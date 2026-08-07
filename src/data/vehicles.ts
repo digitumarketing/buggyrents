@@ -32,7 +32,9 @@ export const buggies: Vehicle[] = [
     blurb: 'The balanced starting point. Enough power for the big dunes, forgiving enough for a first self-drive.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 300 },
-      { label: '1 hour', minutes: 60, price: 550 }
+      { label: '1 hour', minutes: 60, price: 550 },
+      { label: '2 hours', minutes: 120, price: 999 },
+      { label: '4 hours', minutes: 240, price: 2199 }
     ],
     featured: true
   },
@@ -49,9 +51,62 @@ export const buggies: Vehicle[] = [
     blurb: 'One buggy for the whole family. Same chassis as the 2-seater with a second row behind.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 350 },
-      { label: '1 hour', minutes: 60, price: 600 }
+      { label: '1 hour', minutes: 60, price: 550 },
+      { label: '2 hours', minutes: 120, price: 1099 },
+      { label: '4 hours', minutes: 240, price: 2299 }
     ],
     featured: true
+  },
+  {
+    slug: 'polaris-rzr-turbo-2-seater',
+    category: 'buggy',
+    name: 'Polaris RZR Turbo - 2 Seater',
+    shortName: 'Polaris RZR Turbo 2-Seater',
+    engine: 'Turbo',
+    seats: 2,
+    minAge: 18,
+    area: 'Lahbab red dunes',
+    image: 'dune-buggy-sunrise-desert-tour-dubai',
+    blurb: 'Turbocharged Polaris for drivers who want more acceleration out of the bowls.',
+    durations: [
+      { label: '30 minutes', minutes: 30, price: 800 },
+      { label: '1 hour', minutes: 60, price: 1099 },
+      { label: '2 hours', minutes: 120, price: 1999 }
+    ]
+  },
+  {
+    slug: 'polaris-rzr-turbo-4-seater',
+    category: 'buggy',
+    name: 'Polaris RZR Turbo - 4 Seater',
+    shortName: 'Polaris RZR Turbo 4-Seater',
+    engine: 'Turbo',
+    seats: 4,
+    minAge: 18,
+    area: 'Lahbab red dunes',
+    image: 'group-dune-buggy-tour-dubai-photo-stop',
+    blurb: 'Turbo power with four seats, for groups that want the quicker machine without splitting up.',
+    durations: [
+      { label: '30 minutes', minutes: 30, price: 750 },
+      { label: '1 hour', minutes: 60, price: 999 },
+      { label: '2 hours', minutes: 120, price: 2299 }
+    ]
+  },
+  {
+    slug: 'polaris-rzr-pro',
+    category: 'buggy',
+    name: 'Polaris RZR Pro',
+    shortName: 'Polaris RZR Pro',
+    engine: '1000cc',
+    seats: 2,
+    minAge: 18,
+    area: 'Lahbab red dunes',
+    image: 'polaris-rzr-pro-white-dune-buggy-dubai',
+    blurb: 'The Pro chassis with longer travel suspension, aimed at drivers who already know the route.',
+    durations: [
+      { label: '30 minutes', minutes: 30, price: 700 },
+      { label: '1 hour', minutes: 60, price: 1100 },
+      { label: '2 hours', minutes: 120, price: 1300 }
+    ]
   },
   {
     slug: 'can-am-maverick-x3-2-seater',
@@ -65,8 +120,9 @@ export const buggies: Vehicle[] = [
     image: 'can-am-maverick-x3-black-2-seater-red-dune-dubai',
     blurb: 'A serious step up in power and suspension travel. For riders who have driven a buggy before.',
     durations: [
-      { label: '30 minutes', minutes: 30, price: 400 },
-      { label: '1 hour', minutes: 60, price: 750 }
+      { label: '30 minutes', minutes: 30, price: 600 },
+      { label: '1 hour', minutes: 60, price: 999 },
+      { label: '2 hours', minutes: 120, price: 1299 }
     ],
     featured: true
   },
@@ -82,26 +138,77 @@ export const buggies: Vehicle[] = [
     image: 'can-am-maverick-x3-4-seater-family-buggy-ride-dubai',
     blurb: 'Turbo performance with four seats. The pick for groups that do not want to split up.',
     durations: [
-      { label: '30 minutes', minutes: 30, price: 450 },
-      { label: '1 hour', minutes: 60, price: 800 }
+      { label: '30 minutes', minutes: 30, price: 700 },
+      { label: '1 hour', minutes: 60, price: 999 },
+      { label: '2 hours', minutes: 120, price: 1499 }
+    ],
+    featured: true
+  },
+  {
+    slug: 'can-am-x3-turbo-rr-2-seater',
+    category: 'buggy',
+    name: 'Can-Am X3 Turbo RR - 2 Seater',
+    shortName: 'Can-Am X3 Turbo RR 2-Seater',
+    engine: 'Turbo RR',
+    seats: 2,
+    minAge: 18,
+    area: 'Lahbab red dunes',
+    image: 'can-am-maverick-x3-rs-2-seater-dune-buggy-dubai',
+    blurb: 'The RR badge means more boost and stiffer damping. Experienced drivers only.',
+    durations: [
+      { label: '30 minutes', minutes: 30, price: 1000 },
+      { label: '1 hour', minutes: 60, price: 1299 }
+    ]
+  },
+  {
+    slug: 'can-am-x3-turbo-rr-4-seater',
+    category: 'buggy',
+    name: 'Can-Am X3 Turbo RR - 4 Seater',
+    shortName: 'Can-Am X3 Turbo RR 4-Seater',
+    engine: 'Turbo RR',
+    seats: 4,
+    minAge: 18,
+    area: 'Lahbab red dunes',
+    image: 'can-am-maverick-x3-4-seater-desert-tour-dubai',
+    blurb: 'Four seats behind the most powerful X3 setup we run.',
+    durations: [
+      { label: '30 minutes', minutes: 30, price: 1299 },
+      { label: '1 hour', minutes: 60, price: 1799 }
     ]
   },
   {
     slug: 'can-am-maverick-r-turbo',
     category: 'buggy',
     name: 'Can-Am Maverick R - Yellow Turbo',
-    shortName: 'Can-Am Maverick R',
+    shortName: 'Can-Am Maverick R 2-Seater',
     engine: 'Turbo',
     seats: 2,
     minAge: 18,
     area: 'Lahbab red dunes',
-    image: 'can-am-maverick-x3-turbo-dune-buggy-dubai',
-    blurb: 'The fastest machine in the fleet. Experienced drivers only.',
+    image: 'can-am-maverick-x3-yellow-turbo-dune-buggy-dubai',
+    blurb: 'The fastest two-seat machine in the fleet. Experienced drivers only.',
     durations: [
-      { label: '30 minutes', minutes: 30, price: 500 },
-      { label: '1 hour', minutes: 60, price: 950 }
+      { label: '30 minutes', minutes: 30, price: 900 },
+      { label: '1 hour', minutes: 60, price: 1299 },
+      { label: '2 hours', minutes: 120, price: 1999 }
     ],
     featured: true
+  },
+  {
+    slug: 'can-am-maverick-r-4-seater',
+    category: 'buggy',
+    name: 'Can-Am Maverick R - 4 Seater',
+    shortName: 'Can-Am Maverick R 4-Seater',
+    engine: 'Turbo',
+    seats: 4,
+    minAge: 18,
+    area: 'Lahbab red dunes',
+    image: 'can-am-maverick-x3-turbo-dune-buggy-dubai',
+    blurb: 'Maverick R power carrying four. The top of the fleet for group bookings.',
+    durations: [
+      { label: '30 minutes', minutes: 30, price: 999 },
+      { label: '1 hour', minutes: 60, price: 1299 }
+    ]
   }
 ];
 
@@ -248,9 +355,11 @@ export const dirtbikes: Vehicle[] = [
     image: 'ktm-450-dirt-bike-rider-dubai-desert',
     blurb: 'Desert enduro on a proper 450. Riders must be comfortable with clutch, gears and throttle.',
     durations: [
+      { label: '30 minutes', minutes: 30, price: 500 },
       { label: '1 hour', minutes: 60, price: 700 },
       { label: '2 hours', minutes: 120, price: 1200 },
-      { label: '3 hours', minutes: 180, price: 1500 }
+      { label: '3 hours', minutes: 180, price: 1500 },
+      { label: '4 hours', minutes: 240, price: 2000 }
     ],
     featured: true
   }

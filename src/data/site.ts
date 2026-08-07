@@ -23,8 +23,11 @@ export const site = {
     embed: 'https://maps.google.com/maps?q=place_id:ChIJo88Daad39T4RnM7myjfeJdQ&output=embed'
   },
 
-  hours: { opens: '08:00', closes: '19:00' },
+  hours: { opens: '00:00', closes: '23:59', label: 'Open 24/7' },
 
+  geo: { lat: 25.153303, lng: 55.635006 },
+  guides: '50+',
+  fleetSize: '70+',
   founded: 2020,
   guestsServed: '17K+',
   /* Trade licence number intentionally omitted, see note in CLAUDE.md.

@@ -38,7 +38,7 @@ export const quadPillar: PillarData = {
   flowH2: 'From hotel pickup to red dune riding.',
   flowLede: 'A simple flow from pickup through safety briefing, guided ATV riding in the Lahbab red dunes, and return.',
   steps: [
-    { label: 'Pickup', h: 'Dubai hotel pickup', p: 'Central Dubai pickup on request, or self-drive directions to the Al Awir base after confirmation.' },
+    { label: 'Pickup', h: 'Dubai hotel pickup', p: 'Free hotel pickup within Dubai, or self-drive directions to the Al Awir base after confirmation.' },
     { label: 'Briefing', h: 'Gear and controls', p: 'Helmet fitting, throttle and brake walkthrough, kill switch, and the riding line for your group.' },
     { label: 'Warm-up', h: 'Flat-ground practice', p: 'The guide checks your control on flat sand before anyone moves onto bigger dune faces.' },
     { label: 'Ride', h: 'Guided desert route', p: 'A lead guide sets the pace and a sweep stays at the back so the group never splits up.' },
@@ -56,7 +56,7 @@ export const quadPillar: PillarData = {
     { q: 'Can two people share one quad?', a: 'Yes. The double-seat quads in both the boundary area and open desert carry a passenger at no extra charge, one price covers both riders.' },
     { q: 'What should I wear for quad biking?', a: 'Closed shoes, clothes you do not mind getting sandy, and sunglasses. We provide the helmet. Avoid loose scarves and anything that can catch.' },
     { q: 'Where does quad biking in Dubai take place?', a: 'At our Al Awir base on the Dubai-Hatta road, at the edge of the Lahbab red dunes, roughly 45 minutes from Downtown Dubai.' },
-    { q: 'Is hotel pickup available?', a: 'Yes, on request across Dubai. Send your hotel or area and we quote the transfer with your booking rather than adding it at the base.' }
+    { q: 'Is hotel pickup available?', a: 'Yes, and hotel pickup within Dubai is free. Send your hotel or area when you book. Outer-emirate transfers such as Sharjah, Ajman or Abu Dhabi are quoted with the booking.' }
   ],
 
   lfKicker: '05 / Quad bike guide',

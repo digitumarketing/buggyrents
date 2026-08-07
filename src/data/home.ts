@@ -26,7 +26,7 @@ export const buggyIntro = {
     'Price is per vehicle, not per head',
     'No licence needed on guided routes'
   ],
-  image: 'can-am-maverick-x3-rs-2-seater-dune-buggy-dubai'
+  image: 'dune-buggy-convoy-crossing-dubai-red-dunes'
 };
 
 export const quadIntro = {

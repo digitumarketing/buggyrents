@@ -1,0 +1,34 @@
+---
+/* Real guest reviews are NOT yet supplied.
+   Nothing is invented here - the section renders an explicit empty state. */
+const reviews: { name: string; text: string; when: string }[] = [];
+---
+<section class="section" id="reviews">
+  <div class="shell">
+    <p class="eyebrow">Voices from the dunes</p>
+    <h2>What guests say after the ride</h2>
+    {reviews.length === 0 ? (
+      <div class="rv__empty">
+        <p class="rv__empty-t">Awaiting real review data</p>
+        <p class="rv__empty-b">This section is built and ready. It needs your actual Google and TripAdvisor reviews — review count, average rating and a set of recent quotes. Nothing has been invented to fill the gap.</p>
+      </div>
+    ) : null}
+    <div class="rv__award">
+      <img src="/assets/images/2025/01/Buggy-Rents-Travellers-Choice.webp" alt="TripAdvisor Travellers' Choice award" loading="lazy" decoding="async" width="180" height="180" />
+      <div>
+        <h3>TripAdvisor Travellers' Choice</h3>
+        <p>Awarded to businesses that consistently earn great reviews from travellers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rv__empty { margin-top: 1.75rem; border: 2px dashed var(--c-orange-line); background: var(--c-orange-soft); border-radius: var(--radius-lg); padding: 1.5rem; }
+  .rv__empty-t { font-family: var(--font-display); font-weight: 800; color: var(--c-orange-dark); }
+  .rv__empty-b { margin-top: .5rem; font-size: var(--fs-sm); color: var(--c-ink-muted); max-width: 68ch; }
+  .rv__award { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--c-line); border-radius: var(--radius-lg); background: #fff; box-shadow: var(--shadow-tile); }
+  .rv__award img { width: 110px; height: auto; flex: none; }
+  .rv__award h3 { font-size: 1.1rem; }
+  .rv__award p { font-size: var(--fs-sm); color: var(--c-ink-muted); margin-top: .4rem; max-width: 52ch; }
+</style>

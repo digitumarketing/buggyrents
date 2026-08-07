@@ -1,0 +1,91 @@
+---
+/* Mirrors the competitor hero structure: media + scrim + sun glow,
+   centred column, eyebrow → h1 → tagline (with accent em) → badge → scroll cue. */
+interface Props {
+  eyebrow?: string; heading?: string; taglineEm?: string; tagline?: string; image?: string;
+}
+const {
+  eyebrow = 'Multi-activity · Lahbab red dunes · Al Awir base',
+  heading = 'Experience Dubai’s Ultimate Desert Adventure: Dune Buggy, Quad Biking & Desert Safari Tours',
+  taglineEm = 'Self-Drive Desert Adventures',
+  tagline = '— Dune Buggy Rental, Quad Biking Dubai, KTM Dirt Bike & Bedouin BBQ Safari',
+  image = '2024/11/banner-06.jpg'
+} = Astro.props;
+---
+<section class="hero">
+  <img class="hero__media" src={`/assets/images/${image}`} alt="Dune buggy riding through the Lahbab red dunes in Dubai" fetchpriority="high" decoding="async" />
+  <div class="hero__scrim"></div>
+  <div class="hero__sun"></div>
+
+  <div class="hero__inner">
+    <div class="hero__topbar">
+      <span class="hero__eyebrow">{eyebrow}</span>
+    </div>
+
+    <div class="hero__main">
+      <h1 class="hero__h1">{heading}</h1>
+      <p class="hero__tagline"><em>{taglineEm}</em> {tagline}</p>
+
+      <a class="hero__badge" href="#reviews">
+        <img src="/assets/images/2025/01/tripadvisor-travelers-choice-awards-white-2024-768x768-1.png" alt="TripAdvisor Travellers' Choice award winner" width="72" height="72" decoding="async" />
+        <span class="hero__badge-txt">
+          <strong>Travellers’ Choice</strong>
+          <em>TripAdvisor award winner</em>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <span class="hero__scroll">scroll</span>
+</section>
+
+<style>
+  .hero { position: relative; min-height: clamp(600px, 78svh, 840px); overflow: hidden; isolation: isolate; display: flex; align-items: stretch; background: var(--c-navy-dark); }
+  .hero__media { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: 58% 50%; pointer-events: none; animation: heroDrift 28s ease-in-out infinite alternate; }
+  @keyframes heroDrift { from { transform: scale(1.02) translate3d(0,0,0); } to { transform: scale(1.09) translate3d(-1.2%, -1%, 0); } }
+
+  .hero__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(15,18,24,.5), rgba(15,18,24,.2) 38%, rgba(15,18,24,.82)),
+      linear-gradient(90deg, rgba(15,18,24,.62), rgba(15,18,24,.16) 62%, rgba(15,18,24,.38)); }
+
+  .hero__sun { position: absolute; top: 12%; right: -10%; width: clamp(280px, 36vw, 580px); aspect-ratio: 1; border-radius: 999px;
+    background: radial-gradient(circle, rgba(255,102,0,.38), rgba(255,102,0,.05) 55%, transparent 75%);
+    pointer-events: none; z-index: 1; mix-blend-mode: screen; }
+
+  .hero__inner { position: relative; z-index: 2; width: 100%; max-width: var(--shell-max); margin-inline: auto;
+    padding-inline: var(--shell-pad); padding-block: clamp(2.5rem, 4vw, 4.5rem);
+    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+    gap: clamp(1.25rem, 2.5vw, 2rem); color: #fff; }
+
+  .hero__topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; }
+  .hero__eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.78); }
+  .hero__eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--c-orange); display: inline-block; }
+
+  .hero__main { max-width: 920px; margin-inline: auto; }
+  .hero__h1 { color: #fff; font-size: clamp(1.85rem, 1.1rem + 2.6vw, 3.1rem); line-height: 1.1; letter-spacing: -.02em;
+    text-shadow: 0 2px 18px rgba(0,0,0,.5); margin: 0 auto 14px; max-width: 24ch; }
+  .hero__tagline { font-family: var(--font-display); font-weight: 500; font-size: clamp(1rem, .9rem + .45vw, 1.22rem);
+    color: rgba(255,255,255,.9); text-shadow: 0 2px 12px rgba(0,0,0,.4); max-width: 52ch; margin: 0 auto 22px; line-height: 1.5; }
+  .hero__tagline em { font-style: italic; font-weight: 800; color: var(--c-gold); }
+
+  .hero__badge { display: inline-flex; align-items: center; gap: 12px; padding: 8px 18px 8px 8px;
+    background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.28); border-radius: 10px;
+    text-decoration: none; backdrop-filter: blur(6px); transition: background var(--dur-fast), border-color var(--dur-fast); }
+  .hero__badge:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.5); }
+  .hero__badge img { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.14); }
+  .hero__badge-txt { display: grid; text-align: left; }
+  .hero__badge-txt strong { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-sm); color: #fff; }
+  .hero__badge-txt em { font-style: normal; font-size: 11px; color: rgba(255,255,255,.7); }
+
+  .hero__scroll { position: absolute; left: 50%; bottom: 16px; translate: -50% 0; z-index: 2;
+    display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
+    font-family: var(--font-display); font-weight: 700; font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase;
+    color: rgba(255,255,255,.6); pointer-events: none; }
+  .hero__scroll::after { content: ''; width: 1px; height: 28px; background: linear-gradient(180deg, rgba(255,255,255,.6), transparent);
+    animation: scrollHint 2.4s ease-in-out infinite; }
+  @keyframes scrollHint { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+
+  @media (max-width: 640px) { .hero__sun { display: none; } .hero__scroll { display: none; } }
+</style>

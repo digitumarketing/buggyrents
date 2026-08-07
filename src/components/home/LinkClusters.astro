@@ -1,0 +1,58 @@
+---
+import { locations } from '@/data/locations';
+import { audiences } from '@/data/audiences';
+---
+<section class="section lc">
+  <div class="shell">
+    <p class="eyebrow">Pickup routes</p>
+    <h2>Dune buggy and quad biking pickup across the UAE</h2>
+    <p class="lede">Transfers run from across Dubai and the northern emirates to our Al Awir base. Pick your area for drive times and what to confirm before the day.</p>
+    <ul role="list" class="lc__grid">
+      {locations.map(l => (
+        <li>
+          <a href={`/locations/${l.slug}/`}>
+            <span class="lc__name">{l.short}</span>
+            <span class="lc__meta">{l.drive}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="lc__split">
+      <p class="eyebrow">Who it is for</p>
+      <h2>Desert tours by group type</h2>
+      <p class="lede">Same fleet, different plan. Pick the one that matches your group.</p>
+      <ul role="list" class="lc__aud">
+        {audiences.map(a => (
+          <li>
+            <a href={`/audience/${a.slug}/`}>
+              <span class="lc__aud-t">{a.name}</span>
+              <span class="lc__aud-p">{a.pitch}</span>
+              <span class="lc__aud-v">{a.vehicles}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lc__grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); margin-top: 1.75rem; padding: 0; list-style: none; }
+  .lc__grid a { display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .85rem 1rem;
+    background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius); text-decoration: none;
+    transition: border-color var(--dur-fast), transform var(--dur-fast) var(--ease-out-expo); }
+  .lc__grid a:hover { border-color: var(--c-orange); transform: translateY(-2px); }
+  .lc__name { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-sm); color: var(--c-navy); }
+  .lc__meta { font-size: 11px; color: var(--c-ink-soft); white-space: nowrap; }
+
+  .lc__split { margin-top: clamp(2.5rem, 5vw, 4rem); }
+  .lc__aud { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); margin-top: 1.75rem; padding: 0; list-style: none; }
+  .lc__aud a { display: grid; gap: .3rem; padding: 1.1rem 1.2rem; background: var(--c-sand-soft);
+    border: 1px solid var(--c-line); border-radius: var(--radius); text-decoration: none;
+    transition: background var(--dur-fast), border-color var(--dur-fast); }
+  .lc__aud a:hover { background: var(--c-orange-soft); border-color: var(--c-orange); }
+  .lc__aud-t { font-family: var(--font-display); font-weight: 800; color: var(--c-navy); font-size: var(--fs-sm); }
+  .lc__aud-p { font-size: var(--fs-sm); color: var(--c-ink-muted); }
+  .lc__aud-v { font-size: 11px; color: var(--c-orange-dark); font-weight: 600; }
+</style>

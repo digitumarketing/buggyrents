@@ -1,0 +1,24 @@
+---
+import { trustStats } from '@/data/home';
+---
+<section class="trust">
+  <div class="shell trust__in">
+    {trustStats.map(s => (
+      <div class={`trust__item${s.verified ? '' : ' trust__item--todo'}`}>
+        <p class="trust__val">{s.value}</p>
+        <p class="trust__lab">{s.label}</p>
+        <p class="trust__sub">{s.sub}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust { background: var(--c-navy-dark); color: #fff; }
+  .trust__in { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; padding: 0; background: rgba(255,255,255,.1); }
+  .trust__item { background: var(--c-navy-dark); padding: 1.4rem 1.1rem; text-align: center; }
+  .trust__val { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--c-gold); line-height: 1.25; }
+  .trust__lab { font-size: var(--fs-xs); color: #fff; margin-top: .3rem; }
+  .trust__sub { font-size: 11px; color: rgba(255,255,255,.5); margin-top: .15rem; }
+  .trust__item--todo .trust__val { color: #FF8A8A; font-size: .8rem; letter-spacing: .06em; }
+</style>

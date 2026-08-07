@@ -1,0 +1,84 @@
+---
+/* Homepage — mirrors the 13-section structure of BuggyRents-home.html,
+   adapted to the Phase 1 scope (no balloon, camel or combos yet). */
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/home/Hero.astro';
+import TrustStrip from '@/components/home/TrustStrip.astro';
+import Editorial from '@/components/home/Editorial.astro';
+import Safari from '@/components/home/Safari.astro';
+import PricingGuide from '@/components/home/PricingGuide.astro';
+import TourVariety from '@/components/home/TourVariety.astro';
+import Spotlight from '@/components/home/Spotlight.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import LinkClusters from '@/components/home/LinkClusters.astro';
+import Faq from '@/components/home/Faq.astro';
+import Reviews from '@/components/home/Reviews.astro';
+import VehicleCard from '@/components/VehicleCard.astro';
+import { buggies, quads } from '@/data/vehicles';
+import { buggyIntro, quadIntro } from '@/data/home';
+import { homeLongForm } from '@/data/longform';
+---
+<Base
+  title="Dune Buggy Dubai, Quad Biking & KTM Dirt Bike Tours | Buggy Rents"
+  description="Self-drive dune buggy, quad bike and KTM dirt bike tours across the Lahbab red dunes. Guided routes, safety gear included, prices per vehicle from AED 75. WhatsApp +971 56 209 5713."
+>
+  <!-- 1 -->
+  <Hero />
+
+  <!-- 2 -->
+  <TrustStrip />
+
+  <!-- 3 -->
+  <section class="section" id="fleet-buggy">
+    <div class="shell">
+      <p class="eyebrow">Dune buggy rental</p>
+      <h2>Five buggies, two durations, one price per vehicle</h2>
+      <p class="lede">Polaris if it is your first time behind the wheel. Can-Am if it is not. The Maverick R if you already know exactly what you are asking for.</p>
+      <div class="grid grid--3" style="margin-top:2rem">
+        {buggies.map(v => <VehicleCard vehicle={v} base="/dune-buggy-dubai/" />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <Editorial {...buggyIntro} tone="sand" />
+
+  <!-- 5 -->
+  <section class="section" id="fleet-quad">
+    <div class="shell">
+      <p class="eyebrow">Quad bike rental</p>
+      <h2>Six quads, split by riding area</h2>
+      <p class="lede">From a fenced zone for six-year-olds to open-desert Raptor 700 runs. Five durations on every machine.</p>
+      <div class="grid grid--3" style="margin-top:2rem">
+        {quads.map(v => <VehicleCard vehicle={v} base="/quad-bike-dubai/" />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <Editorial {...quadIntro} flip tone="sand" />
+
+  <!-- 7 -->
+  <Safari />
+
+  <!-- 8 -->
+  <PricingGuide />
+
+  <!-- 9 -->
+  <TourVariety />
+
+  <!-- 10 -->
+  <Spotlight />
+
+  <!-- 11 -->
+  <LinkClusters />
+
+  <!-- 12 -->
+  <LongFormReader {...homeLongForm} />
+
+  <!-- 13 -->
+  <Faq />
+
+  <!-- 14 -->
+  <Reviews />
+</Base>

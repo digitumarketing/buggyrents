@@ -1,0 +1,55 @@
+---
+import { dirtbikes } from '@/data/vehicles';
+import { waLink, bookMessage } from '@/data/site';
+const ktm = dirtbikes[0];
+---
+<section class="sp">
+  <div class="shell sp__grid">
+    <div class="sp__media">
+      <img src={`/assets/images/${ktm.image}`} alt="KTM 450 dirt bike in the Dubai desert" loading="lazy" decoding="async" width="800" height="600" />
+      <span class="sp__flag">Rider screening applies</span>
+    </div>
+    <div class="sp__body">
+      <p class="sp__eyebrow">The hardest thing we run</p>
+      <h2>KTM 450 desert enduro</h2>
+      <p class="sp__lede">A 450 in soft sand is unforgiving. If you can already work a clutch, gears and throttle, it is the most rewarding way to cross these dunes. If you can't, start on a quad.</p>
+      <ul role="list" class="sp__specs">
+        <li><strong>{ktm.engine}</strong><span>Engine</span></li>
+        <li><strong>{ktm.minAge}+</strong><span>Minimum age</span></li>
+        <li><strong>1</strong><span>Rider, no passenger</span></li>
+        <li><strong>Open desert</strong><span>Red dunes</span></li>
+      </ul>
+      <div class="sp__prices">
+        {ktm.durations.map(d => (
+          <div class="sp__price"><span>{d.label}</span><strong>AED {d.price.toLocaleString('en-US')}</strong></div>
+        ))}
+      </div>
+      <div class="sp__cta">
+        <a class="btn btn--primary btn--lg" href={waLink(bookMessage(ktm.name))}>Ask about the KTM 450</a>
+        <a class="btn btn--ghost sp__ghost" href="/ktm-dirt-bike-dubai/">Dirt bike details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sp { background: var(--c-navy); color: rgba(255,255,255,.82); padding-block: var(--section-gap); }
+  .sp__grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; }
+  .sp__media { position: relative; }
+  .sp__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); }
+  .sp__flag { position: absolute; left: 14px; bottom: 14px; background: var(--c-orange); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: .5em 1em; border-radius: var(--radius-pill); }
+  .sp__eyebrow { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--c-gold); }
+  .sp h2 { color: #fff; margin-top: .8rem; }
+  .sp__lede { margin-top: 1rem; max-width: 52ch; }
+  .sp__specs { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 1rem; }
+  .sp__specs strong { display: block; font-family: var(--font-display); font-weight: 800; color: #fff; font-size: 1.15rem; }
+  .sp__specs span { font-size: var(--fs-xs); color: rgba(255,255,255,.6); }
+  .sp__prices { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 1px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); overflow: hidden; margin-top: 1.6rem; }
+  .sp__price { background: var(--c-navy); padding: .8rem .6rem; text-align: center; }
+  .sp__price span { display: block; font-size: 11px; color: rgba(255,255,255,.6); }
+  .sp__price strong { display: block; font-family: var(--font-display); font-weight: 800; color: var(--c-gold); font-size: .95rem; margin-top: .2rem; white-space: nowrap; }
+  .sp__cta { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.8rem; }
+  .sp__ghost { color: #fff; border-color: rgba(255,255,255,.5); }
+  .sp__ghost:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+  @media (max-width: 860px) { .sp__grid { grid-template-columns: 1fr; } }
+</style>

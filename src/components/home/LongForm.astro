@@ -1,0 +1,23 @@
+---
+import { longForm } from '@/data/home';
+---
+<section class="section section--sand lf">
+  <div class="shell">
+    <h2 class="lf__h">{longForm.heading}</h2>
+    <div class="lf__grid">
+      {longForm.blocks.map(b => (
+        <div class="lf__block">
+          <h3>{b.h}</h3>
+          <p>{b.p}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .lf__h { max-width: 24ch; }
+  .lf__grid { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); margin-top: 2.25rem; }
+  .lf__block h3 { font-size: 1.05rem; padding-top: .9rem; border-top: 3px solid var(--c-orange); }
+  .lf__block p { margin-top: .7rem; font-size: var(--fs-sm); color: var(--c-ink-muted); }
+</style>

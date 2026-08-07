@@ -1,0 +1,124 @@
+---
+import { site, waLink, bookMessage } from '@/data/site';
+import { mainNav } from '@/data/nav';
+const path = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
+---
+<header class="hdr" data-header>
+  <div class="shell hdr__in">
+    <a class="hdr__logo" href="/" aria-label="Buggy Rents home">
+      <img src="/assets/brand/buggy-rents.webp" alt="Buggy Rents" width="200" height="53" />
+    </a>
+
+    <nav class="hdr__nav" aria-label="Main">
+      <ul role="list">
+        {mainNav.map(item => (
+          <li class={item.children ? 'has-sub' : ''}>
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+            {item.children && (
+              <div class="sub">
+                <ul role="list">
+                  {item.children.map(c => <li><a href={c.href}>{c.label}</a></li>)}
+                </ul>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hdr__cta">
+      <a class="btn btn--primary" href={waLink(bookMessage())}>Book on WhatsApp</a>
+      <button class="hdr__burger" data-mobile-menu aria-expanded="false" aria-controls="mobile-panel" aria-label="Open menu" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="panel" id="mobile-panel" data-panel hidden>
+    <nav class="shell" aria-label="Mobile">
+      <ul role="list">
+        {mainNav.map(item => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+            {item.children && <ul role="list" class="panel__sub">{item.children.map(c => <li><a href={c.href}>{c.label}</a></li>)}</ul>}
+          </li>
+        ))}
+      </ul>
+      <a class="btn btn--primary btn--lg panel__cta" href={waLink(bookMessage())}>Book on WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .hdr { position: sticky; top: 0; z-index: 80; background: #fff; box-shadow: var(--shadow-nav); }
+  .hdr__in { display: flex; align-items: center; gap: 1.25rem; height: var(--header-h); }
+  .hdr__logo img { width: auto; height: 40px; }
+
+  .hdr__nav { margin-left: auto; }
+  .hdr__nav > ul { display: flex; align-items: center; gap: .25rem; list-style: none; padding: 0; margin: 0; }
+  .hdr__nav a {
+    display: block; padding: .6rem .8rem; border-radius: var(--radius-sm);
+    font-family: var(--font-display); font-weight: 700; font-size: var(--fs-sm);
+    color: var(--c-navy); text-decoration: none; white-space: nowrap;
+  }
+  .hdr__nav a:hover { background: var(--c-navy-soft); }
+  .hdr__nav a[aria-current='page'] { color: var(--c-orange); }
+
+  .has-sub { position: relative; }
+  .sub {
+    position: absolute; top: calc(100% + 6px); left: 0; min-width: 250px;
+    background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius);
+    box-shadow: var(--shadow-tile-hover); padding: .4rem;
+    opacity: 0; visibility: hidden; transform: translateY(6px);
+    transition: opacity var(--dur-fast), transform var(--dur-fast), visibility var(--dur-fast);
+  }
+  .has-sub:hover .sub, .has-sub:focus-within .sub { opacity: 1; visibility: visible; transform: none; }
+  .sub ul { list-style: none; padding: 0; margin: 0; }
+  .sub a { font-weight: 500; font-size: var(--fs-sm); }
+
+  .hdr__cta { display: flex; align-items: center; gap: .75rem; }
+  .hdr__burger { display: none; width: 44px; height: 44px; background: none; border: 0; padding: 10px; }
+  .hdr__burger span { display: block; height: 2.5px; background: var(--c-navy); border-radius: 2px; transition: transform var(--dur-fast), opacity var(--dur-fast); }
+  .hdr__burger span + span { margin-top: 5px; }
+  .hdr__burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hdr__burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .hdr__burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .panel { border-top: 1px solid var(--c-line); background: #fff; padding-block: 1rem 1.5rem; max-height: 75vh; overflow-y: auto; }
+  .panel ul { list-style: none; padding: 0; margin: 0; }
+  .panel > nav > ul > li > a { display: block; padding: .7rem 0; font-family: var(--font-display); font-weight: 700; color: var(--c-navy); text-decoration: none; border-bottom: 1px solid var(--c-line-soft); }
+  .panel__sub { padding-left: 1rem !important; padding-block: .35rem; }
+  .panel__sub a { display: block; padding: .4rem 0; font-size: var(--fs-sm); color: var(--c-ink-muted); text-decoration: none; }
+  .panel__cta { width: 100%; margin-top: 1.25rem; }
+
+  @media (max-width: 1080px) {
+    .hdr__nav { display: none; }
+    .hdr__burger { display: block; }
+    .hdr__cta .btn { display: none; }
+  }
+</style>
+
+<script>
+  const burger = document.querySelector('[data-mobile-menu]');
+  const panel  = document.querySelector('[data-panel]');
+  if (burger && panel) {
+    burger.addEventListener('click', () => {
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!open));
+      burger.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+      panel.hidden = open;
+      document.body.style.overflow = open ? '' : 'hidden';
+    });
+    panel.addEventListener('click', e => {
+      if ((e.target as HTMLElement).tagName === 'A') {
+        burger.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+        document.body.style.overflow = '';
+      }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !panel.hidden) (burger as HTMLElement).click();
+    });
+  }
+</script>

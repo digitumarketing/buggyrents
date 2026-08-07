@@ -1,0 +1,41 @@
+---
+import type { Vehicle } from '@/data/vehicles';
+import { waLink, bookMessage } from '@/data/site';
+interface Props { vehicle: Vehicle; }
+const { vehicle: v } = Astro.props;
+---
+<div class="pt">
+  <table>
+    <caption class="sr-only">{v.name} prices by duration</caption>
+    <thead>
+      <tr><th scope="col">Duration</th><th scope="col">Price</th><th scope="col"><span class="sr-only">Book</span></th></tr>
+    </thead>
+    <tbody>
+      {v.durations.map(d => (
+        <tr>
+          <th scope="row">{d.label}</th>
+          <td class="pt__price">AED {d.price}</td>
+          <td class="pt__act">
+            <a class="btn btn--primary" href={waLink(bookMessage(v.name, d.label, d.price))} target="_blank" rel="noopener">Book</a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="pt__note">Price is per vehicle, not per person. Helmet, safety briefing and a guide are included.</p>
+</div>
+
+<style>
+  .pt { border: 1px solid var(--c-line); border-radius: var(--radius-lg); overflow: hidden; background: #fff; }
+  .pt table { width: 100%; border-collapse: collapse; }
+  .pt thead { background: var(--c-navy); color: #fff; }
+  .pt th, .pt td { padding: .9rem 1.1rem; text-align: left; }
+  .pt thead th { font-family: var(--font-display); font-size: var(--fs-xs); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+  .pt tbody tr + tr { border-top: 1px solid var(--c-line-soft); }
+  .pt tbody th { font-family: var(--font-display); font-weight: 700; color: var(--c-navy); }
+  .pt__price { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; color: var(--c-orange); white-space: nowrap; }
+  .pt__act { text-align: right; }
+  .pt__act .btn { padding: .55em 1.2em; font-size: var(--fs-xs); }
+  .pt__note { padding: .9rem 1.1rem; background: var(--c-sand-soft); font-size: var(--fs-xs); color: var(--c-ink-muted); border-top: 1px solid var(--c-line-soft); }
+  @media (max-width: 520px) { .pt th, .pt td { padding: .75rem .7rem; } }
+</style>

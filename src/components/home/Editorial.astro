@@ -1,0 +1,41 @@
+---
+interface Props {
+  eyebrow: string; heading: string; sub: string;
+  paragraphs: string[]; checklist: string[]; image: string;
+  flip?: boolean; tone?: 'plain' | 'sand';
+}
+const { eyebrow, heading, sub, paragraphs, checklist, image, flip = false, tone = 'plain' } = Astro.props;
+---
+<section class={`section ed${tone === 'sand' ? ' section--sand' : ''}`}>
+  <div class={`shell ed__grid${flip ? ' ed__grid--flip' : ''}`}>
+    <div class="ed__media">
+      <img src={`/assets/images/${image}`} alt="" loading="lazy" decoding="async" width="800" height="600" />
+    </div>
+    <div class="ed__body">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{heading}</h2>
+      <p class="ed__sub">{sub}</p>
+      {paragraphs.map(p => <p class="ed__p">{p}</p>)}
+      <ul role="list" class="ed__list">
+        {checklist.map(c => (
+          <li>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>{c}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ed__grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+  .ed__grid--flip .ed__media { order: 2; }
+  .ed__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-tile); }
+  .ed__sub { font-family: var(--font-display); font-weight: 700; color: var(--c-orange); margin-top: .9rem; }
+  .ed__p { margin-top: .9rem; color: var(--c-ink-muted); }
+  .ed__list { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; gap: .6rem; }
+  .ed__list li { display: flex; align-items: start; gap: .6rem; font-size: var(--fs-sm); font-weight: 500; }
+  .ed__list svg { color: var(--c-orange); flex: none; margin-top: 3px; }
+  @media (max-width: 860px) { .ed__grid, .ed__grid--flip { grid-template-columns: 1fr; } .ed__grid--flip .ed__media { order: 0; } }
+</style>

@@ -1,0 +1,82 @@
+---
+import { buggies, quads, dirtbikes } from '@/data/vehicles';
+import type { Vehicle } from '@/data/vehicles';
+
+const cols = (list: Vehicle[]) => {
+  const set = new Set<string>();
+  list.forEach(v => v.durations.forEach(d => set.add(d.label)));
+  return [...set].sort((a, b) => {
+    const n = (s: string) => (s.includes('minute') ? parseInt(s) : parseInt(s) * 60);
+    return n(a) - n(b);
+  });
+};
+const cell = (v: Vehicle, label: string) => v.durations.find(d => d.label === label)?.price;
+
+const tables = [
+  { title: 'Dune buggy', note: 'Price per buggy. A 2-seater covers two people.', list: buggies, cols: cols(buggies) },
+  { title: 'Quad bike / ATV', note: 'Price per quad. Double-seat models carry a passenger at no extra cost.', list: quads, cols: cols(quads) },
+  { title: 'KTM dirt bike', note: 'Rider screening applies. You must be able to use clutch, gears and throttle.', list: dirtbikes, cols: cols(dirtbikes) }
+];
+---
+<section class="section section--sand" id="pricing">
+  <div class="shell">
+    <p class="eyebrow">Full price list</p>
+    <h2>Every vehicle, every duration, one page</h2>
+    <p class="lede">No hidden extras. Helmet, briefing, fuel and a guide are in the price. Transfers are quoted upfront, not added at the end.</p>
+
+    {tables.map(t => (
+      <div class="pg">
+        <div class="pg__head">
+          <h3>{t.title}</h3>
+          <p>{t.note}</p>
+        </div>
+        <div class="pg__scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Vehicle</th>
+                <th scope="col">Seats</th>
+                <th scope="col">Age</th>
+                {t.cols.map(c => <th scope="col">{c.replace(' minutes', ' min').replace(' hours', ' hr').replace(' hour', ' hr')}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {t.list.map(v => (
+                <tr>
+                  <th scope="row">{v.shortName}<span class="pg__eng">{v.engine}</span></th>
+                  <td>{v.seats}</td>
+                  <td>{v.minAge}+</td>
+                  {t.cols.map(c => {
+                    const p = cell(v, c);
+                    return <td class="pg__num">{p ? p.toLocaleString('en-US') : <span class="pg__dash">—</span>}</td>;
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    ))}
+    <p class="pg__foot">All prices in AED. Dirt bike pricing is provisional pending final sign-off.</p>
+  </div>
+</section>
+
+<style>
+  .pg { background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius-lg); overflow: hidden; margin-top: 2rem; box-shadow: var(--shadow-tile); }
+  .pg__head { padding: 1.1rem 1.3rem; border-bottom: 1px solid var(--c-line-soft); }
+  .pg__head h3 { font-size: 1.15rem; }
+  .pg__head p { font-size: var(--fs-xs); color: var(--c-ink-muted); margin-top: .25rem; }
+  .pg__scroll { overflow-x: auto; }
+  .pg table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  .pg thead { background: var(--c-navy); color: #fff; }
+  .pg th, .pg td { padding: .8rem 1rem; text-align: left; white-space: nowrap; }
+  .pg thead th { font-family: var(--font-display); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; font-weight: 700; }
+  .pg tbody tr + tr { border-top: 1px solid var(--c-line-soft); }
+  .pg tbody tr:hover { background: var(--c-orange-soft); }
+  .pg tbody th { font-family: var(--font-display); font-weight: 700; color: var(--c-navy); font-size: var(--fs-sm); }
+  .pg__eng { display: block; font-family: var(--font-body); font-weight: 400; font-size: 11px; color: var(--c-ink-soft); }
+  .pg td { font-size: var(--fs-sm); color: var(--c-ink-muted); }
+  .pg__num { font-family: var(--font-display); font-weight: 800; color: var(--c-orange); }
+  .pg__dash { color: var(--c-line); font-weight: 400; }
+  .pg__foot { margin-top: 1.25rem; font-size: var(--fs-xs); color: var(--c-ink-muted); }
+</style>

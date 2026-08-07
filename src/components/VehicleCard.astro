@@ -1,0 +1,46 @@
+---
+import type { Vehicle } from '@/data/vehicles';
+import { fromPrice } from '@/data/vehicles';
+interface Props { vehicle: Vehicle; base: string; }
+const { vehicle: v, base } = Astro.props;
+const from = fromPrice(v);
+const shortest = v.durations[0];
+---
+<article class="vc">
+  <a class="vc__media" href={`${base}${v.slug}/`}>
+    <img src={`/assets/images/${v.image}`} alt={v.name} loading="lazy" decoding="async" width="600" height="400" />
+    <span class="vc__spec">{v.engine} · {v.seats} {v.seats === 1 ? 'seat' : 'seats'} · Age {v.minAge}+</span>
+  </a>
+  <div class="vc__body">
+    <h3 class="vc__title"><a href={`${base}${v.slug}/`}>{v.name}</a></h3>
+    <p class="vc__area">{v.area}</p>
+    <p class="vc__blurb">{v.blurb}</p>
+    <div class="vc__foot">
+      <p class="vc__price">
+        <span class="vc__from">from</span>
+        <span class="price"><span class="price__cur">AED</span> {from}</span>
+        <span class="vc__per">/ {shortest.label}</span>
+      </p>
+      <a class="btn btn--primary" href={`${base}${v.slug}/`}>View ride</a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .vc { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-tile); transition: transform var(--dur-normal) var(--ease-out-expo), box-shadow var(--dur-normal); }
+  .vc:hover { transform: translateY(-4px); box-shadow: var(--shadow-tile-hover); }
+  .vc__media { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; }
+  .vc__media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-normal) var(--ease-out-expo); }
+  .vc:hover .vc__media img { transform: scale(1.05); }
+  .vc__spec { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(50,61,78,.88); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xs); padding: .5em .9em; }
+  .vc__body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem; }
+  .vc__title { font-size: 1.15rem; }
+  .vc__title a { text-decoration: none; }
+  .vc__title a:hover { color: var(--c-orange); }
+  .vc__area { font-size: var(--fs-xs); color: var(--c-orange); font-weight: 600; margin-top: .3rem; }
+  .vc__blurb { font-size: var(--fs-sm); color: var(--c-ink-muted); margin-top: .6rem; flex: 1; }
+  .vc__foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid var(--c-line-soft); }
+  .vc__from { display: block; font-size: var(--fs-xs); color: var(--c-ink-soft); }
+  .vc__price .price { font-size: 1.6rem; }
+  .vc__per { font-size: var(--fs-xs); color: var(--c-ink-muted); }
+</style>

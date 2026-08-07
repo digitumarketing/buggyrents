@@ -1,0 +1,195 @@
+---
+/* dbr-pillar — 8 sections, structure per BuggyRents-dune-buggy.html
+   1 hero · 2 reviews --light · 3 fleet --dark · 4 usp --light
+   5 process --sand · 6 faq --sand#faq · 7 long-form --content · 8 related --light */
+import '@/styles/pillar.css';
+import Base from '@/layouts/Base.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import ReviewsCarousel from '@/components/ReviewsCarousel.astro';
+import type { LfBlock } from '@/components/LongFormReader.astro';
+import type { Vehicle } from '@/data/vehicles';
+import { fromPrice } from '@/data/vehicles';
+import { site, waLink, bookMessage } from '@/data/site';
+
+export type PillarData = {
+  slug: string; crumb: string; eyebrow: string; h1: string; subhead: string; lede: string;
+  heroImage: string; title: string; description: string;
+  stats: { v: string; l: string }[];
+  vehicles: Vehicle[]; vehicleBase: string;
+  fleetKicker: string; fleetH2: string; fleetLede: string;
+  uspKicker: string; uspH2: string; uspLede: string; usps: { h: string; p: string }[];
+  flowKicker: string; flowH2: string; flowLede: string; steps: { label: string; h: string; p: string }[];
+  faqKicker: string; faqH2: string; faqLede: string; faqs: { q: string; a: string }[];
+  lfHeading: string; lfIntro: string; lfBlocks: LfBlock[];
+  relKicker: string; relH2: string; relLede: string;
+  related: { tag: string; title: string; desc: string; href: string }[];
+};
+interface Props { data: PillarData }
+const { data: d } = Astro.props;
+
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
+  mainEntity: d.faqs.map(f => ({'@type':'Question', name: f.q, acceptedAnswer:{'@type':'Answer', text: f.a}})) };
+const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
+  {'@type':'ListItem',position:1,name:'Home',item:site.domain},
+  {'@type':'ListItem',position:2,name:d.crumb,item:`${site.domain}/${d.slug}/`}]};
+---
+<Base title={d.title} description={d.description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+
+  <!-- 1 · hero -->
+  <section class="pl__hero">
+    <img class="pl__hero-media" src={`/assets/images/${d.heroImage}`} alt={d.h1} fetchpriority="high" decoding="async" />
+    <div class="pl__hero-scrim"></div>
+    <div class="pl__hero-inner">
+      <nav class="pl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span>{d.crumb}</span>
+      </nav>
+      <div class="pl__hero-grid">
+        <div class="pl__hero-copy">
+          <p class="pl__eyebrow"><span></span>{d.eyebrow}</p>
+          <h1>{d.h1}</h1>
+          <p class="pl__hero-subhead">{d.subhead}</p>
+          <p class="pl__hero-lede">{d.lede}</p>
+          <div class="pl__hero-actions">
+            <a class="btn btn--primary btn--lg" href={waLink(bookMessage())}>Book on WhatsApp</a>
+            <a class="btn btn--onDark btn--lg" href="#faq">Read the FAQ</a>
+          </div>
+        </div>
+        <div class="pl__hero-stats">
+          {d.stats.map(s => <div><strong>{s.v}</strong><span>{s.l}</span></div>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · reviews --light -->
+  <ReviewsCarousel />
+
+  <!-- 3 · fleet --dark -->
+  <section class="pl__section pl__section--dark">
+    <div class="pl__shell">
+      <div class="pl__section-head">
+        <div>
+          <p class="pl__kicker">{d.fleetKicker}</p>
+          <h2>{d.fleetH2}</h2>
+        </div>
+        <p>{d.fleetLede}</p>
+      </div>
+      <div class="pl__package-grid">
+        {d.vehicles.map(v => (
+          <article class="pl__package-card">
+            <a class="pl__package-media" href={`${d.vehicleBase}${v.slug}/`}>
+              <img src={`/assets/images/${v.image}`} alt={v.name} loading="lazy" decoding="async" width="600" height="400" />
+              <span class="pl__package-duration">{v.durations.map(x => x.label).join(' · ')}</span>
+            </a>
+            <div class="pl__package-body">
+              <h3 class="pl__package-title"><a href={`${d.vehicleBase}${v.slug}/`}>{v.name}</a></h3>
+              <p class="pl__package-spec">{v.engine} · {v.seats} {v.seats === 1 ? 'seat' : 'seats'} · Age {v.minAge}+ · {v.area}</p>
+              <p class="pl__package-desc">{v.blurb}</p>
+              <div class="pl__package-foot">
+                <span class="pl__package-price">
+                  <small>Starting from</small>
+                  <span class="pl__package-amount"><strong>AED {fromPrice(v)}</strong> <span class="pl__package-unit">/ per vehicle</span></span>
+                </span>
+                <a class="btn btn--primary" href={waLink(bookMessage(v.name))}>Book now</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · usp --light -->
+  <section class="pl__section pl__section--light">
+    <div class="pl__shell">
+      <div class="pl__section-head">
+        <div>
+          <p class="pl__kicker">{d.uspKicker}</p>
+          <h2>{d.uspH2}</h2>
+        </div>
+        <p>{d.uspLede}</p>
+      </div>
+      <div class="pl__usp-grid">
+        {d.usps.map(u => (
+          <article class="pl__info-card">
+            <span class="pl__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </span>
+            <h3>{u.h}</h3>
+            <p>{u.p}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · process --sand -->
+  <section class="pl__section pl__section--sand">
+    <div class="pl__shell">
+      <div class="pl__section-head">
+        <div>
+          <p class="pl__kicker">{d.flowKicker}</p>
+          <h2>{d.flowH2}</h2>
+        </div>
+        <p>{d.flowLede}</p>
+      </div>
+      <ol class="pl__timeline">
+        {d.steps.map((s, i) => (
+          <li>
+            <span>{i + 1}</span>
+            <small>{s.label}</small>
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 · faq --sand -->
+  <section class="pl__section pl__section--sand" id="faq">
+    <div class="pl__shell pl__faq-layout">
+      <aside>
+        <p class="pl__kicker">{d.faqKicker}</p>
+        <h2>{d.faqH2}</h2>
+        <p>{d.faqLede}</p>
+      </aside>
+      <div class="pl__faq-list">
+        {d.faqs.map((f, i) => (
+          <details open={i === 0}>
+            <summary>
+              <span>Q{String(i + 1).padStart(2, '0')}</span>
+              <h3>{f.q}</h3>
+              <b aria-hidden="true">+</b>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- 7 · long-form --content (scrollable reader + mid CTA + closing CTA) -->
+  <LongFormReader eyebrow={d.relKicker.replace(/^\d+\s*\/\s*/, '')} heading={d.lfHeading} intro={d.lfIntro} blocks={d.lfBlocks} />
+
+  <!-- 8 · related --light -->
+  <section class="pl__section pl__section--light">
+    <div class="pl__shell">
+      <p class="pl__kicker">{d.relKicker}</p>
+      <h2 class="pl__wide-title">{d.relH2}</h2>
+      <p class="pl__section-lede">{d.relLede}</p>
+      <div class="pl__related-grid">
+        {d.related.map(r => (
+          <a class="pl__related-card" href={r.href}>
+            <small>{r.tag}</small>
+            <strong>{r.title}</strong>
+            <em>{r.desc}</em>
+            <b>View option →</b>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

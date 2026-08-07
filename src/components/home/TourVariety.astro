@@ -1,0 +1,28 @@
+---
+import { tourStyles } from '@/data/home';
+---
+<section class="section" id="tour-variety">
+  <div class="shell">
+    <p class="eyebrow">Tour styles</p>
+    <h2>Pick the format that fits your group</h2>
+    <p class="lede">The vehicles are the same. What changes is seat count, pace and how much guide attention the group needs.</p>
+    <div class="tv">
+      {tourStyles.map(t => (
+        <article class="tv__card">
+          <h3>{t.title}</h3>
+          <p class="tv__tag">{t.tag}</p>
+          <p class="tv__body">{t.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tv { display: grid; gap: 1px; background: var(--c-line); border: 1px solid var(--c-line); border-radius: var(--radius-lg); overflow: hidden; margin-top: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .tv__card { background: #fff; padding: 1.5rem; transition: background var(--dur-fast); }
+  .tv__card:hover { background: var(--c-sand-soft); }
+  .tv__card h3 { font-size: 1.1rem; }
+  .tv__tag { display: inline-block; margin-top: .5rem; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--c-orange-dark); background: var(--c-orange-soft); padding: .35em .8em; border-radius: var(--radius-pill); }
+  .tv__body { margin-top: .8rem; font-size: var(--fs-sm); color: var(--c-ink-muted); }
+</style>

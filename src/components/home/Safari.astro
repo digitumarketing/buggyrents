@@ -1,0 +1,52 @@
+---
+/* Desert safari packages. Prices NOT yet supplied by the client -
+   the layout is final, the numbers are placeholders. */
+const packages = [
+  { tag: 'Most popular', title: 'Evening safari + BBQ dinner', img: '2024/11/dune-bashing-.webp',
+    body: 'Dune bashing across the red dunes, sunset stop, then a halal BBQ dinner at camp with entertainment. Around six hours end to end.',
+    price: null },
+  { tag: 'With a ride', title: 'Evening safari + 30-min quad', img: '2024/11/Desert-Safari-With-Dune-Buggy.jpg',
+    body: 'The classic evening safari with a 30-minute quad session added before the camp stop. Good middle ground if half the group wants to drive.',
+    price: null },
+  { tag: 'Private', title: 'Private evening safari', img: '2024/11/banner-07.jpg',
+    body: 'Your own vehicle and guide for the evening, on your timing rather than a shared schedule. Suits families and small groups.',
+    price: null }
+];
+---
+<section class="section" id="safari">
+  <div class="shell">
+    <p class="eyebrow">Desert safari</p>
+    <h2>Evening safaris, dunes and a Bedouin BBQ</h2>
+    <p class="lede">If you would rather be driven than drive. Dune bashing in a 4x4, a sunset stop, and dinner at camp.</p>
+    <div class="grid grid--3 sf">
+      {packages.map(p => (
+        <article class="sf__card">
+          <div class="sf__media">
+            <img src={`/assets/images/${p.img}`} alt={p.title} loading="lazy" decoding="async" width="600" height="400" />
+            <span class="badge sf__tag">{p.tag}</span>
+          </div>
+          <div class="sf__body">
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+            <p class="sf__price">{p.price ? `From AED ${p.price}` : 'Price to be confirmed'}</p>
+            <a class="btn btn--ghost" href="/desert-safari-dubai-deals/">See package</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sf { margin-top: 2rem; }
+  .sf__card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--c-line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-tile); transition: transform var(--dur-normal) var(--ease-out-expo), box-shadow var(--dur-normal); }
+  .sf__card:hover { transform: translateY(-4px); box-shadow: var(--shadow-tile-hover); }
+  .sf__media { position: relative; }
+  .sf__media img { aspect-ratio: 3 / 2; width: 100%; object-fit: cover; }
+  .sf__tag { position: absolute; top: 12px; left: 12px; }
+  .sf__body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem; }
+  .sf__body h3 { font-size: 1.1rem; }
+  .sf__body p { font-size: var(--fs-sm); color: var(--c-ink-muted); margin-top: .6rem; flex: 1; }
+  .sf__price { font-family: var(--font-display); font-weight: 800; color: var(--c-ink-soft) !important; margin-top: 1rem !important; flex: none !important; }
+  .sf__body .btn { margin-top: 1rem; align-self: start; }
+</style>

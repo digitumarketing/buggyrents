@@ -1,0 +1,226 @@
+---
+/* Google reviews slider.
+   Desktop 3 per view · tablet 2 · mobile 1. Auto-advances one review every 2.5s.
+   Only 5-star reviews containing text are rendered. */
+import { reviews, googleMeta, fiveStarWithText } from '@/data/reviews';
+import { site } from '@/data/site';
+
+interface Props { interval?: number; heading?: string; kicker?: string; lede?: string; }
+const {
+  interval = 2500,
+  kicker = 'Voices from the dunes',
+  heading = 'Excellent ratings from desert guests.',
+  lede = 'Recent guest reviews from Google, shown with the TripAdvisor Travellers’ Choice award.'
+} = Astro.props;
+
+const list = fiveStarWithText(reviews);
+const hasReviews = list.length > 0;
+const initials = (n: string) => n.trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+
+const schema = hasReviews && googleMeta.averageRating > 0 ? {
+  '@context': 'https://schema.org', '@type': 'LocalBusiness', name: site.name, url: site.domain,
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: googleMeta.averageRating, reviewCount: googleMeta.totalReviews },
+  review: list.slice(0, 10).map(r => ({
+    '@type': 'Review', author: { '@type': 'Person', name: r.author },
+    reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5 },
+    reviewBody: r.text
+  }))
+} : null;
+---
+<section class="rv" id="reviews">
+  <div class="pl__shell">
+    <div class="pl__section-head">
+      <div>
+        <p class="pl__kicker">{kicker}</p>
+        <h2>{heading}</h2>
+      </div>
+      <p>{lede}</p>
+    </div>
+
+    {hasReviews ? (
+      <>
+        <div class="rv__bar">
+          <div class="rv__score">
+            <strong>{googleMeta.averageRating.toFixed(1)}</strong>
+            <span class="rv__stars" aria-hidden="true">★★★★★</span>
+            <span class="rv__count">Based on {googleMeta.totalReviews.toLocaleString('en-US')} Google reviews</span>
+          </div>
+          <div class="rv__nav">
+            <button type="button" data-rv-prev aria-label="Previous review">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" data-rv-next aria-label="Next review">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="rv__viewport" data-rv-carousel data-rv-interval={interval}
+             role="region" aria-roledescription="carousel" aria-label="Guest reviews" tabindex="0">
+          <ul class="rv__track" data-rv-track role="list">
+            {list.map(r => (
+              <li class="rv__slide">
+                <figure class="rv__card">
+                  <div class="rv__head">
+                    {r.avatar
+                      ? <img class="rv__avatar" src={r.avatar} alt="" loading="lazy" decoding="async" width="44" height="44" />
+                      : <span class="rv__avatar rv__avatar--txt" aria-hidden="true">{initials(r.author)}</span>}
+                    <div>
+                      <strong>{r.author}</strong>
+                      <span>Google review</span>
+                    </div>
+                    <span class="rv__g" aria-label="Google review">G</span>
+                  </div>
+                  <div class="rv__stars rv__stars--sm" aria-label={`${r.rating} out of 5 stars`}>★★★★★</div>
+                  <blockquote><p>{r.text}</p></blockquote>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rv__dots" data-rv-dots aria-label="Choose review"></div>
+      </>
+    ) : (
+      <div class="rv__empty">
+        <strong>Reviews not connected yet</strong>
+        <p>The slider is built and working — 3 across on desktop, 2 on tablet, 1 on mobile, advancing every {(interval/1000).toFixed(1)} seconds. It needs real review data before it can render. See the note in the chat for the two ways to connect it.</p>
+      </div>
+    )}
+  </div>
+</section>
+{schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+
+<style>
+  .rv { padding-block: var(--section-gap); background: var(--c-sand-soft); }
+  .rv__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+  .rv__score { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+  .rv__score strong { font-family: var(--font-display); font-weight: 800; font-size: 2rem; color: var(--c-navy); line-height: 1; }
+  .rv__stars { color: var(--c-gold); letter-spacing: 2px; font-size: 1.1rem; }
+  .rv__stars--sm { font-size: 1.15rem; margin-top: .9rem; letter-spacing: 3px; }
+  .rv__count { font-size: var(--fs-xs); color: var(--c-ink-muted); }
+
+  .rv__nav { display: flex; gap: .5rem; }
+  .rv__nav button { width: 42px; height: 42px; border-radius: 10px; border: 1px solid var(--c-line);
+    background: #fff; color: var(--c-navy); display: grid; place-items: center;
+    transition: border-color var(--dur-fast), background var(--dur-fast), color var(--dur-fast); }
+  .rv__nav button:hover { border-color: var(--c-orange); background: var(--c-orange); color: #fff; }
+
+  .rv__viewport { overflow: hidden; margin-inline: -4px; padding-inline: 4px; }
+  .rv__viewport:focus-visible { outline: 3px solid var(--c-orange); outline-offset: 4px; border-radius: 12px; }
+  .rv__track { display: flex; list-style: none; padding: 14px 0 26px; margin: 0; gap: var(--rv-gap, 24px);
+    transition: transform 520ms var(--ease-out-expo); will-change: transform; }
+  .rv__slide { flex: 0 0 calc((100% - (var(--rv-gap, 24px) * (var(--rv-per, 3) - 1))) / var(--rv-per, 3)); display: flex; }
+  .rv__slide > .rv__card { width: 100%; }
+
+  .rv__card { position: relative; margin: 0; height: 100%; background: #fff;
+    border: 1px solid var(--c-line); border-top: 4px solid var(--c-orange); border-radius: 16px;
+    padding: 2.1rem 1.6rem 1.6rem; box-shadow: 0 2px 4px rgba(50,61,78,.05), 0 14px 40px rgba(50,61,78,.11);
+    display: flex; flex-direction: column; text-align: center;
+    transition: transform var(--dur-normal) var(--ease-out-expo), box-shadow var(--dur-normal); }
+  .rv__card:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(50,61,78,.05), 0 20px 52px rgba(255,102,0,.2); }
+  .rv__card::before { content: '\201C'; position: absolute; top: 6px; left: 50%; translate: -50% 0;
+    font-family: var(--font-display); font-weight: 800; font-size: 3.6rem; line-height: 1;
+    color: var(--c-orange); opacity: .16; pointer-events: none; }
+  .rv__head { display: flex; align-items: center; gap: .7rem; }
+  .rv__avatar { width: 54px; height: 54px; border-radius: 50%; flex: none; object-fit: cover; border: 2px solid var(--c-orange-line); }
+  .rv__avatar--txt { display: grid; place-items: center; background: var(--c-orange-soft);
+    color: var(--c-orange-dark); font-family: var(--font-display); font-weight: 800; font-size: .9rem; }
+  .rv__head strong { display: block; font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--c-navy); }
+  .rv__head span { font-size: 11px; color: var(--c-ink-soft); }
+  .rv__g { margin-left: auto; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--c-navy-soft); color: var(--c-navy); font-family: var(--font-display); font-weight: 800; font-size: .85rem; }
+  .rv__card blockquote { margin: .9rem 0 0; flex: 1; display: flex; align-items: center; }
+  .rv__card blockquote p { font-size: 1rem; color: var(--c-ink); line-height: 1.68; font-weight: 500; }
+  .rv__card { text-align: center; }
+  .rv__head { justify-content: center; }
+  .rv__head > div { text-align: left; }
+
+  .rv__dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin-top: 1.5rem; }
+  .rv__dots button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%; background: var(--c-line);
+    transition: background var(--dur-fast), width var(--dur-fast); }
+  .rv__dots button[aria-current='true'] { background: var(--c-orange); width: 26px; border-radius: 5px; }
+
+  .rv__empty { border: 2px dashed var(--c-orange-line); background: var(--c-orange-soft); border-radius: 14px; padding: 1.5rem; }
+  .rv__empty strong { font-family: var(--font-display); font-weight: 800; color: var(--c-orange-dark); }
+  .rv__empty p { margin-top: .5rem; font-size: var(--fs-sm); color: var(--c-ink-muted); max-width: 70ch; }
+
+  @media (max-width: 1024px) { .rv__track { --rv-per: 2; } }
+  @media (max-width: 640px)  { .rv__track { --rv-per: 1; --rv-gap: 16px; } .rv__card { padding: 2rem 1.25rem 1.4rem; } }
+</style>
+
+<script>
+  document.querySelectorAll('[data-rv-carousel]').forEach(root => {
+    const track = root.querySelector('[data-rv-track]');
+    if (!track) return;
+    const slides = Array.from(track.children);
+    const dotsWrap = root.parentElement?.querySelector('[data-rv-dots]');
+    const prev = root.parentElement?.querySelector('[data-rv-prev]');
+    const next = root.parentElement?.querySelector('[data-rv-next]');
+    const delay = Number(root.getAttribute('data-rv-interval')) || 2500;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let index = 0, timer = null;
+    const perView = () => {
+      const w = window.innerWidth;
+      return w <= 640 ? 1 : w <= 1024 ? 2 : 3;
+    };
+    const maxIndex = () => Math.max(0, slides.length - perView());
+
+    function render() {
+      if (index > maxIndex()) index = 0;
+      const slide = slides[0];
+      const gap = parseFloat(getComputedStyle(track).columnGap || '20') || 20;
+      const step = slide.getBoundingClientRect().width + gap;
+      track.style.transform = `translate3d(${-index * step}px,0,0)`;
+      slides.forEach((s, i) => {
+        const visible = i >= index && i < index + perView();
+        s.setAttribute('aria-hidden', String(!visible));
+      });
+      dotsWrap?.querySelectorAll('button').forEach((d, i) =>
+        d.setAttribute('aria-current', String(i === index)));
+    }
+
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      for (let i = 0; i <= maxIndex(); i++) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', `Go to review ${i + 1}`);
+        b.addEventListener('click', () => { index = i; render(); restart(); });
+        dotsWrap.appendChild(b);
+      }
+    }
+
+    const go = d => { index = index + d < 0 ? maxIndex() : (index + d > maxIndex() ? 0 : index + d); render(); };
+    const start = () => { if (!reduce && slides.length > perView()) timer = setInterval(() => go(1), delay); };
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+    const restart = () => { stop(); start(); };
+
+    prev?.addEventListener('click', () => { go(-1); restart(); });
+    next?.addEventListener('click', () => { go(1); restart(); });
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', start);
+    root.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { go(-1); restart(); }
+      if (e.key === 'ArrowRight') { go(1); restart(); }
+    });
+
+    let x0 = null;
+    root.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; stop(); }, { passive: true });
+    root.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+      x0 = null; start();
+    }, { passive: true });
+
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    let rt;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { buildDots(); render(); }, 150); });
+
+    buildDots(); render(); start();
+  });
+</script>

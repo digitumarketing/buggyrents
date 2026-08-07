@@ -1,0 +1,59 @@
+---
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/home/Hero.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import VehicleCard from '@/components/VehicleCard.astro';
+import Faq from '@/components/home/Faq.astro';
+import { locations } from '@/data/locations';
+import { buggies, quads } from '@/data/vehicles';
+import { site } from '@/data/site';
+
+export function getStaticPaths() {
+  return locations.map(l => ({ params: { slug: l.slug }, props: { loc: l } }));
+}
+const { loc } = Astro.props;
+const picks = [...buggies.slice(0, 2), ...quads.slice(3, 5)];
+
+const blocks = [
+  { h: `Getting from ${loc.short} to the Lahbab red dunes`,
+    html: `<p class="lf-lead">${loc.intro}</p><p>Our base is on the Dubai-Hatta road at Al Awir. From ${loc.short} allow <span class="pill">${loc.drive}</span> each way, longer on Friday afternoons and public holidays. Confirm your exact pickup point when you book — a hotel lobby, a landmark or a pinned location all work.</p>` },
+  { h: `What to confirm before leaving ${loc.short}`,
+    html: `<ul><li>Exact pickup address and a contact number that works in the UAE</li><li>Which vehicle and duration you want — see the <a href="/dune-buggy-dubai/price/">full price list</a></li><li>Group size, and whether any riders are under 18</li><li>Return timing, especially if you have evening plans back in ${loc.short}</li></ul><p>We quote transfers upfront with the booking rather than adding them at the base.</p>` },
+  { h: `Which ride suits a ${loc.short} trip`,
+    html: `<p class="lf-lead">If the drive from ${loc.short} is over an hour, book at least a one-hour session — a 30-minute taster rarely justifies the travel time.</p><p>For groups, the <a href="/dune-buggy-dubai/polaris-rzr-1000-4-seater/">4-seater Polaris RZR</a> keeps everyone in one vehicle. Solo riders and confident drivers tend to take the <a href="/quad-bike-dubai/yamaha-raptor-700cc/">Yamaha Raptor 700cc</a> or a <a href="/dune-buggy-dubai/can-am-maverick-x3-2-seater/">Can-Am Maverick X3</a>.</p>` },
+  { h: `Best timing from ${loc.short}`,
+    html: `<p class="lf-lead">Late afternoon is the pick. You leave ${loc.short} after the worst of the heat, ride as the light turns, and get the red dunes at their most photogenic.</p><p>Early morning suits summer months and anyone who wants the dunes quiet. October to April is the most comfortable season overall.</p>` }
+];
+---
+<Base
+  title={`${loc.name} | Pickup, Prices & Timing | Buggy Rents`}
+  description={`${loc.name} — dune buggy and quad biking pickup from ${loc.short}, ${loc.drive} to the Lahbab red dunes. Prices per vehicle from AED 75. WhatsApp ${site.phone}.`}
+>
+  <Hero
+    eyebrow={`${loc.emirate} pickup · Lahbab red dunes`}
+    heading={loc.name}
+    taglineEm={`${loc.drive} to the red dunes`}
+    tagline="— Dune buggy, quad bike and KTM dirt bike sessions with guided routes"
+  />
+
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">Popular from {loc.short}</p>
+      <h2>Vehicles {loc.short} guests book most</h2>
+      <div class="grid grid--3" style="margin-top:2rem">
+        {picks.map(v => <VehicleCard vehicle={v} base={v.category === 'buggy' ? '/dune-buggy-dubai/' : '/quad-bike-dubai/'} />)}
+      </div>
+    </div>
+  </section>
+
+  <LongFormReader
+    eyebrow={`${loc.short} guide`}
+    heading={`${loc.name}: pickup, timing and prices`}
+    intro={loc.intro}
+    blocks={blocks}
+    closeHeading={`Confirm pickup from ${loc.short}`}
+    closeLede={`Send your ${loc.short} pickup point, date and group size. We reply with availability, the total in AED and a transfer plan.`}
+  />
+
+  <Faq />
+</Base>

@@ -1,0 +1,136 @@
+---
+/* Scrollable SEO long-form reader with mid CTA tile and closing CTA tile.
+   Used on every major page. Structure mirrors the competitor's .dbr-long-form__reader. */
+import { site, waLink, bookMessage } from '@/data/site';
+
+export type LfBlock = { h: string; html: string };
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  intro: string;
+  blocks: LfBlock[];
+  ctaLabel?: string;
+  closeHeading?: string;
+  closeLede?: string;
+}
+const {
+  eyebrow = 'The full guide',
+  heading,
+  intro,
+  blocks,
+  ctaLabel = 'Ready to lock in a date? Send your group size and we will confirm availability the same day.',
+  closeHeading = 'Book your Dubai desert adventure',
+  closeLede = 'Dune buggy, quad bike or KTM dirt bike — tell us the date and group size and we will come back with availability, the total in AED and a pickup plan.'
+} = Astro.props;
+const mid = Math.ceil(blocks.length / 2);
+---
+<section class="lf">
+  <div class="shell">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 class="lf__h">{heading}</h2>
+    <p class="lf__intro" set:html={intro} />
+
+    <div class="lf__reader" tabindex="0" role="region" aria-label="Full guide, scrollable">
+      {blocks.slice(0, mid).map(b => (
+        <article class="lf__sec">
+          <h3>{b.h}</h3>
+          <div set:html={b.html} />
+        </article>
+      ))}
+
+      <div class="lf__cta">
+        <span class="lf__cta-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.2 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.1 9.9a16 16 0 006 6l1.26-1.26a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </span>
+        <p class="lf__cta-label">{ctaLabel}</p>
+        <div class="lf__cta-actions">
+          <a class="btn btn--wa" href={waLink(bookMessage())} target="_blank" rel="noopener">WhatsApp us</a>
+          <a class="btn btn--ghost lf__cta-ghost" href={`tel:${site.phoneRaw}`}>{site.phone}</a>
+        </div>
+      </div>
+
+      {blocks.slice(mid).map(b => (
+        <article class="lf__sec">
+          <h3>{b.h}</h3>
+          <div set:html={b.html} />
+        </article>
+      ))}
+
+      <div class="lf__close">
+        <span class="lf__close-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2-6.3-4.6L5.7 21 8 13.8 2 9.4h7.6z"/></svg>
+        </span>
+        <h3 class="lf__close-h">{closeHeading}</h3>
+        <p class="lf__close-lede">{closeLede}</p>
+        <div class="lf__close-ctas">
+          <a class="btn btn--wa btn--lg" href={waLink(bookMessage())} target="_blank" rel="noopener">Book on WhatsApp</a>
+          <a class="btn btn--ghost btn--lg lf__cta-ghost" href="/contact/">Contact page</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="lf__hint"><span></span> Scroll inside the panel to read the full guide</p>
+  </div>
+</section>
+
+<style>
+  .lf { padding-block: var(--section-gap); background: var(--c-sand-soft); }
+  .lf__h { max-width: 26ch; margin-top: .7rem; }
+  .lf__intro { margin-top: 1rem; max-width: 74ch; color: var(--c-ink-muted); }
+
+  .lf__reader {
+    margin-top: 1.75rem; max-height: min(58vh, 560px); min-height: 320px;
+    overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-gutter: stable;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background: #fff; border: 1px solid var(--c-sand); border-radius: var(--radius-lg);
+    display: grid; gap: 1rem; box-shadow: var(--shadow-tile);
+  }
+  .lf__reader:focus-visible { outline: 3px solid var(--c-orange); outline-offset: 2px; }
+  .lf__reader::-webkit-scrollbar { width: 10px; }
+  .lf__reader::-webkit-scrollbar-track { background: var(--c-line-soft); border-radius: 8px; }
+  .lf__reader::-webkit-scrollbar-thumb { background: var(--c-orange-line); border-radius: 8px; }
+  .lf__reader::-webkit-scrollbar-thumb:hover { background: var(--c-orange); }
+
+  .lf__sec { padding: clamp(1rem, 1.7vw, 1.35rem); background: #fff;
+    border: 1px solid var(--c-line); border-left: 3px solid var(--c-orange); border-radius: 10px; }
+  .lf__sec h3 { font-size: 1.05rem; }
+  .lf__sec :global(p) { margin-top: .7rem; font-size: var(--fs-sm); color: var(--c-ink-muted); }
+  .lf__sec :global(h4) { margin-top: 1rem; font-size: .95rem; color: var(--c-navy); }
+  .lf__sec :global(ul) { margin-top: .7rem; padding-left: 1.1rem; font-size: var(--fs-sm); color: var(--c-ink-muted); }
+  .lf__sec :global(li) { margin-top: .3rem; }
+  .lf__sec :global(.lf-lead) { border-left: 3px solid var(--c-orange); padding-left: .85rem;
+    background: linear-gradient(90deg, var(--c-orange-soft), transparent); }
+  .lf__sec :global(a) { color: var(--c-orange-dark); font-weight: 700; text-decoration: underline;
+    text-underline-offset: 3px; text-decoration-thickness: 1.5px; padding: 0 2px; border-radius: 3px; }
+  .lf__sec :global(a:hover) { background: var(--c-orange-soft); color: var(--c-navy); }
+  .lf__sec :global(.pill) { display: inline-block; padding: .12rem .55rem; margin: 0 .12rem; border-radius: 999px;
+    background: var(--c-sand); border: 1px solid var(--c-sand-line, var(--c-line)); color: var(--c-navy);
+    font-size: .88em; font-weight: 800; line-height: 1.35; }
+  .lf__sec :global(.trust) { display: inline-flex; align-items: center; gap: .4rem; padding: .2rem .65rem;
+    background: var(--c-orange); border: 1px solid var(--c-orange-dark); border-radius: 999px;
+    color: #fff; font-size: .88em; font-weight: 800; }
+
+  .lf__cta { position: relative; overflow: hidden; text-align: center; padding: 1.75rem 1.4rem;
+    background: var(--c-orange-dark); color: #fff; border-radius: 18px; }
+  .lf__cta-icon { position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.4);
+    border-radius: 50%; margin-bottom: 14px; }
+  .lf__cta-label { position: relative; z-index: 2; font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(1rem, .95rem + .3vw, 1.2rem); line-height: 1.4; margin-bottom: 18px; max-width: 46ch; margin-inline: auto; }
+  .lf__cta-actions { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .lf__cta-ghost { color: #fff; border-color: rgba(255,255,255,.55); }
+  .lf__cta-ghost:hover { background: rgba(255,255,255,.16); border-color: #fff; }
+
+  .lf__close { position: relative; overflow: hidden; text-align: center; padding: clamp(1.75rem, 4vw, 2.75rem) 1.4rem;
+    background: var(--c-navy); color: #fff; border-radius: 18px; }
+  .lf__close-icon { position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: center;
+    width: 64px; height: 64px; margin-bottom: 16px; background: rgba(255,255,255,.16);
+    border: 2px solid rgba(255,255,255,.5); border-radius: 50%; color: var(--c-gold); }
+  .lf__close-h { position: relative; z-index: 2; color: #fff; font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); margin-bottom: 12px; }
+  .lf__close-lede { position: relative; z-index: 2; font-size: var(--fs-sm); line-height: 1.6;
+    color: rgba(255,255,255,.9); max-width: 52ch; margin: 0 auto 22px; }
+  .lf__close-ctas { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+  .lf__hint { display: flex; align-items: center; gap: .5rem; margin-top: .9rem; font-size: var(--fs-xs); color: var(--c-ink-soft); }
+  .lf__hint span { width: 22px; height: 2px; background: var(--c-orange); border-radius: 2px; }
+</style>

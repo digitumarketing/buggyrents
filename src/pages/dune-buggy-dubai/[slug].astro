@@ -1,0 +1,10 @@
+---
+import Cluster from '@/components/templates/Cluster.astro';
+import { buggies } from '@/data/vehicles';
+import { tourData } from '@/data/tours';
+export function getStaticPaths() {
+  return buggies.map(v => ({ params: { slug: v.slug }, props: { data: tourData(v) } }));
+}
+const { data } = Astro.props;
+---
+<Cluster data={data} />

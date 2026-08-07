@@ -1,0 +1,236 @@
+---
+/* dbr-cluster — 10 sections, structure per BuggyRents-polaris-rzr-2-seater.html
+   1 hero · 2 spec-strip · 3 durations --light · 4 included --sand · 5 flow --light
+   6 vehicle --dark · 7 safety --sand · 8 FAQ --light · 9 related --sand · 10 guide --light */
+import '@/styles/cluster.css';
+import Base from '@/layouts/Base.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import type { LfBlock } from '@/components/LongFormReader.astro';
+import { img, hero } from '@/data/images';
+import { site, waLink, bookMessage } from '@/data/site';
+import type { Vehicle } from '@/data/vehicles';
+
+export type ClusterData = {
+  vehicle: Vehicle;
+  crumbParent: { label: string; href: string };
+  title: string; description: string;
+  heroImage: string; eyebrow: string; h1Lead: string; h1Em: string; h1Tail: string; lede: string;
+  specs: { label: string; value: string }[];
+  durationCopy: Record<string, { badge: string; blurb: string }>;
+  included: string[]; checkBefore: string[];
+  flow: { h: string; p: string }[];
+  whyH2: string; whyLede: string;
+  gallery: { image: string; kicker: string; title: string; body?: string }[];
+  safety: { label: string; h: string; p: string }[];
+  faqs: { q: string; a: string }[];
+  related: { tag: string; title: string; desc: string; from: string; href: string; img: string }[];
+  guideKicker: string; guideH2: string; guideIntro: string; guideBlocks: LfBlock[];
+};
+interface Props { data: ClusterData }
+const { data: d } = Astro.props;
+const v = d.vehicle;
+const base = v.category === 'buggy' ? '/dune-buggy-dubai/' : v.category === 'quad' ? '/quad-bike-dubai/' : '/ktm-dirt-bike-dubai/';
+
+const productSchema = {
+  '@context': 'https://schema.org', '@type': 'Product', name: v.name, description: v.blurb,
+  image: new URL(img(v.image, v.category).src, site.domain).href,
+  brand: { '@type': 'Brand', name: site.name },
+  offers: v.durations.map(x => ({
+    '@type': 'Offer', name: `${v.name} — ${x.label}`, price: x.price, priceCurrency: 'AED',
+    availability: 'https://schema.org/InStock', url: new URL(`${base}${v.slug}/`, site.domain).href
+  }))
+};
+const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
+  {'@type':'ListItem',position:1,name:'Home',item:site.domain},
+  {'@type':'ListItem',position:2,name:d.crumbParent.label,item:`${site.domain}${d.crumbParent.href}`},
+  {'@type':'ListItem',position:3,name:v.shortName,item:`${site.domain}${base}${v.slug}/`}]};
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
+  mainEntity: d.faqs.map(f => ({'@type':'Question', name: f.q, acceptedAnswer:{'@type':'Answer', text: f.a}})) };
+---
+<Base title={d.title} description={d.description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(productSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+
+  <!-- 1 hero -->
+  <section class="cl__hero">
+    <img class="cl__hero-media" src={hero(d.heroImage).src} alt={hero(d.heroImage).alt}
+         style={`object-position:${hero(d.heroImage).focal} center`}
+         width={hero(d.heroImage).w} height={hero(d.heroImage).h} fetchpriority="high" decoding="async" />
+    <div class="cl__hero-scrim"></div>
+    <div class="cl__shell cl__hero-inner">
+      <nav class="cl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span>
+        <a href={d.crumbParent.href}>{d.crumbParent.label}</a><span aria-hidden="true">/</span>
+        <span>{v.shortName}</span>
+      </nav>
+      <div class="cl__hero-copy">
+        <p class="cl__eyebrow"><span></span>{d.eyebrow}</p>
+        <h1>{d.h1Lead} <em>{d.h1Em}</em> {d.h1Tail}</h1>
+        <p class="cl__hero-lede">{d.lede}</p>
+        <div class="cl__chips">
+          {v.durations.map(x => <span>AED {x.price.toLocaleString('en-US')} / {x.label}</span>)}
+        </div>
+        <div class="cl__hero-actions">
+          <a class="btn btn--primary btn--lg" href={waLink(bookMessage(v.name))}>Book on WhatsApp</a>
+          <a class="btn btn--onDark btn--lg" href="#combos">See durations</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 spec strip -->
+  <section class="cl__spec-strip">
+    <div class="cl__shell cl__spec-grid">
+      {d.specs.map(s => <article><span>{s.label}</span><strong>{s.value}</strong></article>)}
+    </div>
+  </section>
+
+  <!-- 3 durations -->
+  <section class="cl__section cl__section--light" id="combos">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">01 / Choose duration</p><h2>Pick the ride time that fits your desert plan.</h2></div>
+        <p>Every price is per vehicle, not per person. Helmet, briefing, fuel and a lead guide are included on all durations.</p>
+      </header>
+      <div class="cl__value-grid">
+        {v.durations.map(x => {
+          const c = d.durationCopy[x.label] ?? { badge: 'Option', blurb: '' };
+          return (
+            <article class="cl__value-card">
+              <span>{c.badge}</span>
+              <h3>{x.label}</h3>
+              <p>{c.blurb}</p>
+              <div class="cl__value-price">
+                <strong>AED {x.price.toLocaleString('en-US')}</strong>
+                <small>Per vehicle</small>
+              </div>
+              <a class="btn btn--primary" href={waLink(bookMessage(v.name, x.label, x.price))}>Book {x.label}</a>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 included -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header><p class="cl__kicker">02 / Included</p><h2 class="cl__wide-title">What is included before you drive.</h2></header>
+      <div class="cl__split" style="margin-top:2rem">
+        <article class="cl__list-card">
+          <h3>Included with this {v.category === 'buggy' ? 'buggy' : v.category === 'quad' ? 'quad' : 'bike'}</h3>
+          <ul>{d.included.map(x => <li>{x}</li>)}</ul>
+        </article>
+        <article class="cl__list-card cl__list-card--check">
+          <h3>Check before booking</h3>
+          <ul>{d.checkBefore.map(x => <li>{x}</li>)}</ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 flow -->
+  <section class="cl__section cl__section--light">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">03 / Tour flow</p><h2>From pickup to the Lahbab red dunes.</h2></div>
+        <p>A simple sequence from arrival through briefing, guided riding and return.</p>
+      </header>
+      <ol class="cl__flow">
+        {d.flow.map((s,i) => <li><span>{i+1}</span><strong>{s.h}</strong><p>{s.p}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 vehicle --dark -->
+  <section class="cl__section cl__section--dark">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">04 / Vehicle specs</p><h2>{d.whyH2}</h2></div>
+        <p>{d.whyLede}</p>
+      </header>
+      <div class="cl__gallery">
+        <figure class="cl__photo">
+          <img src={img(d.gallery[0].image, v.category).src} alt={img(d.gallery[0].image, v.category).alt} loading="lazy" decoding="async" width="800" height="533" />
+          <figcaption>
+            <span>{d.gallery[0].kicker}</span><strong>{d.gallery[0].title}</strong>
+            {d.gallery[0].body && <p>{d.gallery[0].body}</p>}
+          </figcaption>
+        </figure>
+        <div class="cl__detail-grid">
+          {d.gallery.slice(1).map(g => (
+            <figure class="cl__photo">
+              <img src={img(g.image, v.category).src} alt={img(g.image, v.category).alt} loading="lazy" decoding="async" width="480" height="320" />
+              <figcaption><span>{g.kicker}</span><strong>{g.title}</strong></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 safety -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">05 / Safety and fit</p><h2>A guided ride with clear safety rules.</h2></div>
+        <p>Nothing moves until the briefing is done and harnesses are checked.</p>
+      </header>
+      <div class="cl__safety-grid">
+        {d.safety.map(s => (
+          <article class="cl__safety-card">
+            <span class="cl__safety-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <span class="cl__safety-label">{s.label}</span>
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 FAQ -->
+  <section class="cl__section cl__section--light" id="faq">
+    <div class="cl__shell cl__faq-layout">
+      <aside>
+        <p class="cl__kicker">06 / FAQ</p>
+        <h2>{v.shortName} questions.</h2>
+        <p>The usual booking questions: duration, who can drive, what is included and how pickup works.</p>
+      </aside>
+      <div class="cl__faq-list">
+        {d.faqs.map((f,i) => (
+          <details open={i === 0}>
+            <summary><span>Q{String(i+1).padStart(2,'0')}</span><h3>{f.q}</h3><b aria-hidden="true">+</b></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- 9 related -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">07 / Related choices</p><h2>Compare the next options before you book.</h2></div>
+        <p>Same routes and the same included gear. What changes is seats, power and price.</p>
+      </header>
+      <div class="cl__related-grid">
+        {d.related.map(r => (
+          <a class="cl__related-card" href={r.href}>
+            <span class="cl__related-media"><img src={img(r.img).src} alt={img(r.img).alt} loading="lazy" decoding="async" width="480" height="320" /></span>
+            <span class="cl__related-body">
+              <span>{r.tag}</span><strong>{r.title}</strong><p>{r.desc}</p><em>{r.from}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 guide (scrollable long-form reader with mid + closing CTA) -->
+  <LongFormReader eyebrow={d.guideKicker} heading={d.guideH2} intro={d.guideIntro} blocks={d.guideBlocks} />
+</Base>

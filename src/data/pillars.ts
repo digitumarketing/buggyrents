@@ -59,6 +59,7 @@ export const quadPillar: PillarData = {
     { q: 'Is hotel pickup available?', a: 'Yes, on request across Dubai. Send your hotel or area and we quote the transfer with your booking rather than adding it at the base.' }
   ],
 
+  lfKicker: '05 / Quad bike guide',
   lfHeading: 'Quad Biking Dubai: ATV routes, prices and rider levels in the Lahbab red dunes',
   lfIntro: 'Everything you need before booking <strong>quad biking Dubai</strong> — the six ATV options, what each riding area actually means, current <strong>quad bike rental Dubai</strong> prices, age limits, and how to pick the machine that matches your experience.',
   lfBlocks: [
@@ -91,7 +92,7 @@ export const quadPillar: PillarData = {
 <p>We reply with availability, the total in AED and a pickup plan — usually within a few minutes. No deposit is needed to hold a standard slot.</p>` }
   ],
 
-  relKicker: '05 / Next choices',
+  relKicker: '06 / Next choices',
   relH2: 'Add a dune buggy, KTM dirt bike or desert safari after your quad ride.',
   relLede: 'Compare the other three routes: a seated self-drive buggy, a 450cc desert enduro, or a 4x4 safari with a camp dinner.',
   related: [

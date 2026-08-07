@@ -20,7 +20,7 @@ export type PillarData = {
   uspKicker: string; uspH2: string; uspLede: string; usps: { h: string; p: string }[];
   flowKicker: string; flowH2: string; flowLede: string; steps: { label: string; h: string; p: string }[];
   faqKicker: string; faqH2: string; faqLede: string; faqs: { q: string; a: string }[];
-  lfHeading: string; lfIntro: string; lfBlocks: LfBlock[];
+  lfKicker: string; lfHeading: string; lfIntro: string; lfBlocks: LfBlock[];
   relKicker: string; relH2: string; relLede: string;
   related: { tag: string; title: string; desc: string; href: string }[];
 };
@@ -172,7 +172,7 @@ const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', 
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
   <!-- 7 · long-form --content (scrollable reader + mid CTA + closing CTA) -->
-  <LongFormReader eyebrow={d.relKicker.replace(/^\d+\s*\/\s*/, '')} heading={d.lfHeading} intro={d.lfIntro} blocks={d.lfBlocks} />
+  <LongFormReader eyebrow={d.lfKicker} heading={d.lfHeading} intro={d.lfIntro} blocks={d.lfBlocks} />
 
   <!-- 8 · related --light -->
   <section class="pl__section pl__section--light">

@@ -1,15 +1,16 @@
 ---
+import { img } from '@/data/images';
 interface Props {
   eyebrow: string; heading: string; sub: string;
-  paragraphs: string[]; checklist: string[]; image: string;
+  paragraphs: string[]; checklist: string[]; image: string; alt?: string;
   flip?: boolean; tone?: 'plain' | 'sand';
 }
-const { eyebrow, heading, sub, paragraphs, checklist, image, flip = false, tone = 'plain' } = Astro.props;
+const { eyebrow, heading, sub, paragraphs, checklist, image, alt = '', flip = false, tone = 'plain' } = Astro.props;
 ---
 <section class={`section ed${tone === 'sand' ? ' section--sand' : ''}`}>
   <div class={`shell ed__grid${flip ? ' ed__grid--flip' : ''}`}>
     <div class="ed__media">
-      <img src={`/assets/images/${image}`} alt="" loading="lazy" decoding="async" width="800" height="600" />
+      <img src={img(image).src} alt={img(image).alt} loading="lazy" decoding="async" width="800" height="600" />
     </div>
     <div class="ed__body">
       <p class="eyebrow">{eyebrow}</p>

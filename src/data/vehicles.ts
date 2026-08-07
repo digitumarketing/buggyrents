@@ -9,7 +9,7 @@ export type Vehicle = {
   seats: number;
   minAge: number;
   area: string;
-  image: string;
+  image: string;   // key into src/data/images.ts
   blurb: string;
   durations: Duration[];
   featured?: boolean;
@@ -28,7 +28,7 @@ export const buggies: Vehicle[] = [
     seats: 2,
     minAge: 18,
     area: 'Lahbab red dunes',
-    image: '2024/11/2-seater-dube-buggy-polaris-1000cc.webp',
+    image: 'polaris-rzr-1000-2-seater-dune-buggy-dubai',
     blurb: 'The balanced starting point. Enough power for the big dunes, forgiving enough for a first self-drive.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 300 },
@@ -45,7 +45,7 @@ export const buggies: Vehicle[] = [
     seats: 4,
     minAge: 18,
     area: 'Lahbab red dunes',
-    image: '2024/11/4-seater-dune-buggy-polaris-1000c.webp',
+    image: 'polaris-rzr-4-seater-dune-buggy-parked-dubai-base',
     blurb: 'One buggy for the whole family. Same chassis as the 2-seater with a second row behind.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 350 },
@@ -62,7 +62,7 @@ export const buggies: Vehicle[] = [
     seats: 2,
     minAge: 18,
     area: 'Lahbab red dunes',
-    image: '2024/11/Canam-Maverick-x3.jpg',
+    image: 'can-am-maverick-x3-black-2-seater-red-dune-dubai',
     blurb: 'A serious step up in power and suspension travel. For riders who have driven a buggy before.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 400 },
@@ -79,7 +79,7 @@ export const buggies: Vehicle[] = [
     seats: 4,
     minAge: 18,
     area: 'Lahbab red dunes',
-    image: '2024/11/Canam-Maverick-x3-Turbo.webp',
+    image: 'can-am-maverick-x3-4-seater-family-buggy-ride-dubai',
     blurb: 'Turbo performance with four seats. The pick for groups that do not want to split up.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 450 },
@@ -95,7 +95,7 @@ export const buggies: Vehicle[] = [
     seats: 2,
     minAge: 18,
     area: 'Lahbab red dunes',
-    image: '2024/12/Canam-Maverick-R-Powerfull-Buggy1.webp',
+    image: 'can-am-maverick-x3-turbo-dune-buggy-dubai',
     blurb: 'The fastest machine in the fleet. Experienced drivers only.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 500 },
@@ -120,7 +120,7 @@ export const quads: Vehicle[] = [
     seats: 1,
     minAge: 6,
     area: 'Kids special area',
-    image: '2024/11/1-Seater-Quad-Bike.jpg',
+    image: 'kids-quad-bike-dubai-fenced-riding-area',
     blurb: 'A fenced, flat area away from the main dunes so younger riders get their own space.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 75 },
@@ -140,7 +140,7 @@ export const quads: Vehicle[] = [
     seats: 1,
     minAge: 12,
     area: '2 km boundary area',
-    image: '2022/06/Mojo-Quad-Biking.jpg',
+    image: 'single-seat-quad-bike-rider-dubai-desert',
     blurb: 'Ride inside a marked 2 km square. The easiest way to try a quad without committing to open desert.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 89 },
@@ -160,7 +160,7 @@ export const quads: Vehicle[] = [
     seats: 2,
     minAge: 14,
     area: '2 km boundary area',
-    image: '2024/11/2-seater-quad-biking-dubai.jpg',
+    image: 'double-seat-quad-biking-dubai-red-dunes',
     blurb: 'Take a passenger. Same marked boundary area, a larger engine to carry two.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 150 },
@@ -179,7 +179,7 @@ export const quads: Vehicle[] = [
     seats: 1,
     minAge: 14,
     area: 'Open desert, red dunes',
-    image: '2024/11/Quad-Biking-Dubai.webp',
+    image: 'quad-bike-open-desert-group-ride-dubai',
     blurb: 'Out of the boundary and into the red dunes with a guide. The real thing.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 200 },
@@ -199,7 +199,7 @@ export const quads: Vehicle[] = [
     seats: 2,
     minAge: 16,
     area: 'Open desert, red dunes',
-    image: '2023/12/2-Seater-quad-Bike-Ride.jpg',
+    image: 'double-seat-quad-bike-dubai-friends-photo-stop',
     blurb: 'Two up across the open red dunes. The biggest engine we put a passenger on.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 300 },
@@ -218,7 +218,7 @@ export const quads: Vehicle[] = [
     seats: 1,
     minAge: 18,
     area: 'Open desert, red dunes',
-    image: '2022/06/YAMAHA-Raptor-700cc.jpg',
+    image: 'yamaha-raptor-700cc-quad-bike-lahbab-red-dunes',
     blurb: 'The sport quad. Fast, light and demanding - for riders who already know what they are doing.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 500 },
@@ -245,7 +245,7 @@ export const dirtbikes: Vehicle[] = [
     seats: 1,
     minAge: 18,
     area: 'Open desert, red dunes',
-    image: '2022/10/KTM-Desert-Ride-Biking.jpg',
+    image: 'ktm-450-dirt-bike-rider-dubai-desert',
     blurb: 'Desert enduro on a proper 450. Riders must be comfortable with clutch, gears and throttle.',
     durations: [
       { label: '1 hour', minutes: 60, price: 700 },

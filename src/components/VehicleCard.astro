@@ -1,4 +1,5 @@
 ---
+import { img } from '@/data/images';
 import type { Vehicle } from '@/data/vehicles';
 import { fromPrice } from '@/data/vehicles';
 interface Props { vehicle: Vehicle; base: string; }
@@ -8,7 +9,7 @@ const shortest = v.durations[0];
 ---
 <article class="vc">
   <a class="vc__media" href={`${base}${v.slug}/`}>
-    <img src={`/assets/images/${v.image}`} alt={v.name} loading="lazy" decoding="async" width="600" height="400" />
+    <img src={img(v.image, v.category).src} alt={img(v.image, v.category).alt} loading="lazy" decoding="async" width="600" height="400" />
     <span class="vc__spec">{v.engine} · {v.seats} {v.seats === 1 ? 'seat' : 'seats'} · Age {v.minAge}+</span>
   </a>
   <div class="vc__body">

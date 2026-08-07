@@ -1,6 +1,6 @@
-/* Desert safari packages — prices confirmed by client 7 Aug 2026.
+/* Desert safari packages, prices confirmed by client 7 Aug 2026.
    `was` values are the client-supplied former prices. Only display them if they are
-   genuine historic prices — permanent strike-through anchors are a UAE advertising risk. */
+   genuine historic prices, permanent strike-through anchors are a UAE advertising risk. */
 
 export type SafariPackage = {
   slug: string;
@@ -35,7 +35,7 @@ export const sharedSafaris: SafariPackage[] = [
     group: 'shared', vehicle: 'Shared 4x4', capacity: '6 to 7 persons', duration: '7 to 8 hours',
     priceLabel: 'Per person', price: 150, was: 250,
     image: '2024/11/banner-07.jpg',
-    blurb: 'The evening safari upgraded — VIP seating at the camp, a better dinner spread and a quieter section away from the main crowd.',
+    blurb: 'The evening safari upgraded. VIP seating at the camp, a better dinner spread and a quieter section away from the main crowd.',
     includes: ['Hotel pickup and drop-off', 'Dune bashing in a 4x4', 'VIP camp seating', 'Camel ride', 'Sandboarding', 'Premium halal BBQ dinner', 'Full entertainment programme'],
     featured: true
   },
@@ -55,7 +55,7 @@ export const sharedSafaris: SafariPackage[] = [
     group: 'shared', vehicle: 'Shared 4x4', capacity: '6 to 7 persons', duration: '7 to 8 hours',
     priceLabel: 'Per person', price: 250, was: 350,
     image: '2024/11/Desert-Safari-With-Dune-Buggy.jpg',
-    blurb: 'VIP camp treatment plus a quad bike session — the fullest shared evening safari we run.',
+    blurb: 'VIP camp treatment plus a quad bike session, the fullest shared evening safari we run.',
     includes: ['Hotel pickup and drop-off', 'Dune bashing in a 4x4', 'Quad bike ride', 'VIP camp seating', 'Camel ride', 'Sandboarding', 'Premium halal BBQ dinner', 'Full entertainment programme']
   },
   {
@@ -96,7 +96,7 @@ export const privateSafaris: SafariPackage[] = [
     group: 'private', vehicle: 'Private 4x4', capacity: '6 to 7 persons', duration: '4 to 5 hours',
     priceLabel: 'Private Land Cruiser', price: 650, was: 950,
     image: '2024/11/banner-06.jpg',
-    blurb: 'A morning desert safari Dubai in your own Land Cruiser — cooler sand, quieter dunes, and back in time for the rest of the day.',
+    blurb: 'A morning desert safari Dubai in your own Land Cruiser, cooler sand, quieter dunes, and back in time for the rest of the day.',
     includes: ['Private hotel pickup and drop-off', 'Private Land Cruiser and guide', 'Morning dune bashing', 'Camel ride', 'Sandboarding', 'Refreshments']
   },
   {
@@ -105,7 +105,7 @@ export const privateSafaris: SafariPackage[] = [
     group: 'private', vehicle: 'Private 4x4', capacity: '6 to 7 persons', duration: '7 hours',
     priceLabel: 'Private Land Cruiser', price: 600, was: 800,
     image: '2024/11/Camel-Riding.webp',
-    blurb: 'A private evening safari timed and paced for two — sunset stop, unhurried photos, and VIP seating at camp.',
+    blurb: 'A private evening safari timed and paced for two, sunset stop, unhurried photos, and VIP seating at camp.',
     includes: ['Private hotel pickup and drop-off', 'Private Land Cruiser and guide', 'Sunset dune drive', 'VIP camp seating', 'Camel ride', 'Halal BBQ dinner', 'Camp entertainment'],
     featured: true
   },
@@ -133,7 +133,7 @@ export const privateSafaris: SafariPackage[] = [
     group: 'private', vehicle: 'Private bus', capacity: '10 to 12 persons', duration: '7 hours',
     priceLabel: 'Private mini bus', price: 800, was: 1150,
     image: '2024/11/BUffet.jpeg',
-    blurb: 'For larger groups travelling together — one mini bus for 10 to 12 people rather than splitting across several 4x4s.',
+    blurb: 'For larger groups travelling together, one mini bus for 10 to 12 people rather than splitting across several 4x4s.',
     includes: ['Private hotel pickup and drop-off', 'Private mini bus for 10–12', 'Desert camp transfer', 'Camel ride', 'Sandboarding', 'Halal BBQ dinner', 'Camp entertainment']
   }
 ];

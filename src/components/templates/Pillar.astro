@@ -1,5 +1,5 @@
 ---
-/* dbr-pillar — 8 sections, structure per BuggyRents-dune-buggy.html
+/* dbr-pillar. 8 sections, structure per BuggyRents-dune-buggy.html
    1 hero · 2 reviews --light · 3 fleet --dark · 4 usp --light
    5 process --sand · 6 faq --sand#faq · 7 long-form --content · 8 related --light */
 import '@/styles/pillar.css';
@@ -9,6 +9,7 @@ import ReviewsCarousel from '@/components/ReviewsCarousel.astro';
 import type { LfBlock } from '@/components/LongFormReader.astro';
 import type { Vehicle } from '@/data/vehicles';
 import { fromPrice } from '@/data/vehicles';
+import { img, hero } from '@/data/images';
 import { site, waLink, bookMessage } from '@/data/site';
 
 export type PillarData = {
@@ -22,7 +23,7 @@ export type PillarData = {
   faqKicker: string; faqH2: string; faqLede: string; faqs: { q: string; a: string }[];
   lfKicker: string; lfHeading: string; lfIntro: string; lfBlocks: LfBlock[];
   relKicker: string; relH2: string; relLede: string;
-  related: { tag: string; title: string; desc: string; href: string }[];
+  related: { tag: string; title: string; desc: string; href: string; img: string }[];
 };
 interface Props { data: PillarData }
 const { data: d } = Astro.props;
@@ -38,7 +39,9 @@ const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', 
 
   <!-- 1 · hero -->
   <section class="pl__hero">
-    <img class="pl__hero-media" src={`/assets/images/${d.heroImage}`} alt={d.h1} fetchpriority="high" decoding="async" />
+    <img class="pl__hero-media" src={hero(d.heroImage).src} alt={hero(d.heroImage).alt}
+           style={`object-position:${hero(d.heroImage).focal} center`}
+           width={hero(d.heroImage).w} height={hero(d.heroImage).h} fetchpriority="high" decoding="async" />
     <div class="pl__hero-scrim"></div>
     <div class="pl__hero-inner">
       <nav class="pl__crumbs" aria-label="Breadcrumb">
@@ -79,7 +82,7 @@ const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', 
         {d.vehicles.map(v => (
           <article class="pl__package-card">
             <a class="pl__package-media" href={`${d.vehicleBase}${v.slug}/`}>
-              <img src={`/assets/images/${v.image}`} alt={v.name} loading="lazy" decoding="async" width="600" height="400" />
+              <img src={img(v.image, v.category).src} alt={img(v.image, v.category).alt} loading="lazy" decoding="async" width="600" height="400" />
               <span class="pl__package-duration">{v.durations.map(x => x.label).join(' · ')}</span>
             </a>
             <div class="pl__package-body">
@@ -148,7 +151,7 @@ const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', 
   </section>
 
   <!-- 6 · faq --sand -->
-  <section class="pl__section pl__section--sand" id="faq">
+  <section class="pl__section pl__section--dark pl__section--faq" id="faq">
     <div class="pl__shell pl__faq-layout">
       <aside>
         <p class="pl__kicker">{d.faqKicker}</p>
@@ -183,10 +186,15 @@ const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', 
       <div class="pl__related-grid">
         {d.related.map(r => (
           <a class="pl__related-card" href={r.href}>
-            <small>{r.tag}</small>
-            <strong>{r.title}</strong>
-            <em>{r.desc}</em>
-            <b>View option →</b>
+            <span class="pl__related-media">
+              <img src={img(r.img).src} alt={img(r.img).alt} loading="lazy" decoding="async" width="480" height="320" />
+            </span>
+            <span class="pl__related-body">
+              <small>{r.tag}</small>
+              <strong>{r.title}</strong>
+              <em>{r.desc}</em>
+              <b>View option →</b>
+            </span>
           </a>
         ))}
       </div>

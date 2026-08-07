@@ -1,4 +1,5 @@
 ---
+import { hero } from '@/data/images';
 /* Mirrors the competitor hero structure: media + scrim + sun glow,
    centred column, eyebrow → h1 → tagline (with accent em) → badge → scroll cue. */
 interface Props {
@@ -8,12 +9,12 @@ const {
   eyebrow = 'Multi-activity · Lahbab red dunes · Al Awir base',
   heading = 'Experience Dubai’s Ultimate Desert Adventure: Dune Buggy, Quad Biking & Desert Safari Tours',
   taglineEm = 'Self-Drive Desert Adventures',
-  tagline = '— Dune Buggy Rental, Quad Biking Dubai, KTM Dirt Bike & Bedouin BBQ Safari',
-  image = '2024/11/banner-06.jpg'
+  tagline = ',  Dune Buggy Rental, Quad Biking Dubai, KTM Dirt Bike & Bedouin BBQ Safari',
+  image = 'desert-adventure-dubai-hero-canam-maverick'
 } = Astro.props;
 ---
 <section class="hero">
-  <img class="hero__media" src={`/assets/images/${image}`} alt="Dune buggy riding through the Lahbab red dunes in Dubai" fetchpriority="high" decoding="async" />
+  <img class="hero__media" src={hero(image).src} alt={hero(image).alt} style={`object-position:${hero(image).focal} center`} fetchpriority="high" decoding="async" />
   <div class="hero__scrim"></div>
   <div class="hero__sun"></div>
 
@@ -41,7 +42,7 @@ const {
 
 <style>
   .hero { position: relative; min-height: clamp(600px, 78svh, 840px); overflow: hidden; isolation: isolate; display: flex; align-items: stretch; background: var(--c-navy-dark); }
-  .hero__media { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: 58% 50%; pointer-events: none; animation: heroDrift 28s ease-in-out infinite alternate; }
+  .hero__media { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover;  pointer-events: none; animation: heroDrift 28s ease-in-out infinite alternate; }
   @keyframes heroDrift { from { transform: scale(1.02) translate3d(0,0,0); } to { transform: scale(1.09) translate3d(-1.2%, -1%, 0); } }
 
   .hero__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -66,7 +67,7 @@ const {
   .hero__main { max-width: 920px; margin-inline: auto; }
   .hero__h1 { color: #fff; font-size: clamp(1.85rem, 1.1rem + 2.6vw, 3.1rem); line-height: 1.1; letter-spacing: -.02em;
     text-shadow: 0 2px 18px rgba(0,0,0,.5); margin: 0 auto 14px; max-width: 24ch; }
-  .hero__tagline { font-family: var(--font-display); font-weight: 500; font-size: clamp(1rem, .9rem + .45vw, 1.22rem);
+  .hero__tagline { font-family: var(--font-display); font-weight: 500; font-size: clamp(1rem.9rem + .45vw, 1.22rem);
     color: rgba(255,255,255,.9); text-shadow: 0 2px 12px rgba(0,0,0,.4); max-width: 52ch; margin: 0 auto 22px; line-height: 1.5; }
   .hero__tagline em { font-style: italic; font-weight: 800; color: var(--c-gold); }
 

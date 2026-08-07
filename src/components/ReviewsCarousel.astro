@@ -40,11 +40,12 @@ const schema = hasReviews && googleMeta.averageRating > 0 ? {
     {hasReviews ? (
       <>
         <div class="rv__bar">
-          <div class="rv__score">
+          <a class="rv__score" href={site.maps.link} target="_blank" rel="noopener nofollow">
+            <img class="rv__glogo" src="/assets/brand/google-g.svg" alt="Google" width="30" height="30" loading="lazy" decoding="async" />
             <strong>{googleMeta.averageRating.toFixed(1)}</strong>
             <span class="rv__stars" aria-hidden="true">★★★★★</span>
             <span class="rv__count">Based on {googleMeta.totalReviews.toLocaleString('en-US')} Google reviews</span>
-          </div>
+          </a>
           <div class="rv__nav">
             <button type="button" data-rv-prev aria-label="Previous review">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -69,7 +70,7 @@ const schema = hasReviews && googleMeta.averageRating > 0 ? {
                       <strong>{r.author}</strong>
                       <span>Google review</span>
                     </div>
-                    <span class="rv__g" aria-label="Google review">G</span>
+                    <img class="rv__g" src="/assets/brand/google-g.svg" alt="Posted on Google" width="22" height="22" loading="lazy" decoding="async" />
                   </div>
                   <div class="rv__stars rv__stars--sm" aria-label={`${r.rating} out of 5 stars`}>★★★★★</div>
                   <blockquote><p>{r.text}</p></blockquote>
@@ -83,7 +84,7 @@ const schema = hasReviews && googleMeta.averageRating > 0 ? {
     ) : (
       <div class="rv__empty">
         <strong>Reviews not connected yet</strong>
-        <p>The slider is built and working — 3 across on desktop, 2 on tablet, 1 on mobile, advancing every {(interval/1000).toFixed(1)} seconds. It needs real review data before it can render. See the note in the chat for the two ways to connect it.</p>
+        <p>The slider is built and working. 3 across on desktop, 2 on tablet, 1 on mobile, advancing every {(interval/1000).toFixed(1)} seconds. It needs real review data before it can render. See the note in the chat for the two ways to connect it.</p>
       </div>
     )}
   </div>
@@ -91,9 +92,13 @@ const schema = hasReviews && googleMeta.averageRating > 0 ? {
 {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
 <style>
-  .rv { padding-block: var(--section-gap); background: var(--c-sand-soft); }
+  .rv { padding-block: var(--section-gap); background: #fff; }
   .rv__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
-  .rv__score { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+  .rv__score { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; text-decoration: none;
+    padding: .5rem .9rem; border: 1px solid var(--c-line); border-radius: 12px;
+    transition: border-color var(--dur-fast), box-shadow var(--dur-fast); }
+  .rv__score:hover { border-color: var(--c-orange); box-shadow: var(--shadow-tile); }
+  .rv__glogo { width: 30px; height: 30px; flex: none; }
   .rv__score strong { font-family: var(--font-display); font-weight: 800; font-size: 2rem; color: var(--c-navy); line-height: 1; }
   .rv__stars { color: var(--c-gold); letter-spacing: 2px; font-size: 1.1rem; }
   .rv__stars--sm { font-size: 1.15rem; margin-top: .9rem; letter-spacing: 3px; }
@@ -107,17 +112,17 @@ const schema = hasReviews && googleMeta.averageRating > 0 ? {
 
   .rv__viewport { overflow: hidden; margin-inline: -4px; padding-inline: 4px; }
   .rv__viewport:focus-visible { outline: 3px solid var(--c-orange); outline-offset: 4px; border-radius: 12px; }
-  .rv__track { display: flex; list-style: none; padding: 14px 0 26px; margin: 0; gap: var(--rv-gap, 24px);
+  .rv__track { display: flex; list-style: none; padding: 6px 0 14px; margin: 0; gap: var(--rv-gap, 24px);
     transition: transform 520ms var(--ease-out-expo); will-change: transform; }
   .rv__slide { flex: 0 0 calc((100% - (var(--rv-gap, 24px) * (var(--rv-per, 3) - 1))) / var(--rv-per, 3)); display: flex; }
   .rv__slide > .rv__card { width: 100%; }
 
   .rv__card { position: relative; margin: 0; height: 100%; background: #fff;
     border: 1px solid var(--c-line); border-top: 4px solid var(--c-orange); border-radius: 16px;
-    padding: 2.1rem 1.6rem 1.6rem; box-shadow: 0 2px 4px rgba(50,61,78,.05), 0 14px 40px rgba(50,61,78,.11);
+    padding: 2.1rem 1.6rem 1.6rem; box-shadow: 0 1px 2px rgba(50,61,78,.04), 0 4px 12px rgba(50,61,78,.05);
     display: flex; flex-direction: column; text-align: center;
     transition: transform var(--dur-normal) var(--ease-out-expo), box-shadow var(--dur-normal); }
-  .rv__card:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(50,61,78,.05), 0 20px 52px rgba(255,102,0,.2); }
+  .rv__card:hover { transform: translateY(-3px); border-color: var(--c-orange-line); box-shadow: 0 1px 2px rgba(50,61,78,.04), 0 8px 20px rgba(255,102,0,.10); }
   .rv__card::before { content: '\201C'; position: absolute; top: 6px; left: 50%; translate: -50% 0;
     font-family: var(--font-display); font-weight: 800; font-size: 3.6rem; line-height: 1;
     color: var(--c-orange); opacity: .16; pointer-events: none; }
@@ -127,8 +132,7 @@ const schema = hasReviews && googleMeta.averageRating > 0 ? {
     color: var(--c-orange-dark); font-family: var(--font-display); font-weight: 800; font-size: .9rem; }
   .rv__head strong { display: block; font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--c-navy); }
   .rv__head span { font-size: 11px; color: var(--c-ink-soft); }
-  .rv__g { margin-left: auto; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
-    background: var(--c-navy-soft); color: var(--c-navy); font-family: var(--font-display); font-weight: 800; font-size: .85rem; }
+  .rv__g { margin-left: auto; width: 22px; height: 22px; flex: none; }
   .rv__card blockquote { margin: .9rem 0 0; flex: 1; display: flex; align-items: center; }
   .rv__card blockquote p { font-size: 1rem; color: var(--c-ink); line-height: 1.68; font-weight: 500; }
   .rv__card { text-align: center; }

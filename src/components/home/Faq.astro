@@ -15,7 +15,7 @@ const schema = {
     <div class="faq__head">
       <p class="eyebrow">Before you book</p>
       <h2>Straight answers to the usual questions</h2>
-      <p class="lede">Not here? Message us on WhatsApp — a real person replies, usually within a few minutes.</p>
+      <p class="lede">Not here? Message us on WhatsApp, a real person replies, usually within a few minutes.</p>
       <a class="btn btn--wa" href={waLink(bookMessage())}>WhatsApp {site.phone}</a>
     </div>
     <div class="faq__list">
@@ -35,7 +35,7 @@ const schema = {
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 <style>
-  .faq { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); align-items: start; }
+  .faq { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); grid-template-columns: minmax(0.78fr) minmax(0, 1.22fr); align-items: start; }
   .faq__head .btn { margin-top: 1.4rem; }
   .faq__list { border: 1px solid var(--c-line); border-radius: var(--radius-lg); overflow: hidden; background: #fff; }
   .faq__list details + details { border-top: 1px solid var(--c-line-soft); }

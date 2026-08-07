@@ -3,7 +3,7 @@
    Used on every major page. Structure mirrors the competitor's .dbr-long-form__reader. */
 import { site, waLink, bookMessage } from '@/data/site';
 
-export type LfBlock = { h: string; html: string };
+export type LfBlock = { h: string; html: string; img?: string; alt?: string };
 interface Props {
   eyebrow?: string;
   heading: string;
@@ -20,7 +20,7 @@ const {
   blocks,
   ctaLabel = 'Ready to lock in a date? Send your group size and we will confirm availability the same day.',
   closeHeading = 'Book your Dubai desert adventure',
-  closeLede = 'Dune buggy, quad bike or KTM dirt bike — tell us the date and group size and we will come back with availability, the total in AED and a pickup plan.'
+  closeLede = 'Dune buggy, quad bike or KTM dirt bike, tell us the date and group size and we will come back with availability, the total in AED and a pickup plan.'
 } = Astro.props;
 const mid = Math.ceil(blocks.length / 2);
 ---
@@ -32,9 +32,16 @@ const mid = Math.ceil(blocks.length / 2);
 
     <div class="lf__reader" tabindex="0" role="region" aria-label="Full guide, scrollable">
       {blocks.slice(0, mid).map(b => (
-        <article class="lf__sec">
-          <h3>{b.h}</h3>
-          <div set:html={b.html} />
+        <article class={`lf__sec${b.img ? ' lf__sec--img' : ''}`}>
+          <div class="lf__sec-body">
+            <h3>{b.h}</h3>
+            <div set:html={b.html} />
+          </div>
+          {b.img && (
+            <figure class="lf__sec-fig">
+              <img src={`/assets/images/${b.img}`} alt={b.alt ?? b.h} loading="lazy" decoding="async" width="480" height="360" />
+            </figure>
+          )}
         </article>
       ))}
 
@@ -50,9 +57,16 @@ const mid = Math.ceil(blocks.length / 2);
       </div>
 
       {blocks.slice(mid).map(b => (
-        <article class="lf__sec">
-          <h3>{b.h}</h3>
-          <div set:html={b.html} />
+        <article class={`lf__sec${b.img ? ' lf__sec--img' : ''}`}>
+          <div class="lf__sec-body">
+            <h3>{b.h}</h3>
+            <div set:html={b.html} />
+          </div>
+          {b.img && (
+            <figure class="lf__sec-fig">
+              <img src={`/assets/images/${b.img}`} alt={b.alt ?? b.h} loading="lazy" decoding="async" width="480" height="360" />
+            </figure>
+          )}
         </article>
       ))}
 
@@ -93,6 +107,10 @@ const mid = Math.ceil(blocks.length / 2);
 
   .lf__sec { padding: clamp(1rem, 1.7vw, 1.35rem); background: #fff;
     border: 1px solid var(--c-line); border-left: 3px solid var(--c-orange); border-radius: 10px; }
+  .lf__sec--img { display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; }
+  .lf__sec-fig { margin: 0; }
+  .lf__sec-fig img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
+  @media (max-width: 720px) { .lf__sec--img { grid-template-columns: 1fr; } .lf__sec-fig { order: -1; } }
   .lf__sec h3 { font-size: 1.05rem; }
   .lf__sec :global(p) { margin-top: .7rem; font-size: var(--fs-sm); color: var(--c-ink-muted); }
   .lf__sec :global(h4) { margin-top: 1rem; font-size: .95rem; color: var(--c-navy); }
@@ -106,23 +124,20 @@ const mid = Math.ceil(blocks.length / 2);
   .lf__sec :global(.pill) { display: inline-block; padding: .12rem .55rem; margin: 0 .12rem; border-radius: 999px;
     background: var(--c-sand); border: 1px solid var(--c-sand-line, var(--c-line)); color: var(--c-navy);
     font-size: .88em; font-weight: 800; line-height: 1.35; }
-  .lf__sec :global(.trust) { display: inline-flex; align-items: center; gap: .4rem; padding: .2rem .65rem;
-    background: var(--c-orange); border: 1px solid var(--c-orange-dark); border-radius: 999px;
-    color: #fff; font-size: .88em; font-weight: 800; }
 
   .lf__cta { position: relative; overflow: hidden; text-align: center; padding: 1.75rem 1.4rem;
-    background: var(--c-orange-dark); color: #fff; border-radius: 18px; }
+    background: var(--c-navy); color: #fff; border-radius: 18px; }
   .lf__cta-icon { position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: center;
     width: 48px; height: 48px; background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.4);
     border-radius: 50%; margin-bottom: 14px; }
   .lf__cta-label { position: relative; z-index: 2; font-family: var(--font-display); font-weight: 700;
-    font-size: clamp(1rem, .95rem + .3vw, 1.2rem); line-height: 1.4; margin-bottom: 18px; max-width: 46ch; margin-inline: auto; }
+    font-size: clamp(1rem.95rem + .3vw, 1.2rem); line-height: 1.4; margin-bottom: 18px; max-width: 46ch; margin-inline: auto; }
   .lf__cta-actions { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
   .lf__cta-ghost { color: #fff; border-color: rgba(255,255,255,.55); }
   .lf__cta-ghost:hover { background: rgba(255,255,255,.16); border-color: #fff; }
 
   .lf__close { position: relative; overflow: hidden; text-align: center; padding: clamp(1.75rem, 4vw, 2.75rem) 1.4rem;
-    background: var(--c-navy); color: #fff; border-radius: 18px; }
+    background: var(--c-navy-dark); color: #fff; border-radius: 18px; border: 1px solid rgba(255,255,255,.12); }
   .lf__close-icon { position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: center;
     width: 64px; height: 64px; margin-bottom: 16px; background: rgba(255,255,255,.16);
     border: 2px solid rgba(255,255,255,.5); border-radius: 50%; color: var(--c-gold); }

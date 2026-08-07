@@ -1,4 +1,5 @@
 ---
+import { img } from '@/data/images';
 import { dirtbikes } from '@/data/vehicles';
 import { waLink, bookMessage } from '@/data/site';
 const ktm = dirtbikes[0];
@@ -6,7 +7,7 @@ const ktm = dirtbikes[0];
 <section class="sp">
   <div class="shell sp__grid">
     <div class="sp__media">
-      <img src={`/assets/images/${ktm.image}`} alt="KTM 450 dirt bike in the Dubai desert" loading="lazy" decoding="async" width="800" height="600" />
+      <img src={img(ktm.image, "dirtbike").src} alt={img(ktm.image, "dirtbike").alt} loading="lazy" decoding="async" width="800" height="600" />
       <span class="sp__flag">Rider screening applies</span>
     </div>
     <div class="sp__body">

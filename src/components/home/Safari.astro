@@ -1,14 +1,15 @@
 ---
+import { img } from '@/data/images';
 /* Desert safari packages. Prices NOT yet supplied by the client -
    the layout is final, the numbers are placeholders. */
 const packages = [
-  { tag: 'Most popular', title: 'Evening safari + BBQ dinner', img: '2024/11/dune-bashing-.webp',
+  { tag: 'Most popular', title: 'Evening safari + BBQ dinner', img: 'belly-dance-show-desert-safari-camp-dubai',
     body: 'Dune bashing across the red dunes, sunset stop, then a halal BBQ dinner at camp with entertainment. Around six hours end to end.',
     price: null },
-  { tag: 'With a ride', title: 'Evening safari + 30-min quad', img: '2024/11/Desert-Safari-With-Dune-Buggy.jpg',
+  { tag: 'With a ride', title: 'Evening safari + 30-min quad', img: 'quad-bike-rental-dubai-rider-red-quad',
     body: 'The classic evening safari with a 30-minute quad session added before the camp stop. Good middle ground if half the group wants to drive.',
     price: null },
-  { tag: 'Private', title: 'Private evening safari', img: '2024/11/banner-07.jpg',
+  { tag: 'Private', title: 'Private evening safari', img: 'camel-ride-desert-safari-dubai',
     body: 'Your own vehicle and guide for the evening, on your timing rather than a shared schedule. Suits families and small groups.',
     price: null }
 ];
@@ -22,7 +23,7 @@ const packages = [
       {packages.map(p => (
         <article class="sf__card">
           <div class="sf__media">
-            <img src={`/assets/images/${p.img}`} alt={p.title} loading="lazy" decoding="async" width="600" height="400" />
+            <img src={img(p.img).src} alt={img(p.img).alt} loading="lazy" decoding="async" width="600" height="400" />
             <span class="badge sf__tag">{p.tag}</span>
           </div>
           <div class="sf__body">

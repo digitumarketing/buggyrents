@@ -27,7 +27,7 @@ export const site = {
 
   founded: 2020,
   guestsServed: '17K+',
-  /* Trade licence number intentionally omitted — see note in CLAUDE.md.
+  /* Trade licence number intentionally omitted, see note in CLAUDE.md.
      Add a trade licence number here only if you hold one; it will appear in the footer and About page. */
   tradeLicence: null as string | null,
 

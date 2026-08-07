@@ -1,1 +1,1 @@
-/* removed — real reviews now live in reviews.ts */
+/* removed, real reviews now live in reviews.ts */

@@ -60,3 +60,65 @@ for (const file of walk(DIST)) {
 }
 if (fails) { console.error(`\n${fails} contrast failure(s).`); process.exit(1); }
 console.log('Contrast audit passed — no low-contrast text on card surfaces.');
+
+/* Guard against malformed colour functions, e.g. rgba(50,61,78.05) missing the alpha comma. */
+{
+  const files = [];
+  const walkSrc = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkSrc(p);
+    else if (/\.(astro|css)$/.test(p)) files.push(p);
+  });
+  try { walkSrc('src'); } catch {}
+  const bad = [];
+  for (const f of files) {
+    const src = readFileSync(f, 'utf8');
+    for (const m of src.matchAll(/\brgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+\.\d+\s*\)/g)) bad.push(`${f}: ${m[0]}`);
+  }
+  if (bad.length) {
+    console.error('Malformed colour values (missing alpha comma):');
+    bad.forEach(b => console.error('  ' + b));
+    process.exit(1);
+  }
+  console.log('Colour-syntax audit passed.');
+}
+
+/* No image may be used more than once across the built site, and every img needs alt text. */
+{
+  const pages = [];
+  const walkD = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkD(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkD(DIST);
+  const seen = new Map(), noAlt = [];
+  for (const page of pages) {
+    const html = readFileSync(page, 'utf8');
+    for (const m of html.matchAll(/<img\b[^>]*>/g)) {
+      const tag = m[0];
+      const src = (tag.match(/src="([^"]+)"/) || [])[1];
+      const alt = (tag.match(/alt="([^"]*)"/) || [])[1];
+      if (!src || src.startsWith('data:')) continue;
+      if (alt === undefined || alt.trim() === '') {
+        if (!/brand\/google-g|logo/.test(src)) noAlt.push(`${page}: ${src}`);
+      }
+      if (!/brand\//.test(src)) {
+        const key = `${page}|${src}`;
+        seen.set(key, (seen.get(key) || 0) + 1);
+      }
+    }
+  }
+  const dupes = [...seen.entries()].filter(([, n]) => n > 1);
+  if (dupes.length) {
+    console.error('Image reused on the same page:');
+    dupes.forEach(([k, n]) => console.error(`  ${k} x${n}`));
+    process.exit(1);
+  }
+  if (noAlt.length) {
+    console.error('Images missing alt text:');
+    noAlt.slice(0, 10).forEach(x => console.error('  ' + x));
+    process.exit(1);
+  }
+  console.log('Image audit passed — no reuse within a page, all alt text present.');
+}

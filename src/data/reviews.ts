@@ -1,4 +1,4 @@
-/* Google reviews — 17 verified 5-star reviews with text.
+/* Google reviews. 17 verified 5-star reviews with text.
    5 pulled live from the Places API (7 Aug 2026) + 12 supplied by the client
    from the Google Business Profile dashboard. French-language review removed per client.
    Dates deliberately not stored or shown.

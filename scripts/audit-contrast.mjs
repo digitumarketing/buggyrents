@@ -122,3 +122,31 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   }
   console.log('Image audit passed — no reuse within a page, all alt text present.');
 }
+
+
+/* The business carries no rider insurance. Any claim of cover would be a false statement
+   on a booking page, so fail the build if one appears. */
+{
+  const banned = [/\binsured\b/i, /\binsurance\b/i, /fully covered/i, /\bcover(?:age)? included\b/i];
+  const pages = [];
+  const walkI = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkI(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkI(DIST);
+  const hits = [];
+  for (const page of pages) {
+    const text = readFileSync(page, 'utf8').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]*>/g, ' ');
+    for (const re of banned) {
+      const m = text.match(re);
+      if (m) hits.push(`${page}: "${m[0]}"`);
+    }
+  }
+  if (hits.length) {
+    console.error('Insurance claim found, but the business has no cover:');
+    hits.slice(0, 10).forEach(h => console.error('  ' + h));
+    process.exit(1);
+  }
+  console.log('Claims audit passed — no insurance claims.');
+}

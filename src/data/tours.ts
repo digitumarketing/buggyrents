@@ -80,6 +80,9 @@ const faqsFor = (v: Vehicle): { q: string; a: string }[] => {
     { q: 'Is hotel pickup available?', a: 'Yes, and hotel pickup within Dubai is free. Send your hotel or area when you book. Outer-emirate transfers are quoted with the booking.' },
     { q: 'What should I wear?', a: 'Closed shoes, clothes you do not mind getting sandy, and sunglasses. We provide the helmet.' },
     { q: 'How do I book?', a: `Message us on WhatsApp with your date, group size and the duration you want. We reply with availability and the total in AED, usually within a few minutes.` },
+    { q: 'How do I pay, and when?', a: 'Cash, card and bank transfer are all accepted. Nothing is due when you book: you pay on the spot at the Al Awir base before you ride. No deposit is taken to hold a standard slot.' },
+    { q: 'Is hotel pickup free?', a: 'Hotel pickup and drop-off within Dubai is free on every booking. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.' },
+    { q: 'Can I cancel or reschedule?', a: 'Cancel more than 24 hours before your slot and you get a full refund. Inside 24 hours we will always try to move you to another date rather than charge you. If weather makes the route unsafe we reschedule at no cost.' },
     { q: 'How long should I book?', a: `${cheapest.label} is a taster. For most riders an hour is the sweet spot. Longer routes suit riders who already know what they are doing.` }
   ];
 };
@@ -147,7 +150,7 @@ ${v.durations.length > 2 ? `<p>Longer routes suit riders who already know what t
 
     { h: 'How to book',
       html: `<p class="lf-lead">Message us on WhatsApp with your date, group size, rider ages and the duration you want.</p>
-<p>We reply with availability, the total in AED and a pickup plan, usually within a few minutes. No deposit is needed to hold a standard slot. Multi-vehicle and corporate bookings are confirmed differently and we explain that in the message rather than surprising you later.</p>
+<p>We reply with availability, the total in AED and a pickup plan, usually within a few minutes. No deposit is needed to hold a standard slot.</p><p>Payment is on the spot at the Al Awir base before you ride: cash, card or bank transfer, whichever suits you. Nothing is taken when you book. Hotel pickup within Dubai is free, and free cancellation applies up to 24 hours before your slot.</p>
 <p>Weekend and public-holiday afternoons fill first, particularly between October and April. If your dates are fixed, message earlier rather than later. If your dates are flexible, tell us and we will suggest the quieter slots, which usually means a better ride as well as easier availability.</p>` }
   ];
 };

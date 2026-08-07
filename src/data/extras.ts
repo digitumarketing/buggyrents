@@ -39,6 +39,13 @@ export const transfers = {
   outsideDubai: 'Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.'
 };
 
+export const payment = {
+  methods: ['Cash', 'Card', 'Bank transfer'],
+  onTheSpot: true,
+  summary: 'Cash, card and bank transfer are all accepted, and you can pay on the spot at the base.',
+  detail: 'There is nothing to pay when you book. Settle up at the Al Awir base before you ride, by cash, card or bank transfer, whichever suits you.'
+};
+
 /* Policy — client confirmed 7 Aug 2026. Original wording, not copied from any competitor. */
 export const policy = {
   cancellationHours: 24,

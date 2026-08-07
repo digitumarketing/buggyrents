@@ -56,7 +56,9 @@ export const quadPillar: PillarData = {
     { q: 'Can two people share one quad?', a: 'Yes. The double-seat quads in both the boundary area and open desert carry a passenger at no extra charge, one price covers both riders.' },
     { q: 'What should I wear for quad biking?', a: 'Closed shoes, clothes you do not mind getting sandy, and sunglasses. We provide the helmet. Avoid loose scarves and anything that can catch.' },
     { q: 'Where does quad biking in Dubai take place?', a: 'At our Al Awir base on the Dubai-Hatta road, at the edge of the Lahbab red dunes, roughly 45 minutes from Downtown Dubai.' },
-    { q: 'Is hotel pickup available?', a: 'Yes, and hotel pickup within Dubai is free. Send your hotel or area when you book. Outer-emirate transfers such as Sharjah, Ajman or Abu Dhabi are quoted with the booking.' }
+    { q: 'Is hotel pickup available?', a: 'Yes, and hotel pickup within Dubai is free. Send your hotel or area when you book. Outer-emirate transfers such as Sharjah, Ajman or Abu Dhabi are quoted with the booking.' },
+    { q: 'How do I pay?', a: 'Cash, card and bank transfer are all accepted, and you can pay on the spot at the base before you ride. Nothing is due when you book, and there is no deposit on standard slots.' },
+    { q: 'Can I cancel if my plans change?', a: 'Cancel more than 24 hours before your slot for a full refund. Inside 24 hours we will try to move you to another date rather than charge you. If wind or heat make the route unsafe, we reschedule at no cost.' }
   ],
 
   lfKicker: '05 / Quad bike guide',

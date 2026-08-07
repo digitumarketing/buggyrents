@@ -3,10 +3,11 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "ENABLE_KEYSTATIC=true astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "build:cms": "ENABLE_KEYSTATIC=true astro build"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",

@@ -1,13 +1,10 @@
 name = "buggyrents"
 compatibility_date = "2026-08-01"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "dist"
 
-# KV session store — only needed once the Keystatic admin runs in production.
-# Create it when you want /keystatic live:
-#   npx wrangler kv namespace create SESSION
-# then uncomment the block below and paste the printed id.
-#
-# [[kv_namespaces]]
-# binding = "SESSION"
-# id = "PASTE_ID_HERE"
+# Static-assets-only Worker. The whole public site is prerendered HTML,
+# so there is no Worker script — Cloudflare serves dist/ straight from the edge.
+[assets]
+directory = "./dist"
+
+# Switch to "404-page" once the 404 template is built and dist/404.html exists.
+not_found_handling = "none"

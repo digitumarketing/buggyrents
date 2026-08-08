@@ -12,6 +12,8 @@ import Base from '@/layouts/Base.astro';
 import { img, hero } from '@/data/images';
 import { site, waLink } from '@/data/site';
 import { transfers, payment } from '@/data/extras';
+import { buggies, quads, dirtbikes, fromPrice } from '@/data/vehicles';
+import { sharedSafaris, privateSafaris } from '@/data/safari';
 
 const title = 'Contact Buggy Rents | Dune Buggy and Quad Bike Booking in Dubai';
 const description = `Message the team that runs the base. WhatsApp ${site.phone}, call any time, or send the form. Free hotel pickup inside Dubai, no deposit, and free cancellation up to 24 hours before.`;
@@ -23,6 +25,16 @@ const channels = [
   { tag: 'WhatsApp', value: site.phone, note: 'The fastest route, and the one most guests use. Send your date, group size and ages and we will come back with options.', href: `https://wa.me/${site.whatsapp}` },
   { tag: 'Phone', value: 'Call the base', note: 'Open 24/7. Useful when you are already on the road or the pickup point is hard to describe.', href: `tel:${site.phoneRaw}` },
   { tag: 'Email', value: site.email, note: 'Better for corporate bookings, large groups and anything that needs a written quote.', href: `mailto:${site.email}` }
+];
+
+/* Built from the real fleet, so the dropdown can never drift from what we run.
+   Every option carries its entry price, which is the number people are actually
+   choosing between. */
+const packageGroups = [
+  { label: 'Dune buggy', items: buggies.map(v => `${v.name} (from AED ${fromPrice(v)})`) },
+  { label: 'Quad bike', items: quads.map(v => `${v.name} (from AED ${fromPrice(v)})`) },
+  { label: 'Dirt bike', items: dirtbikes.map(v => `${v.name} (from AED ${fromPrice(v)})`) },
+  { label: 'Desert safari', items: [...sharedSafaris, ...privateSafaris].map(s => `${s.name} (AED ${s.price}, ${s.priceLabel})`) }
 ];
 
 const templates = [
@@ -104,22 +116,38 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
                 <span>Phone*</span>
                 <input id="ct-phone" name="phone" type="tel" autocomplete="tel" placeholder="With country code" required />
               </label>
-              <label class="ct__field ct__field--full" for="ct-email">
+              <label class="ct__field" for="ct-email">
                 <span>Email</span>
-                <input id="ct-email" name="email" type="email" autocomplete="email" placeholder="Optional, for written quotes" />
+                <input id="ct-email" name="email" type="email" autocomplete="email" placeholder="Optional" />
+              </label>
+              <label class="ct__field" for="ct-people">
+                <span>Number of people</span>
+                <input id="ct-people" name="people" type="number" min="1" max="60" inputmode="numeric"
+                       placeholder="How many riding" />
+              </label>
+              <label class="ct__field ct__field--full" for="ct-package">
+                <span>Package</span>
+                <select id="ct-package" name="package">
+                  <option value="">Not sure yet, please advise</option>
+                  {packageGroups.map(g => (
+                    <optgroup label={g.label}>
+                      {g.items.map(i => <option value={i}>{i}</option>)}
+                    </optgroup>
+                  ))}
+                </select>
               </label>
               <label class="ct__field ct__field--full" for="ct-message">
                 <span>Message*</span>
-                <textarea id="ct-message" name="message" rows="5" required
-                  placeholder="Date, guests and ages, activity and pickup area."></textarea>
+                <textarea id="ct-message" name="message" rows="3" required
+                  placeholder="Date, ages, pickup area and anything else."></textarea>
               </label>
             </div>
             <p class="ct__form-status" id="ct-status" role="status" aria-live="polite">
               Sends to the booking desk and opens WhatsApp with the same message.
             </p>
             <div class="ct__form-actions">
-              <button class="btn btn--primary btn--lg" type="submit">Send request</button>
-              <a class="btn btn--ghost btn--lg" id="ct-email-link" href={`mailto:${site.email}`}>Email instead</a>
+              <button class="btn btn--primary btn--lg" type="submit">Start request</button>
+              <button class="btn btn--ghost btn--lg" type="button" id="ct-email-btn">Send Email</button>
             </div>
           </form>
 
@@ -220,64 +248,100 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
   </section>
 </Base>
 
-<script is:inline define:vars={{ wa: site.whatsapp, mail: site.email }}>
-  /* Submit does two things: POST to the Worker so the booking desk gets an email,
-     and open WhatsApp with the same body. WhatsApp opens either way. If the email
-     call fails the guest never finds out, because losing the booking would be the
-     worse outcome and the message still reaches the team. */
+<script is:inline define:vars={{ wa: site.whatsapp }}>
+  /* Two ways to send, both real.
+
+     Start request  opens WhatsApp with the message ready AND posts to the Worker
+                    so the booking desk gets an email either way.
+     Send Email     posts to the Worker only. This used to be a mailto: link, which
+                    silently does nothing on any device without a mail client set
+                    up, which is most desktop browsers. Sending it server side
+                    means the button works for everyone. */
   (function () {
     var form = document.getElementById('ct-form');
     if (!form) return;
     var status = document.getElementById('ct-status');
-    var emailLink = document.getElementById('ct-email-link');
+    var emailBtn = document.getElementById('ct-email-btn');
+    var idle = status ? status.textContent : '';
+
+    function read() {
+      return Object.fromEntries(new FormData(form));
+    }
 
     function body(d) {
-      return 'Hi BuggyRents,\n\n' +
-        'Name: ' + d.name + '\n' +
-        'Phone: ' + d.phone + '\n' +
-        'Email: ' + d.email + '\n\n' +
-        'Message:\n' + d.message;
+      var lines = [
+        'Hi BuggyRents,', '',
+        'Name: ' + (d.name || ''),
+        'Phone: ' + (d.phone || ''),
+        'Email: ' + (d.email || '')
+      ];
+      if (d.package) lines.push('Package: ' + d.package);
+      if (d.people) lines.push('People: ' + d.people);
+      lines.push('', 'Message:', d.message || '');
+      return lines.join('\n');
     }
 
     function say(text, state) {
+      if (!status) return;
       status.textContent = text;
       if (state) status.setAttribute('data-state', state);
       else status.removeAttribute('data-state');
     }
 
-    /* Keep the mailto fallback in sync as they type, so "Email instead" always
-       carries whatever is already in the form. */
-    form.addEventListener('input', function () {
-      var d = Object.fromEntries(new FormData(form));
-      emailLink.href = 'mailto:' + mail +
-        '?subject=' + encodeURIComponent('Booking request from ' + (d.name || 'the website')) +
-        '&body=' + encodeURIComponent(body(d));
-    });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var d = Object.fromEntries(new FormData(form));
-
+    function valid(d) {
       if (!d.name || !d.phone || !d.message) {
         say('Add your name, phone and a message so we can help.', 'error');
         form.reportValidity();
-        return;
+        return false;
       }
+      return true;
+    }
 
-      var text = body(d);
-
-      /* Popup blockers only allow window.open inside the click that triggered it,
-         so open WhatsApp now and let the email request run in the background. */
-      window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-      say('Opening WhatsApp with your message. We have emailed the booking desk too.');
-
-      fetch('/api/contact', {
+    function post(d) {
+      return fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(d)
-      }).catch(function () { /* WhatsApp already has it. Nothing to tell the guest. */ });
+      }).then(function (r) { return r.json(); });
+    }
 
+    /* Start request: WhatsApp opens, email is best effort behind it. */
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = read();
+      if (!valid(d)) return;
+
+      /* Popup blockers only allow window.open inside the click that triggered it,
+         so open WhatsApp first and let the email request run behind it. */
+      window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(body(d)), '_blank', 'noopener');
+      say('Opening WhatsApp with your message. We have emailed the booking desk too.');
+      post(d).catch(function () { /* WhatsApp already has it. */ });
       form.reset();
+      setTimeout(function () { say(idle); }, 6000);
     });
+
+    /* Send Email: server side, so it works with no mail client installed. */
+    if (emailBtn) {
+      emailBtn.addEventListener('click', function () {
+        var d = read();
+        if (!valid(d)) return;
+        emailBtn.disabled = true;
+        say('Sending to the booking desk...');
+        post(d).then(function (r) {
+          if (r && r.ok) {
+            say('Sent. We will reply to your email or phone shortly.');
+            form.reset();
+          } else {
+            /* Never leave the guest at a dead end. WhatsApp always works. */
+            say('That did not go through. Tap Start request to send it on WhatsApp instead.', 'error');
+          }
+        }).catch(function () {
+          say('That did not go through. Tap Start request to send it on WhatsApp instead.', 'error');
+        }).then(function () {
+          emailBtn.disabled = false;
+          setTimeout(function () { if (status.textContent.indexOf('Sent.') === 0) say(idle); }, 8000);
+        });
+      });
+    }
   })();
 </script>

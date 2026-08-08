@@ -80,6 +80,8 @@ export default {
     const phone = clean(data.phone, 60);
     const email = clean(data.email, 200);
     const message = String(data.message ?? '').trim().slice(0, 4000);
+    const pkg = clean(data.package, 200);
+    const people = clean(data.people, 10).replace(/[^0-9]/g, '');
 
     if (!name || !phone || !message) {
       return json({ ok: false, reason: 'missing-fields' }, 400);
@@ -99,6 +101,8 @@ export default {
       `Name:    ${name}`,
       `Phone:   ${phone}`,
       `Email:   ${email || 'not given'}`,
+      `Package: ${pkg || 'not chosen, wants advice'}`,
+      `People:  ${people || 'not given'}`,
       '',
       'Message:',
       message,
@@ -118,7 +122,7 @@ export default {
           from: env.CONTACT_FROM || DEFAULT_FROM,
           to: [env.CONTACT_INBOX || DEFAULT_INBOX],
           reply_to: email || undefined,
-          subject: `Booking request from ${name} (${phone})`,
+          subject: `Booking request from ${name} (${phone})${people ? ', ' + people + ' pax' : ''}`,
           text
         })
       });

@@ -72,12 +72,20 @@
 .ct__field--full { grid-column: 1 / -1; }
 .ct__field span { color: var(--c-navy); font-size: 13px; font-weight: 800;
   font-family: var(--font-display); }
-.ct__field input, .ct__field textarea { width: 100%; border: 1px solid var(--c-line);
+.ct__field input, .ct__field textarea, .ct__field select { width: 100%; border: 1px solid var(--c-line);
   border-radius: 10px; background: #fff; color: var(--c-ink); font: inherit; font-size: var(--fs-sm); }
-.ct__field input { min-height: 52px; padding: 0 14px; }
-.ct__field textarea { min-height: 132px; resize: vertical; padding: 14px; line-height: 1.5; }
+.ct__field input, .ct__field select { min-height: 52px; padding: 0 14px; }
+/* Shorter than it was. Three rows is enough for a date, ages and a pickup area,
+   and a shorter box asks for less, which gets more forms finished. */
+.ct__field textarea { min-height: 84px; resize: vertical; padding: 12px 14px; line-height: 1.5; }
+.ct__field select { appearance: none; cursor: pointer; padding-right: 40px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--c-navy) 50%),
+                    linear-gradient(135deg, var(--c-navy) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 22px, calc(100% - 14px) 22px;
+  background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
+.ct__field select:invalid, .ct__field select option[value=''] { color: var(--c-ink-soft); }
 .ct__field input::placeholder, .ct__field textarea::placeholder { color: var(--c-ink-soft); }
-.ct__field input:focus, .ct__field textarea:focus { outline: none; border-color: var(--c-orange-text);
+.ct__field input:focus, .ct__field textarea:focus, .ct__field select:focus { outline: none; border-color: var(--c-orange-text);
   box-shadow: 0 0 0 4px rgba(255,102,0,.16); }
 .ct__field input:invalid:not(:placeholder-shown),
 .ct__field textarea:invalid:not(:placeholder-shown) { border-color: #C24E00; }

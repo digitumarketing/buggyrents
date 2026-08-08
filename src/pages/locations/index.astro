@@ -4,7 +4,7 @@
    everything outside Dubai is quoted. */
 import '@/styles/pillar.css';
 import Base from '@/layouts/Base.astro';
-import { hero } from '@/data/images';
+import { hero, img } from '@/data/images';
 import { site, waLink } from '@/data/site';
 import { locations } from '@/data/locations';
 import { transfers } from '@/data/extras';
@@ -16,6 +16,9 @@ const title = 'Dune Buggy Pickup Locations in Dubai and the UAE | Buggy Rents';
 const description = `We collect from ${locations.length} areas across Dubai and the northern emirates. Hotel pickup anywhere inside Dubai is free; outer emirates are quoted before you book.`;
 
 const h = hero('dune-buggy-dubai-hero-red-dunes');
+/* A different photo from the hero. Reusing the hero here would put the same image
+   twice on one page, which the client has asked us not to do. */
+const fin = img('dune-buggy-convoy-crossing-dubai-red-dunes', 'buggy');
 
 const inDubai = locations.filter(l => l.emirate === 'Dubai');
 const outside = locations.filter(l => l.emirate !== 'Dubai');
@@ -65,9 +68,11 @@ const groups = [
     <section class={`pl__section ${gi === 0 ? 'pl__section--light' : 'pl__section--sand'}`}>
       <div class="pl__shell">
         <header class="pl__section-head">
-          <p class="pl__kicker">{gi === 0 ? 'Dubai' : 'Northern emirates'}</p>
-          <h2>{g.h}</h2>
-          <p class="pl__section-lede">{g.lede}</p>
+          <div>
+            <p class="pl__kicker">{gi === 0 ? 'Dubai' : 'Northern emirates'}</p>
+            <h2>{g.h}</h2>
+          </div>
+          <p>{g.lede}</p>
         </header>
         <div class="lh__grid">
           {g.list.map(l => (
@@ -87,16 +92,20 @@ const groups = [
     </section>
   ))}
 
-  <section class="pl__section pl__section--dark">
-    <div class="pl__shell" style="text-align:center">
+  <!-- final CTA. Plain navy would butt straight into the navy footer, so this
+       carries the hero image with a heavier scrim to keep the two apart. -->
+  <section class="lh__final">
+    <img class="lh__final-media" src={fin.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
+    <div class="lh__final-scrim" aria-hidden="true"></div>
+    <div class="pl__shell lh__final-inner">
       <p class="pl__kicker">Not on the list?</p>
       <h2>We probably still collect from you</h2>
-      <p class="pl__section-lede" style="margin-inline:auto">
+      <p>
         These are the areas we are asked about most, not the only ones we serve.
         Send us your hotel or district and we will confirm the pickup and the drive time.
         Buggies start at AED {buggyFrom} per vehicle.
       </p>
-      <div class="pl__hero-actions" style="justify-content:center">
+      <div class="pl__hero-actions">
         <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! Do you pick up from my area? Here is where I am staying:')}>Ask on WhatsApp</a>
         <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
       </div>
@@ -105,6 +114,18 @@ const groups = [
 </Base>
 
 <style>
+  .lh__final { position: relative; overflow: hidden; background: var(--c-navy-dark);
+    isolation: isolate; padding-block: var(--section-gap); }
+  .lh__final-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .lh__final-scrim { position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(15,18,24,.82), rgba(15,18,24,.90)); }
+  .lh__final-inner { position: relative; z-index: 2; text-align: center; color: #fff; }
+  .lh__final-inner .pl__kicker { color: var(--c-gold); }
+  .lh__final-inner h2 { color: #fff; margin-top: .6rem; }
+  .lh__final-inner > p { margin-top: .9rem; font-size: var(--fs-sm); color: rgba(255,255,255,.85);
+    max-width: 58ch; margin-inline: auto; line-height: 1.7; }
+  .lh__final-inner .pl__hero-actions { justify-content: center; }
+
   .lh__grid { display: grid; gap: clamp(1rem,2vw,1.4rem); margin-top: clamp(1.6rem,3vw,2.4rem);
     grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); }
   .lh__card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--c-line);

@@ -121,9 +121,11 @@ const groups = [
   <section class="pl__section pl__section--dark" id="packages" aria-labelledby="sf-pkg-h">
     <div class="pl__shell">
       <header class="pl__section-head">
-        <p class="pl__kicker">The packages</p>
-        <h2 id="sf-pkg-h">Every safari we run, with the price basis stated</h2>
-        <p class="pl__section-lede">
+        <div>
+          <p class="pl__kicker">The packages</p>
+          <h2 id="sf-pkg-h">Every safari we run, with the price basis stated</h2>
+        </div>
+        <p>
           Shared safaris are per person. Private safaris are per vehicle. Every card below says which,
           because that difference decides which one is actually cheaper for your group.
         </p>
@@ -160,9 +162,11 @@ const groups = [
   <section class="pl__section pl__section--light" aria-labelledby="sf-inc-h">
     <div class="pl__shell">
       <header class="pl__section-head">
-        <p class="pl__kicker">What is included</p>
-        <h2 id="sf-inc-h">What comes with a shared safari</h2>
-        <p class="pl__section-lede">No paid extras at the camp. If something costs more, it is priced on this page.</p>
+        <div>
+          <p class="pl__kicker">What is included</p>
+          <h2 id="sf-inc-h">What comes with a shared safari</h2>
+        </div>
+        <p>No paid extras at the camp. If something costs more, it is priced on this page.</p>
       </header>
       <div class="pl__usp-grid">
         {included.map(x => (
@@ -176,13 +180,15 @@ const groups = [
   <section class="pl__section pl__section--sand" aria-labelledby="sf-flow-h">
     <div class="pl__shell">
       <header class="pl__section-head">
-        <p class="pl__kicker">How the day runs</p>
-        <h2 id="sf-flow-h">Pickup to drop-off</h2>
-        <p class="pl__section-lede">The evening safari, which is the one most people book.</p>
+        <div>
+          <p class="pl__kicker">How the day runs</p>
+          <h2 id="sf-flow-h">Pickup to drop-off</h2>
+        </div>
+        <p>The evening safari, which is the one most people book.</p>
       </header>
       <ol class="pl__timeline">
-        {steps.map(s => (
-          <li><span>{s.label}</span><div><h3>{s.h}</h3><p>{s.p}</p></div></li>
+        {steps.map((s, i) => (
+          <li><span>{i + 1}</span><small>{s.label}</small><h3>{s.h}</h3><p>{s.p}</p></li>
         ))}
       </ol>
     </div>
@@ -196,18 +202,22 @@ const groups = [
     blocks={lfBlocks} />
 
   <!-- 7 FAQ -->
-  <section class="pl__section pl__section--faq" id="faq" aria-labelledby="sf-faq-h">
+  <section class="pl__section pl__section--dark pl__section--faq" id="faq" aria-labelledby="sf-faq-h">
     <div class="pl__shell pl__faq-layout">
-      <header class="pl__section-head">
+      <aside>
         <p class="pl__kicker">Questions</p>
         <h2 id="sf-faq-h">Desert safari questions</h2>
-        <p class="pl__section-lede">The ones people ask before booking.</p>
-      </header>
+        <p>The ones people ask before booking.</p>
+      </aside>
       <div class="pl__faq-list">
         {faqs.map((f, i) => (
           <details open={i === 0}>
-            <summary><span>Q{i + 1}</span><h3>{f.q}</h3><i aria-hidden="true"></i></summary>
-            <div>{f.a}</div>
+            <summary>
+              <span>Q{String(i + 1).padStart(2, '0')}</span>
+              <h3>{f.q}</h3>
+              <b aria-hidden="true">+</b>
+            </summary>
+            <p>{f.a}</p>
           </details>
         ))}
       </div>
@@ -218,9 +228,11 @@ const groups = [
   <section class="pl__section pl__section--light" aria-labelledby="sf-rel-h">
     <div class="pl__shell">
       <header class="pl__section-head">
-        <p class="pl__kicker">Rather drive yourself?</p>
-        <h2 id="sf-rel-h">The desert with you at the wheel</h2>
-        <p class="pl__section-lede">Mixed groups often book both, then meet at the camp for dinner.</p>
+        <div>
+          <p class="pl__kicker">Rather drive yourself?</p>
+          <h2 id="sf-rel-h">The desert with you at the wheel</h2>
+        </div>
+        <p>Mixed groups often book both, then meet at the camp for dinner.</p>
       </header>
       <div class="pl__related-grid">
         <a class="pl__related-card" href="/dune-buggy-dubai/">
@@ -248,14 +260,16 @@ const groups = [
     </div>
   </section>
 
-  <section class="pl__section pl__section--dark" aria-labelledby="sf-cta-h">
-    <div class="pl__shell" style="text-align:center">
+  <!-- final CTA. Not a plain dark section: the footer is the same navy, so the two
+       ran together into one block. An image with a scrim separates them. -->
+  <section class="sf__final" aria-labelledby="sf-cta-h">
+    <img class="sf__final-media" src={fin.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
+    <div class="sf__final-scrim" aria-hidden="true"></div>
+    <div class="pl__shell sf__final-inner">
       <p class="pl__kicker">Ready to book</p>
       <h2 id="sf-cta-h">Tell us the date and how many</h2>
-      <p class="pl__section-lede" style="margin-inline:auto">
-        We will come back with shared and private prices so you can see which one works out cheaper.
-      </p>
-      <div class="pl__hero-actions" style="justify-content:center">
+      <p>We will come back with shared and private prices so you can see which one works out cheaper.</p>
+      <div class="pl__hero-actions">
         <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I would like desert safari prices. Could you send shared and private options?')}>Message on WhatsApp</a>
         <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
       </div>
@@ -264,6 +278,18 @@ const groups = [
 </Base>
 
 <style>
+  .sf__final { position: relative; overflow: hidden; background: var(--c-navy-dark);
+    isolation: isolate; padding-block: var(--section-gap); }
+  .sf__final-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .sf__final-scrim { position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(15,18,24,.82), rgba(15,18,24,.90)); }
+  .sf__final-inner { position: relative; z-index: 2; text-align: center; color: #fff; }
+  .sf__final-inner .pl__kicker { color: var(--c-gold); }
+  .sf__final-inner h2 { color: #fff; margin-top: .6rem; }
+  .sf__final-inner > p { margin-top: .9rem; font-size: var(--fs-sm); color: rgba(255,255,255,.85);
+    max-width: 58ch; margin-inline: auto; line-height: 1.7; }
+  .sf__final-inner .pl__hero-actions { justify-content: center; }
+
   .sf__group { margin-top: clamp(2rem,4vw,3rem); }
   .sf__group:first-of-type { margin-top: clamp(1.6rem,3vw,2.4rem); }
   .sf__group-title { color: #fff; font-size: clamp(1.2rem,1rem + .7vw,1.55rem); }

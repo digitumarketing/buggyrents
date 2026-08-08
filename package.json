@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "build:cms": "ENABLE_KEYSTATIC=true astro build",
-    "audit": "node scripts/audit-contrast.mjs"
+    "audit": "node scripts/audit-contrast.mjs && node scripts/audit-contrast-dom.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",
@@ -22,6 +22,7 @@
     "sharp": "^0.34.2"
   },
   "devDependencies": {
-    "image-size": "^2.0.2"
+    "image-size": "^2.0.2",
+    "node-html-parser": "^7.0.1"
   }
 }

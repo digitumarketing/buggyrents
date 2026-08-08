@@ -170,6 +170,8 @@
 .cl__ptable tbody th a:hover { color: var(--c-orange); }
 .cl__pspec { display: block; font-family: var(--font-body); font-weight: 400; font-size: 11px; color: var(--c-ink-soft); }
 .cl__pnum { font-family: var(--font-display); font-weight: 800; color: var(--c-orange); }
-.cl__pdash { color: var(--c-line); }
+/* "not offered" is real information a price comparison depends on, so it has to be
+   readable. It was set to the border token, which is near invisible on white. */
+.cl__pdash { color: var(--c-ink-muted); }
 .cl__ptable td { font-size: var(--fs-sm); color: var(--c-ink-muted); }
 .cl__pfoot { padding: .9rem 1.3rem; background: var(--c-sand-soft); font-size: var(--fs-xs); color: var(--c-ink-muted); border-top: 1px solid var(--c-line-soft); }

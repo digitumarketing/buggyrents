@@ -104,7 +104,10 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
       if (!decorative && (alt === undefined || alt.trim() === '')) {
         if (!/brand\/google-g|logo/.test(src)) noAlt.push(`${page}: ${src}`);
       }
-      if (!/brand\//.test(src) && !decorative) {
+      /* Decorative images were exempt from the duplicate check, which let the same
+         hero photo appear at the top and bottom of a page unnoticed. aria-hidden
+         only removes it from the accessibility tree; the reader still sees it. */
+      if (!/brand\//.test(src)) {
         const key = `${page}|${src}`;
         seen.set(key, (seen.get(key) || 0) + 1);
       }

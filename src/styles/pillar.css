@@ -44,6 +44,14 @@
 .pl__section-head h2 em { font-style: normal; color: var(--c-orange); }
 .pl__section-head > p { font-size: var(--fs-sm); color: var(--c-ink-muted); }
 .pl__section--dark .pl__section-head > p { color: rgba(255,255,255,.72); }
+/* A lede or heading placed straight into the shell rather than inside a section-head
+   was inheriting the light-surface colour and going near-invisible on navy. Direct
+   child selectors only, so this can never bleed into a white card inside the section. */
+.pl__section--dark > .pl__shell > h2,
+.pl__section--dark > .pl__shell > h3 { color: #fff; }
+.pl__section--dark > .pl__shell > p,
+.pl__section--dark > .pl__shell > .pl__section-lede,
+.pl__section--dark .pl__section-head > .pl__section-lede { color: rgba(255,255,255,.78); }
 .pl__section--dark .pl__kicker { color: var(--c-gold); }
 .pl__section--dark .pl__section-head h2 em { color: var(--c-gold); }
 

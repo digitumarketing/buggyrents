@@ -107,14 +107,18 @@
   grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
 .ab__bento-card { background: #fff; border: 1px solid var(--c-line); border-radius: 16px;
   padding: clamp(1.3rem,2vw,1.7rem); box-shadow: 0 10px 30px rgba(50,61,78,.05); }
-.ab__bento-card--feature { grid-column: span 2; background: var(--c-navy); border-color: transparent; }
-.ab__bento-card--feature h3 { color: #fff; }
-.ab__bento-card--feature p { color: rgba(255,255,255,.76); }
-.ab__bento-card--feature span { color: var(--c-gold); }
 .ab__bento-card span { font-family: var(--font-display); font-weight: 700; font-size: 10px;
   letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange); }
 .ab__bento-card h3 { margin-top: .5rem; color: var(--c-navy); font-size: clamp(1.1rem,.98rem + .4vw,1.35rem); }
 .ab__bento-card p { margin: .6rem 0 0; font-size: var(--fs-sm); color: var(--c-ink-soft); line-height: 1.65; }
+
+/* The dark feature card must come AFTER the base card rules. These selectors carry
+   the same specificity as the ones above, so when they sat first the later base
+   rule won and the heading rendered navy on navy. */
+.ab__bento-card--feature { grid-column: span 2; background: var(--c-navy); border-color: transparent; }
+.ab__bento-card--feature h3 { color: #fff; }
+.ab__bento-card--feature p { color: rgba(255,255,255,.76); }
+.ab__bento-card--feature span { color: var(--c-gold); }
 
 /* ------------------------------------------------------- 6 handled lists */
 .ab__lists { display: grid; gap: clamp(1rem,2vw,1.5rem); margin-top: clamp(1.8rem,3vw,2.6rem);

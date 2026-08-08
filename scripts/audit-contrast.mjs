@@ -269,3 +269,58 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   }
   console.log('Em dash audit passed — none in body, schema, meta or title.');
 }
+
+
+/* Every local asset a page references must actually exist in dist.
+   The favicons and the Open Graph image were linked in the layout for weeks while
+   the files were never created, so every page fired four 404s, browsers showed a
+   blank tab icon, and links shared on WhatsApp had no preview image. Nothing in
+   the build noticed, because a missing static file is not a build error. */
+{
+  const pages = [];
+  const walkA = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkA(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkA(DIST);
+
+  const missing = new Map();
+  const record = (url, page) => {
+    if (!missing.has(url)) missing.set(url, new Set());
+    missing.get(url).add(page);
+  };
+
+  for (const page of pages) {
+    const html = readFileSync(page, 'utf8');
+    const urls = new Set();
+    for (const re of [
+      /<link[^>]+href="(\/[^"]+)"/g,
+      /<script[^>]+src="(\/[^"]+)"/g,
+      /<img[^>]+src="(\/[^"]+)"/g,
+      /<source[^>]+srcset="(\/[^"\s]+)/g,
+      /<meta[^>]+property="og:image"[^>]+content="([^"]+)"/g,
+      /<meta[^>]+content="([^"]+)"[^>]+property="og:image"/g
+    ]) {
+      for (const m of html.matchAll(re)) urls.add(m[1]);
+    }
+    for (let u of urls) {
+      /* og:image is absolute. Reduce it to a path we can check on disk. */
+      if (/^https?:\/\//.test(u)) {
+        try { u = new URL(u).pathname; } catch { continue; }
+      }
+      if (!u.startsWith('/') || u.startsWith('//')) continue;
+      const file = join(DIST, decodeURIComponent(u.split('?')[0]));
+      if (!existsSync(file)) record(u, page);
+    }
+  }
+
+  if (missing.size) {
+    console.error('Referenced file does not exist in the build:');
+    for (const [url, pgs] of [...missing.entries()].sort((a, b) => b[1].size - a[1].size).slice(0, 15)) {
+      console.error(`  ${url}  (referenced by ${pgs.size} page${pgs.size > 1 ? 's' : ''}, e.g. ${[...pgs][0]})`);
+    }
+    process.exit(1);
+  }
+  console.log(`Asset audit passed — every referenced file exists across ${pages.length} pages.`);
+}

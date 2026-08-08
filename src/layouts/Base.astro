@@ -59,8 +59,14 @@ const localBusiness = {
   <meta property="og:image" content={new URL(image, site.domain).href} />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png" sizes="32x32" />
+  {/* These four were linked before the files existed, so every page was firing
+      four 404s and showing the browser's blank default icon. Generated from the
+      brand mark: a white buggy on the orange plate, which is the only version
+      still readable at 16px. favicon.ico stays because several crawlers, Google's
+      search result icon among them, still ask for it before anything else. */}
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="/apple-touch-icon-180.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#FF6600" />

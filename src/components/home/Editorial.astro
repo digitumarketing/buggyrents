@@ -33,10 +33,10 @@ const { eyebrow, heading, sub, paragraphs, checklist, image, alt = '', flip = fa
   .ed__grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
   .ed__grid--flip .ed__media { order: 2; }
   .ed__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-tile); }
-  .ed__sub { font-family: var(--font-display); font-weight: 700; color: var(--c-orange); margin-top: .9rem; }
+  .ed__sub { font-family: var(--font-display); font-weight: 700; color: var(--c-orange-text); margin-top: .9rem; }
   .ed__p { margin-top: .9rem; color: var(--c-ink-muted); }
   .ed__list { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; gap: .6rem; }
   .ed__list li { display: flex; align-items: start; gap: .6rem; font-size: var(--fs-sm); font-weight: 500; }
-  .ed__list svg { color: var(--c-orange); flex: none; margin-top: 3px; }
+  .ed__list svg { color: var(--c-orange-text); flex: none; margin-top: 3px; }
   @media (max-width: 860px) { .ed__grid, .ed__grid--flip { grid-template-columns: 1fr; } .ed__grid--flip .ed__media { order: 0; } }
 </style>

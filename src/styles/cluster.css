@@ -9,7 +9,7 @@
 .cl__section--dark > .cl__shell > .cl__head h2 { color: #fff; }
 .cl__section--dark .cl__kicker { color: var(--c-gold); }
 
-.cl__kicker { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-orange); }
+.cl__kicker { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-orange-text); }
 .cl__head { display: grid; gap: 1rem; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); align-items: end; margin-bottom: clamp(1.75rem,3vw,2.5rem); }
 .cl__head h2 { margin-top: .55rem; }
 .cl__head > p { font-size: var(--fs-sm); color: var(--c-ink-muted); }
@@ -129,7 +129,7 @@
 .cl__faq-list summary { display: flex; align-items: center; gap: .85rem; padding: 1.05rem 1.2rem; cursor: pointer; list-style: none; }
 .cl__faq-list summary::-webkit-details-marker { display: none; }
 .cl__faq-list summary:hover { background: var(--c-sand-soft); }
-.cl__faq-list summary > span { font-family: var(--font-display); font-weight: 800; font-size: 11px; color: var(--c-orange); flex: none; }
+.cl__faq-list summary > span { font-family: var(--font-display); font-weight: 800; font-size: 11px; color: var(--c-orange-text); flex: none; }
 .cl__faq-list summary h3 { flex: 1; font-size: var(--fs-sm); color: var(--c-navy); }
 .cl__faq-list summary b { font-family: var(--font-display); font-size: 1.2rem; color: var(--c-ink-soft); transition: transform var(--dur-fast); }
 .cl__faq-list details[open] summary b { transform: rotate(45deg); }
@@ -138,7 +138,7 @@
 /* 9 related */
 .cl__related-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr)); }
 .cl__related-card { display: flex; flex-direction: column; text-align: center; background: #fff; border: 1px solid var(--c-line); border-radius: 14px; overflow: hidden; text-decoration: none; box-shadow: var(--shadow-tile); transition: transform var(--dur-normal) var(--ease-out-expo), border-color var(--dur-fast), box-shadow var(--dur-normal); }
-.cl__related-card:hover { transform: translateY(-4px); border-color: var(--c-orange); box-shadow: var(--shadow-tile-hover); }
+.cl__related-card:hover { transform: translateY(-4px); border-color: var(--c-orange-text); box-shadow: var(--shadow-tile-hover); }
 .cl__related-media { aspect-ratio: 3/2; overflow: hidden; }
 .cl__related-media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-normal) var(--ease-out-expo); }
 .cl__related-card:hover .cl__related-media img { transform: scale(1.06); }
@@ -146,7 +146,7 @@
 .cl__related-body > span { font-family: var(--font-display); font-weight: 700; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--c-orange-dark); }
 .cl__related-body strong { display: block; margin-top: .5rem; font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--c-navy); }
 .cl__related-body p { margin-top: .5rem; font-size: var(--fs-sm); color: var(--c-ink-muted); flex: 1; }
-.cl__related-body em { display: block; margin-top: .9rem; font-style: normal; font-family: var(--font-display); font-weight: 800; color: var(--c-orange); }
+.cl__related-body em { display: block; margin-top: .9rem; font-style: normal; font-family: var(--font-display); font-weight: 800; color: var(--c-orange-text); }
 
 @media (max-width: 900px) {
   .cl__head, .cl__faq-layout, .cl__gallery { grid-template-columns: 1fr; }
@@ -167,9 +167,9 @@
 .cl__ptable tbody tr:hover { background: var(--c-orange-soft); }
 .cl__ptable tbody th { font-family: var(--font-display); font-weight: 700; color: var(--c-navy); font-size: var(--fs-sm); white-space: normal; min-width: 200px; }
 .cl__ptable tbody th a { text-decoration: none; color: inherit; }
-.cl__ptable tbody th a:hover { color: var(--c-orange); }
+.cl__ptable tbody th a:hover { color: var(--c-orange-text); }
 .cl__pspec { display: block; font-family: var(--font-body); font-weight: 400; font-size: 11px; color: var(--c-ink-soft); }
-.cl__pnum { font-family: var(--font-display); font-weight: 800; color: var(--c-orange); }
+.cl__pnum { font-family: var(--font-display); font-weight: 800; color: var(--c-orange-text); }
 /* "not offered" is real information a price comparison depends on, so it has to be
    readable. It was set to the border token, which is near invisible on white. */
 .cl__pdash { color: var(--c-ink-muted); }

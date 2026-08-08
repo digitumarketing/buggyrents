@@ -10,8 +10,9 @@ main = "worker/index.js"
 directory = "./dist"
 binding = "ASSETS"
 
-# Switch to "404-page" once the dbr-error template is built and dist/404.html exists.
-not_found_handling = "none"
+# dist/404.html now exists, so Cloudflare serves our own page on an unknown path
+# instead of a blank browser error.
+not_found_handling = "404-page"
 
 # Contact form delivery. Both are plain vars, not secrets.
 # The Resend account is owned by Buggyrents@gmail.com, so the shared sender

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Buggy Rents — orange contrast, before and after</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --navy:#323D4E; --navy-dark:#232C3A; --sand:#FDF6E9; --line:#E4E8ED;
+    --ink:#1A1A1A; --ink-muted:#5A6472; --ink-soft:#8A93A0;
+    --orange:#FF6600; --orange-dark:#C24E00; --gold:#FFC757;
+    --display:'Plus Jakarta Sans',system-ui,sans-serif;
+    --body:'Instrument Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--body);color:var(--ink);background:#F4F6F8;line-height:1.6}
+  h1,h2,h3,h4,strong{font-family:var(--display)}
+  .wrap{max-width:1180px;margin-inline:auto;padding:clamp(1.5rem,4vw,3rem) clamp(1rem,3vw,2rem)}
+  .lede{max-width:70ch;color:var(--ink-muted)}
+  .note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);
+    border-radius:8px;padding:1rem 1.2rem;margin:1.5rem 0;font-size:.94rem;color:var(--ink-muted)}
+
+  .cols{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));margin-top:1.5rem}
+  .col{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .col__head{padding:1rem 1.3rem;border-bottom:1px solid var(--line);display:flex;
+    justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+  .col__head strong{font-size:1.05rem}
+  .col--now .col__head{background:#FFF4F0}
+  .col--new .col__head{background:#F0F7F2}
+  .pill{font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;padding:.35em .8em;border-radius:999px}
+  .pill--bad{background:#FDE3DA;color:#8C2F00}
+  .pill--good{background:#DBEEE1;color:#155C2E}
+  .col__body{padding:1.3rem}
+
+  /* the two variants */
+  .v-now{--link:#FF6600;--btnbg:#FF6600}
+  .v-new{--link:#C24E00;--btnbg:#C24E00}
+
+  .demo{padding:1.2rem;border-radius:10px;border:1px solid var(--line);margin-bottom:1rem}
+  .demo--white{background:#fff}
+  .demo--sand{background:var(--sand)}
+  .demo__label{font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-soft);margin:0 0 .7rem}
+
+  .kicker{font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--link);margin:0 0 .4rem}
+  .navrow{display:flex;gap:1.1rem;flex-wrap:wrap;font-family:var(--display);font-weight:700;font-size:.9rem}
+  .navrow a{color:var(--link);text-decoration:none}
+  .cardlink{display:block;text-decoration:none;margin-top:.9rem}
+  .cardlink strong{display:block;color:var(--navy);font-size:1.05rem}
+  .cardlink p{margin:.35rem 0 .5rem;font-size:.9rem;color:var(--ink-soft)}
+  .cardlink em{font-style:normal;font-family:var(--display);font-weight:700;font-size:.88rem;color:var(--link)}
+  .price{display:flex;align-items:baseline;gap:.5rem;margin-top:.2rem}
+  .price b{font-family:var(--display);font-size:1.6rem;color:var(--navy)}
+  .price span{font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--link)}
+  .btn{display:inline-block;background:var(--btnbg);color:#fff;font-family:var(--display);
+    font-weight:700;padding:.85em 1.6em;border-radius:10px;text-decoration:none;font-size:.95rem}
+  .btn--ghost{background:transparent;color:var(--link);border:1px solid var(--link)}
+
+  table{width:100%;border-collapse:collapse;margin-top:1.5rem;background:#fff;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.92rem}
+  th,td{padding:.75rem 1rem;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:var(--navy);color:#fff;font-family:var(--display);font-size:.82rem;
+    letter-spacing:.04em;text-transform:uppercase}
+  tr:last-child td{border-bottom:0}
+  td.r{font-family:var(--display);font-weight:700}
+  .ok{color:#155C2E}.bad{color:#8C2F00}
+  .sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:.45rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Orange contrast, before and after</h1>
+  <p class="lede">
+    The brand orange stays the brand orange. The only change is that <strong>small text and links</strong>
+    use a darker shade of the same colour, so they pass the readability standard. Buttons, price tags,
+    bullets and every filled shape keep the bright orange exactly as it is now.
+  </p>
+
+  <div class="note">
+    <strong>Why this matters in practice:</strong> most of your traffic is on a phone, and a lot of it is
+    people standing outside in Dubai daylight. Orange on white is the first thing that disappears in
+    bright sun. The darker shade reads the same at a glance and stays legible on a screen at half brightness.
+  </div>
+
+  <div class="cols">
+    <!-- NOW -->
+    <section class="col col--now v-now">
+      <header class="col__head">
+        <strong>Now &mdash; #FF6600</strong>
+        <span class="pill pill--bad">2.94:1 &middot; fails</span>
+      </header>
+      <div class="col__body">
+        <div class="demo demo--white">
+          <p class="demo__label">Menu links</p>
+          <nav class="navrow">
+            <a href="#">Dune Buggy</a><a href="#">Quad Bike</a><a href="#">Dirt Bike</a><a href="#">Safari</a>
+          </nav>
+        </div>
+        <div class="demo demo--white">
+          <p class="demo__label">Card link and price</p>
+          <p class="kicker">Shared 4x4</p>
+          <a class="cardlink" href="#">
+            <strong>Evening Desert Safari Dubai</strong>
+            <p>Red dune bashing, camp dinner and live shows.</p>
+            <div class="price"><b>AED 99</b><span>Per person</span></div>
+            <em>View page &rarr;</em>
+          </a>
+        </div>
+        <div class="demo demo--sand">
+          <p class="demo__label">On the sand background</p>
+          <p class="kicker">02 / What the price covers</p>
+          <a class="cardlink" href="#"><em>See all eleven buggies &rarr;</em></a>
+        </div>
+        <div class="demo demo--white">
+          <p class="demo__label">Buttons</p>
+          <a class="btn" href="#">Check availability</a>
+          <a class="btn btn--ghost" href="#">See prices</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROPOSED -->
+    <section class="col col--new v-new">
+      <header class="col__head">
+        <strong>Proposed &mdash; #C24E00 for text</strong>
+        <span class="pill pill--good">4.79:1 &middot; passes</span>
+      </header>
+      <div class="col__body">
+        <div class="demo demo--white">
+          <p class="demo__label">Menu links</p>
+          <nav class="navrow">
+            <a href="#">Dune Buggy</a><a href="#">Quad Bike</a><a href="#">Dirt Bike</a><a href="#">Safari</a>
+          </nav>
+        </div>
+        <div class="demo demo--white">
+          <p class="demo__label">Card link and price</p>
+          <p class="kicker">Shared 4x4</p>
+          <a class="cardlink" href="#">
+            <strong>Evening Desert Safari Dubai</strong>
+            <p>Red dune bashing, camp dinner and live shows.</p>
+            <div class="price"><b>AED 99</b><span>Per person</span></div>
+            <em>View page &rarr;</em>
+          </a>
+        </div>
+        <div class="demo demo--sand">
+          <p class="demo__label">On the sand background</p>
+          <p class="kicker">02 / What the price covers</p>
+          <a class="cardlink" href="#"><em>See all eleven buggies &rarr;</em></a>
+        </div>
+        <div class="demo demo--white">
+          <p class="demo__label">Buttons</p>
+          <a class="btn" style="--btnbg:#FF6600" href="#">Check availability</a>
+          <a class="btn btn--ghost" href="#">See prices</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="note">
+    <strong>Look at the buttons in both columns.</strong> They are identical. The bright orange fill is
+    untouched, because a large solid block of colour is not the readability problem. Only the thin
+    text changes.
+  </div>
+
+  <h2 style="margin-top:2.5rem">The measurements</h2>
+  <table>
+    <thead>
+      <tr><th>Where it is used</th><th>Colour</th><th>Ratio</th><th>Standard needs 4.5:1</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Link and small text on white</td><td><span class="sw" style="background:#FF6600"></span>#FF6600</td><td class="r bad">2.94:1</td><td class="bad">Fails</td></tr>
+      <tr><td>Link and small text on white</td><td><span class="sw" style="background:#C24E00"></span>#C24E00</td><td class="r ok">4.79:1</td><td class="ok">Passes</td></tr>
+      <tr><td>Kicker text on sand</td><td><span class="sw" style="background:#FF6600"></span>#FF6600</td><td class="r bad">2.73:1</td><td class="bad">Fails</td></tr>
+      <tr><td>Kicker text on sand</td><td><span class="sw" style="background:#C24E00"></span>#C24E00</td><td class="r ok">4.46:1</td><td class="ok">Passes, just</td></tr>
+      <tr><td>White text on an orange button</td><td><span class="sw" style="background:#FF6600"></span>#FF6600</td><td class="r bad">2.94:1</td><td class="bad">Fails</td></tr>
+      <tr><td>White text on a dark orange button</td><td><span class="sw" style="background:#C24E00"></span>#C24E00</td><td class="r ok">4.79:1</td><td class="ok">Passes</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note" style="border-left-color:#C24E00">
+    <strong>The one real decision is the button.</strong> Everything above is easy: darker text, no visible
+    downside. The button is a genuine trade-off. White on bright orange fails the standard at 2.94:1, but
+    the bright fill is what makes the CTA jump off the page, and that drives bookings. Three ways to go:
+    <br><br>
+    <strong>1. Leave buttons bright.</strong> Fix only text and links. My recommendation. You get most of
+    the readability gain and the CTA keeps its punch. Buttons are large, bold and unmistakable in context,
+    which is exactly the case the standard is weakest at judging.
+    <br><br>
+    <strong>2. Darken the button fill too.</strong> Everything passes, but the CTA gets noticeably more
+    muted across all 57 pages.
+    <br><br>
+    <strong>3. Navy text on the orange button.</strong> Passes at 3.74:1 for large text, keeps the bright
+    fill, but it reads as a different brand.
+  </div>
+</div>
+</body>
+</html>

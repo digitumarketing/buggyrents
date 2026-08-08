@@ -9,7 +9,7 @@
 .lo__section--dark > .lo__shell > .lo__head h2 { color: #fff; }
 .lo__section--dark .lo__kicker { color: var(--c-gold); }
 
-.lo__kicker { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-orange); }
+.lo__kicker { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-orange-text); }
 .lo__head h2 { margin-top: .55rem; }
 .lo__head-lede { margin-top: .8rem; font-size: var(--fs-sm); color: var(--c-ink-muted); max-width: 62ch; }
 .lo__section--dark .lo__head-lede { color: rgba(255,255,255,.72); }
@@ -75,7 +75,7 @@
 /* 4 activity cards */
 .lo__activity-grid { display: grid; gap: clamp(1rem,2vw,1.5rem); grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); margin-top: 2rem; }
 .lo__activity-card { display: flex; flex-direction: column; text-align: center; background: #fff; border: 1px solid var(--c-line); border-radius: 14px; overflow: hidden; text-decoration: none; box-shadow: var(--shadow-tile); transition: transform var(--dur-normal) var(--ease-out-expo), border-color var(--dur-fast), box-shadow var(--dur-normal); }
-.lo__activity-card:hover { transform: translateY(-4px); border-color: var(--c-orange); box-shadow: var(--shadow-tile-hover); }
+.lo__activity-card:hover { transform: translateY(-4px); border-color: var(--c-orange-text); box-shadow: var(--shadow-tile-hover); }
 .lo__activity-media { aspect-ratio: 3/2; overflow: hidden; }
 .lo__activity-media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-normal) var(--ease-out-expo); }
 .lo__activity-card:hover .lo__activity-media img { transform: scale(1.06); }
@@ -110,7 +110,7 @@
 .lo__faq-list summary { display: flex; align-items: center; gap: .85rem; padding: 1.05rem 1.2rem; cursor: pointer; list-style: none; }
 .lo__faq-list summary::-webkit-details-marker { display: none; }
 .lo__faq-list summary:hover { background: var(--c-sand-soft); }
-.lo__faq-list summary > span { font-family: var(--font-display); font-weight: 800; font-size: 11px; color: var(--c-orange); flex: none; }
+.lo__faq-list summary > span { font-family: var(--font-display); font-weight: 800; font-size: 11px; color: var(--c-orange-text); flex: none; }
 .lo__faq-list summary h3 { flex: 1; font-size: var(--fs-sm); color: var(--c-navy); }
 .lo__faq-list summary b { font-family: var(--font-display); font-size: 1.2rem; color: var(--c-ink-soft); transition: transform var(--dur-fast); }
 .lo__faq-list details[open] summary b { transform: rotate(45deg); }
@@ -119,7 +119,7 @@
 /* 8 related */
 .lo__related-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr)); margin-top: 2rem; }
 .lo__related-card { display: block; text-align: center; background: #fff; border: 1px solid var(--c-line); border-radius: 12px; padding: 1.3rem; text-decoration: none; transition: border-color var(--dur-fast), transform var(--dur-fast) var(--ease-out-expo); }
-.lo__related-card:hover { border-color: var(--c-orange); transform: translateY(-3px); }
+.lo__related-card:hover { border-color: var(--c-orange-text); transform: translateY(-3px); }
 .lo__related-card span { font-family: var(--font-display); font-weight: 700; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--c-orange-dark); }
 .lo__related-card strong { display: block; margin-top: .5rem; font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--c-navy); }
 .lo__related-card small { display: block; margin-top: .5rem; font-size: var(--fs-sm); color: var(--c-ink-muted); }

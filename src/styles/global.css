@@ -62,7 +62,7 @@ ul[role='list'], ol[role='list'] { list-style: none; padding: 0; }
   font-size: var(--fs-xs);
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--c-orange);
+  color: var(--c-orange-text);
 }
 
 .lede { font-size: clamp(1.05rem, 1rem + .35vw, 1.25rem); color: var(--c-ink-muted); max-width: 62ch; }
@@ -121,3 +121,16 @@ ul[role='list'], ol[role='list'] { list-style: none; padding: 0; }
   transition: top var(--dur-fast);
 }
 .skip-link:focus { top: 8px; }
+
+
+/* Dark surfaces flip the orange text token back to bright.
+   On navy the ratios reverse: #FF6600 scores 3.74:1 while #C24E00 drops to 2.29:1,
+   so the darker shade would make things worse. Matching on the class-name patterns
+   this codebase uses for dark surfaces means new templates inherit it for free. */
+[class*="--dark"],
+[class*="__hero"], [class^="hero__"],
+[class*="__final"], [class*="__trust"],
+[class*="__cta"], [class*="--reviews"],
+.ftr, .err__hero, .sf__final, .lh__final {
+  --c-orange-text: var(--c-orange);
+}

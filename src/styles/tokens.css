@@ -10,6 +10,16 @@
   --c-orange-soft:   #FFF0E6;
   --c-orange-line:   #FFD4B8;
 
+  /* Orange used as TEXT, not as a fill.
+     #FF6600 on white is 2.94:1 and fails WCAG AA, so small orange text and links
+     use the darker shade, which is 4.79:1. Filled shapes keep the bright orange:
+     a solid block of colour is not the readability problem, and dulling every CTA
+     would cost more than it gains.
+     On a dark surface the maths inverts, so the dark-context rule below flips this
+     back to bright. Never hardcode either value in a `color:` rule; use this token
+     and the right one is chosen for you. */
+  --c-orange-text:   #C24E00;
+
   --c-navy:          #323D4E;   /* logo buggy body - headings, nav, footer */
   --c-navy-hover:    #3E4B5F;
   --c-navy-dark:     #232C3A;

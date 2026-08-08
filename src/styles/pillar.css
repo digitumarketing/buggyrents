@@ -39,9 +39,9 @@
 
 /* --- section head --- */
 .pl__section-head { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: end; margin-bottom: clamp(1.75rem, 3vw, 2.75rem); }
-.pl__kicker { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-orange); }
+.pl__kicker { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--c-orange-text); }
 .pl__section-head h2 { margin-top: .55rem; }
-.pl__section-head h2 em { font-style: normal; color: var(--c-orange); }
+.pl__section-head h2 em { font-style: normal; color: var(--c-orange-text); }
 .pl__section-head > p { font-size: var(--fs-sm); color: var(--c-ink-muted); }
 .pl__section--dark .pl__section-head > p { color: rgba(255,255,255,.72); }
 /* A lede or heading placed straight into the shell rather than inside a section-head
@@ -82,8 +82,8 @@
 .pl__package-body { display: flex; flex-direction: column; flex: 1; padding: 1.15rem; text-align: center; }
 .pl__package-title { font-size: 1.05rem; color: var(--c-navy); }
 .pl__package-title a { text-decoration: none; color: var(--c-navy); }
-.pl__package-title a:hover { color: var(--c-orange); }
-.pl__package-spec { margin-top: .45rem; font-size: var(--fs-xs); color: var(--c-orange); font-weight: 600; }
+.pl__package-title a:hover { color: var(--c-orange-text); }
+.pl__package-spec { margin-top: .45rem; font-size: var(--fs-xs); color: var(--c-orange-text); font-weight: 600; }
 .pl__package-desc { margin-top: .6rem; font-size: var(--fs-sm); color: var(--c-ink-muted); flex: 1; }
 .pl__package-foot { display: flex; flex-direction: column; align-items: center; gap: .8rem;
   margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--c-line-soft); }
@@ -130,7 +130,7 @@
 .pl__faq-list summary { display: flex; align-items: center; gap: .85rem; padding: 1.05rem 1.2rem; cursor: pointer; list-style: none; }
 .pl__faq-list summary::-webkit-details-marker { display: none; }
 .pl__faq-list summary:hover { background: var(--c-sand-soft); }
-.pl__faq-list summary > span { font-family: var(--font-display); font-weight: 800; font-size: 11px; color: var(--c-orange); flex: none; }
+.pl__faq-list summary > span { font-family: var(--font-display); font-weight: 800; font-size: 11px; color: var(--c-orange-text); flex: none; }
 .pl__faq-list summary h3 { flex: 1; font-size: var(--fs-sm); }
 .pl__faq-list summary b { flex: none; font-family: var(--font-display); font-size: 1.2rem; color: var(--c-ink-soft); transition: transform var(--dur-fast); }
 .pl__faq-list details[open] summary b { transform: rotate(45deg); }
@@ -144,7 +144,7 @@
   border: 1px solid var(--c-line); border-radius: 14px; overflow: hidden; text-decoration: none;
   box-shadow: var(--shadow-tile);
   transition: box-shadow var(--dur-normal), border-color var(--dur-fast), transform var(--dur-normal) var(--ease-out-expo); }
-.pl__related-card:hover { border-color: var(--c-orange); transform: translateY(-4px); box-shadow: var(--shadow-tile-hover); }
+.pl__related-card:hover { border-color: var(--c-orange-text); transform: translateY(-4px); box-shadow: var(--shadow-tile-hover); }
 .pl__related-media { display: block; aspect-ratio: 3 / 2; overflow: hidden; }
 .pl__related-media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-normal) var(--ease-out-expo); }
 .pl__related-card:hover .pl__related-media img { transform: scale(1.06); }

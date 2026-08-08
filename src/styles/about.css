@@ -15,7 +15,7 @@
 .ab__section--dark .ab__kicker { color: var(--c-gold); }
 
 .ab__kicker { font-family: var(--font-display); font-weight: 700; font-size: 11px;
-  letter-spacing: .16em; text-transform: uppercase; color: var(--c-orange); margin: 0; }
+  letter-spacing: .16em; text-transform: uppercase; color: var(--c-orange-text); margin: 0; }
 .ab__head { max-width: 62ch; }
 .ab__head h2 { margin-top: .6rem; color: var(--c-navy); }
 .ab__head > p { margin-top: .8rem; font-size: var(--fs-sm); color: var(--c-ink-soft); line-height: 1.7; }
@@ -88,7 +88,7 @@
 .ab__mini-card { background: #fff; border: 1px solid var(--c-line); border-radius: 14px;
   padding: clamp(1.1rem,1.8vw,1.4rem); box-shadow: 0 8px 24px rgba(50,61,78,.05); }
 .ab__mini-card span { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-xs);
-  color: var(--c-orange); }
+  color: var(--c-orange-text); }
 .ab__mini-card h3 { margin-top: .35rem; color: var(--c-navy); font-size: clamp(1rem,.94rem + .3vw,1.15rem); }
 .ab__mini-card p { margin: .45rem 0 0; font-size: var(--fs-sm); color: var(--c-ink-soft); line-height: 1.6; }
 
@@ -108,7 +108,7 @@
 .ab__bento-card { background: #fff; border: 1px solid var(--c-line); border-radius: 16px;
   padding: clamp(1.3rem,2vw,1.7rem); box-shadow: 0 10px 30px rgba(50,61,78,.05); }
 .ab__bento-card span { font-family: var(--font-display); font-weight: 700; font-size: 10px;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange); }
+  letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange-text); }
 .ab__bento-card h3 { margin-top: .5rem; color: var(--c-navy); font-size: clamp(1.1rem,.98rem + .4vw,1.35rem); }
 .ab__bento-card p { margin: .6rem 0 0; font-size: var(--fs-sm); color: var(--c-ink-soft); line-height: 1.65; }
 
@@ -146,7 +146,7 @@
   box-shadow: 0 10px 30px rgba(50,61,78,.05); transition: transform .16s ease, box-shadow .16s ease; }
 .ab__contact-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(50,61,78,.10); }
 .ab__contact-card span { font-family: var(--font-display); font-weight: 700; font-size: 10px;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange); }
+  letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange-text); }
 .ab__contact-card strong { display: block; margin-top: .45rem; color: var(--c-navy);
   font-family: var(--font-display); font-size: clamp(1.02rem,.94rem + .3vw,1.18rem); }
 .ab__contact-card small { display: block; margin-top: .45rem; font-size: var(--fs-sm);
@@ -163,7 +163,7 @@
 .ab__faq-list summary::-webkit-details-marker { display: none; }
 .ab__faq-list summary:hover { background: var(--c-sand-soft); }
 .ab__faq-list summary > span { flex: none; font-family: var(--font-display); font-weight: 800;
-  font-size: var(--fs-xs); color: var(--c-orange); }
+  font-size: var(--fs-xs); color: var(--c-orange-text); }
 .ab__faq-list summary h3 { flex: 1; margin: 0; color: var(--c-navy);
   font-size: clamp(.98rem,.92rem + .25vw,1.1rem); line-height: 1.4; }
 .ab__faq-list summary i { flex: none; width: 12px; height: 12px;
@@ -181,7 +181,7 @@
   box-shadow: 0 10px 30px rgba(50,61,78,.05); transition: transform .16s ease, box-shadow .16s ease; }
 .ab__links a:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(50,61,78,.10); }
 .ab__links span { font-family: var(--font-display); font-weight: 700; font-size: 10px;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange); }
+  letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange-text); }
 .ab__links strong { display: block; margin-top: .5rem; color: var(--c-navy);
   font-family: var(--font-display); font-size: clamp(1.05rem,.95rem + .35vw,1.2rem); }
 .ab__links p { margin: .5rem 0 0; font-size: var(--fs-sm); color: var(--c-ink-soft); line-height: 1.6; }

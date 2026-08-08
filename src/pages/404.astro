@@ -1,0 +1,132 @@
+---
+/* 404 — structure per templates/BuggyRents-404-page.html.
+   Four sections: error hero (copy left, media right) · recovery links ·
+   pillar links · help panel.
+
+   A 404 is a rescue page, not a dead end. Someone here already wanted something
+   from us, so every section points at a real next step rather than apologising. */
+import '@/styles/error.css';
+import Base from '@/layouts/Base.astro';
+import { img } from '@/data/images';
+import { site, waLink } from '@/data/site';
+import { buggies, quads, dirtbikes, fromPrice } from '@/data/vehicles';
+import { safariFromPrice } from '@/data/safari';
+
+const buggyFrom = Math.min(...buggies.map(fromPrice));
+const quadFrom = Math.min(...quads.map(fromPrice));
+const ktmFrom = fromPrice(dirtbikes[0]);
+
+const media = img('dune-buggy-climbing-red-dune-convoy-dubai', 'buggy');
+
+const recovery = [
+  { tag: 'Most likely', title: 'Prices', desc: 'Every buggy and quad with all durations, per vehicle.', href: '/dune-buggy-dubai/price/' },
+  { tag: 'Book', title: 'Contact us', desc: 'WhatsApp the team that runs the base. Open 24/7.', href: '/contact/' },
+  { tag: 'Everything', title: 'Sitemap', desc: 'Every page on the site in one list.', href: '/sitemap-html/' }
+];
+
+const pillars = [
+  { tag: `From AED ${buggyFrom}`, title: 'Dune Buggy Dubai', desc: 'Eleven buggies, two and four seats.', href: '/dune-buggy-dubai/' },
+  { tag: `From AED ${quadFrom}`, title: 'Quad Biking Dubai', desc: 'Six quads, riders from age six.', href: '/quad-bike-dubai/' },
+  { tag: `From AED ${ktmFrom}`, title: 'KTM Dirt Bike Dubai', desc: 'A 450 enduro for riders who already ride.', href: '/ktm-dirt-bike-dubai/' },
+  { tag: `From AED ${safariFromPrice}`, title: 'Desert Safari Dubai', desc: 'Someone else drives. Dinner and shows.', href: '/desert-safari-dubai-deals/' }
+];
+---
+<Base title="Page not found | Buggy Rents Dubai"
+      description="That page has moved or never existed. Here are the pages people were looking for: buggy and quad prices, the fleet, and how to reach the team.">
+  <meta name="robots" content="noindex, follow" slot="head" />
+
+  <!-- 1 error hero -->
+  <section class="err__hero">
+    <div class="err__shell err__hero-grid">
+      <div class="err__hero-copy">
+        <p class="err__eyebrow">Page not found</p>
+        <p class="err__code" aria-hidden="true">404</p>
+        <h1>This page took a <em>wrong turn</em></h1>
+        <p class="err__lede">
+          The link is broken or the page has moved. Nothing is wrong with your booking,
+          and everything you were probably looking for is one click away below.
+        </p>
+        <div class="err__actions">
+          <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I could not find what I was looking for on the website.')}>Ask on WhatsApp</a>
+          <a class="btn btn--onDark btn--lg" href="/">Back to the home page</a>
+        </div>
+        <p class="err__trust">
+          {site.guestsServed} guests since {site.founded} &middot; rated 4.9 on Google &middot; free Dubai pickup
+        </p>
+      </div>
+
+      <figure class="err__media">
+        <img src={media.src} alt={media.alt} width="1200" height="900" decoding="async" />
+        <figcaption>
+          <span>Al Awir, Dubai</span>
+          <strong>The red dunes are still where we left them.</strong>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2 recovery -->
+  <section class="err__section err__section--light">
+    <div class="err__shell">
+      <header class="err__head">
+        <div>
+          <p class="err__kicker">Start here</p>
+          <h2>Three pages that answer most questions</h2>
+        </div>
+        <p>If you arrived from a search or an old link, one of these is almost certainly what you wanted.</p>
+      </header>
+      <div class="err__links">
+        {recovery.map(l => (
+          <a class="err__link-card" href={l.href}>
+            <span>{l.tag}</span>
+            <strong>{l.title}</strong>
+            <small>{l.desc}</small>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 pillars -->
+  <section class="err__section err__section--sand">
+    <div class="err__shell err__pillars">
+      <div class="err__pillars-intro">
+        <p class="err__kicker">Or pick a ride</p>
+        <h2>Four ways into the desert</h2>
+        <p>
+          Every price on this site is per vehicle, not per person, so a group splits
+          the cost between the seats.
+        </p>
+      </div>
+      <div class="err__pillars-list">
+        {pillars.map(p => (
+          <a href={p.href}>
+            <span>{p.tag}</span>
+            <strong>{p.title}</strong>
+            <small>{p.desc}</small>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 help -->
+  <section class="err__section err__section--dark">
+    <div class="err__shell">
+      <div class="err__help">
+        <div>
+          <p class="err__kicker">Still stuck</p>
+          <h2>Tell us what you were looking for</h2>
+          <p>
+            If a link sent you here, we would like to know so we can fix it.
+            And if you just want a price, message us and skip the browsing entirely.
+          </p>
+        </div>
+        <div class="err__help-actions">
+          <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I hit a broken link on your website. I was looking for:')}>Message on WhatsApp</a>
+          <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

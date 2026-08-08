@@ -36,7 +36,7 @@ export const library: Record<string, { subject: Subject; alt: string }> = {
   'double-seat-quad-biking-dubai-red-dunes': { subject: 'quad', alt: 'Double seat quad bike ready for a red dune ride in Dubai' },
   'kids-quad-bike-dubai-fenced-riding-area': { subject: 'quad', alt: 'Child riding a small kids quad bike in the fenced area at the Dubai base' },
   'quad-bike-group-tour-dubai-open-desert': { subject: 'quad', alt: 'Three riders on quad bikes during an open desert tour in Dubai' },
-  'quad-bike-open-desert-group-ride-dubai': { subject: 'quad', alt: 'Group of quad bikes lined up on a dune during an open desert ride in Dubai' },
+  'quad-biking-dubai-open-desert-three-riders': { subject: 'quad', alt: 'Three riders on single seat quad bikes climbing a red dune in the Dubai open desert' },
   'quad-bike-rental-dubai-rider-red-quad': { subject: 'quad', alt: 'Rider on a red quad bike during a Dubai desert quad biking session' },
   'quad-bike-rental-fleet-parked-al-awir-dubai': { subject: 'quad', alt: 'Quad bike rental fleet parked under shade at the Buggy Rents Al Awir base' },
   'quad-bike-sunset-desert-safari-dubai': { subject: 'quad', alt: 'Quad bikes and guests silhouetted at sunset on a Dubai desert safari' },

@@ -166,7 +166,7 @@ export const quadPrices: PriceGuideData = {
     { tag: 'Buggy prices', title: 'Dune Buggy Dubai Price', desc: '11 buggies from Polaris RZR to Can-Am Maverick R.', from: `From AED ${fromPrice(buggies[0])}`, href: '/dune-buggy-dubai/price/', img: buggies[0].image },
     { tag: 'Dirt bike', title: 'KTM Dirt Bike Dubai', desc: 'A 450cc desert enduro for experienced riders.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/ktm-450-dirt-bike/', img: dirtbikes[0].image },
     { tag: 'Safari prices', title: 'Desert Safari Dubai Price', desc: '12 shared and private safari packages.', from: `From AED ${safariFromPrice}`, href: '/desert-safari-dubai/price/', img: 'desert-safari-dubai-dune-bashing-land-cruiser' },
-    { tag: 'All quads', title: 'Quad Biking Dubai', desc: 'The full quad fleet with routes and age limits.', from: `From AED ${fromPrice(quads[0])}`, href: '/quad-bike-dubai/', img: 'quad-bike-open-desert-group-ride-dubai' }
+    { tag: 'All quads', title: 'Quad Biking Dubai', desc: 'The full quad fleet with routes and age limits.', from: `From AED ${fromPrice(quads[0])}`, href: '/quad-bike-dubai/', img: 'quad-biking-dubai-open-desert-three-riders' }
   ],
   guideKicker: 'Quad price guide',
   guideH2: 'How quad biking Dubai prices work, and which one to book',

@@ -2,7 +2,7 @@
    so this does the next best thing: it resolves the CSS cascade for known
    "text on a surface" pairs and fails the build when contrast is too low.
    Catches the white-heading-on-white-card class of bug. */
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const DIST = 'dist';
@@ -136,18 +136,92 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     else if (p.endsWith('.html')) pages.push(p);
   });
   walkI(DIST);
+
+  /* The terms and safety pages have to state plainly that we carry NO cover, so a
+     blanket word ban would forbid the honest disclosure as well as the false claim.
+     Judge each sentence: a negated mention is a denial and is allowed, a bare one
+     reads as a claim of cover and fails. Erring towards false positives is correct
+     here — a wrongly flagged sentence costs a rewrite, a missed one is a lie on a
+     booking page. */
+  const DENIAL = /\b(no|not|never|without|nor|lack|lacks|excludes?|exclusion|carries no|do not|does not|don't|doesn't|is not|are not|isn't|aren't|cannot|can't)\b/i;
+
+  /* Telling a guest to check their OWN travel policy is advice, not a claim about us,
+     and it can never be misread as cover we provide. Allow that framing explicitly so
+     the copy can be helpful instead of either boastful or bleak. The possessive is what
+     makes it safe: "your insurance" is theirs, "insurance included" is a claim. */
+  const GUEST_OWNED = /\b(your|my)\s+(own\s+)?(travel\s+|medical\s+)?(insurance|policy|policies|cover)\b/i;
   const hits = [];
   for (const page of pages) {
-    const text = readFileSync(page, 'utf8').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]*>/g, ' ');
-    for (const re of banned) {
-      const m = text.match(re);
-      if (m) hits.push(`${page}: "${m[0]}"`);
-    }
+    const text = readFileSync(page, 'utf8')
+      .replace(/<script[\s\S]*?<\/script>/g, ' ')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/&[a-z]+;/gi, ' ')
+      .replace(/\s+/g, ' ');
+    const sentences = text.split(/(?<=[.!?])\s+/);
+    sentences.forEach((sentence, i) => {
+      /* A question is not a claim, but only if its answer denies cover. Read the
+         FAQ heading together with the reply that follows it. */
+      const scope = sentence.trim().endsWith('?')
+        ? `${sentence} ${sentences[i + 1] ?? ''}`
+        : sentence;
+      if (GUEST_OWNED.test(scope)) return;
+      for (const re of banned) {
+        if (re.test(sentence) && !DENIAL.test(scope)) {
+          hits.push(`${page}\n      "${sentence.trim().slice(0, 150)}"`);
+          break;
+        }
+      }
+    });
   }
   if (hits.length) {
-    console.error('Insurance claim found, but the business has no cover:');
+    console.error('Sentence implies insurance cover, but the business carries none:');
     hits.slice(0, 10).forEach(h => console.error('  ' + h));
+    console.error('  Rewrite it, or state the absence of cover explicitly.');
     process.exit(1);
   }
-  console.log('Claims audit passed — no insurance claims.');
+  console.log('Claims audit passed — no sentence implies cover.');
+}
+
+
+/* Resolution audit. A card image renders about 400px wide on desktop and 800px on a 2x
+   screen, so anything under ~500px source is visibly soft and anything tiny is a bug —
+   we shipped a 260x194 thumbnail once because it was the only copy of that photo.
+   Hard-fail the broken class, warn on the merely small so it stays visible. */
+{
+  const { imageSize } = await import('image-size').catch(() => ({ imageSize: null }));
+  const LIB = join(DIST, 'assets/images/lib');
+  const HARD_MIN = 500;
+  const SOFT_MIN = 900;
+
+  if (!imageSize) {
+    console.log('Resolution audit skipped — image-size not installed.');
+  } else {
+    const used = new Set();
+    const walkR = d => readdirSync(d).forEach(f => {
+      const p = join(d, f);
+      if (statSync(p).isDirectory()) walkR(p);
+      else if (p.endsWith('.html')) {
+        for (const m of readFileSync(p, 'utf8').matchAll(/\/assets\/images\/lib\/([a-z0-9-]+)\.webp/g)) used.add(m[1]);
+      }
+    });
+    walkR(DIST);
+
+    const tooSmall = [], soft = [];
+    for (const name of used) {
+      const file = join(LIB, `${name}.webp`);
+      if (!existsSync(file)) continue;
+      const { width, height } = imageSize(readFileSync(file));
+      if (width < HARD_MIN) tooSmall.push(`${name} — ${width}x${height}`);
+      else if (width < SOFT_MIN) soft.push(`${name} — ${width}x${height}`);
+    }
+
+    if (tooSmall.length) {
+      console.error(`Image too low resolution to ship (under ${HARD_MIN}px wide):`);
+      tooSmall.forEach(h => console.error('  ' + h));
+      console.error('  Re-export from a larger original, or ask the client for a better photo.');
+      process.exit(1);
+    }
+    soft.forEach(s => console.warn(`  Soft image (under ${SOFT_MIN}px wide): ${s}`));
+    console.log(`Resolution audit passed — ${used.size} images, none under ${HARD_MIN}px${soft.length ? `, ${soft.length} below ${SOFT_MIN}px` : ''}.`);
+  }
 }

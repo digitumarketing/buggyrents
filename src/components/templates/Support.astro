@@ -1,0 +1,219 @@
+---
+/* dbr-support — 9 sections, structure per templates/BuggyRents-privacy-policy.html
+   1 hero (+ right panel) · 2 trust strip · 3 intro --light · 4 what to check --sand
+   5 details that change it --dark · 6 booking path --light · 7 FAQ --faq
+   8 related --sand · 9 final CTA
+
+   Serves: privacy, refund, terms, safety standards, our fleet, and audience sub-pages. */
+import '@/styles/support.css';
+import Base from '@/layouts/Base.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import type { LfBlock } from '@/components/LongFormReader.astro';
+import { img, hero } from '@/data/images';
+import { site, waLink } from '@/data/site';
+
+export type SupportData = {
+  slug: string;              // full path, e.g. 'about-us/privacy-policy'
+  crumb: { name: string; href: string }[];   // between Home and the current page
+  short: string;             // current page name for the breadcrumb tail
+  title: string; description: string;
+  heroImage: string; finalImage: string; heroSubject?: 'buggy'|'quad'|'dirtbike'|'safari';
+  kicker: string; h1Lead: string; h1Em: string; lede: string; chips: string[];
+  ctaPrimary: { label: string; message: string };
+  ctaSecondary: { label: string; href: string };
+  panel: { kicker: string; title: string; sub: string; points: string[] };
+  trust: { tag: string; value: string; note: string }[];
+  introKicker: string; introH2: string; introLede: string; introBody: string[];
+  cardsKicker: string; cardsH2: string; cardsLede: string;
+  cards: { tag: string; h: string; p: string }[];
+  checksKicker: string; checksH2: string; checksLede: string;
+  checks: { tag: string; h: string; p: string }[];
+  stepsKicker: string; stepsH2: string; stepsLede: string;
+  steps: { h: string; p: string }[];
+  guideKicker?: string; guideH2?: string; guideIntro?: string; guideBlocks?: LfBlock[];
+  faqKicker: string; faqH2: string; faqLede: string; faqs: { q: string; a: string }[];
+  linksKicker: string; linksH2: string;
+  links: { tag: string; title: string; desc: string; href: string }[];
+  finalKicker: string; finalH2: string; finalLede: string;
+};
+interface Props { data: SupportData }
+const { data: d } = Astro.props;
+
+const url = `${site.domain}/${d.slug}/`;
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList',
+  itemListElement: [
+    { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+    ...d.crumb.map((c,i) => ({ '@type':'ListItem', position:i+2, name:c.name, item:`${site.domain}${c.href}` })),
+    { '@type':'ListItem', position:d.crumb.length+2, name:d.short, item:url }
+  ]};
+const faqSchema = { '@context':'https://schema.org', '@type':'FAQPage',
+  mainEntity: d.faqs.map(f => ({ '@type':'Question', name:f.q,
+    acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+
+const h = hero(d.heroImage);
+const fin = img(d.finalImage, d.heroSubject);
+---
+<Base title={d.title} description={d.description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- 1 hero -->
+  <section class="sp__hero" aria-labelledby="sp-hero-h">
+    <img class="sp__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="sp__hero-scrim" aria-hidden="true"></div>
+    <div class="sp__shell sp__hero-inner">
+      <nav class="sp__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        {d.crumb.map(c => (<><span aria-hidden="true">/</span><a href={c.href}>{c.name}</a></>))}
+        <span aria-hidden="true">/</span><span aria-current="page">{d.short}</span>
+      </nav>
+      <div class="sp__hero-grid">
+        <div class="sp__hero-copy">
+          <p class="sp__kicker">{d.kicker}</p>
+          <h1 id="sp-hero-h">{d.h1Lead} <em>{d.h1Em}</em></h1>
+          <p class="sp__hero-lede">{d.lede}</p>
+          <div class="sp__chips">{d.chips.map(c => <span>{c}</span>)}</div>
+          <div class="sp__actions">
+            <a class="btn btn--primary btn--lg" href={waLink(d.ctaPrimary.message)}>{d.ctaPrimary.label}</a>
+            <a class="btn btn--onDark btn--lg" href={d.ctaSecondary.href}>{d.ctaSecondary.label}</a>
+          </div>
+        </div>
+        <aside class="sp__panel" aria-label={d.panel.kicker}>
+          <p>{d.panel.kicker}</p>
+          <strong>{d.panel.title}</strong>
+          <span>{d.panel.sub}</span>
+          <ul>{d.panel.points.map(x => <li>{x}</li>)}</ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 trust strip -->
+  <section class="sp__trust" aria-label="At a glance">
+    <div class="sp__shell sp__trust-grid">
+      {d.trust.map(t => (
+        <article><span>{t.tag}</span><strong>{t.value}</strong><p>{t.note}</p></article>
+      ))}
+    </div>
+  </section>
+
+  <!-- 3 intro -->
+  <section class="sp__section sp__section--light" aria-labelledby="sp-intro-h">
+    <div class="sp__shell sp__split">
+      <header class="sp__head">
+        <p class="sp__kicker">{d.introKicker}</p>
+        <h2 id="sp-intro-h">{d.introH2}</h2>
+        <p class="sp__head-lede">{d.introLede}</p>
+      </header>
+      <div class="sp__prose">{d.introBody.map(p => <p set:html={p} />)}</div>
+    </div>
+  </section>
+
+  <!-- 4 what to check -->
+  <section class="sp__section sp__section--sand" aria-labelledby="sp-cards-h">
+    <div class="sp__shell">
+      <header class="sp__head sp__head--split">
+        <div>
+          <p class="sp__kicker">{d.cardsKicker}</p>
+          <h2 id="sp-cards-h">{d.cardsH2}</h2>
+        </div>
+        <p>{d.cardsLede}</p>
+      </header>
+      <div class="sp__cards">
+        {d.cards.map(c => (
+          <article><span>{c.tag}</span><h3>{c.h}</h3><p>{c.p}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 details that change the recommendation -->
+  <section class="sp__section sp__section--dark" aria-labelledby="sp-checks-h">
+    <div class="sp__shell">
+      <header class="sp__head sp__head--split">
+        <div>
+          <p class="sp__kicker">{d.checksKicker}</p>
+          <h2 id="sp-checks-h">{d.checksH2}</h2>
+        </div>
+        <p>{d.checksLede}</p>
+      </header>
+      <div class="sp__checks">
+        {d.checks.map(c => (
+          <article><span>{c.tag}</span><strong>{c.h}</strong><p>{c.p}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 question to booking path -->
+  <section class="sp__section sp__section--light" aria-labelledby="sp-steps-h">
+    <div class="sp__shell">
+      <header class="sp__head">
+        <p class="sp__kicker">{d.stepsKicker}</p>
+        <h2 id="sp-steps-h">{d.stepsH2}</h2>
+        <p class="sp__head-lede">{d.stepsLede}</p>
+      </header>
+      <ol class="sp__steps">
+        {d.steps.map((s, i) => (
+          <li><span>{i + 1}</span><div><strong>{s.h}</strong><p>{s.p}</p></div></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {/* scrollable long-form reader, before the FAQ, per the standing rule */}
+  {d.guideBlocks && d.guideBlocks.length > 0 && (
+    <LongFormReader eyebrow={d.guideKicker} heading={d.guideH2!} intro={d.guideIntro!} blocks={d.guideBlocks} />
+  )}
+
+  <!-- 7 FAQ -->
+  <section class="sp__section sp__section--faq" id="faq" aria-labelledby="sp-faq-h">
+    <div class="sp__shell sp__faq-layout">
+      <header class="sp__head">
+        <p class="sp__kicker">{d.faqKicker}</p>
+        <h2 id="sp-faq-h">{d.faqH2}</h2>
+        <p class="sp__head-lede">{d.faqLede}</p>
+      </header>
+      <div class="sp__faq-list">
+        {d.faqs.map((f, i) => (
+          <details open={i === 0}>
+            <summary><span>Q{i + 1}</span><h3>{f.q}</h3><i aria-hidden="true"></i></summary>
+            <div>{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 related pages -->
+  <section class="sp__section sp__section--sand" aria-labelledby="sp-links-h">
+    <div class="sp__shell">
+      <header class="sp__head">
+        <p class="sp__kicker">{d.linksKicker}</p>
+        <h2 id="sp-links-h">{d.linksH2}</h2>
+      </header>
+      <div class="sp__links">
+        {d.links.map(l => (
+          <a href={l.href}><span>{l.tag}</span><strong>{l.title}</strong><p>{l.desc}</p></a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 final CTA -->
+  <section class="sp__final" id="book" aria-labelledby="sp-final-h">
+    <img class="sp__final-media" src={fin.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
+    <div class="sp__final-scrim" aria-hidden="true"></div>
+    <div class="sp__shell sp__final-inner">
+      <p class="sp__kicker">{d.finalKicker}</p>
+      <h2 id="sp-final-h">{d.finalH2}</h2>
+      <p>{d.finalLede}</p>
+      <div class="sp__actions">
+        <a class="btn btn--primary btn--lg" href={waLink(d.ctaPrimary.message)}>Message on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</Base>

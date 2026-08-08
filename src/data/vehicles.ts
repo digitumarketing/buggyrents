@@ -286,7 +286,7 @@ export const quads: Vehicle[] = [
     seats: 1,
     minAge: 14,
     area: 'Open desert, red dunes',
-    image: 'quad-bike-open-desert-group-ride-dubai',
+    image: 'quad-biking-dubai-open-desert-three-riders',
     blurb: 'Out of the boundary and into the red dunes with a guide. The real thing.',
     durations: [
       { label: '30 minutes', minutes: 30, price: 200 },

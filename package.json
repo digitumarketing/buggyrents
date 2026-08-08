@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "ENABLE_KEYSTATIC=true astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run audit",
     "preview": "astro preview",
     "check": "astro check",
-    "build:cms": "ENABLE_KEYSTATIC=true astro build"
+    "build:cms": "ENABLE_KEYSTATIC=true astro build",
+    "audit": "node scripts/audit-contrast.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",
@@ -19,5 +20,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sharp": "^0.34.2"
+  },
+  "devDependencies": {
+    "image-size": "^2.0.2"
   }
 }

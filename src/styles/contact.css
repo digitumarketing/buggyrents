@@ -27,7 +27,12 @@
   font-size: var(--fs-xs); color: rgba(255,255,255,.62); margin-bottom: clamp(1.5rem,3vw,2.5rem); }
 .ct__crumbs a { color: rgba(255,255,255,.82); text-decoration: none; }
 .ct__crumbs a:hover { color: #fff; text-decoration: underline; }
-.ct__hero .ct__kicker { color: var(--c-gold); }
+/* Gold only on the dark side of the hero. The form card is a white surface sitting
+   inside the same section, so a hero-wide rule made its kicker gold on white at
+   1.55:1. Scope to the copy column, and put the card back on the light token. */
+.ct__hero-copy .ct__kicker { color: var(--c-gold); }
+.ct__form-card { --c-orange-text: var(--c-orange-dark); }
+.ct__form-card .ct__kicker { color: var(--c-orange-text); }
 .ct__hero h1 { color: #fff; margin-top: .8rem; text-shadow: 0 2px 18px rgba(0,0,0,.5);
   font-size: clamp(1.9rem,1.2rem + 2.6vw,3.1rem); }
 .ct__hero h1 em { font-style: normal; color: var(--c-gold); }

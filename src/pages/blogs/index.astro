@@ -1,25 +1,34 @@
 ---
-/* Blog index — dbr-blogs, 3 sections per templates/BuggyRents-blogs.html:
-   hero (copy left, card right) · list section with filters · CTA.
-   The reference search box is omitted; with a handful of posts it is noise. */
+/* Blog index — dbr-blogs, 3 sections, markup matched to
+   templates/BuggyRents-blogs.html:
+     1 hero  light surface, copy left, latest post as a card on the right with
+             an offset frame behind it and three stat boxes below
+     2 list  section head, toolbar (search + topic filters with a live count),
+             4-up grid whose first card spans two columns
+     3 CTA   dark, copy left, one button right */
 import '@/styles/blog.css';
 import Base from '@/layouts/Base.astro';
-import { hero, img } from '@/data/images';
+import { img } from '@/data/images';
 import { site, waLink } from '@/data/site';
 import { posts, categories } from '@/data/posts';
 
 const title = 'Desert Riding Guides and Tips | Buggy Rents Dubai';
 const description = 'Straight answers on dune buggies, quad bikes and desert safaris in Dubai. What things cost, what to wear, which timing to pick and how to choose between them.';
 
-const h = hero('dune-buggy-dubai-hero-red-dunes');
-const ctaImg = img('group-dune-buggy-tour-dubai-photo-stop', 'buggy');
-
 const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
-const [lead, ...rest] = sorted;
+const lead = sorted[0];
+const leadImg = img(lead.image, lead.subject);
+
+/* The hero card IS the featured slot for the newest guide, so the grid lists the
+   rest. The reference repeats the lead post in both, which puts the same photo
+   on screen twice and reads as a bug. Every post is still one click away. */
+const rest = sorted.slice(1);
+
+const topics = categories.filter(c => sorted.some(p => p.category === c.slug));
 
 const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
   { '@type':'ListItem', position:1, name:'Home', item: site.domain },
-  { '@type':'ListItem', position:2, name:'Guides', item: `${site.domain}/blogs/` }]};
+  { '@type':'ListItem', position:2, name:'Blogs', item: `${site.domain}/blogs/` }]};
 const listSchema = { '@context':'https://schema.org', '@type':'ItemList',
   itemListElement: sorted.map((p, i) => ({ '@type':'ListItem', position:i+1, name:p.title,
     url: `${site.domain}/blogs/${p.slug}/` })) };
@@ -31,35 +40,39 @@ const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numer
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(listSchema)} />
 
   <!-- 1 hero -->
-  <section class="bl__hero">
-    <img class="bl__hero-media" src={h.src} alt={h.alt}
-         style={`object-position:${h.focal} center`}
-         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
-    <div class="bl__hero-scrim" aria-hidden="true"></div>
-    <div class="bl__shell bl__hero-inner">
+  <section class="bl__hero" aria-labelledby="blogs-h">
+    <div class="bl__shell">
       <nav class="bl__crumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Guides</span>
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Blogs</span>
       </nav>
       <div class="bl__hero-grid">
-        <div>
-          <p class="bl__kicker">Guides</p>
-          <h1>Straight answers about <em>riding in the Dubai desert</em></h1>
-          <p class="bl__hero-lede">
-            No filler and no borrowed advice. These are the questions guests actually ask us
-            on WhatsApp, answered with real prices and what we see happen on the sand.
+        <div class="bl__hero-copy">
+          <p class="bl__eyebrow">Blogs</p>
+          <h1 id="blogs-h">Dubai desert guides for smarter trip planning.</h1>
+          <p class="bl__lede">
+            Practical guides on dune buggy rides, quad biking, timing, what to wear and what
+            things actually cost. Written by the team that runs the base, not researched from
+            somewhere else.
           </p>
+          <div class="bl__hero-actions">
+            <a class="btn btn--primary btn--lg" href="#blogs-list-h">Explore guides</a>
+          </div>
         </div>
-        <aside class="bl__hero-card">
-          <p>Written by the operator</p>
-          <strong>Not a travel blog</strong>
-          <span>
-            We run the base at Al Awir. Every price, age limit and timing here is what we
-            actually charge and enforce, not an estimate.
-          </span>
-          <div class="bl__hero-stats">
-            <div><b>{site.guestsServed}</b><span>guests since {site.founded}</span></div>
-            <div><b>4.9</b><span>Google rating</span></div>
-            <div><b>{posts.length}</b><span>guides so far</span></div>
+
+        <aside class="bl__hero-visual" aria-label="Featured guide">
+          <a class="bl__hero-card" href={`/blogs/${lead.slug}/`} aria-label={`Read ${lead.title}`}>
+            <img src={leadImg.src} alt={leadImg.alt} width="720" height="540" loading="eager" decoding="async" />
+            <div class="bl__hero-card-copy">
+              <span>Latest guide</span>
+              <strong>{lead.title}</strong>
+            </div>
+          </a>
+          <div class="bl__hero-stats" aria-label="Archive highlights">
+            <span><strong>{sorted.length}</strong><small>Guides</small></span>
+            <span><strong>{topics.length}</strong><small>Topics</small></span>
+            <span><strong>{site.guestsServed}</strong><small>Guests</small></span>
           </div>
         </aside>
       </div>
@@ -67,90 +80,125 @@ const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numer
   </section>
 
   <!-- 2 list -->
-  <section class="bl__list">
+  <section class="bl__list" aria-labelledby="blogs-list-h">
     <div class="bl__shell">
       <header class="bl__list-head">
-        <div>
-          <p class="bl__kicker">All guides</p>
-          <h2>Read before you book</h2>
-        </div>
-        <p>Every guide links back to the prices it references, so you can check the number yourself.</p>
+        <p class="bl__eyebrow">All guides</p>
+        <h2 id="blogs-list-h">Choose a guide and keep moving.</h2>
+        <p>Every guide links back to the price page it references, so you can check the number yourself.</p>
       </header>
 
-      <div class="bl__filters" role="group" aria-label="Filter guides by topic">
-        <button type="button" data-cat="all" aria-pressed="true">All</button>
-        {categories.map(c => (
-          <button type="button" data-cat={c.slug} aria-pressed="false">{c.label}</button>
-        ))}
+      <div class="bl__toolbar" aria-label="Guide controls">
+        <label class="bl__search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+          </svg>
+          <span class="sr-only">Search guides</span>
+          <input type="search" placeholder="Search guides" autocomplete="off" id="bl-search" />
+        </label>
+        <div class="bl__filter-block">
+          <div class="bl__filter-head">
+            <span>Topics</span>
+            <output id="bl-count" aria-live="polite">{rest.length} guides</output>
+          </div>
+          <div class="bl__filter-wrap">
+            <div class="bl__filters" aria-label="Filter guides by topic">
+              <button type="button" class="is-active" data-filter="all" aria-pressed="true">All</button>
+              {topics.map(c => (
+                <button type="button" data-filter={c.slug} aria-pressed="false">{c.label}</button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="bl__grid" id="bl-grid">
-        {sorted.map((p, i) => {
+        {rest.map((p, i) => {
           const m = img(p.image, p.subject);
+          const label = categories.find(c => c.slug === p.category)?.label;
           return (
-            <article class={`bl__card${i === 0 ? ' bl__card--featured' : ''}`} data-cat={p.category}>
-              <a class="bl__card-link" href={`/blogs/${p.slug}/`}>
+            <article class={`bl__card${i === 0 ? ' bl__card--featured' : ''}`}
+                     data-cat={p.category}
+                     data-search={`${p.title} ${p.excerpt} ${label}`.toLowerCase()}>
+              <a class="bl__card-link" href={`/blogs/${p.slug}/`} aria-label={`Read ${p.title}`}>
                 <span class="bl__media">
                   <img src={m.src} alt={m.alt} width="720" height="480"
                        loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
                 </span>
                 <span class="bl__card-copy">
                   <span class="bl__meta">
-                    <span>{categories.find(c => c.slug === p.category)?.label}</span>
-                    <time datetime={p.date}>{fmt(p.date)}</time>
+                    <span class="bl__tag">{label}</span>
+                    <span>{fmt(p.date)}</span>
                   </span>
-                  <h3>{p.title}</h3>
-                  <p>{p.excerpt}</p>
-                  <em>Read the guide &rarr;</em>
+                  <strong>{p.title}</strong>
+                  <span>{p.excerpt}</span>
+                  <em>Read guide</em>
                 </span>
               </a>
             </article>
           );
         })}
       </div>
-      <p class="bl__empty" id="bl-empty" hidden>No guides in that topic yet.</p>
+      <p class="bl__empty" id="bl-empty" hidden>No guides match this search.</p>
     </div>
   </section>
 
   <!-- 3 CTA -->
-  <section class="bl__cta">
-    <img class="bl__cta-media" src={ctaImg.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
-    <div class="bl__cta-scrim" aria-hidden="true"></div>
+  <section class="bl__cta" aria-labelledby="blogs-cta-h">
     <div class="bl__shell bl__cta-inner">
       <div>
-        <p class="bl__kicker">Skip the reading</p>
-        <h2>Or just ask us</h2>
-        <p>Send your date, group size and ages. We will tell you what fits and what it costs, in one message.</p>
+        <p class="bl__eyebrow">Need help choosing?</p>
+        <h2 id="blogs-cta-h">Turn a guide into the right desert booking.</h2>
+        <p>Send your date, pickup area, guest count and preferred activity. We will point you at the right ride.</p>
       </div>
-      <div class="bl__cta-actions">
-        <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I have a question about booking a desert ride.')}>Ask on WhatsApp</a>
-        <a class="btn btn--onDark btn--lg" href="/contact/">Contact page</a>
-      </div>
+      <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I have a question about booking a desert ride.')}>Ask on WhatsApp</a>
     </div>
   </section>
 </Base>
 
 <script is:inline>
-  /* Category filter. Progressive enhancement: without JS every post is already
-     in the DOM and visible, so the page still works. */
+  /* Search and topic filter. Progressive enhancement: every card is in the DOM
+     and visible without JS, so the archive still works with scripting off. */
   (function () {
-    var buttons = document.querySelectorAll('.bl__filters button');
-    var cards = document.querySelectorAll('#bl-grid .bl__card');
+    var grid = document.getElementById('bl-grid');
+    if (!grid) return;
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.bl__card'));
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('.bl__filters button'));
+    var search = document.getElementById('bl-search');
+    var count = document.getElementById('bl-count');
     var empty = document.getElementById('bl-empty');
-    if (!buttons.length || !cards.length) return;
+    var cat = 'all';
+
+    function apply() {
+      var q = (search && search.value || '').trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function (card) {
+        var okCat = cat === 'all' || card.getAttribute('data-cat') === cat;
+        var okText = !q || (card.getAttribute('data-search') || '').indexOf(q) > -1;
+        var visible = okCat && okText;
+        card.hidden = !visible;
+        if (visible) shown++;
+      });
+      if (count) count.textContent = shown + (shown === 1 ? ' guide' : ' guides');
+      if (empty) empty.hidden = shown > 0;
+      /* The lead card only earns its double width while it is the first thing
+         visible. Filtered down to one column it would look like a mistake. */
+      var first = cards.filter(function (c) { return !c.hidden; })[0];
+      cards.forEach(function (c) { c.classList.toggle('bl__card--featured', c === first && shown > 1); });
+    }
 
     buttons.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var cat = btn.getAttribute('data-cat');
-        buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
-        var shown = 0;
-        cards.forEach(function (card) {
-          var match = cat === 'all' || card.getAttribute('data-cat') === cat;
-          card.hidden = !match;
-          if (match) shown++;
+        cat = btn.getAttribute('data-filter');
+        buttons.forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', String(on));
         });
-        if (empty) empty.hidden = shown > 0;
+        apply();
       });
     });
+    if (search) search.addEventListener('input', apply);
   })();
 </script>

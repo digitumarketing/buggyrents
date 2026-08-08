@@ -166,6 +166,17 @@ function specificity(sel) {
 /* Match a compound selector like ".a.b" against one element. */
 function matchesCompound(part, el) {
   if (!part || part === '*') return true;
+
+  /* Pull :not(...) out before reading classes. Left in place, its argument was
+     being treated as a REQUIRED class, so "p:not(.eyebrow)" only matched elements
+     that had .eyebrow — the exact opposite. That turned correct white-on-navy CTA
+     text into a reported failure. */
+  const nots = [];
+  part = part.replace(/:not\(([^)]*)\)/gi, (_m, inner) => { nots.push(inner.trim()); return ''; });
+  for (const n of nots) {
+    if (n && matchesCompound(n, el)) return false;
+  }
+
   const tag = (part.match(/^[a-z][\w-]*/i) || [])[0];
   if (tag && el.rawTagName?.toLowerCase() !== tag.toLowerCase()) return false;
   for (const c of part.match(/\.[\w-]+/g) || []) {

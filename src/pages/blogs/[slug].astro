@@ -1,11 +1,19 @@
 ---
-/* Blog article — structure per templates/BuggyRents-5-quadbike-mistakes.html:
-   hero (1.05fr / .95fr) · article-wrap (220px TOC / body / 280px help)
-   · author · final CTA. Body carries key takeaways, the h2/h3 sections, an
-   optional comparison table and an FAQ, in that order. */
+/* Blog article — markup matched to templates/BuggyRents-5-quadbike-mistakes.html:
+     1 hero        breadcrumb, h1, deck, meta pills and two buttons on the left,
+                   figure on the right, large ghosted word behind
+     2 wrap        TOC aside / article body / help + related asides
+     3 author      divider, avatar, name, bio
+     4 final CTA   divider, kicker, h2, copy, two buttons
+
+   The body follows the reference order exactly: intro, Key takeaways as a normal
+   h2 with a list, the content sections, How to book, the comparison table, then
+   Frequently asked questions as h3 and paragraph pairs rather than accordions,
+   and a closing line. The table of contents is generated from the rendered h2
+   and h3 tags, which is how the reference builds it. */
 import '@/styles/blog.css';
 import Base from '@/layouts/Base.astro';
-import { hero, img } from '@/data/images';
+import { img } from '@/data/images';
 import { site, waLink } from '@/data/site';
 import { posts, categories, type Post } from '@/data/posts';
 
@@ -15,28 +23,56 @@ export function getStaticPaths() {
 interface Props { post: Post }
 const { post: p } = Astro.props;
 
-const h = hero(p.heroImage);
 const fig = img(p.image, p.subject);
-const fin = img(p.finalImage, p.subject);
-
 const url = `${site.domain}/blogs/${p.slug}/`;
 const cat = categories.find(c => c.slug === p.category);
 
-/* Reading time from the actual body, rounded to the nearest minute and never
-   below two, because "1 min read" on a 1,400 word guide reads as a mistake. */
-const words = p.sections.reduce((n, s) => n + s.html.replace(/<[^>]*>/g, ' ').split(/\s+/).length, 0);
-const readTime = Math.max(2, Math.round(words / 220));
+const slugify = (s: string) => s.toLowerCase().replace(/<[^>]*>/g, '')
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+/* Give every h3 inside a section an id so it can appear in the contents list,
+   exactly as the reference does. Written once here rather than by hand in the
+   data, so a new article gets its contents for free. */
+type Entry = { id: string; text: string; level: 2 | 3 };
+const toc: Entry[] = [];
+
+const intro = p.intro;
+
+toc.push({ id: 'key-takeaways', text: 'Key takeaways', level: 2 });
+
+const rendered = p.sections.map(s => {
+  toc.push({ id: s.id, text: s.h, level: 2 });
+  const html = s.html.replace(/<h3>([\s\S]*?)<\/h3>/g, (_m, inner) => {
+    const id = slugify(inner);
+    toc.push({ id, text: inner.replace(/<[^>]*>/g, ''), level: 3 });
+    return `<h3 id="${id}">${inner}</h3>`;
+  });
+  return { ...s, html };
+});
+
+if (p.table) toc.push({ id: 'comparison', text: p.table.h, level: 2 });
+if (p.faqs.length) {
+  toc.push({ id: 'faq', text: 'Frequently asked questions', level: 2 });
+  p.faqs.forEach(f => toc.push({ id: slugify(f.q), text: f.q, level: 3 }));
+}
+
+const words = rendered.reduce((n, s) => n + s.html.replace(/<[^>]*>/g, ' ').split(/\s+/).length, 0);
+const readTime = Math.max(2, Math.round(words / 220));
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+/* Two other guides, preferring the same topic. */
+const related = [...posts.filter(x => x.slug !== p.slug)]
+  .sort((a, b) => (Number(b.category === p.category) - Number(a.category === p.category))
+                || b.date.localeCompare(a.date))
+  .slice(0, 3);
 
 const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
   { '@type':'ListItem', position:1, name:'Home', item: site.domain },
-  { '@type':'ListItem', position:2, name:'Guides', item: `${site.domain}/blogs/` },
+  { '@type':'ListItem', position:2, name:'Blogs', item: `${site.domain}/blogs/` },
   { '@type':'ListItem', position:3, name:p.title, item: url }]};
-const articleSchema = {
-  '@context':'https://schema.org', '@type':'BlogPosting',
+const articleSchema = { '@context':'https://schema.org', '@type':'BlogPosting',
   headline: p.title, description: p.excerpt, datePublished: p.date, dateModified: p.date,
-  image: `${site.domain}${fig.src}`, inLanguage: 'en',
+  image: `${site.domain}${fig.src}`, inLanguage: 'en', wordCount: words,
   author: { '@type':'Organization', name: site.name, url: site.domain },
   publisher: { '@type':'Organization', name: site.name, url: site.domain },
   mainEntityOfPage: { '@type':'WebPage', '@id': url } };
@@ -51,53 +87,60 @@ const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FA
 
   <!-- 1 hero -->
   <section class="ar__hero">
-    <img class="ar__hero-media" src={h.src} alt={h.alt}
-         style={`object-position:${h.focal} center`}
-         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
-    <div class="ar__hero-scrim" aria-hidden="true"></div>
-    <div class="bl__shell ar__hero-inner">
-      <nav class="ar__crumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a><span aria-hidden="true">/</span>
-        <a href="/blogs/">Guides</a><span aria-hidden="true">/</span>
-        <span aria-current="page">{cat?.label}</span>
-      </nav>
-      <div class="ar__hero-grid">
-        <div>
-          <p class="bl__kicker">{cat?.label}</p>
-          <h1>{p.title}</h1>
-          <p class="ar__deck">{p.excerpt}</p>
-          <div class="ar__meta">
-            <time datetime={p.date}>{fmt(p.date)}</time>
-            <span>{readTime} min read</span>
-            <span>By the Buggy Rents team</span>
-          </div>
+    <div class="bl__shell ar__hero-grid">
+      <div class="ar__hero-copy">
+        <nav class="bl__crumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a><span aria-hidden="true">/</span>
+          <a href="/blogs/">Blogs</a><span aria-hidden="true">/</span>
+          <span aria-current="page">{p.title}</span>
+        </nav>
+        <p class="bl__eyebrow">{cat?.label}</p>
+        <h1 id="article-title">{p.title}</h1>
+        <p class="ar__deck">{p.excerpt}</p>
+        <div class="ar__meta" aria-label="Article details">
+          <span>{fmt(p.date)}</span>
+          <span>{readTime} min read</span>
+          <span>Buggy Rents team</span>
         </div>
+        <div class="ar__hero-actions">
+          <a class="btn btn--primary btn--lg" href={waLink(p.helpMessage)}>Plan this ride</a>
+          <a class="btn btn--ghost btn--lg" href="#article">Read guide</a>
+        </div>
+      </div>
+      <div class="ar__hero-visual">
         <figure class="ar__hero-figure">
-          <img src={fig.src} alt={fig.alt} width="1200" height="900" decoding="async" />
+          <img src={fig.src} alt={fig.alt} width="1200" height="900" loading="eager" decoding="async" />
         </figure>
       </div>
     </div>
+    <span class="ar__backdrop" aria-hidden="true">DESERT</span>
   </section>
 
   <!-- 2 article -->
   <div class="bl__shell ar__wrap">
-    <aside class="ar__toc" aria-label="On this page">
+    <aside class="ar__toc" aria-label="Table of contents">
       <div class="ar__panel">
-        <p>On this page</p>
-        <ol>
-          {p.sections.map(s => <li><a href={`#${s.id}`}>{s.h}</a></li>)}
-          {p.faqs.length > 0 && <li><a href="#faq">Questions</a></li>}
-        </ol>
+        <p class="ar__panel-eyebrow">In this guide</p>
+        <nav>
+          {toc.map(t => (
+            <a class={`ar__toc-link ar__toc-link--h${t.level}`} href={`#${t.id}`}>{t.text}</a>
+          ))}
+        </nav>
       </div>
     </aside>
 
-    <article class="ar__body">
-      <div class="ar__takeaways">
-        <p>The short version</p>
-        <ul>{p.takeaways.map(t => <li>{t}</li>)}</ul>
-      </div>
+    <article class="ar__body" id="article">
+      <nav class="ar__toc-mobile" aria-label="Table of contents">
+        <p class="ar__panel-eyebrow">In this guide</p>
+        <ol>{toc.filter(t => t.level === 2).map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
+      </nav>
 
-      {p.sections.map(s => (
+      {intro && <p set:html={intro} />}
+
+      <h2 id="key-takeaways">Key takeaways</h2>
+      <ul>{p.takeaways.map(t => <li set:html={t} />)}</ul>
+
+      {rendered.map(s => (
         <>
           <h2 id={s.id}>{s.h}</h2>
           <Fragment set:html={s.html} />
@@ -106,9 +149,9 @@ const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FA
 
       {p.table && (
         <>
-          <h2 id="compare">{p.table.h}</h2>
+          <h2 id="comparison">{p.table.h}</h2>
           <div class="ar__table-wrap">
-            <table class="ar__table">
+            <table>
               <thead><tr>{p.table.head.map(c => <th>{c}</th>)}</tr></thead>
               <tbody>
                 {p.table.rows.map(r => (
@@ -122,58 +165,74 @@ const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FA
 
       {p.faqs.length > 0 && (
         <>
-          <h2 id="faq">Questions we get about this</h2>
-          <div class="ar__faq">
-            {p.faqs.map((f, i) => (
-              <details open={i === 0}>
-                <summary><span>Q{i + 1}</span><h3>{f.q}</h3><b aria-hidden="true">+</b></summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
-          </div>
+          <h2 id="faq">Frequently asked questions</h2>
+          {p.faqs.map(f => (
+            <>
+              <h3 id={slugify(f.q)}>{f.q}</h3>
+              <p>{f.a}</p>
+            </>
+          ))}
         </>
       )}
+
+      <p set:html={p.closing} />
     </article>
 
-    <aside class="ar__help" aria-label="Booking help">
-      <div class="ar__panel">
-        <p>Book it</p>
-        <strong>{p.helpTitle}</strong>
-        <span>{p.helpText}</span>
-        <a class="btn btn--primary" href={waLink(p.helpMessage)}>Ask on WhatsApp</a>
-        {/* The help panel is navy, so the secondary button needs the on-dark
-            variant. btn--ghost is navy text and vanished into the panel. */}
-        <a class="btn btn--onDark" href={p.helpHref}>{p.helpLinkLabel}</a>
-      </div>
-    </aside>
+    <div class="ar__help">
+      <aside class="ar__panel ar__panel--help" aria-label="Booking help">
+        <p class="ar__panel-eyebrow">Need help choosing?</p>
+        <h2>{p.helpTitle}</h2>
+        <p>{p.helpText}</p>
+        <a class="btn btn--primary" href={waLink(p.helpMessage)}>WhatsApp team</a>
+      </aside>
+
+      <aside class="ar__panel" aria-label="Related guides">
+        <p class="ar__panel-eyebrow">Related guides</p>
+        <div class="ar__related-list">
+          {related.map(r => {
+            const ri = img(r.image, r.subject);
+            return (
+              <a class="ar__related-card" href={`/blogs/${r.slug}/`}>
+                {/* Decorative: the title next to it is the accessible label for this link. */}
+                <img src={ri.src} alt="" aria-hidden="true" width="72" height="56" loading="lazy" decoding="async" />
+                <div>
+                  <strong>{r.title}</strong>
+                  <span>Read</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </aside>
+    </div>
   </div>
 
   <!-- 3 author -->
+  <div class="ar__divider" aria-hidden="true"><span></span></div>
   <section class="ar__author">
     <div class="bl__shell ar__author-inner">
       <div class="ar__avatar" aria-hidden="true">BR</div>
-      <div class="ar__author-text">
-        <strong>The Buggy Rents team</strong>
-        <p>
+      <div>
+        <p class="ar__author-name">The Buggy Rents team</p>
+        <p class="ar__author-bio">
           We run the base at Al Awir on the Dubai to Hatta road, with {site.fleetSize} vehicles
-          and {site.guides} guides. Everything in this guide is what we charge and what we see
-          on the sand, not research from somewhere else.
+          and {site.guides} guides. Every price and age limit in this guide is what we charge
+          and enforce, not an estimate.
         </p>
       </div>
     </div>
   </section>
 
   <!-- 4 final CTA -->
+  <div class="ar__divider" aria-hidden="true"><span></span></div>
   <section class="ar__final">
-    <img class="ar__final-media" src={fin.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
-    <div class="ar__final-scrim" aria-hidden="true"></div>
     <div class="bl__shell ar__final-inner">
-      <p class="bl__kicker">Ready when you are</p>
+      <p class="bl__eyebrow">Ready to ride?</p>
       <h2>{p.finalH2}</h2>
       <p>{p.finalLede}</p>
       <div class="ar__final-actions">
-        <a class="btn btn--primary btn--lg" href={waLink(p.helpMessage)}>Message on WhatsApp</a>
-        <a class="btn btn--onDark btn--lg" href="/blogs/">More guides</a>
+        <a class="btn btn--primary btn--lg" href={waLink(p.helpMessage)}>Book on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href={p.helpHref}>{p.helpLinkLabel}</a>
       </div>
     </div>
   </section>

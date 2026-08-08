@@ -16,7 +16,9 @@ export type Post = {
   subject: 'buggy' | 'quad' | 'dirtbike' | 'safari';
   heroImage: string; image: string; finalImage: string;
   keyword: string;                       // the primary target, for our own tracking
+  intro: string;                         // opening paragraph, before Key takeaways
   takeaways: string[];
+  closing: string;                       // final line of the body, carries the CTA link
   sections: { id: string; h: string; html: string }[];
   table?: { h: string; head: string[]; rows: string[][] };
   faqs: { q: string; a: string }[];
@@ -44,6 +46,8 @@ export const posts: Post[] = [
     image: 'quad-bike-rental-fleet-parked-al-awir-dubai',
     finalImage: 'quad-biking-dubai-open-desert-three-riders',
     keyword: 'quad biking dubai price',
+    intro: `Quad biking is the cheapest way into the Dubai desert and the most physical. Before you can pick a price you need to settle two things: how old everyone riding is, and whether you want the fenced boundary area or the open red dunes. Here is the full list, and what actually drives the number.`,
+    closing: `Send us the ages and the group size and we will price the right quads for you. <a href="/quad-bike-dubai/price/">Every quad and duration is on the price page</a>, or <a href="/contact/">message the team</a> and skip the reading.`,
     takeaways: [
       'Quad prices start at AED 75 for 30 minutes on a kids machine and AED 89 on an adult boundary quad',
       'Every price is per quad. A double seat quad carries two people, so it halves per head',
@@ -125,6 +129,8 @@ export const posts: Post[] = [
     image: 'polaris-rzr-4-seater-dune-buggy-parked-dubai-base',
     finalImage: 'dune-buggy-climbing-red-dune-convoy-dubai',
     keyword: 'dune buggy dubai price',
+    intro: `A dune buggy is the fastest way to go from never having done this to genuinely enjoying it, and the pricing is simpler than it looks. There is one thing to understand before you compare anything: our prices are per buggy, not per person. That single detail changes which option is cheapest for your group.`,
+    closing: `Tell us how many are riding and we will work out whether two seaters or a four seater costs less. <a href="/dune-buggy-dubai/price/">All eleven buggies are on the price page</a>, or <a href="/contact/">message us</a> for a straight answer.`,
     takeaways: [
       'Dune buggies start at AED 300 for 30 minutes in a Polaris RZR 1000 two seater',
       'Prices are per buggy. A four seater split four ways is under AED 90 each',
@@ -200,6 +206,8 @@ export const posts: Post[] = [
     image: 'camel-ride-desert-safari-dubai',
     finalImage: 'bedouin-camp-majlis-seating-desert-safari-dubai',
     keyword: 'dubai desert safari without dune bashing',
+    intro: `Dune bashing is the part of a desert safari that some people book it for and others quietly dread. If you are in the second group, you do not have to skip the safari. You can book exactly the same trip with a calm drive to the camp instead, and it is a request we handle every week.`,
+    closing: `Send your date and add the line about no dune bashing, and we will flag it on the booking. <a href="/desert-safari-dubai-deals/">See the safari packages</a> or <a href="/contact/">message the team</a>.`,
     takeaways: [
       'Yes, you can book a desert safari with no dune bashing. Just say so when you book',
       'You keep the camp, the dinner, the camel ride, sandboarding and the shows',
@@ -272,6 +280,8 @@ export const posts: Post[] = [
     image: 'sandboarding-desert-safari-dubai',
     finalImage: 'private-desert-safari-4x4-dubai-red-dunes',
     keyword: 'what to wear to desert safari dubai',
+    intro: `The desert is not a beach, and the difference between a comfortable evening and a miserable one usually comes down to two decisions: your shoes, and whether you brought a layer. Here is what actually works, by season, and what people most often wish they had done differently.`,
+    closing: `Not sure what the evenings are doing for your date? <a href="/contact/">Message us</a> and we will tell you. <a href="/desert-safari-dubai-deals/">Safari packages are here</a> when you are ready to book.`,
     takeaways: [
       'Closed shoes, always. Sandals are the single most common regret',
       'Winter evenings get genuinely cold once the sun drops. Bring a layer',
@@ -345,6 +355,8 @@ export const posts: Post[] = [
     image: 'belly-dance-show-desert-safari-camp-dubai',
     finalImage: 'fire-show-desert-safari-camp-dubai',
     keyword: 'desert safari dubai timings',
+    intro: `There are three desert safari timings in Dubai and they suit genuinely different trips. The evening safari is what most people mean by a desert safari. The morning one is shorter and, in summer, far more comfortable. The overnight adds a night under the stars. Here is how each one runs.`,
+    closing: `Send us your date and we will confirm the pickup window and which timing suits that season. <a href="/desert-safari-dubai-deals/">See the packages</a> or <a href="/contact/">message the team</a>.`,
     takeaways: [
       'The evening safari runs 7 to 8 hours door to door and is what most people book',
       'Morning safaris are shorter, 4 to 5 hours, and are the sensible summer option',
@@ -414,6 +426,8 @@ export const posts: Post[] = [
     image: 'couple-dune-buggy-ride-dubai-desert-tour',
     finalImage: 'can-am-maverick-x3-4-seater-desert-tour-dubai',
     keyword: 'dune buggy vs quad bike dubai',
+    intro: `Both take you into the same red dunes with the same guides, and both are priced per vehicle. After that they are completely different days out. One is easy to be good at immediately, the other is hard work and more rewarding for it. Here is how to pick without guessing.`,
+    closing: `Tell us who is riding, the ages and whether anyone is nervous, and we will give you a straight recommendation. <a href="/dune-buggy-dubai/">See the buggies</a>, <a href="/quad-bike-dubai/">see the quads</a>, or <a href="/contact/">just ask</a>.`,
     takeaways: [
       'A buggy is easier to be competent in quickly. A quad is more physical and more direct',
       'Buggies let a group ride together in one machine. Quads mean everyone rides their own',

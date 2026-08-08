@@ -54,34 +54,36 @@
 /* ------------------------------------------------------------ form card */
 .ct__form-card { position: relative; background: #fff; color: var(--c-ink);
   border: 1px solid var(--c-line); border-top: 6px solid var(--c-orange);
-  border-radius: 10px; padding: clamp(20px,2.6vw,30px);
+  border-radius: 10px; padding: clamp(18px,2.2vw,24px);
   box-shadow: 0 28px 74px rgba(0,0,0,.22); }
-.ct__form-card::before { content: '24/7'; position: absolute; top: 18px; right: 18px;
-  display: inline-flex; min-height: 32px; align-items: center; border-radius: 999px;
-  padding: 0 12px; background: var(--c-sand); color: var(--c-navy);
-  font-family: var(--font-display); font-size: 12px; font-weight: 800; }
-.ct__form-head { padding-right: 60px; }
+.ct__form-card::before { content: '24/7'; position: absolute; top: 16px; right: 16px;
+  display: inline-flex; min-height: 28px; align-items: center; border-radius: 999px;
+  padding: 0 11px; background: var(--c-sand); color: var(--c-navy);
+  font-family: var(--font-display); font-size: 11px; font-weight: 800; }
+.ct__form-head { padding-right: 56px; }
 .ct__form-head h2 { margin: 0; color: var(--c-navy);
-  font-size: clamp(1.5rem,1.2rem + 1.2vw,2.1rem); line-height: 1.1; }
-.ct__form-head > p:not(.ct__kicker) { margin: 12px 0 0; color: var(--c-ink-muted);
-  font-size: var(--fs-sm); line-height: 1.55; }
+  font-size: clamp(1.35rem,1.1rem + .9vw,1.75rem); line-height: 1.12; }
+.ct__form-head > p:not(.ct__kicker) { margin: 8px 0 0; color: var(--c-ink-muted);
+  font-size: var(--fs-xs); line-height: 1.5; }
 
-.ct__form { margin-top: 22px; }
-.ct__form-grid { display: grid; gap: 14px; grid-template-columns: repeat(2,minmax(0,1fr)); }
-.ct__field { display: grid; min-width: 0; gap: 8px; }
+.ct__form { margin-top: 16px; }
+.ct__form-grid { display: grid; gap: 11px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.ct__field { display: grid; min-width: 0; gap: 5px; }
 .ct__field--full { grid-column: 1 / -1; }
-.ct__field span { color: var(--c-navy); font-size: 13px; font-weight: 800;
+/* The label sits tight to its control so each field reads as one block and the
+   card stops running past the fold. */
+.ct__field span { color: var(--c-navy); font-size: 12px; font-weight: 800;
   font-family: var(--font-display); }
 .ct__field input, .ct__field textarea, .ct__field select { width: 100%; border: 1px solid var(--c-line);
   border-radius: 10px; background: #fff; color: var(--c-ink); font: inherit; font-size: var(--fs-sm); }
-.ct__field input, .ct__field select { min-height: 52px; padding: 0 14px; }
+.ct__field input, .ct__field select { min-height: 44px; padding: 0 13px; }
 /* Shorter than it was. Three rows is enough for a date, ages and a pickup area,
    and a shorter box asks for less, which gets more forms finished. */
-.ct__field textarea { min-height: 84px; resize: vertical; padding: 12px 14px; line-height: 1.5; }
+.ct__field textarea { min-height: 70px; resize: vertical; padding: 10px 13px; line-height: 1.45; }
 .ct__field select { appearance: none; cursor: pointer; padding-right: 40px;
   background-image: linear-gradient(45deg, transparent 50%, var(--c-navy) 50%),
                     linear-gradient(135deg, var(--c-navy) 50%, transparent 50%);
-  background-position: calc(100% - 20px) 22px, calc(100% - 14px) 22px;
+  background-position: calc(100% - 20px) 18px, calc(100% - 14px) 18px;
   background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
 .ct__field select:invalid, .ct__field select option[value=''] { color: var(--c-ink-soft); }
 .ct__field input::placeholder, .ct__field textarea::placeholder { color: var(--c-ink-soft); }
@@ -90,17 +92,17 @@
 .ct__field input:invalid:not(:placeholder-shown),
 .ct__field textarea:invalid:not(:placeholder-shown) { border-color: #C24E00; }
 
-.ct__form-status { margin: 14px 0 0; border-left: 4px solid var(--c-gold);
-  padding: 10px 12px; background: var(--c-sand-soft); color: var(--c-ink-muted);
-  font-size: 13px; line-height: 1.45; font-weight: 600; }
+.ct__form-status { margin: 11px 0 0; border-left: 3px solid var(--c-gold);
+  padding: 8px 11px; background: var(--c-sand-soft); color: var(--c-ink-muted);
+  font-size: 12px; line-height: 1.4; font-weight: 600; }
 .ct__form-status[data-state='error'] { border-left-color: #C24E00; }
-.ct__form-actions { display: grid; gap: 10px; margin-top: 16px;
+.ct__form-actions { display: grid; gap: 9px; margin-top: 12px;
   grid-template-columns: minmax(0,1fr) auto; }
-.ct__form-proof { display: grid; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
-.ct__form-proof li { position: relative; min-width: 0; padding-left: 18px;
-  color: var(--c-ink-soft); font-size: 13px; font-weight: 600; line-height: 1.5; }
-.ct__form-proof li::before { content: ''; position: absolute; top: .62em; left: 0;
-  width: 8px; height: 8px; border-radius: 999px; background: var(--c-orange); }
+.ct__form-proof { display: grid; gap: 5px; margin: 12px 0 0; padding: 0; list-style: none; }
+.ct__form-proof li { position: relative; min-width: 0; padding-left: 15px;
+  color: var(--c-ink-soft); font-size: 12px; font-weight: 600; line-height: 1.45; }
+.ct__form-proof li::before { content: ''; position: absolute; top: .55em; left: 0;
+  width: 6px; height: 6px; border-radius: 999px; background: var(--c-orange); }
 
 /* ------------------------------------------------- 2 channels + location */
 .ct__main-grid { display: grid; gap: 28px; align-items: start;

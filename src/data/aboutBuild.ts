@@ -356,7 +356,7 @@ export const aboutUs: AboutData = {
   faqs: [
     { q: 'How long have you been running?', a: `Since ${site.founded}. We have taken ${site.guestsServed} guests into the desert in that time, and we hold a TripAdvisor Travellers' Choice award and a 4.9 rating on Google.` },
     { q: 'Are you the actual operator?', a: 'Yes. We own the vehicles, employ the guides and run the base at Al Awir. Many desert tour sites in Dubai are booking agencies that pass you on to whoever has a machine free.' },
-    { q: 'Where are you based?', a: `${site.address}. It is on the Dubai to Hatta road, close to the Lahbab red dunes, which is why our routes start where they do.` },
+    { q: 'Where are you based?', a: `${site.address.full}. It is on the Dubai to Hatta road, close to the Lahbab red dunes, which is why our routes start where they do.` },
     { q: 'What are your opening hours?', a: 'Open 24/7. In practice sunrise and late afternoon are the sessions worth booking, and being open around the clock is what makes a pre dawn start possible.' },
     { q: 'How many vehicles do you have?', a: `${site.fleetSize} across buggies, quads and dirt bikes, with ${site.guides} guides. Group bookings are usually possible at short notice.` },
     { q: 'Why are your prices per vehicle?', a: 'Because that is what you are hiring. A four seat buggy costs the same to run whether one person or four are in it. Quoting per person looks cheaper on a search results page and costs more when you multiply by the group.' },

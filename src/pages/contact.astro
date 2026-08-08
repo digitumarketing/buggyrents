@@ -59,7 +59,8 @@ const faqSchema = { '@context':'https://schema.org', '@type':'FAQPage',
   mainEntity: faqs.map(f => ({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
 const bizSchema = { '@context':'https://schema.org', '@type':'LocalBusiness',
   name: site.name, telephone: site.phoneRaw, email: site.email,
-  address: { '@type':'PostalAddress', streetAddress: site.address, addressLocality: 'Dubai', addressCountry: 'AE' },
+  address: { '@type':'PostalAddress', streetAddress: `${site.address.street}, ${site.address.district}`,
+    addressLocality: site.address.city, addressCountry: site.address.country },
   geo: { '@type':'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
   openingHours: 'Mo-Su 00:00-23:59', url: `${site.domain}/contact/` };
 
@@ -180,7 +181,7 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
         <p class="ct__kicker">02 / Where we are</p>
         <h2>The base at Al Awir</h2>
         <dl class="ct__office">
-          <dt>Address</dt><dd>{site.address}</dd>
+          <dt>Address</dt><dd>{site.address.full}</dd>
           <dt>Hours</dt><dd>Open 24 hours, 7 days a week</dd>
           <dt>Pickup</dt><dd>{transfers.summary} Outer emirates are quoted before you commit.</dd>
         </dl>

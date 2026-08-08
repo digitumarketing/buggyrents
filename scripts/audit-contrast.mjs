@@ -324,3 +324,60 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   }
   console.log(`Asset audit passed — every referenced file exists across ${pages.length} pages.`);
 }
+
+
+/* Placeholders and stringified objects that should never reach a visitor.
+   "[object Object]" shipped on the contact page and in an About us answer because
+   an object was interpolated where a string was expected. Nothing failed: it is
+   valid output, just meaningless. Same class as a stray TODO or an undefined. */
+{
+  const pages = [];
+  const walkP = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkP(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkP(DIST);
+
+  const banned = [
+    /\[object [A-Z]\w+\]/,
+    /\bundefined\b(?!\s*[)'"])/,
+    /\bNaN\b/,
+    /\bPLACEHOLDER\b/i,
+    /\bLorem ipsum\b/i,
+    /\bTODO\b/,
+    /\{\{[^}]+\}\}/          // an unrendered template expression
+  ];
+
+  const hits = [];
+  for (const page of pages) {
+    /* Visible text and meta only. Scripts legitimately contain "undefined". */
+    const html = readFileSync(page, 'utf8');
+    const meta = [...html.matchAll(/<meta[^>]*content="([^"]*)"/g)].map(m => m[1]).join(' ');
+    const title = (html.match(/<title[^>]*>([\s\S]*?)<\/title>/) || [])[1] || '';
+    const ld = [...html.matchAll(/<script[^>]*ld\+json[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]).join(' ');
+    const visible = html
+      .replace(/<script[\s\S]*?<\/script>/g, ' ')
+      .replace(/<style[\s\S]*?<\/style>/g, ' ')
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/<[^>]*>/g, ' ');
+
+    for (const [where, text] of [['body', visible], ['schema', ld], ['meta', meta], ['title', title]]) {
+      for (const re of banned) {
+        const m = text.match(re);
+        if (m) {
+          const i = text.indexOf(m[0]);
+          hits.push(`${page} (${where}): ...${text.slice(Math.max(0, i - 40), i + 50).replace(/\s+/g, ' ').trim()}...`);
+          break;
+        }
+      }
+    }
+  }
+  if (hits.length) {
+    console.error('Placeholder or stringified object reached the page:');
+    hits.slice(0, 10).forEach(h => console.error('  ' + h));
+    if (hits.length > 10) console.error(`  ...and ${hits.length - 10} more.`);
+    process.exit(1);
+  }
+  console.log('Placeholder audit passed — no [object Object], undefined or TODO in output.');
+}

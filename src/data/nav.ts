@@ -35,7 +35,8 @@ export const mainNav: NavItem[] = [
     { label: 'Safety standards', href: '/about-us/safety-standards/' },
     { label: 'Refund policy', href: '/about-us/refund-policy/' }
   ]},
-  { label: 'Contact', href: '/contact/' }
+  { label: 'Contact', href: '/contact/' },
+  { label: 'Guides', href: '/blogs/' }
 ];
 
 export const footerNav = {
@@ -53,6 +54,7 @@ export const footerNav = {
   ],
   Company: [
     { label: 'About us', href: '/about-us/' },
+    { label: 'Guides', href: '/blogs/' },
     { label: 'Our fleet', href: '/about-us/our-fleet/' },
     { label: 'Safety standards', href: '/about-us/safety-standards/' },
     { label: 'Contact', href: '/contact/' }

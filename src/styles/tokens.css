@@ -33,7 +33,12 @@
   /* ---- Neutrals ---- */
   --c-ink:           #1A1A1A;
   --c-ink-muted:     #5A6472;
-  --c-ink-soft:      #8A93A0;
+  --c-ink-soft:      #69727F;   /* was #8A93A0 */
+  /* Darkened 8 Aug 2026. At #8A93A0 this scored 3.11:1 on white and 2.89:1 on sand,
+     and it is not a decorative token: it carries every card description on the site,
+     633 elements. #69727F is the lightest blue-grey of the same character that clears
+     AA on both surfaces (4.87 and 4.53), so the visual hierarchy against --c-ink-muted
+     survives while the text becomes readable. */
   --c-line:          #E4E8ED;
   --c-line-soft:     #F1F4F7;
   --c-white:         #FFFFFF;

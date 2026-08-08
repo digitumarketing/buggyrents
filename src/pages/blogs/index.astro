@@ -1,0 +1,156 @@
+---
+/* Blog index — dbr-blogs, 3 sections per templates/BuggyRents-blogs.html:
+   hero (copy left, card right) · list section with filters · CTA.
+   The reference search box is omitted; with a handful of posts it is noise. */
+import '@/styles/blog.css';
+import Base from '@/layouts/Base.astro';
+import { hero, img } from '@/data/images';
+import { site, waLink } from '@/data/site';
+import { posts, categories } from '@/data/posts';
+
+const title = 'Desert Riding Guides and Tips | Buggy Rents Dubai';
+const description = 'Straight answers on dune buggies, quad bikes and desert safaris in Dubai. What things cost, what to wear, which timing to pick and how to choose between them.';
+
+const h = hero('dune-buggy-dubai-hero-red-dunes');
+const ctaImg = img('group-dune-buggy-tour-dubai-photo-stop', 'buggy');
+
+const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+const [lead, ...rest] = sorted;
+
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
+  { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+  { '@type':'ListItem', position:2, name:'Guides', item: `${site.domain}/blogs/` }]};
+const listSchema = { '@context':'https://schema.org', '@type':'ItemList',
+  itemListElement: sorted.map((p, i) => ({ '@type':'ListItem', position:i+1, name:p.title,
+    url: `${site.domain}/blogs/${p.slug}/` })) };
+
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(listSchema)} />
+
+  <!-- 1 hero -->
+  <section class="bl__hero">
+    <img class="bl__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="bl__hero-scrim" aria-hidden="true"></div>
+    <div class="bl__shell bl__hero-inner">
+      <nav class="bl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Guides</span>
+      </nav>
+      <div class="bl__hero-grid">
+        <div>
+          <p class="bl__kicker">Guides</p>
+          <h1>Straight answers about <em>riding in the Dubai desert</em></h1>
+          <p class="bl__hero-lede">
+            No filler and no borrowed advice. These are the questions guests actually ask us
+            on WhatsApp, answered with real prices and what we see happen on the sand.
+          </p>
+        </div>
+        <aside class="bl__hero-card">
+          <p>Written by the operator</p>
+          <strong>Not a travel blog</strong>
+          <span>
+            We run the base at Al Awir. Every price, age limit and timing here is what we
+            actually charge and enforce, not an estimate.
+          </span>
+          <div class="bl__hero-stats">
+            <div><b>{site.guestsServed}</b><span>guests since {site.founded}</span></div>
+            <div><b>4.9</b><span>Google rating</span></div>
+            <div><b>{posts.length}</b><span>guides so far</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 list -->
+  <section class="bl__list">
+    <div class="bl__shell">
+      <header class="bl__list-head">
+        <div>
+          <p class="bl__kicker">All guides</p>
+          <h2>Read before you book</h2>
+        </div>
+        <p>Every guide links back to the prices it references, so you can check the number yourself.</p>
+      </header>
+
+      <div class="bl__filters" role="group" aria-label="Filter guides by topic">
+        <button type="button" data-cat="all" aria-pressed="true">All</button>
+        {categories.map(c => (
+          <button type="button" data-cat={c.slug} aria-pressed="false">{c.label}</button>
+        ))}
+      </div>
+
+      <div class="bl__grid" id="bl-grid">
+        {sorted.map((p, i) => {
+          const m = img(p.image, p.subject);
+          return (
+            <article class={`bl__card${i === 0 ? ' bl__card--featured' : ''}`} data-cat={p.category}>
+              <a class="bl__card-link" href={`/blogs/${p.slug}/`}>
+                <span class="bl__media">
+                  <img src={m.src} alt={m.alt} width="720" height="480"
+                       loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                </span>
+                <span class="bl__card-copy">
+                  <span class="bl__meta">
+                    <span>{categories.find(c => c.slug === p.category)?.label}</span>
+                    <time datetime={p.date}>{fmt(p.date)}</time>
+                  </span>
+                  <h3>{p.title}</h3>
+                  <p>{p.excerpt}</p>
+                  <em>Read the guide &rarr;</em>
+                </span>
+              </a>
+            </article>
+          );
+        })}
+      </div>
+      <p class="bl__empty" id="bl-empty" hidden>No guides in that topic yet.</p>
+    </div>
+  </section>
+
+  <!-- 3 CTA -->
+  <section class="bl__cta">
+    <img class="bl__cta-media" src={ctaImg.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
+    <div class="bl__cta-scrim" aria-hidden="true"></div>
+    <div class="bl__shell bl__cta-inner">
+      <div>
+        <p class="bl__kicker">Skip the reading</p>
+        <h2>Or just ask us</h2>
+        <p>Send your date, group size and ages. We will tell you what fits and what it costs, in one message.</p>
+      </div>
+      <div class="bl__cta-actions">
+        <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I have a question about booking a desert ride.')}>Ask on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href="/contact/">Contact page</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  /* Category filter. Progressive enhancement: without JS every post is already
+     in the DOM and visible, so the page still works. */
+  (function () {
+    var buttons = document.querySelectorAll('.bl__filters button');
+    var cards = document.querySelectorAll('#bl-grid .bl__card');
+    var empty = document.getElementById('bl-empty');
+    if (!buttons.length || !cards.length) return;
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cat = btn.getAttribute('data-cat');
+        buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+        var shown = 0;
+        cards.forEach(function (card) {
+          var match = cat === 'all' || card.getAttribute('data-cat') === cat;
+          card.hidden = !match;
+          if (match) shown++;
+        });
+        if (empty) empty.hidden = shown > 0;
+      });
+    });
+  })();
+</script>

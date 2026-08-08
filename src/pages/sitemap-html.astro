@@ -8,6 +8,7 @@ import { site } from '@/data/site';
 import { buggies, quads, dirtbikes } from '@/data/vehicles';
 import { locations } from '@/data/locations';
 import { audiences } from '@/data/audiences';
+import { posts } from '@/data/posts';
 
 const title = 'Sitemap | Buggy Rents Dubai';
 const description = 'Every page on buggyrents.com in one list: dune buggies, quad bikes, dirt bikes, desert safari, pickup locations, audience guides and policies.';
@@ -45,6 +46,10 @@ const groups = [
   { h: 'Pickup locations', links: [
     { label: 'All locations', href: '/locations/' },
     ...locations.map(l => ({ label: l.name, href: `/locations/${l.slug}/` }))
+  ]},
+  { h: 'Guides', links: [
+    { label: 'All guides', href: '/blogs/' },
+    ...posts.map(p => ({ label: p.title, href: `/blogs/${p.slug}/` }))
   ]},
   { h: 'Who it suits', links: audiences.map(a => ({ label: a.name, href: `/audience/${a.slug}/` })) },
   { h: 'Policies', links: [

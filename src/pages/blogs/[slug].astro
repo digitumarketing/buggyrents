@@ -1,0 +1,180 @@
+---
+/* Blog article — structure per templates/BuggyRents-5-quadbike-mistakes.html:
+   hero (1.05fr / .95fr) · article-wrap (220px TOC / body / 280px help)
+   · author · final CTA. Body carries key takeaways, the h2/h3 sections, an
+   optional comparison table and an FAQ, in that order. */
+import '@/styles/blog.css';
+import Base from '@/layouts/Base.astro';
+import { hero, img } from '@/data/images';
+import { site, waLink } from '@/data/site';
+import { posts, categories, type Post } from '@/data/posts';
+
+export function getStaticPaths() {
+  return posts.map(p => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+interface Props { post: Post }
+const { post: p } = Astro.props;
+
+const h = hero(p.heroImage);
+const fig = img(p.image, p.subject);
+const fin = img(p.finalImage, p.subject);
+
+const url = `${site.domain}/blogs/${p.slug}/`;
+const cat = categories.find(c => c.slug === p.category);
+
+/* Reading time from the actual body, rounded to the nearest minute and never
+   below two, because "1 min read" on a 1,400 word guide reads as a mistake. */
+const words = p.sections.reduce((n, s) => n + s.html.replace(/<[^>]*>/g, ' ').split(/\s+/).length, 0);
+const readTime = Math.max(2, Math.round(words / 220));
+
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
+  { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+  { '@type':'ListItem', position:2, name:'Guides', item: `${site.domain}/blogs/` },
+  { '@type':'ListItem', position:3, name:p.title, item: url }]};
+const articleSchema = {
+  '@context':'https://schema.org', '@type':'BlogPosting',
+  headline: p.title, description: p.excerpt, datePublished: p.date, dateModified: p.date,
+  image: `${site.domain}${fig.src}`, inLanguage: 'en',
+  author: { '@type':'Organization', name: site.name, url: site.domain },
+  publisher: { '@type':'Organization', name: site.name, url: site.domain },
+  mainEntityOfPage: { '@type':'WebPage', '@id': url } };
+const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FAQPage',
+  mainEntity: p.faqs.map(f => ({ '@type':'Question', name:f.q,
+    acceptedAnswer:{ '@type':'Answer', text:f.a } })) } : null;
+---
+<Base title={p.title + ' | Buggy Rents Dubai'} description={p.excerpt}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />
+  {faqSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />}
+
+  <!-- 1 hero -->
+  <section class="ar__hero">
+    <img class="ar__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="ar__hero-scrim" aria-hidden="true"></div>
+    <div class="bl__shell ar__hero-inner">
+      <nav class="ar__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span>
+        <a href="/blogs/">Guides</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{cat?.label}</span>
+      </nav>
+      <div class="ar__hero-grid">
+        <div>
+          <p class="bl__kicker">{cat?.label}</p>
+          <h1>{p.title}</h1>
+          <p class="ar__deck">{p.excerpt}</p>
+          <div class="ar__meta">
+            <time datetime={p.date}>{fmt(p.date)}</time>
+            <span>{readTime} min read</span>
+            <span>By the Buggy Rents team</span>
+          </div>
+        </div>
+        <figure class="ar__hero-figure">
+          <img src={fig.src} alt={fig.alt} width="1200" height="900" decoding="async" />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 article -->
+  <div class="bl__shell ar__wrap">
+    <aside class="ar__toc" aria-label="On this page">
+      <div class="ar__panel">
+        <p>On this page</p>
+        <ol>
+          {p.sections.map(s => <li><a href={`#${s.id}`}>{s.h}</a></li>)}
+          {p.faqs.length > 0 && <li><a href="#faq">Questions</a></li>}
+        </ol>
+      </div>
+    </aside>
+
+    <article class="ar__body">
+      <div class="ar__takeaways">
+        <p>The short version</p>
+        <ul>{p.takeaways.map(t => <li>{t}</li>)}</ul>
+      </div>
+
+      {p.sections.map(s => (
+        <>
+          <h2 id={s.id}>{s.h}</h2>
+          <Fragment set:html={s.html} />
+        </>
+      ))}
+
+      {p.table && (
+        <>
+          <h2 id="compare">{p.table.h}</h2>
+          <div class="ar__table-wrap">
+            <table class="ar__table">
+              <thead><tr>{p.table.head.map(c => <th>{c}</th>)}</tr></thead>
+              <tbody>
+                {p.table.rows.map(r => (
+                  <tr><th scope="row">{r[0]}</th>{r.slice(1).map(c => <td>{c}</td>)}</tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+
+      {p.faqs.length > 0 && (
+        <>
+          <h2 id="faq">Questions we get about this</h2>
+          <div class="ar__faq">
+            {p.faqs.map((f, i) => (
+              <details open={i === 0}>
+                <summary><span>Q{i + 1}</span><h3>{f.q}</h3><b aria-hidden="true">+</b></summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </>
+      )}
+    </article>
+
+    <aside class="ar__help" aria-label="Booking help">
+      <div class="ar__panel">
+        <p>Book it</p>
+        <strong>{p.helpTitle}</strong>
+        <span>{p.helpText}</span>
+        <a class="btn btn--primary" href={waLink(p.helpMessage)}>Ask on WhatsApp</a>
+        {/* The help panel is navy, so the secondary button needs the on-dark
+            variant. btn--ghost is navy text and vanished into the panel. */}
+        <a class="btn btn--onDark" href={p.helpHref}>{p.helpLinkLabel}</a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 3 author -->
+  <section class="ar__author">
+    <div class="bl__shell ar__author-inner">
+      <div class="ar__avatar" aria-hidden="true">BR</div>
+      <div class="ar__author-text">
+        <strong>The Buggy Rents team</strong>
+        <p>
+          We run the base at Al Awir on the Dubai to Hatta road, with {site.fleetSize} vehicles
+          and {site.guides} guides. Everything in this guide is what we charge and what we see
+          on the sand, not research from somewhere else.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 final CTA -->
+  <section class="ar__final">
+    <img class="ar__final-media" src={fin.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
+    <div class="ar__final-scrim" aria-hidden="true"></div>
+    <div class="bl__shell ar__final-inner">
+      <p class="bl__kicker">Ready when you are</p>
+      <h2>{p.finalH2}</h2>
+      <p>{p.finalLede}</p>
+      <div class="ar__final-actions">
+        <a class="btn btn--primary btn--lg" href={waLink(p.helpMessage)}>Message on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href="/blogs/">More guides</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,126 @@
+---
+/* Locations hub. A simple index over the 10 location pages, grouped by emirate,
+   which is the distinction that actually matters: Dubai pickups are free, and
+   everything outside Dubai is quoted. */
+import '@/styles/pillar.css';
+import Base from '@/layouts/Base.astro';
+import { hero } from '@/data/images';
+import { site, waLink } from '@/data/site';
+import { locations } from '@/data/locations';
+import { transfers } from '@/data/extras';
+import { buggies, fromPrice } from '@/data/vehicles';
+
+const buggyFrom = Math.min(...buggies.map(fromPrice));
+
+const title = 'Dune Buggy Pickup Locations in Dubai and the UAE | Buggy Rents';
+const description = `We collect from ${locations.length} areas across Dubai and the northern emirates. Hotel pickup anywhere inside Dubai is free; outer emirates are quoted before you book.`;
+
+const h = hero('dune-buggy-dubai-hero-red-dunes');
+
+const inDubai = locations.filter(l => l.emirate === 'Dubai');
+const outside = locations.filter(l => l.emirate !== 'Dubai');
+
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
+  { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+  { '@type':'ListItem', position:2, name:'Locations', item: `${site.domain}/locations/` }]};
+const listSchema = { '@context':'https://schema.org', '@type':'ItemList',
+  itemListElement: locations.map((l, i) => ({ '@type':'ListItem', position:i+1, name:l.name,
+    url: `${site.domain}/locations/${l.slug}/` })) };
+
+const groups = [
+  { key: 'dubai', h: 'Inside Dubai, pickup is free', lede: `${transfers.summary} Give us the hotel, tower or villa and we handle the rest.`, list: inDubai },
+  { key: 'outside', h: 'Outside Dubai, transfers are quoted', lede: 'We still collect you. The transfer is priced before you book so there is no surprise on the day.', list: outside }
+];
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(listSchema)} />
+
+  <section class="pl__hero">
+    <img class="pl__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="pl__hero-scrim" aria-hidden="true"></div>
+    <div class="pl__shell pl__hero-inner">
+      <nav class="pl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Locations</span>
+      </nav>
+      <div class="pl__hero-copy">
+        <p class="pl__eyebrow">Pickup locations</p>
+        <h1>Where we <em>collect you from</em></h1>
+        <p class="pl__hero-subhead">Free hotel pickup anywhere inside Dubai. Outer emirates quoted before you book.</p>
+        <p class="pl__hero-lede">
+          Every ride starts at our Al Awir base on the Dubai to Hatta road, next to the Lahbab red dunes.
+          These {locations.length} pages cover the areas we collect from most often, with drive times and what to expect.
+        </p>
+        <div class="pl__hero-actions">
+          <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! Could you confirm pickup from my area?')}>Ask about your area</a>
+          <a class="btn btn--onDark btn--lg" href="/dune-buggy-dubai/">See the buggies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {groups.map((g, gi) => (
+    <section class={`pl__section ${gi === 0 ? 'pl__section--light' : 'pl__section--sand'}`}>
+      <div class="pl__shell">
+        <header class="pl__section-head">
+          <p class="pl__kicker">{gi === 0 ? 'Dubai' : 'Northern emirates'}</p>
+          <h2>{g.h}</h2>
+          <p class="pl__section-lede">{g.lede}</p>
+        </header>
+        <div class="lh__grid">
+          {g.list.map(l => (
+            <a class="lh__card" href={`/locations/${l.slug}/`}>
+              <span class="lh__tag">{l.emirate}</span>
+              <strong>{l.short}</strong>
+              <p>{l.intro.split('.')[0]}.</p>
+              <dl class="lh__meta">
+                <div><dt>Drive time</dt><dd>{l.drive}</dd></div>
+                <div><dt>Transfer</dt><dd>{l.emirate === 'Dubai' ? 'Free' : 'Quoted'}</dd></div>
+              </dl>
+              <em>View page &rarr;</em>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="pl__section pl__section--dark">
+    <div class="pl__shell" style="text-align:center">
+      <p class="pl__kicker">Not on the list?</p>
+      <h2>We probably still collect from you</h2>
+      <p class="pl__section-lede" style="margin-inline:auto">
+        These are the areas we are asked about most, not the only ones we serve.
+        Send us your hotel or district and we will confirm the pickup and the drive time.
+        Buggies start at AED {buggyFrom} per vehicle.
+      </p>
+      <div class="pl__hero-actions" style="justify-content:center">
+        <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! Do you pick up from my area? Here is where I am staying:')}>Ask on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lh__grid { display: grid; gap: clamp(1rem,2vw,1.4rem); margin-top: clamp(1.6rem,3vw,2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); }
+  .lh__card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--c-line);
+    border-radius: 16px; padding: clamp(1.3rem,2vw,1.7rem); text-decoration: none;
+    box-shadow: 0 10px 30px rgba(50,61,78,.05); transition: transform .16s ease, box-shadow .16s ease; }
+  .lh__card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(50,61,78,.10); }
+  .lh__tag { font-family: var(--font-display); font-weight: 700; font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange); }
+  .lh__card strong { margin-top: .45rem; color: var(--c-navy); font-family: var(--font-display);
+    font-size: clamp(1.1rem,1rem + .4vw,1.3rem); }
+  .lh__card p { margin: .55rem 0 0; font-size: var(--fs-sm); color: var(--c-ink-soft); line-height: 1.6; }
+  .lh__meta { display: grid; gap: .4rem; margin: 1rem 0 0; padding-top: .9rem;
+    border-top: 1px solid var(--c-line); }
+  .lh__meta > div { display: flex; justify-content: space-between; gap: 1rem; }
+  .lh__meta dt { font-size: var(--fs-xs); color: var(--c-ink-soft); }
+  .lh__meta dd { margin: 0; font-size: var(--fs-xs); font-weight: 700; color: var(--c-navy); }
+  .lh__card em { margin-top: .9rem; font-style: normal; font-family: var(--font-display);
+    font-weight: 700; font-size: var(--fs-sm); color: var(--c-orange-dark); }
+</style>

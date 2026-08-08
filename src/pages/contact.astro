@@ -1,0 +1,283 @@
+---
+/* dbr-contact — structure per templates/BuggyRents-contact-page.html.
+   Reference has 6 sections; the social section is omitted because the business
+   has no accounts, leaving 5: hero (copy + form) · channels and location --main
+   · message templates · FAQ --faq · final CTA.
+
+   The form submits to BOTH, as decided 8 Aug 2026: it POSTs to /api/contact
+   (Worker emails Buggyrents@gmail.com) and opens WhatsApp with the same body.
+   WhatsApp opens whether or not the email call succeeds. */
+import '@/styles/contact.css';
+import Base from '@/layouts/Base.astro';
+import { img, hero } from '@/data/images';
+import { site, waLink } from '@/data/site';
+import { transfers, payment } from '@/data/extras';
+
+const title = 'Contact Buggy Rents | Dune Buggy and Quad Bike Booking in Dubai';
+const description = `Message the team that runs the base. WhatsApp ${site.phone}, call any time, or send the form. Free hotel pickup inside Dubai, no deposit, and free cancellation up to 24 hours before.`;
+
+const h = hero('desert-adventure-dubai-hero-canam-maverick');
+const fin = img('couple-dune-buggy-ride-dubai-desert-tour', 'buggy');
+
+const channels = [
+  { tag: 'WhatsApp', value: site.phone, note: 'The fastest route, and the one most guests use. Send your date, group size and ages and we will come back with options.', href: `https://wa.me/${site.whatsapp}` },
+  { tag: 'Phone', value: 'Call the base', note: 'Open 24/7. Useful when you are already on the road or the pickup point is hard to describe.', href: `tel:${site.phoneRaw}` },
+  { tag: 'Email', value: site.email, note: 'Better for corporate bookings, large groups and anything that needs a written quote.', href: `mailto:${site.email}` }
+];
+
+const templates = [
+  { h: 'Standard booking', body: `Hi Buggy Rents,\n\nDate:\nGuests and ages:\nActivity: buggy / quad / dirt bike\nDuration:\nPickup area:` },
+  { h: 'Family with children', body: `Hi Buggy Rents,\n\nDate:\nAdults:\nChildren and ages:\nWe would like the kids to ride too.\nPickup area:` },
+  { h: 'Group or corporate', body: `Hi Buggy Rents,\n\nDate:\nTotal guests:\nMix of buggies and quads:\nPickup area:\nAnything else we should plan for:` }
+];
+
+const faqs = [
+  { q: 'How fast do you reply?', a: 'WhatsApp is usually within minutes during the day. We are open 24/7, so late night messages get picked up too, though a reply may take a little longer.' },
+  { q: 'Do I have to pay to reserve a slot?', a: `No deposit on standard bookings. ${payment.summary} Nothing is due when you message us.` },
+  { q: 'Can you collect from my hotel?', a: `${transfers.summary} Outside Dubai we quote the transfer before you commit, so there is no surprise on the day.` },
+  { q: 'What should I include in my first message?', a: 'Date, how many people are riding, and their ages. Ages decide which machines are even an option, so it saves a round of questions.' },
+  { q: 'Can I change or cancel after booking?', a: 'Free cancellation up to 24 hours before your slot. Inside 24 hours, message us anyway. Our first move is to find you another date rather than charge you.' },
+  { q: 'Do you handle large or corporate groups?', a: 'Yes. Group bookings are quoted separately so vehicles and guides can be planned properly. Send the headcount and date and we will come back with options.' }
+];
+
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
+  { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+  { '@type':'ListItem', position:2, name:'Contact', item: `${site.domain}/contact/` }]};
+const faqSchema = { '@context':'https://schema.org', '@type':'FAQPage',
+  mainEntity: faqs.map(f => ({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+const bizSchema = { '@context':'https://schema.org', '@type':'LocalBusiness',
+  name: site.name, telephone: site.phoneRaw, email: site.email,
+  address: { '@type':'PostalAddress', streetAddress: site.address, addressLocality: 'Dubai', addressCountry: 'AE' },
+  geo: { '@type':'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  openingHours: 'Mo-Su 00:00-23:59', url: `${site.domain}/contact/` };
+
+const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl=en&z=13&output=embed`;
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(bizSchema)} />
+
+  <!-- 1 hero: copy left, form right -->
+  <section class="ct__hero" aria-labelledby="ct-hero-h">
+    <img class="ct__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="ct__hero-scrim" aria-hidden="true"></div>
+    <div class="ct__shell ct__hero-inner">
+      <nav class="ct__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span>
+      </nav>
+      <div class="ct__hero-grid">
+        <div class="ct__hero-copy">
+          <p class="ct__kicker">Contact</p>
+          <h1 id="ct-hero-h">Talk to the people who <em>actually run the base</em></h1>
+          <p class="ct__hero-lede">Not a call centre and not a booking agency. WhatsApp reaches the team at Al Awir who will be handing you a helmet.</p>
+          <div class="ct__status">
+            <p class="ct__status-item">Open 24/7, and hotel pickup anywhere inside Dubai is free</p>
+            <p class="ct__status-item">No deposit. You pay at the base before you ride</p>
+            <p class="ct__status-item">Free cancellation up to 24 hours before your slot</p>
+          </div>
+          <div class="ct__actions">
+            <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I would like to book a desert ride.')}>Message on WhatsApp</a>
+            <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
+          </div>
+        </div>
+
+        <aside class="ct__form-card" aria-labelledby="ct-form-h">
+          <div class="ct__form-head">
+            <p class="ct__kicker">Message the team</p>
+            <h2 id="ct-form-h">Send a booking request</h2>
+            <p>Fill it in once. We email the booking desk and open WhatsApp with the same message ready to send.</p>
+          </div>
+
+          <form class="ct__form" id="ct-form" novalidate>
+            {/* Honeypot. Hidden from guests, so anything in it is a bot. */}
+            <input type="text" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true"
+                   style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden" />
+            <div class="ct__form-grid">
+              <label class="ct__field" for="ct-name">
+                <span>Name*</span>
+                <input id="ct-name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
+              </label>
+              <label class="ct__field" for="ct-phone">
+                <span>Phone*</span>
+                <input id="ct-phone" name="phone" type="tel" autocomplete="tel" placeholder="With country code" required />
+              </label>
+              <label class="ct__field ct__field--full" for="ct-email">
+                <span>Email</span>
+                <input id="ct-email" name="email" type="email" autocomplete="email" placeholder="Optional, for written quotes" />
+              </label>
+              <label class="ct__field ct__field--full" for="ct-message">
+                <span>Message*</span>
+                <textarea id="ct-message" name="message" rows="5" required
+                  placeholder="Date, guests and ages, activity and pickup area."></textarea>
+              </label>
+            </div>
+            <p class="ct__form-status" id="ct-status" role="status" aria-live="polite">
+              Sends to the booking desk and opens WhatsApp with the same message.
+            </p>
+            <div class="ct__form-actions">
+              <button class="btn btn--primary btn--lg" type="submit">Send request</button>
+              <a class="btn btn--ghost btn--lg" id="ct-email-link" href={`mailto:${site.email}`}>Email instead</a>
+            </div>
+          </form>
+
+          <ul class="ct__form-proof">
+            <li>No deposit, and nothing to pay until you reach the base</li>
+            <li>We reply on WhatsApp, usually within minutes during the day</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 channels and location -->
+  <section class="ct__section ct__section--main" aria-labelledby="ct-main-h">
+    <div class="ct__shell ct__main-grid">
+      <div class="ct__panel">
+        <p class="ct__kicker">01 / Fastest route</p>
+        <h2 id="ct-main-h">Three ways to reach us</h2>
+        <p>All three land with the same team. WhatsApp is quickest, email is best for anything that needs writing down.</p>
+        <div class="ct__channels">
+          {channels.map(c => (
+            <a class="ct__channel" href={c.href}>
+              <small>{c.tag}</small><strong>{c.value}</strong><em>{c.note}</em>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="ct__panel">
+        <p class="ct__kicker">02 / Where we are</p>
+        <h2>The base at Al Awir</h2>
+        <dl class="ct__office">
+          <dt>Address</dt><dd>{site.address}</dd>
+          <dt>Hours</dt><dd>Open 24 hours, 7 days a week</dd>
+          <dt>Pickup</dt><dd>{transfers.summary} Outer emirates are quoted before you commit.</dd>
+        </dl>
+        <div class="ct__map-frame">
+          <iframe src={mapSrc} title="Buggy Rents base location on the Dubai to Hatta road"
+                  loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <p class="ct__coords">{site.geo.lat}, {site.geo.lng}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 message templates -->
+  <section class="ct__section ct__section--templates" aria-labelledby="ct-tpl-h">
+    <div class="ct__shell">
+      <header class="ct__head">
+        <p class="ct__kicker">03 / Save a round trip</p>
+        <h2 id="ct-tpl-h">Copy a template, fill the gaps, send</h2>
+        <p>Every question we ask is in here already. Filling one of these in gets you a price in the first reply rather than the third.</p>
+      </header>
+      <div class="ct__templates">
+        {templates.map(t => (
+          <article class="ct__template">
+            <h3>{t.h}</h3>
+            <pre>{t.body}</pre>
+            <a class="btn btn--primary" href={waLink(t.body)}>Open in WhatsApp</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 FAQ -->
+  <section class="ct__section ct__section--faq" id="faq" aria-labelledby="ct-faq-h">
+    <div class="ct__shell ct__faq-wrap">
+      <aside class="ct__head">
+        <p class="ct__kicker">04 / Before you message</p>
+        <h2 id="ct-faq-h">Quick answers</h2>
+        <p>The things people check before sending a first message.</p>
+      </aside>
+      <div class="ct__faq-list">
+        {faqs.map((f, i) => (
+          <details open={i === 0}>
+            <summary><span>Q{i + 1}</span><h3>{f.q}</h3><i aria-hidden="true"></i></summary>
+            <div>{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 final CTA -->
+  <section class="ct__cta" aria-labelledby="ct-cta-h">
+    <img class="ct__cta-media" src={fin.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
+    <div class="ct__cta-scrim" aria-hidden="true"></div>
+    <div class="ct__shell ct__cta-inner">
+      <p class="ct__kicker">Ready when you are</p>
+      <h2 id="ct-cta-h">Send the date and we will do the rest</h2>
+      <p>Ages, group size and a date is enough for us to come back with the right machines and a price.</p>
+      <div class="ct__actions">
+        <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I would like to book a desert ride.')}>Message on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline define:vars={{ wa: site.whatsapp, mail: site.email }}>
+  /* Submit does two things: POST to the Worker so the booking desk gets an email,
+     and open WhatsApp with the same body. WhatsApp opens either way. If the email
+     call fails the guest never finds out, because losing the booking would be the
+     worse outcome and the message still reaches the team. */
+  (function () {
+    var form = document.getElementById('ct-form');
+    if (!form) return;
+    var status = document.getElementById('ct-status');
+    var emailLink = document.getElementById('ct-email-link');
+
+    function body(d) {
+      return 'Hi BuggyRents,\n\n' +
+        'Name: ' + d.name + '\n' +
+        'Phone: ' + d.phone + '\n' +
+        'Email: ' + d.email + '\n\n' +
+        'Message:\n' + d.message;
+    }
+
+    function say(text, state) {
+      status.textContent = text;
+      if (state) status.setAttribute('data-state', state);
+      else status.removeAttribute('data-state');
+    }
+
+    /* Keep the mailto fallback in sync as they type, so "Email instead" always
+       carries whatever is already in the form. */
+    form.addEventListener('input', function () {
+      var d = Object.fromEntries(new FormData(form));
+      emailLink.href = 'mailto:' + mail +
+        '?subject=' + encodeURIComponent('Booking request from ' + (d.name || 'the website')) +
+        '&body=' + encodeURIComponent(body(d));
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = Object.fromEntries(new FormData(form));
+
+      if (!d.name || !d.phone || !d.message) {
+        say('Add your name, phone and a message so we can help.', 'error');
+        form.reportValidity();
+        return;
+      }
+
+      var text = body(d);
+
+      /* Popup blockers only allow window.open inside the click that triggered it,
+         so open WhatsApp now and let the email request run in the background. */
+      window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+      say('Opening WhatsApp with your message. We have emailed the booking desk too.');
+
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(d)
+      }).catch(function () { /* WhatsApp already has it. Nothing to tell the guest. */ });
+
+      form.reset();
+    });
+  })();
+</script>

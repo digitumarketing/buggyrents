@@ -1,0 +1,294 @@
+---
+/* Desert safari pillar. Uses the dbr-pillar section order and the pl__ styles,
+   but is written as a page rather than driven by Pillar.astro, because safari
+   pricing is mixed: five shared packages are PER PERSON and the private ones are
+   PER VEHICLE. Pillar.astro assumes per vehicle throughout and would print the
+   wrong basis on five cards. Every card here carries its own label.
+
+   Kept deliberately small. Client direction: buggy and quad are the primary
+   services, safari is secondary and expands in Phase 2. This exists to serve the
+   service properly and close a sitewide broken link, not to become a cluster. */
+import '@/styles/pillar.css';
+import Base from '@/layouts/Base.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import ReviewsCarousel from '@/components/ReviewsCarousel.astro';
+import { hero, img } from '@/data/images';
+import { site, waLink } from '@/data/site';
+import { sharedSafaris, privateSafaris, safariFromPrice } from '@/data/safari';
+import { transfers, payment } from '@/data/extras';
+import { buggies, quads, fromPrice } from '@/data/vehicles';
+
+const buggyFrom = Math.min(...buggies.map(fromPrice));
+const quadFrom = Math.min(...quads.map(fromPrice));
+
+const title = `Desert Safari Dubai | ${sharedSafaris.length + privateSafaris.length} Packages from AED ${safariFromPrice} | Buggy Rents`;
+const description = `Evening, morning, overnight and private desert safari packages in Dubai from AED ${safariFromPrice}. Dune bashing, camel ride, sandboarding, halal BBQ dinner and live shows, with free hotel pickup inside Dubai.`;
+
+const h = hero('desert-safari-dubai-hero-dune-bashing');
+const fin = img('private-desert-safari-4x4-dubai-red-dunes', 'safari');
+
+const included = [
+  { h: 'Hotel pickup and drop-off', p: `${transfers.summary} Outer emirates are quoted before you book.` },
+  { h: 'Dune bashing in a 4x4', p: 'A trained driver takes the red dunes. You are a passenger, which is the whole point of a safari.' },
+  { h: 'Camel ride and sandboarding', p: 'Both included on the shared packages. No extra charge and no upsell at the camp.' },
+  { h: 'Halal BBQ dinner', p: 'Vegetarian options are always available. Tell us about allergies when you book.' },
+  { h: 'Live entertainment', p: 'Belly dance, tanoura and a fire show at the Bedouin camp after dinner.' },
+  { h: 'No deposit', p: `${payment.summary} Nothing is due when you book.` }
+];
+
+const steps = [
+  { label: 'Pickup', h: 'We collect you', p: 'Free anywhere inside Dubai. Afternoon for the evening safari, before dawn for the morning one.' },
+  { label: 'Dunes', h: 'Dune bashing', p: 'Forty minutes or so across the red dunes at Lahbab, with a stop at the top for photos.' },
+  { label: 'Camp', h: 'Bedouin camp', p: 'Camel ride, sandboarding, henna and Arabic coffee before the light goes.' },
+  { label: 'Dinner', h: 'BBQ and shows', p: 'Halal buffet, then belly dance, tanoura and fire show under the lights.' },
+  { label: 'Return', h: 'Drop-off', p: 'Back to your hotel. Evening safaris usually finish between 9 and 10pm.' }
+];
+
+const faqs = [
+  { q: 'How much is a desert safari in Dubai?', a: `From AED ${safariFromPrice} per person for the shared evening safari. Private safaris are priced per vehicle instead, starting higher but working out cheaper for a family or a group who want the 4x4 to themselves.` },
+  { q: 'Is the price per person or per vehicle?', a: 'It depends on the package, and every card on this page says which. Shared safaris are per person because you share a Land Cruiser with other guests. Private safaris are per vehicle.' },
+  { q: 'How long does a desert safari take?', a: 'The evening safari runs 7 to 8 hours door to door, including pickup and drop-off. Morning safaris are shorter, usually 4 to 5 hours.' },
+  { q: 'Is dune bashing safe for children?', a: 'Yes, and children usually enjoy it most. Tell us their ages when you book. If anyone in the group gets motion sick, ask for a gentler drive and the driver will adjust.' },
+  { q: 'Can I do a safari without dune bashing?', a: 'Yes. Tell us when you book and the driver takes a calmer route to the camp. Guests who are pregnant, have back problems or simply do not enjoy it take this option regularly.' },
+  { q: 'Is the food halal?', a: 'Yes, the BBQ dinner is halal. Vegetarian options are always available. Tell us about allergies or dietary needs when you book so the camp knows in advance.' },
+  { q: 'Do you pick up from the hotel?', a: `${transfers.summary} Outside Dubai we quote the transfer before you commit.` },
+  { q: 'Can I add a buggy or quad to a safari?', a: `Yes, and it is the most popular combination we run. A quad and safari combo starts at AED 200. A buggy with BBQ dinner starts at AED 450. Ask on WhatsApp and we will price your group.` }
+];
+
+const lfBlocks = [
+  { h: 'Evening, morning or overnight', html: `<p>The evening safari is what most people mean by a desert safari in Dubai. Afternoon pickup, dune bashing while the light is good, then a Bedouin camp for dinner and shows. It runs 7 to 8 hours door to door and finishes around 9 or 10pm.</p><p>The morning safari is shorter and quieter. Pickup before dawn, dune bashing as the sun comes up, and you are back at the hotel by late morning with the rest of the day free. In summer it is also the only comfortable option.</p><p>Overnight safaris add a night in the camp under the stars. It is a genuinely different experience and worth it if you have the time, but it is not the one to book if you have an early flight.</p>` },
+  { h: 'Shared or private, and why the price basis differs', html: `<p>A shared safari puts you in a Land Cruiser with other guests, usually six or seven people. That is why it is priced per person and why it is cheap. You have no control over who else is in the vehicle, which is fine for most people and occasionally is not.</p><p>A private safari gives you the vehicle. It is priced per vehicle rather than per head, so the maths flips: a family of six in a private Land Cruiser often pays less in total than six shared seats, and gets a driver who works to their pace. If your group is four or more, always ask us to price both.</p>` },
+  { h: 'What to wear and bring', html: `<p>Comfortable clothes and closed shoes. Sand gets into everything, and the camp floor is sand. In winter evenings genuinely get cold once the sun drops, so bring a layer. In summer the opposite problem applies and the morning safari is the better booking.</p><p>Bring a camera and something to keep it in. Dune bashing throws sand around and phones do not enjoy it. If you wear contact lenses, sunglasses are worth having for the photo stops.</p>` },
+  { h: 'How a safari compares with driving yourself', html: `<p>A safari is the one desert activity where somebody else does the work. If you want to drive, a dune buggy from AED ${buggyFrom} or a quad from AED ${quadFrom} puts you in control instead, and both are priced per vehicle.</p><p>Plenty of groups do both, and that is usually the right answer when a group is mixed. The people who want to drive take a buggy or a quad, everyone else takes the safari, and the whole group meets at the camp for dinner. Tell us the split and we will plan it.</p>` }
+];
+
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
+  { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+  { '@type':'ListItem', position:2, name:'Desert Safari Dubai', item: `${site.domain}/desert-safari-dubai-deals/` }]};
+const faqSchema = { '@context':'https://schema.org', '@type':'FAQPage',
+  mainEntity: faqs.map(f => ({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+const svcSchema = { '@context':'https://schema.org', '@type':'Service',
+  name: 'Desert Safari Dubai', serviceType: 'Desert safari tours',
+  provider: { '@type':'LocalBusiness', name: site.name, telephone: site.phoneRaw },
+  areaServed: { '@type':'Place', name: 'Dubai, United Arab Emirates' },
+  offers: [...sharedSafaris, ...privateSafaris].map(s => ({
+    '@type':'Offer', name: `${s.name}, ${s.priceLabel}`, price: s.price, priceCurrency: 'AED',
+    availability: 'https://schema.org/InStock', url: `${site.domain}/desert-safari-dubai-deals/` })) };
+
+const groups = [
+  { key: 'shared', kicker: 'Shared safaris', h: 'Shared 4x4 packages, priced per person', lede: 'You share a Land Cruiser with other guests. The cheapest way into the desert, and the one most people book.', list: sharedSafaris },
+  { key: 'private', kicker: 'Private safaris', h: 'Private packages, priced per vehicle', lede: 'The vehicle is yours. For four or more people this often costs less in total than the same number of shared seats.', list: privateSafaris }
+];
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(svcSchema)} />
+
+  <!-- 1 hero -->
+  <section class="pl__hero">
+    <img class="pl__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="pl__hero-scrim" aria-hidden="true"></div>
+    <div class="pl__shell pl__hero-inner">
+      <nav class="pl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Desert Safari Dubai</span>
+      </nav>
+      <div class="pl__hero-copy">
+        <p class="pl__eyebrow">Desert safari Dubai</p>
+        <h1>Desert safari Dubai, <em>from AED {safariFromPrice}</em></h1>
+        <p class="pl__hero-subhead">Someone else drives. Dune bashing, a Bedouin camp, halal BBQ dinner and live shows.</p>
+        <p class="pl__hero-lede">
+          {sharedSafaris.length + privateSafaris.length} packages across evening, morning, overnight and private safaris.
+          Free hotel pickup inside Dubai, no deposit, and you pay at the base or on the day.
+        </p>
+        <div class="pl__hero-actions">
+          <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I would like to book a desert safari. Could you send options?')}>Ask for safari options</a>
+          <a class="btn btn--onDark btn--lg" href="#packages">See all packages</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 reviews strip -->
+  <ReviewsCarousel
+    kicker="What guests say"
+    heading="Rated 4.9 by guests who came with us."
+    lede="Real Google reviews, alongside our TripAdvisor Travellers' Choice award." />
+
+  <!-- 3 packages -->
+  <section class="pl__section pl__section--dark" id="packages" aria-labelledby="sf-pkg-h">
+    <div class="pl__shell">
+      <header class="pl__section-head">
+        <p class="pl__kicker">The packages</p>
+        <h2 id="sf-pkg-h">Every safari we run, with the price basis stated</h2>
+        <p class="pl__section-lede">
+          Shared safaris are per person. Private safaris are per vehicle. Every card below says which,
+          because that difference decides which one is actually cheaper for your group.
+        </p>
+      </header>
+
+      {groups.map(g => (
+        <div class="sf__group">
+          <h3 class="sf__group-title">{g.h}</h3>
+          <p class="sf__group-lede">{g.lede}</p>
+          <div class="sf__grid">
+            {g.list.map(s => (
+              <article class="sf__card">
+                <p class="sf__card-tag">{s.vehicle}</p>
+                <h4>{s.name}</h4>
+                <p class="sf__card-desc">{s.blurb}</p>
+                <dl class="sf__spec">
+                  <div><dt>Duration</dt><dd>{s.duration}</dd></div>
+                  <div><dt>Capacity</dt><dd>{s.capacity}</dd></div>
+                </dl>
+                <div class="sf__price">
+                  <span class="sf__price-amount">AED {s.price}</span>
+                  <span class="sf__price-unit">{s.priceLabel}</span>
+                </div>
+                <a class="btn btn--primary" href={waLink(`Hi Buggy Rents! I would like to book the ${s.name} (AED ${s.price}, ${s.priceLabel}). Could you confirm availability?`)}>Check availability</a>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 4 what is included -->
+  <section class="pl__section pl__section--light" aria-labelledby="sf-inc-h">
+    <div class="pl__shell">
+      <header class="pl__section-head">
+        <p class="pl__kicker">What is included</p>
+        <h2 id="sf-inc-h">What comes with a shared safari</h2>
+        <p class="pl__section-lede">No paid extras at the camp. If something costs more, it is priced on this page.</p>
+      </header>
+      <div class="pl__usp-grid">
+        {included.map(x => (
+          <article class="pl__info-card"><h3>{x.h}</h3><p>{x.p}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 process -->
+  <section class="pl__section pl__section--sand" aria-labelledby="sf-flow-h">
+    <div class="pl__shell">
+      <header class="pl__section-head">
+        <p class="pl__kicker">How the day runs</p>
+        <h2 id="sf-flow-h">Pickup to drop-off</h2>
+        <p class="pl__section-lede">The evening safari, which is the one most people book.</p>
+      </header>
+      <ol class="pl__timeline">
+        {steps.map(s => (
+          <li><span>{s.label}</span><div><h3>{s.h}</h3><p>{s.p}</p></div></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 long-form reader, before the FAQ -->
+  <LongFormReader
+    eyebrow="Choosing a safari"
+    heading="Which desert safari actually suits you"
+    intro="Four things decide it: the time of day, whether you share the vehicle, the size of your group, and whether anyone wants to drive instead."
+    blocks={lfBlocks} />
+
+  <!-- 7 FAQ -->
+  <section class="pl__section pl__section--faq" id="faq" aria-labelledby="sf-faq-h">
+    <div class="pl__shell pl__faq-layout">
+      <header class="pl__section-head">
+        <p class="pl__kicker">Questions</p>
+        <h2 id="sf-faq-h">Desert safari questions</h2>
+        <p class="pl__section-lede">The ones people ask before booking.</p>
+      </header>
+      <div class="pl__faq-list">
+        {faqs.map((f, i) => (
+          <details open={i === 0}>
+            <summary><span>Q{i + 1}</span><h3>{f.q}</h3><i aria-hidden="true"></i></summary>
+            <div>{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 cross-sell -->
+  <section class="pl__section pl__section--light" aria-labelledby="sf-rel-h">
+    <div class="pl__shell">
+      <header class="pl__section-head">
+        <p class="pl__kicker">Rather drive yourself?</p>
+        <h2 id="sf-rel-h">The desert with you at the wheel</h2>
+        <p class="pl__section-lede">Mixed groups often book both, then meet at the camp for dinner.</p>
+      </header>
+      <div class="pl__related-grid">
+        <a class="pl__related-card" href="/dune-buggy-dubai/">
+          <div class="pl__related-body">
+            <span>Buggy from AED {buggyFrom}</span>
+            <strong>Dune Buggy Dubai</strong>
+            <p>Eleven buggies, two and four seats, priced per vehicle.</p>
+          </div>
+        </a>
+        <a class="pl__related-card" href="/quad-bike-dubai/">
+          <div class="pl__related-body">
+            <span>Quad from AED {quadFrom}</span>
+            <strong>Quad Biking Dubai</strong>
+            <p>Six quads, kids from age six, more physical than a buggy.</p>
+          </div>
+        </a>
+        <a class="pl__related-card" href="/contact/">
+          <div class="pl__related-body">
+            <span>Mixed group</span>
+            <strong>Plan it with us</strong>
+            <p>Some drive, some ride along. Tell us the split and we will price it.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pl__section pl__section--dark" aria-labelledby="sf-cta-h">
+    <div class="pl__shell" style="text-align:center">
+      <p class="pl__kicker">Ready to book</p>
+      <h2 id="sf-cta-h">Tell us the date and how many</h2>
+      <p class="pl__section-lede" style="margin-inline:auto">
+        We will come back with shared and private prices so you can see which one works out cheaper.
+      </p>
+      <div class="pl__hero-actions" style="justify-content:center">
+        <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I would like desert safari prices. Could you send shared and private options?')}>Message on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sf__group { margin-top: clamp(2rem,4vw,3rem); }
+  .sf__group:first-of-type { margin-top: clamp(1.6rem,3vw,2.4rem); }
+  .sf__group-title { color: #fff; font-size: clamp(1.2rem,1rem + .7vw,1.55rem); }
+  .sf__group-lede { margin-top: .5rem; font-size: var(--fs-sm); color: rgba(255,255,255,.7);
+    max-width: 62ch; line-height: 1.65; }
+  .sf__grid { display: grid; gap: clamp(1rem,2vw,1.4rem); margin-top: clamp(1.2rem,2.4vw,1.8rem);
+    grid-template-columns: repeat(auto-fit, minmax(275px,1fr)); }
+  .sf__card { display: flex; flex-direction: column; background: #fff; border-radius: 16px;
+    padding: clamp(1.3rem,2vw,1.7rem); box-shadow: 0 14px 38px rgba(0,0,0,.18); }
+  .sf__card-tag { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange); }
+  .sf__card h4 { margin-top: .5rem; color: var(--c-navy);
+    font-family: var(--font-display); font-size: clamp(1.05rem,.95rem + .4vw,1.25rem); line-height: 1.25; }
+  .sf__card-desc { margin: .6rem 0 0; font-size: var(--fs-sm); color: var(--c-ink-muted); line-height: 1.6; }
+  .sf__spec { display: grid; gap: .5rem; margin: 1rem 0 0; padding: .9rem 0 0;
+    border-top: 1px solid var(--c-line); }
+  .sf__spec > div { display: flex; justify-content: space-between; gap: 1rem; }
+  .sf__spec dt { font-size: var(--fs-xs); color: var(--c-ink-soft); }
+  .sf__spec dd { margin: 0; font-size: var(--fs-xs); font-weight: 700; color: var(--c-navy); text-align: right; }
+  .sf__price { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
+    margin: 1.1rem 0 1rem; padding-top: .9rem; border-top: 1px solid var(--c-line); }
+  .sf__price-amount { font-family: var(--font-display); font-weight: 800; color: var(--c-navy);
+    font-size: clamp(1.4rem,1.1rem + 1vw,1.85rem); line-height: 1; }
+  /* The unit is the whole point of this page. Do not let it shrink into the noise. */
+  .sf__price-unit { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xs);
+    color: var(--c-orange-dark); text-transform: uppercase; letter-spacing: .06em; }
+  .sf__card .btn { margin-top: auto; }
+</style>

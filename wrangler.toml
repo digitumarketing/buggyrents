@@ -1,10 +1,25 @@
 name = "buggyrents"
 compatibility_date = "2026-08-01"
 
-# Static-assets-only Worker. The whole public site is prerendered HTML,
-# so there is no Worker script — Cloudflare serves dist/ straight from the edge.
+# The public site is prerendered HTML. This Worker exists only to handle
+# POST /api/contact; every other request falls through to the static assets.
+# See worker/index.js for the one secret it needs (RESEND_API_KEY).
+main = "worker/index.js"
+
 [assets]
 directory = "./dist"
+binding = "ASSETS"
 
-# Switch to "404-page" once the 404 template is built and dist/404.html exists.
+# Switch to "404-page" once the dbr-error template is built and dist/404.html exists.
 not_found_handling = "none"
+
+# Contact form delivery. Both are plain vars, not secrets.
+# The Resend account is owned by Buggyrents@gmail.com, so the shared sender
+# onboarding@resend.dev can deliver to it. That is the only address it can reach
+# until the domain is verified.
+# To send from our own domain: resend.com -> Domains -> add buggyrents.com, paste
+# the DKIM and SPF records into Cloudflare DNS, then change CONTACT_FROM to
+# "Buggy Rents Website <bookings@buggyrents.com>". CONTACT_INBOX stays as is.
+[vars]
+CONTACT_FROM  = "Buggy Rents Website <onboarding@resend.dev>"
+CONTACT_INBOX = "Buggyrents@gmail.com"

@@ -1,0 +1,106 @@
+---
+/* HTML sitemap. Built from the data files rather than typed by hand, so it cannot
+   drift out of date when a vehicle, location or audience page is added. */
+import '@/styles/pillar.css';
+import Base from '@/layouts/Base.astro';
+import { hero } from '@/data/images';
+import { site } from '@/data/site';
+import { buggies, quads, dirtbikes } from '@/data/vehicles';
+import { locations } from '@/data/locations';
+import { audiences } from '@/data/audiences';
+
+const title = 'Sitemap | Buggy Rents Dubai';
+const description = 'Every page on buggyrents.com in one list: dune buggies, quad bikes, dirt bikes, desert safari, pickup locations, audience guides and policies.';
+
+const h = hero('dune-buggy-dubai-hero-red-dunes');
+
+const groups = [
+  { h: 'Main pages', links: [
+    { label: 'Home', href: '/' },
+    { label: 'About us', href: '/about-us/' },
+    { label: 'Contact', href: '/contact/' },
+    { label: 'Our fleet', href: '/about-us/our-fleet/' }
+  ]},
+  { h: 'Dune buggy', links: [
+    { label: 'Dune Buggy Dubai', href: '/dune-buggy-dubai/' },
+    { label: 'Dune buggy prices', href: '/dune-buggy-dubai/price/' },
+    { label: 'Dune buggy FAQ', href: '/dune-buggy-dubai/faq/' },
+    ...buggies.map(v => ({ label: v.name, href: `/dune-buggy-dubai/${v.slug}/` }))
+  ]},
+  { h: 'Quad bike', links: [
+    { label: 'Quad Biking Dubai', href: '/quad-bike-dubai/' },
+    { label: 'Quad bike prices', href: '/quad-bike-dubai/price/' },
+    { label: 'Quad bike FAQ', href: '/quad-bike-dubai/faq/' },
+    ...quads.map(v => ({ label: v.name, href: `/quad-bike-dubai/${v.slug}/` }))
+  ]},
+  { h: 'Dirt bike', links: [
+    { label: 'KTM Dirt Bike Dubai', href: '/ktm-dirt-bike-dubai/' },
+    ...dirtbikes.map(v => ({ label: v.name, href: `/ktm-dirt-bike-dubai/${v.slug}/` })),
+    { label: 'Dirt bike for beginners', href: '/ktm-dirt-bike-dubai/dirt-bike-for-beginners/' },
+    { label: 'Dirt bike for advanced riders', href: '/ktm-dirt-bike-dubai/dirt-bike-for-advanced/' }
+  ]},
+  { h: 'Desert safari', links: [
+    { label: 'Desert Safari Dubai', href: '/desert-safari-dubai-deals/' }
+  ]},
+  { h: 'Pickup locations', links: [
+    { label: 'All locations', href: '/locations/' },
+    ...locations.map(l => ({ label: l.name, href: `/locations/${l.slug}/` }))
+  ]},
+  { h: 'Who it suits', links: audiences.map(a => ({ label: a.name, href: `/audience/${a.slug}/` })) },
+  { h: 'Policies', links: [
+    { label: 'Safety standards', href: '/about-us/safety-standards/' },
+    { label: 'Terms and conditions', href: '/about-us/terms-conditions/' },
+    { label: 'Refund policy', href: '/about-us/refund-policy/' },
+    { label: 'Privacy policy', href: '/about-us/privacy-policy/' }
+  ]}
+];
+
+const total = groups.reduce((n, g) => n + g.links.length, 0);
+
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
+  { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+  { '@type':'ListItem', position:2, name:'Sitemap', item: `${site.domain}/sitemap-html/` }]};
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+
+  <section class="pl__hero">
+    <img class="pl__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="pl__hero-scrim" aria-hidden="true"></div>
+    <div class="pl__shell pl__hero-inner">
+      <nav class="pl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Sitemap</span>
+      </nav>
+      <div class="pl__hero-copy">
+        <p class="pl__eyebrow">Sitemap</p>
+        <h1>Every page on <em>buggyrents.com</em></h1>
+        <p class="pl__hero-lede">All {total} pages, grouped by what they cover.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pl__section pl__section--light">
+    <div class="pl__shell">
+      <div class="sm__grid">
+        {groups.map(g => (
+          <nav class="sm__group" aria-label={g.h}>
+            <h2>{g.h}</h2>
+            <ul>{g.links.map(l => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+          </nav>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sm__grid { display: grid; gap: clamp(1.6rem,3vw,2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+  .sm__group h2 { color: var(--c-navy); font-size: clamp(1.05rem,.95rem + .4vw,1.25rem);
+    padding-bottom: .6rem; border-bottom: 2px solid var(--c-orange); }
+  .sm__group ul { margin: 1rem 0 0; padding: 0; list-style: none; display: grid; gap: .55rem; }
+  .sm__group a { font-size: var(--fs-sm); color: var(--c-ink-muted); text-decoration: none; line-height: 1.5; }
+  .sm__group a:hover { color: var(--c-orange-dark); text-decoration: underline; }
+</style>

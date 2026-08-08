@@ -19,6 +19,7 @@ export type PriceGuideData = {
   title: string; description: string;
   heroImage: string; eyebrow: string; h1Lead: string; h1Em: string; h1Tail: string; lede: string;
   chips: string[];
+  panel: { kicker: string; title: string; sub: string; points: string[] };
   specs: { label: string; value: string }[];
   tables: PriceTable[];
   included: string[]; checkBefore: string[];
@@ -55,15 +56,23 @@ const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
         <a href={d.crumbParent.href}>{d.crumbParent.label}</a><span aria-hidden="true">/</span>
         <span>Prices</span>
       </nav>
-      <div class="cl__hero-copy">
-        <p class="cl__eyebrow"><span></span>{d.eyebrow}</p>
-        <h1>{d.h1Lead} <em>{d.h1Em}</em> {d.h1Tail}</h1>
-        <p class="cl__hero-lede">{d.lede}</p>
-        <div class="cl__chips">{d.chips.map(c => <span>{c}</span>)}</div>
-        <div class="cl__hero-actions">
-          <a class="btn btn--primary btn--lg" href={waLink(bookMessage())}>Get a quote on WhatsApp</a>
-          <a class="btn btn--onDark btn--lg" href="#combos">Jump to prices</a>
+      <div class="cl__hero-grid">
+        <div class="cl__hero-copy">
+          <p class="cl__eyebrow"><span></span>{d.eyebrow}</p>
+          <h1>{d.h1Lead} <em>{d.h1Em}</em> {d.h1Tail}</h1>
+          <p class="cl__hero-lede">{d.lede}</p>
+          <div class="cl__chips">{d.chips.map(c => <span>{c}</span>)}</div>
+          <div class="cl__hero-actions">
+            <a class="btn btn--primary btn--lg" href={waLink(bookMessage())}>Get a quote on WhatsApp</a>
+            <a class="btn btn--onDark btn--lg" href="#combos">Jump to prices</a>
+          </div>
         </div>
+        <aside class="cl__panel">
+          <p>{d.panel.kicker}</p>
+          <strong>{d.panel.title}</strong>
+          <span>{d.panel.sub}</span>
+          <ul>{d.panel.points.map(x => <li>{x}</li>)}</ul>
+        </aside>
       </div>
     </div>
   </section>

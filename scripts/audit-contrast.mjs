@@ -100,10 +100,11 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
       const src = (tag.match(/src="([^"]+)"/) || [])[1];
       const alt = (tag.match(/alt="([^"]*)"/) || [])[1];
       if (!src || src.startsWith('data:')) continue;
-      if (alt === undefined || alt.trim() === '') {
+      const decorative = /aria-hidden="true"/.test(tag);
+      if (!decorative && (alt === undefined || alt.trim() === '')) {
         if (!/brand\/google-g|logo/.test(src)) noAlt.push(`${page}: ${src}`);
       }
-      if (!/brand\//.test(src)) {
+      if (!/brand\//.test(src) && !decorative) {
         const key = `${page}|${src}`;
         seen.set(key, (seen.get(key) || 0) + 1);
       }

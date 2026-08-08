@@ -31,6 +31,25 @@
 .cl__hero h1 { color: #fff; font-size: clamp(1.9rem,1.2rem + 2.6vw,3.1rem); margin-top: .9rem; text-shadow: 0 2px 18px rgba(0,0,0,.5); }
 .cl__hero h1 em { font-style: normal; color: var(--c-gold); }
 .cl__hero-lede { margin-top: .9rem; font-size: var(--fs-sm); color: rgba(255,255,255,.88); max-width: 56ch; line-height: 1.65; }
+/* hero: two columns, copy left, price panel right — per the reference */
+.cl__hero-grid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(340px,.48fr);
+  gap: 2rem; align-items: end; }
+.cl__panel { padding: 1.6rem; border-radius: 1.15rem;
+  background: linear-gradient(145deg, rgba(15,18,24,.9), rgba(35,44,58,.82));
+  border: 1px solid rgba(255,255,255,.18); color: #fff; backdrop-filter: blur(12px);
+  box-shadow: 0 24px 70px rgba(0,0,0,.28); }
+.cl__panel > p { margin: 0; color: var(--c-gold); font-family: var(--font-display);
+  font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 800; }
+.cl__panel > strong { display: block; margin-top: .5rem; color: var(--c-gold);
+  font-family: var(--font-display); font-size: clamp(2.4rem,4.5vw,3.4rem); line-height: .92; font-weight: 800; }
+.cl__panel > span { display: block; margin-top: .65rem; color: rgba(255,255,255,.72); font-weight: 600; font-size: var(--fs-sm); }
+.cl__panel ul { display: grid; gap: .72rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
+.cl__panel li { position: relative; padding-left: 1.2rem; color: rgba(255,255,255,.82); line-height: 1.45; font-size: var(--fs-sm); }
+.cl__panel li::before { content: ''; position: absolute; left: 0; top: .58em; width: .5rem; height: .5rem;
+  border-radius: 50%; background: var(--c-orange); }
+@media (max-width: 1180px) { .cl__hero-grid { grid-template-columns: 1fr; align-items: start; } }
+@media (max-width: 640px) { .cl__panel { display: none; } }
+
 .cl__chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem; }
 .cl__chips span { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xs); padding: .5em 1em; border-radius: 10px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.24); }
 .cl__hero-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.6rem; }

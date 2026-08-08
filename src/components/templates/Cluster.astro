@@ -63,17 +63,31 @@ const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
         <a href={d.crumbParent.href}>{d.crumbParent.label}</a><span aria-hidden="true">/</span>
         <span>{v.shortName}</span>
       </nav>
-      <div class="cl__hero-copy">
-        <p class="cl__eyebrow"><span></span>{d.eyebrow}</p>
-        <h1>{d.h1Lead} <em>{d.h1Em}</em> {d.h1Tail}</h1>
-        <p class="cl__hero-lede">{d.lede}</p>
-        <div class="cl__chips">
-          {v.durations.map(x => <span>AED {x.price.toLocaleString('en-US')} / {x.label}</span>)}
+      <div class="cl__hero-grid">
+        <div class="cl__hero-copy">
+          <p class="cl__eyebrow"><span></span>{d.eyebrow}</p>
+          <h1>{d.h1Lead} <em>{d.h1Em}</em> {d.h1Tail}</h1>
+          <p class="cl__hero-lede">{d.lede}</p>
+          <div class="cl__chips">
+            <span>{v.seats} {v.seats === 1 ? 'seat' : 'seats'}</span>
+            <span>{v.engine}</span>
+            <span>Age {v.minAge}+</span>
+            <span>Helmet and guide included</span>
+          </div>
+          <div class="cl__hero-actions">
+            <a class="btn btn--primary btn--lg" href={waLink(bookMessage(v.name))}>Book your tour</a>
+            <a class="btn btn--onDark btn--lg" href="#combos">See durations</a>
+          </div>
         </div>
-        <div class="cl__hero-actions">
-          <a class="btn btn--primary btn--lg" href={waLink(bookMessage(v.name))}>Book on WhatsApp</a>
-          <a class="btn btn--onDark btn--lg" href="#combos">See durations</a>
-        </div>
+        <aside class="cl__panel">
+          <p>Starts from</p>
+          <strong>AED {v.durations[0].price.toLocaleString('en-US')}</strong>
+          <span>{v.shortName} / {v.durations[0].label}</span>
+          <ul>
+            {v.durations.slice(1).map(x => <li>AED {x.price.toLocaleString('en-US')} for the {x.label} route.</li>)}
+            <li>Prices are per vehicle, not per person.</li>
+          </ul>
+        </aside>
       </div>
     </div>
   </section>

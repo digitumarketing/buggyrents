@@ -1,0 +1,202 @@
+---
+/* dbr-location — 9 sections, structure per BuggyRents-Sharjah-Full-Rebrand.html
+   1 hero · 2 stats · 3 area fit --light · 4 activities --sand · 5 pickup flow --light
+   6 booking checks --dark · 7 FAQ --light#faq · 8 nearby --sand · 9 final CTA #book */
+import '@/styles/location.css';
+import Base from '@/layouts/Base.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import type { LfBlock } from '@/components/LongFormReader.astro';
+import { img, hero } from '@/data/images';
+import { site, waLink, bookMessage } from '@/data/site';
+
+export type LocationData = {
+  slug: string; name: string; short: string; emirate: string; drive: string;
+  title: string; description: string; heroImage: string; finalImage: string;
+  kicker: string; h1Lead: string; h1Em: string; lede: string; chips: string[];
+  stats: { label: string; value: string; sub: string }[];
+  fitH2: string; fitIntro: string; fitPoints: string[];
+  activities: { tag: string; title: string; desc: string; href: string; img: string }[];
+  flow: { label: string; h: string; p: string }[];
+  checksH2: string; checksLede: string; checks: { tag: string; h: string; p: string }[];
+  panel: { kicker: string; title: string; sub: string; points: string[] };
+  faqs: { q: string; a: string }[]; faqChips: string[];
+  nearby: { tag: string; title: string; desc: string; href: string }[];
+  guideKicker: string; guideH2: string; guideIntro: string; guideBlocks: LfBlock[];
+  finalH2: string; finalLede: string;
+};
+interface Props { data: LocationData }
+const { data: d } = Astro.props;
+
+const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
+  {'@type':'ListItem',position:1,name:'Home',item:site.domain},
+  {'@type':'ListItem',position:2,name:'Locations',item:`${site.domain}/locations/`},
+  {'@type':'ListItem',position:3,name:d.short,item:`${site.domain}/locations/${d.slug}/`}]};
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
+  mainEntity: d.faqs.map(f => ({'@type':'Question', name: f.q, acceptedAnswer:{'@type':'Answer', text: f.a}})) };
+const areaSchema = { '@context':'https://schema.org','@type':'Service',
+  name: `${d.name} — Buggy Rents`, provider: { '@type':'LocalBusiness', name: site.name, telephone: site.phoneRaw },
+  areaServed: { '@type':'Place', name: `${d.short}, ${d.emirate}` },
+  serviceType: 'Desert buggy, quad bike and dirt bike tours' };
+---
+<Base title={d.title} description={d.description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(areaSchema)} />
+
+  <!-- 1 hero -->
+  <section class="lo__hero">
+    <img class="lo__hero-media" src={hero(d.heroImage).src} alt={hero(d.heroImage).alt}
+         style={`object-position:${hero(d.heroImage).focal} center`}
+         width={hero(d.heroImage).w} height={hero(d.heroImage).h} fetchpriority="high" decoding="async" />
+    <div class="lo__hero-scrim"></div>
+    <div class="lo__shell lo__hero-inner">
+      <nav class="lo__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span>
+        <a href="/locations/">Locations</a><span aria-hidden="true">/</span>
+        <span>{d.short}</span>
+      </nav>
+      <div class="lo__hero-grid">
+        <div class="lo__hero-copy">
+          <p class="lo__kicker">{d.kicker}</p>
+          <h1>{d.h1Lead} <em>{d.h1Em}</em></h1>
+          <p class="lo__hero-lede">{d.lede}</p>
+          <div class="lo__chips">{d.chips.map(c => <span>{c}</span>)}</div>
+          <div class="lo__actions">
+            <a class="btn btn--primary btn--lg" href={waLink(`Hi Buggy Rents! I'd like a pickup from ${d.short}. Could you confirm availability?`)}>Ask transfer quote</a>
+            <a class="btn btn--onDark btn--lg" href="/locations/">Compare locations</a>
+          </div>
+        </div>
+        <aside class="lo__panel">
+          <p>{d.panel.kicker}</p>
+          <strong>{d.panel.title}</strong>
+          <span>{d.panel.sub}</span>
+          <ul>{d.panel.points.map(x => <li>{x}</li>)}</ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 stats -->
+  <section class="lo__stats">
+    <div class="lo__shell lo__stats-grid">
+      {d.stats.map(s => <article><span>{s.label}</span><strong>{s.value}</strong><small>{s.sub}</small></article>)}
+    </div>
+  </section>
+
+  <!-- 3 area fit -->
+  <section class="lo__section lo__section--light">
+    <div class="lo__shell lo__split">
+      <header class="lo__head">
+        <p class="lo__kicker">01 / Area fit</p>
+        <h2>{d.fitH2}</h2>
+      </header>
+      <div class="lo__note-card">
+        <p>{d.fitIntro}</p>
+        <ul>{d.fitPoints.map(x => <li>{x}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 activities -->
+  <section class="lo__section lo__section--sand">
+    <div class="lo__shell">
+      <header class="lo__head">
+        <p class="lo__kicker">02 / Best options</p>
+        <h2>Pick the {d.short} desert activity by control style.</h2>
+        <p class="lo__head-lede">A quad gives you handlebars and the most direct feel. A buggy gives you a roll cage, a steering wheel and a passenger seat. A safari means someone else drives.</p>
+      </header>
+      <div class="lo__activity-grid">
+        {d.activities.map(a => (
+          <a class="lo__activity-card" href={a.href}>
+            <span class="lo__activity-media"><img src={img(a.img).src} alt={img(a.img).alt} loading="lazy" decoding="async" width="480" height="320" /></span>
+            <span class="lo__activity-body"><span>{a.tag}</span><strong>{a.title}</strong><small>{a.desc}</small></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 pickup flow -->
+  <section class="lo__section lo__section--light">
+    <div class="lo__shell">
+      <header class="lo__head">
+        <p class="lo__kicker">03 / Pickup flow</p>
+        <h2>From {d.short} pickup to the Lahbab red dunes.</h2>
+      </header>
+      <ol class="lo__flow">
+        {d.flow.map((s,i) => <li><span>{i+1}</span><small>{s.label}</small><strong>{s.h}</strong><p>{s.p}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 booking checks --dark -->
+  <section class="lo__section lo__section--dark">
+    <div class="lo__shell lo__split">
+      <header class="lo__head">
+        <p class="lo__kicker">04 / Booking checks</p>
+        <h2>{d.checksH2}</h2>
+        <p class="lo__head-lede">{d.checksLede}</p>
+      </header>
+      <div class="lo__check-grid">
+        {d.checks.map(c => <article class="lo__check-card"><span>{c.tag}</span><strong>{c.h}</strong><p>{c.p}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 FAQ -->
+  <section class="lo__section lo__section--light" id="faq">
+    <div class="lo__shell lo__faq-layout">
+      <aside class="lo__faq-panel">
+        <p class="lo__kicker">05 / FAQ</p>
+        <h2>{d.short} pickup questions.</h2>
+        <p>What to confirm before you book, how the transfer works, and what it costs.</p>
+        <div class="lo__faq-chips">{d.faqChips.map(c => <span>{c}</span>)}</div>
+        <a class="btn btn--wa" href={waLink(`Hi Buggy Rents! I have a question about pickup from ${d.short}.`)}>Ask about {d.short} pickup</a>
+      </aside>
+      <div class="lo__faq-list">
+        {d.faqs.map((f,i) => (
+          <details open={i === 0}>
+            <summary><span>Q{String(i+1).padStart(2,'0')}</span><h3>{f.q}</h3><b aria-hidden="true">+</b></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- 8 guide (scrollable, second last) -->
+  <LongFormReader eyebrow={d.guideKicker} heading={d.guideH2} intro={d.guideIntro} blocks={d.guideBlocks} />
+
+  <!-- 9 nearby routes, then final CTA -->
+  <section class="lo__section lo__section--sand">
+    <div class="lo__shell">
+      <header class="lo__head">
+        <p class="lo__kicker">06 / Next routes</p>
+        <h2>Compare nearby pickup and planning pages.</h2>
+        <p class="lo__head-lede">Same base, same fleet. What changes is the drive time and what you should confirm before leaving.</p>
+      </header>
+      <div class="lo__related-grid">
+        {d.nearby.map(n => (
+          <a class="lo__related-card" href={n.href}>
+            <span>{n.tag}</span><strong>{n.title}</strong><small>{n.desc}</small>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="lo__final" id="book">
+    <img class="lo__final-media" src={hero(d.finalImage).src} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+    <div class="lo__final-scrim"></div>
+    <div class="lo__shell lo__final-inner">
+      <p class="lo__kicker">Confirm pickup</p>
+      <h2>{d.finalH2}</h2>
+      <p>{d.finalLede}</p>
+      <div class="lo__actions">
+        <a class="btn btn--wa btn--lg" href={waLink(`Hi Buggy Rents! I'd like to book from ${d.short}. Date and group size to follow.`)}>WhatsApp {site.phone}</a>
+        <a class="btn btn--onDark btn--lg" href="/dune-buggy-dubai/price/">See all prices</a>
+      </div>
+      <div class="lo__chips lo__chips--center">{d.chips.map(c => <span>{c}</span>)}</div>
+    </div>
+  </section>
+</Base>

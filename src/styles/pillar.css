@@ -22,7 +22,8 @@
 .pl__crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: var(--fs-xs); color: rgba(255,255,255,.62); margin-bottom: clamp(1.75rem, 4vw, 3rem); }
 .pl__crumbs a { color: rgba(255,255,255,.8); text-decoration: none; }
 .pl__crumbs a:hover { color: #fff; text-decoration: underline; }
-.pl__hero-grid { display: grid; gap: clamp(1.5rem, 3vw, 3rem); grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: end; }
+/* reference pillar hero is a single column */
+.pl__hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: end; }
 .pl__eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700;
   font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--c-gold); }
 .pl__eyebrow > span { width: 28px; height: 1px; background: var(--c-orange); display: inline-block; }

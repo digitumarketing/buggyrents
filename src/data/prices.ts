@@ -67,6 +67,9 @@ export const buggyPrices: PriceGuideData = {
   h1Lead: 'Dune Buggy Dubai', h1Em: 'Price', h1Tail: 'Guide',
   lede: 'The full dune buggy Dubai price list, per buggy rather than per person. Polaris RZR through to Can-Am Maverick R, plus Bedouin BBQ combos. Helmet, briefing, fuel, guide and free Dubai hotel pickup are in every price.',
   chips: [`From AED ${fromPrice(buggies[0])}`, '11 buggies', 'Free Dubai pickup', 'No deposit'],
+  panel: { kicker: 'Starts from', title: `AED ${fromPrice(buggies[0])}`,
+    sub: 'Polaris RZR 1000 2-seater / 30 minutes',
+    points: ['Eleven buggies from Polaris RZR to Can-Am Maverick R.', 'Five BBQ combos pairing a buggy session with a camp dinner.', 'Prices are per buggy, not per person.'] },
   specs: [
     { label: 'Buggies', value: '11 options' },
     { label: 'From', value: `AED ${fromPrice(buggies[0])}` },
@@ -127,6 +130,9 @@ export const quadPrices: PriceGuideData = {
   h1Lead: 'Quad Biking Dubai', h1Em: 'Price', h1Tail: 'Guide',
   lede: `The full quad biking Dubai price list, from AED ${fromPrice(quads[0])} for a 30-minute kids session to four hours on a Yamaha Raptor 700cc. Sorted by riding area rather than model, because that is what actually decides which quad you can take.`,
   chips: [`From AED ${fromPrice(quads[0])}`, '6 quads', 'Age 6 and up', 'Free Dubai pickup'],
+  panel: { kicker: 'Starts from', title: `AED ${fromPrice(quads[0])}`,
+    sub: 'Kids quad, fenced area / 30 minutes',
+    points: ['Six quads split by riding area, from age 6 to the Raptor 700.', 'Five durations on every machine, 30 minutes to 4 hours.', 'Prices are per quad. Double seats carry a passenger free.'] },
   specs: [
     { label: 'Quads', value: '6 options' },
     { label: 'From', value: `AED ${fromPrice(quads[0])}` },
@@ -186,6 +192,9 @@ export const safariPrices: PriceGuideData = {
   h1Lead: 'Desert Safari Dubai', h1Em: 'Price', h1Tail: 'Guide',
   lede: `Every desert safari Dubai package and price in one place, from AED ${safariFromPrice} per person for the classic evening safari to a private mini bus for twelve. Dune bashing, sunset stop, camel ride, sandboarding and a Bedouin BBQ camp dinner.`,
   chips: [`From AED ${safariFromPrice} per person`, '12 packages', 'Free Dubai pickup', 'Shared or private'],
+  panel: { kicker: 'Starts from', title: `AED ${safariFromPrice}`,
+    sub: 'Evening Desert Safari / per person',
+    points: ['Six shared packages priced per person.', 'Six private packages priced per vehicle.', 'Dune bashing, camel ride, sandboarding and BBQ dinner in every one.'] },
   specs: [
     { label: 'Packages', value: '12 options' },
     { label: 'From', value: `AED ${safariFromPrice}` },

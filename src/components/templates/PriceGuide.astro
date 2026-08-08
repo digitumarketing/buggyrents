@@ -1,0 +1,218 @@
+---
+/* Price guide — same dbr-cluster 10-section system as the tour template,
+   with comparison tables in section 3 instead of single-vehicle duration cards. */
+import '@/styles/cluster.css';
+import Base from '@/layouts/Base.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import type { LfBlock } from '@/components/LongFormReader.astro';
+import { img, hero } from '@/data/images';
+import { site, waLink, bookMessage } from '@/data/site';
+import type { Vehicle } from '@/data/vehicles';
+
+export type PriceTable = {
+  title: string; note: string;
+  columns: string[];
+  rows: { name: string; href?: string; spec: string; cells: (number | null)[] }[];
+};
+export type PriceGuideData = {
+  slug: string; crumbParent: { label: string; href: string };
+  title: string; description: string;
+  heroImage: string; eyebrow: string; h1Lead: string; h1Em: string; h1Tail: string; lede: string;
+  chips: string[];
+  specs: { label: string; value: string }[];
+  tables: PriceTable[];
+  included: string[]; checkBefore: string[];
+  flow: { h: string; p: string }[];
+  whyH2: string; whyLede: string; gallery: { image: string; kicker: string; title: string; body?: string }[];
+  gallerySubject: 'buggy' | 'quad' | 'dirtbike' | 'safari';
+  safety: { label: string; h: string; p: string }[];
+  faqs: { q: string; a: string }[];
+  related: { tag: string; title: string; desc: string; from: string; href: string; img: string }[];
+  guideKicker: string; guideH2: string; guideIntro: string; guideBlocks: LfBlock[];
+};
+interface Props { data: PriceGuideData }
+const { data: d } = Astro.props;
+
+const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
+  {'@type':'ListItem',position:1,name:'Home',item:site.domain},
+  {'@type':'ListItem',position:2,name:d.crumbParent.label,item:`${site.domain}${d.crumbParent.href}`},
+  {'@type':'ListItem',position:3,name:'Prices',item:`${site.domain}${d.slug}`}]};
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
+  mainEntity: d.faqs.map(f => ({'@type':'Question', name: f.q, acceptedAnswer:{'@type':'Answer', text: f.a}})) };
+---
+<Base title={d.title} description={d.description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+
+  <!-- 1 hero -->
+  <section class="cl__hero">
+    <img class="cl__hero-media" src={hero(d.heroImage).src} alt={hero(d.heroImage).alt}
+         style={`object-position:${hero(d.heroImage).focal} center`}
+         width={hero(d.heroImage).w} height={hero(d.heroImage).h} fetchpriority="high" decoding="async" />
+    <div class="cl__hero-scrim"></div>
+    <div class="cl__shell cl__hero-inner">
+      <nav class="cl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span>
+        <a href={d.crumbParent.href}>{d.crumbParent.label}</a><span aria-hidden="true">/</span>
+        <span>Prices</span>
+      </nav>
+      <div class="cl__hero-copy">
+        <p class="cl__eyebrow"><span></span>{d.eyebrow}</p>
+        <h1>{d.h1Lead} <em>{d.h1Em}</em> {d.h1Tail}</h1>
+        <p class="cl__hero-lede">{d.lede}</p>
+        <div class="cl__chips">{d.chips.map(c => <span>{c}</span>)}</div>
+        <div class="cl__hero-actions">
+          <a class="btn btn--primary btn--lg" href={waLink(bookMessage())}>Get a quote on WhatsApp</a>
+          <a class="btn btn--onDark btn--lg" href="#combos">Jump to prices</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 spec strip -->
+  <section class="cl__spec-strip">
+    <div class="cl__shell cl__spec-grid">
+      {d.specs.map(s => <article><span>{s.label}</span><strong>{s.value}</strong></article>)}
+    </div>
+  </section>
+
+  <!-- 3 price tables -->
+  <section class="cl__section cl__section--light" id="combos">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">01 / Full price list</p><h2>Every option, every duration, on one page.</h2></div>
+        <p>Prices are per vehicle unless a row says otherwise. Helmet, briefing, fuel and a guide are included, and hotel pickup within Dubai is free.</p>
+      </header>
+      {d.tables.map(t => (
+        <div class="cl__ptable">
+          <div class="cl__ptable-head"><h3>{t.title}</h3><p>{t.note}</p></div>
+          <div class="cl__ptable-scroll">
+            <table>
+              <thead><tr><th scope="col">Option</th>{t.columns.map(c => <th scope="col">{c}</th>)}</tr></thead>
+              <tbody>
+                {t.rows.map(r => (
+                  <tr>
+                    <th scope="row">
+                      {r.href ? <a href={r.href}>{r.name}</a> : r.name}
+                      <span class="cl__pspec">{r.spec}</span>
+                    </th>
+                    {r.cells.map(v => (
+                      <td class={v === null ? '' : 'cl__pnum'}>{v === null ? <span class="cl__pdash">not offered</span> : `AED ${v.toLocaleString('en-US')}`}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="cl__pfoot">All prices in AED. Nothing is due when you book; you pay at the base by cash, card or bank transfer.</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 4 included -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header><p class="cl__kicker">02 / What the price covers</p><h2 class="cl__wide-title">What is included before you drive.</h2></header>
+      <div class="cl__split" style="margin-top:2rem">
+        <article class="cl__list-card"><h3>Included in every price</h3><ul>{d.included.map(x => <li>{x}</li>)}</ul></article>
+        <article class="cl__list-card cl__list-card--check"><h3>Check before booking</h3><ul>{d.checkBefore.map(x => <li>{x}</li>)}</ul></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 flow -->
+  <section class="cl__section cl__section--light">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">03 / How booking works</p><h2>From quote to the red dunes.</h2></div>
+        <p>No deposit, no online payment. You confirm on WhatsApp and settle at the base.</p>
+      </header>
+      <ol class="cl__flow">{d.flow.map((s,i) => <li><span>{i+1}</span><strong>{s.h}</strong><p>{s.p}</p></li>)}</ol>
+    </div>
+  </section>
+
+  <!-- 6 gallery --dark -->
+  <section class="cl__section cl__section--dark">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">04 / What you are paying for</p><h2>{d.whyH2}</h2></div>
+        <p>{d.whyLede}</p>
+      </header>
+      <div class="cl__gallery">
+        <figure class="cl__photo">
+          <img src={img(d.gallery[0].image, d.gallerySubject).src} alt={img(d.gallery[0].image, d.gallerySubject).alt} loading="lazy" decoding="async" width="800" height="533" />
+          <figcaption><span>{d.gallery[0].kicker}</span><strong>{d.gallery[0].title}</strong>{d.gallery[0].body && <p>{d.gallery[0].body}</p>}</figcaption>
+        </figure>
+        <div class="cl__detail-grid">
+          {d.gallery.slice(1).map(g => (
+            <figure class="cl__photo">
+              <img src={img(g.image, d.gallerySubject).src} alt={img(g.image, d.gallerySubject).alt} loading="lazy" decoding="async" width="480" height="320" />
+              <figcaption><span>{g.kicker}</span><strong>{g.title}</strong></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 safety -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">05 / No hidden extras</p><h2>What the price does not change.</h2></div>
+        <p>Safety, gear and guide support are the same on the cheapest slot and the most expensive one.</p>
+      </header>
+      <div class="cl__safety-grid">
+        {d.safety.map(s => (
+          <article class="cl__safety-card">
+            <span class="cl__safety-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <span class="cl__safety-label">{s.label}</span><h3>{s.h}</h3><p>{s.p}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 FAQ -->
+  <section class="cl__section cl__section--light" id="faq">
+    <div class="cl__shell cl__faq-layout">
+      <aside>
+        <p class="cl__kicker">06 / Price questions</p>
+        <h2>{d.crumbParent.label} price questions.</h2>
+        <p>What the price covers, how payment works, and what is genuinely free.</p>
+      </aside>
+      <div class="cl__faq-list">
+        {d.faqs.map((f,i) => (
+          <details open={i === 0}>
+            <summary><span>Q{String(i+1).padStart(2,'0')}</span><h3>{f.q}</h3><b aria-hidden="true">+</b></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- 9 guide, second last -->
+  <LongFormReader eyebrow={d.guideKicker} heading={d.guideH2} intro={d.guideIntro} blocks={d.guideBlocks} />
+  <!-- 10 related, last in the body -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">08 / Compare other prices</p><h2>Price pages for the rest of the fleet.</h2></div>
+        <p>Same booking terms, different machines.</p>
+      </header>
+      <div class="cl__related-grid">
+        {d.related.map(r => (
+          <a class="cl__related-card" href={r.href}>
+            <span class="cl__related-media"><img src={img(r.img).src} alt={img(r.img).alt} loading="lazy" decoding="async" width="480" height="320" /></span>
+            <span class="cl__related-body"><span>{r.tag}</span><strong>{r.title}</strong><p>{r.desc}</p><em>{r.from}</em></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Base>

@@ -133,3 +133,24 @@
   .cl__head, .cl__faq-layout, .cl__gallery { grid-template-columns: 1fr; }
   .cl__head { align-items: start; }
 }
+
+/* price-guide variant: full comparison tables in section 3 */
+.cl__ptable { background: #fff; border: 1px solid var(--c-line); border-radius: 14px; overflow: hidden; margin-top: 1.5rem; box-shadow: var(--shadow-tile); }
+.cl__ptable-head { padding: 1.1rem 1.3rem; border-bottom: 1px solid var(--c-line-soft); }
+.cl__ptable-head h3 { font-size: 1.1rem; color: var(--c-navy); }
+.cl__ptable-head p { margin-top: .25rem; font-size: var(--fs-xs); color: var(--c-ink-muted); }
+.cl__ptable-scroll { overflow-x: auto; }
+.cl__ptable table { width: 100%; border-collapse: collapse; min-width: 620px; }
+.cl__ptable thead { background: var(--c-navy); color: #fff; }
+.cl__ptable th, .cl__ptable td { padding: .8rem 1rem; text-align: left; white-space: nowrap; }
+.cl__ptable thead th { font-family: var(--font-display); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; font-weight: 700; }
+.cl__ptable tbody tr + tr { border-top: 1px solid var(--c-line-soft); }
+.cl__ptable tbody tr:hover { background: var(--c-orange-soft); }
+.cl__ptable tbody th { font-family: var(--font-display); font-weight: 700; color: var(--c-navy); font-size: var(--fs-sm); white-space: normal; min-width: 200px; }
+.cl__ptable tbody th a { text-decoration: none; color: inherit; }
+.cl__ptable tbody th a:hover { color: var(--c-orange); }
+.cl__pspec { display: block; font-family: var(--font-body); font-weight: 400; font-size: 11px; color: var(--c-ink-soft); }
+.cl__pnum { font-family: var(--font-display); font-weight: 800; color: var(--c-orange); }
+.cl__pdash { color: var(--c-line); }
+.cl__ptable td { font-size: var(--fs-sm); color: var(--c-ink-muted); }
+.cl__pfoot { padding: .9rem 1.3rem; background: var(--c-sand-soft); font-size: var(--fs-xs); color: var(--c-ink-muted); border-top: 1px solid var(--c-line-soft); }

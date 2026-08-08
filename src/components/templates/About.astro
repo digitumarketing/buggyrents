@@ -1,0 +1,257 @@
+---
+/* dbr-about — 11 sections, structure per BuggyRents-dune-buggy-faqs.html
+   1 hero (+ right panel) · 2 trust strip · 3 intro --light (split + minis)
+   4 what to confirm --dark · 5 pick your question --sand (bento)
+   6 what is handled --light · 7 reviews --reviews · 8 ask the team --sand
+   9 FAQ accordion --faq · 10 related links --links · 11 final CTA
+
+   Serves: the FAQ pages and About us. */
+import '@/styles/about.css';
+import Base from '@/layouts/Base.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import type { LfBlock } from '@/components/LongFormReader.astro';
+import ReviewsCarousel from '@/components/ReviewsCarousel.astro';
+import { img, hero } from '@/data/images';
+import { site, waLink } from '@/data/site';
+
+export type AboutData = {
+  slug: string;
+  crumb: { name: string; href: string }[];
+  short: string;
+  title: string; description: string;
+  heroImage: string; finalImage: string; heroSubject?: 'buggy'|'quad'|'dirtbike'|'safari';
+  kicker: string; h1Lead: string; h1Em: string; lede: string; chips: string[];
+  ctaPrimary: { label: string; message: string };
+  ctaSecondary: { label: string; href: string };
+  panel: { kicker: string; title: string; sub: string; points: string[] };
+  trust: { tag: string; value: string; note: string }[];
+  introKicker: string; introH2: string; introLede: string;
+  introBody: string[];
+  minis: { n: string; h: string; p: string }[];
+  confirmKicker: string; confirmH2: string; confirmLede: string;
+  confirm: { tag: string; h: string; p: string }[];
+  bentoKicker: string; bentoH2: string; bentoLede: string;
+  bento: { tag: string; h: string; p: string; feature?: boolean }[];
+  handledKicker: string; handledH2: string; handledLede: string;
+  handledList: { h: string; items: string[] }[];
+  reviewsKicker: string; reviewsH2: string; reviewsLede: string;
+  askKicker: string; askH2: string; askLede: string;
+  askCards: { tag: string; value: string; note: string; href: string }[];
+  guideKicker?: string; guideH2?: string; guideIntro?: string; guideBlocks?: LfBlock[];
+  faqKicker: string; faqH2: string; faqLede: string; faqs: { q: string; a: string }[];
+  linksKicker: string; linksH2: string;
+  links: { tag: string; title: string; desc: string; href: string }[];
+  finalKicker: string; finalH2: string; finalLede: string;
+};
+interface Props { data: AboutData }
+const { data: d } = Astro.props;
+
+const url = `${site.domain}/${d.slug}/`;
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList',
+  itemListElement: [
+    { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+    ...d.crumb.map((c,i) => ({ '@type':'ListItem', position:i+2, name:c.name, item:`${site.domain}${c.href}` })),
+    { '@type':'ListItem', position:d.crumb.length+2, name:d.short, item:url }
+  ]};
+const faqSchema = { '@context':'https://schema.org', '@type':'FAQPage',
+  mainEntity: d.faqs.map(f => ({ '@type':'Question', name:f.q,
+    acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+
+const h = hero(d.heroImage);
+const fin = img(d.finalImage, d.heroSubject);
+---
+<Base title={d.title} description={d.description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- 1 hero -->
+  <section class="ab__hero" aria-labelledby="ab-hero-h">
+    <img class="ab__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="ab__hero-scrim" aria-hidden="true"></div>
+    <div class="ab__shell ab__hero-inner">
+      <nav class="ab__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        {d.crumb.map(c => (<><span aria-hidden="true">/</span><a href={c.href}>{c.name}</a></>))}
+        <span aria-hidden="true">/</span><span aria-current="page">{d.short}</span>
+      </nav>
+      <div class="ab__hero-grid">
+        <div class="ab__hero-copy">
+          <p class="ab__kicker">{d.kicker}</p>
+          <h1 id="ab-hero-h">{d.h1Lead} <em>{d.h1Em}</em></h1>
+          <p class="ab__hero-lede">{d.lede}</p>
+          <div class="ab__chips">{d.chips.map(c => <span>{c}</span>)}</div>
+          <div class="ab__actions">
+            <a class="btn btn--primary btn--lg" href={waLink(d.ctaPrimary.message)}>{d.ctaPrimary.label}</a>
+            <a class="btn btn--onDark btn--lg" href={d.ctaSecondary.href}>{d.ctaSecondary.label}</a>
+          </div>
+        </div>
+        <aside class="ab__panel" aria-label={d.panel.kicker}>
+          <p>{d.panel.kicker}</p>
+          <strong>{d.panel.title}</strong>
+          <span>{d.panel.sub}</span>
+          <ul>{d.panel.points.map(x => <li>{x}</li>)}</ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 trust strip -->
+  <section class="ab__trust" aria-label="At a glance">
+    <div class="ab__shell ab__trust-grid">
+      {d.trust.map(t => (
+        <article><span>{t.tag}</span><strong>{t.value}</strong><p>{t.note}</p></article>
+      ))}
+    </div>
+  </section>
+
+  <!-- 3 intro -->
+  <section class="ab__section ab__section--light" aria-labelledby="ab-intro-h">
+    <div class="ab__shell">
+      <header class="ab__head">
+        <p class="ab__kicker">{d.introKicker}</p>
+        <h2 id="ab-intro-h">{d.introH2}</h2>
+        <p>{d.introLede}</p>
+      </header>
+      <div class="ab__split">
+        <div class="ab__prose-card">{d.introBody.map(p => <p set:html={p} />)}</div>
+        <div class="ab__mini-grid">
+          {d.minis.map(m => (
+            <article class="ab__mini-card"><span>{m.n}</span><h3>{m.h}</h3><p>{m.p}</p></article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 what to confirm -->
+  <section class="ab__section ab__section--dark" aria-labelledby="ab-confirm-h">
+    <div class="ab__shell">
+      <header class="ab__head">
+        <p class="ab__kicker">{d.confirmKicker}</p>
+        <h2 id="ab-confirm-h">{d.confirmH2}</h2>
+        <p>{d.confirmLede}</p>
+      </header>
+      <div class="ab__cards">
+        {d.confirm.map(c => (
+          <article class="ab__card"><span>{c.tag}</span><h3>{c.h}</h3><p>{c.p}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 pick your question -->
+  <section class="ab__section ab__section--sand" aria-labelledby="ab-bento-h">
+    <div class="ab__shell">
+      <header class="ab__head">
+        <p class="ab__kicker">{d.bentoKicker}</p>
+        <h2 id="ab-bento-h">{d.bentoH2}</h2>
+        <p>{d.bentoLede}</p>
+      </header>
+      <div class="ab__bento">
+        {d.bento.map(b => (
+          <article class={`ab__bento-card${b.feature ? ' ab__bento-card--feature' : ''}`}>
+            <span>{b.tag}</span><h3>{b.h}</h3><p>{b.p}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 what is handled -->
+  <section class="ab__section ab__section--light" aria-labelledby="ab-handled-h">
+    <div class="ab__shell">
+      <header class="ab__head">
+        <p class="ab__kicker">{d.handledKicker}</p>
+        <h2 id="ab-handled-h">{d.handledH2}</h2>
+        <p>{d.handledLede}</p>
+      </header>
+      <div class="ab__lists">
+        {d.handledList.map((l, i) => (
+          <article class={`ab__list-card${i > 0 ? ' ab__list-card--check' : ''}`}>
+            <h3>{l.h}</h3>
+            <ul>{l.items.map(x => <li>{x}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 reviews -->
+  <ReviewsCarousel kicker={d.reviewsKicker} heading={d.reviewsH2} lede={d.reviewsLede} />
+
+  <!-- 8 ask the team -->
+  <section class="ab__section ab__section--sand" aria-labelledby="ab-ask-h">
+    <div class="ab__shell ab__contact-layout">
+      <header class="ab__head">
+        <p class="ab__kicker">{d.askKicker}</p>
+        <h2 id="ab-ask-h">{d.askH2}</h2>
+        <p>{d.askLede}</p>
+      </header>
+      <div class="ab__contact-grid">
+        {d.askCards.map(c => (
+          <a class="ab__contact-card" href={c.href}>
+            <span>{c.tag}</span><strong>{c.value}</strong><small>{c.note}</small>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* scrollable long-form reader, before the FAQ, per the standing rule */}
+  {d.guideBlocks && d.guideBlocks.length > 0 && (
+    <LongFormReader eyebrow={d.guideKicker} heading={d.guideH2!} intro={d.guideIntro!} blocks={d.guideBlocks} />
+  )}
+
+  <!-- 9 FAQ -->
+  <section class="ab__section ab__section--faq" id="faq" aria-labelledby="ab-faq-h">
+    <div class="ab__shell ab__faq-layout">
+      <aside class="ab__head">
+        <p class="ab__kicker">{d.faqKicker}</p>
+        <h2 id="ab-faq-h">{d.faqH2}</h2>
+        <p>{d.faqLede}</p>
+      </aside>
+      <div class="ab__faq-list">
+        {d.faqs.map((f, i) => (
+          <details open={i === 0}>
+            <summary><span>Q{i + 1}</span><h3>{f.q}</h3><i aria-hidden="true"></i></summary>
+            <div>{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 related links -->
+  <section class="ab__section ab__section--links" aria-labelledby="ab-links-h">
+    <div class="ab__shell">
+      <header class="ab__head">
+        <p class="ab__kicker">{d.linksKicker}</p>
+        <h2 id="ab-links-h">{d.linksH2}</h2>
+      </header>
+      <div class="ab__links">
+        {d.links.map(l => (
+          <a href={l.href}>
+            <span>{l.tag}</span><strong>{l.title}</strong><p>{l.desc}</p><em>View page &rarr;</em>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 final CTA -->
+  <section class="ab__final" id="book" aria-labelledby="ab-final-h">
+    <img class="ab__final-media" src={fin.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
+    <div class="ab__final-scrim" aria-hidden="true"></div>
+    <div class="ab__shell ab__final-inner">
+      <p class="ab__kicker">{d.finalKicker}</p>
+      <h2 id="ab-final-h">{d.finalH2}</h2>
+      <p>{d.finalLede}</p>
+      <div class="ab__actions">
+        <a class="btn btn--primary btn--lg" href={waLink(d.ctaPrimary.message)}>Message on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</Base>

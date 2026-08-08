@@ -36,7 +36,7 @@ const productSchema = {
   image: new URL(img(v.image, v.category).src, site.domain).href,
   brand: { '@type': 'Brand', name: site.name },
   offers: v.durations.map(x => ({
-    '@type': 'Offer', name: `${v.name} — ${x.label}`, price: x.price, priceCurrency: 'AED',
+    '@type': 'Offer', name: `${v.name}, ${x.label}`, price: x.price, priceCurrency: 'AED',
     availability: 'https://schema.org/InStock', url: new URL(`${base}${v.slug}/`, site.domain).href
   }))
 };

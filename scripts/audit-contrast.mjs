@@ -225,3 +225,44 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     console.log(`Resolution audit passed — ${used.size} images, none under ${HARD_MIN}px${soft.length ? `, ${soft.length} below ${SOFT_MIN}px` : ''}.`);
   }
 }
+
+
+/* Client rule: no em dashes anywhere in website content. They slipped in twice via
+   schema Offer names, which are content even though they never render on screen —
+   Google reads them. Check visible text, meta, and JSON-LD; ignore code comments. */
+{
+  const pages = [];
+  const walkE = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkE(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkE(DIST);
+
+  const hits = [];
+  for (const page of pages) {
+    const html = readFileSync(page, 'utf8');
+
+    const jsonLd = [...html.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/g)]
+      .map(m => m[1]).join(' ');
+    const meta = [...html.matchAll(/<meta[^>]*content="([^"]*)"/g)].map(m => m[1]).join(' ');
+    const title = (html.match(/<title[^>]*>([\s\S]*?)<\/title>/) || [])[1] || '';
+    const visible = html
+      .replace(/<script[\s\S]*?<\/script>/g, ' ')
+      .replace(/<style[\s\S]*?<\/style>/g, ' ')
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/<[^>]*>/g, ' ');
+
+    for (const [where, text] of [['body', visible], ['schema', jsonLd], ['meta', meta], ['title', title]]) {
+      const m = text.match(/.{0,50}—.{0,50}/);
+      if (m) hits.push(`${page} (${where}): ...${m[0].replace(/\s+/g, ' ').trim()}...`);
+    }
+  }
+  if (hits.length) {
+    console.error('Em dash found. The client asked for none anywhere on the site:');
+    hits.slice(0, 10).forEach(h => console.error('  ' + h));
+    if (hits.length > 10) console.error(`  ...and ${hits.length - 10} more.`);
+    process.exit(1);
+  }
+  console.log('Em dash audit passed — none in body, schema, meta or title.');
+}

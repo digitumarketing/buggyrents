@@ -34,7 +34,7 @@ const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', 
 const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
   mainEntity: d.faqs.map(f => ({'@type':'Question', name: f.q, acceptedAnswer:{'@type':'Answer', text: f.a}})) };
 const areaSchema = { '@context':'https://schema.org','@type':'Service',
-  name: `${d.name} — Buggy Rents`, provider: { '@type':'LocalBusiness', name: site.name, telephone: site.phoneRaw },
+  name: `${d.name}, Buggy Rents`, provider: { '@type':'LocalBusiness', name: site.name, telephone: site.phoneRaw },
   areaServed: { '@type':'Place', name: `${d.short}, ${d.emirate}` },
   serviceType: 'Desert buggy, quad bike and dirt bike tours' };
 ---

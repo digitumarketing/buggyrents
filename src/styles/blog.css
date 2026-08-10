@@ -212,6 +212,12 @@
   font-size: var(--fs-xs); letter-spacing: .04em; text-transform: uppercase; }
 .ar__body tbody tr:last-child td, .ar__body tbody tr:last-child th { border-bottom: 0; }
 .ar__body tbody th { color: var(--c-navy); font-family: var(--font-display); font-weight: 700; }
+/* Tables come out of the Markdoc editor bare, without the wrapper the old
+   structured table field used to add. A seven-column price table does not fit a
+   phone, so the scroll has to live on the table itself now. display: block is what
+   makes overflow apply to a table at all; min-width stops the columns collapsing
+   into unreadable slivers before the scroll kicks in. */
+.ar__body table { display: block; overflow-x: auto; }
 .ar__table-wrap { overflow-x: auto; }
 
 .ar__help { position: sticky; top: 90px; display: grid; gap: 1rem; }

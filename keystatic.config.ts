@@ -101,6 +101,77 @@ export default config({
         order:    fields.integer({ label: 'Display order', defaultValue: 99 })
       }
     }),
+    /* Blog articles.
+       The only collection that is Markdoc rather than JSON, because it is the only
+       one the client actually WRITES rather than fills in: headings, bold, links,
+       lists and tables in an editor instead of HTML typed into a textarea.
+       Everything that feeds structured data (the FAQ pairs) stays as fields, since
+       Google needs question and answer separately and prose cannot be split back
+       apart reliably. */
+    posts: collection({
+      label: 'Blog articles',
+      slugField: 'title',
+      path: 'src/content/posts/*',
+      format: { contentField: 'body' },
+      entryLayout: 'content',
+      columns: ['title', 'date'],
+      schema: {
+        title:   fields.slug({
+          name: { label: 'Title', description: 'Also the h1. Put the target keyword in it, in natural language.' },
+          slug: { label: 'URL slug', description: 'Changing this breaks any link to the old address. Leave it alone once published.' }
+        }),
+        excerpt: fields.text({ label: 'Excerpt', description: 'Used as the meta description and on the guide cards. Aim for 150 to 160 characters.', multiline: true }),
+        date:    fields.text({ label: 'Date', description: 'YYYY-MM-DD.', defaultValue: '' }),
+        category: fields.select({
+          label: 'Topic',
+          options: [
+            { label: 'Dune buggy', value: 'buggy' },
+            { label: 'Quad bike', value: 'quad' },
+            { label: 'Desert safari', value: 'safari' },
+            { label: 'Planning', value: 'planning' }
+          ],
+          defaultValue: 'planning'
+        }),
+        /* Separate from the topic on purpose: an article filed under Planning can
+           still be illustrated with buggy photos. img() checks this at build time,
+           so a quad article can never show a buggy by accident. */
+        subject: fields.select({
+          label: 'Photo subject',
+          description: 'Which part of the library the images must come from. The build fails if an image does not match.',
+          options: [
+            { label: 'Dune buggy', value: 'buggy' },
+            { label: 'Quad bike', value: 'quad' },
+            { label: 'Dirt bike', value: 'dirtbike' },
+            { label: 'Desert safari', value: 'safari' }
+          ],
+          defaultValue: 'buggy'
+        }),
+        heroImage:  fields.text({ label: 'Hero image key' }),
+        image:      fields.text({ label: 'Card and article image key' }),
+        finalImage: fields.text({ label: 'Closing CTA image key' }),
+        keyword:    fields.text({ label: 'Target keyword', description: 'Never shown on the page. It is here so you can see what this article is meant to rank for before rewriting the title.' }),
+        intro:      fields.text({ label: 'Opening paragraph', description: 'Sits above Key takeaways.', multiline: true }),
+        takeaways:  fields.array(fields.text({ label: 'Takeaway' }), {
+          label: 'Key takeaways', itemLabel: p => p.value
+        }),
+        body: fields.markdoc({ label: 'Article body' }),
+        faqs: fields.array(
+          fields.object({
+            q: fields.text({ label: 'Question' }),
+            a: fields.text({ label: 'Answer', multiline: true })
+          }),
+          { label: 'Frequently asked questions', itemLabel: p => p.fields.q.value }
+        ),
+        closing:       fields.text({ label: 'Closing line', description: 'Last paragraph of the article. HTML links are allowed here.', multiline: true }),
+        helpTitle:     fields.text({ label: 'Help panel heading' }),
+        helpText:      fields.text({ label: 'Help panel text', multiline: true }),
+        helpMessage:   fields.text({ label: 'Help panel WhatsApp message', multiline: true }),
+        helpHref:      fields.text({ label: 'Help panel link URL' }),
+        helpLinkLabel: fields.text({ label: 'Help panel link text' }),
+        finalH2:       fields.text({ label: 'Final CTA heading' }),
+        finalLede:     fields.text({ label: 'Final CTA text', multiline: true })
+      }
+    }),
     faqs: collection({
       label: 'FAQs',
       slugField: 'question',

@@ -12,58 +12,57 @@
    and a closing line. The table of contents is generated from the rendered h2
    and h3 tags, which is how the reference builds it. */
 import '@/styles/blog.css';
+import { render } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import { img } from '@/data/images';
 import { site, waLink } from '@/data/site';
-import { posts, categories, type Post } from '@/data/posts';
+import { allPosts, categoryLabel, type Post } from '@/data/posts';
 
-export function getStaticPaths() {
-  return posts.map(p => ({ params: { slug: p.slug }, props: { post: p } }));
+export async function getStaticPaths() {
+  const posts = await allPosts();
+  return posts.map(p => ({ params: { slug: p.id }, props: { post: p, posts } }));
 }
-interface Props { post: Post }
-const { post: p } = Astro.props;
+interface Props { post: Post; posts: Post[] }
+const { post: entry, posts } = Astro.props;
+const p = entry.data;
+
+/* The body is Markdoc now, so Astro renders it and hands back the headings it
+   found. That list used to be built by regex over hand-written HTML; letting the
+   renderer report its own headings means the contents can never drift from the
+   article. Heading ids come from markdoc.config.mjs. */
+const { Content, headings } = await render(entry);
 
 const fig = img(p.image, p.subject);
-const url = `${site.domain}/blogs/${p.slug}/`;
-const cat = categories.find(c => c.slug === p.category);
+const url = `${site.domain}/blogs/${entry.id}/`;
+const cat = categoryLabel(p.category);
 
 const slugify = (s: string) => s.toLowerCase().replace(/<[^>]*>/g, '')
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-/* Give every h3 inside a section an id so it can appear in the contents list,
-   exactly as the reference does. Written once here rather than by hand in the
-   data, so a new article gets its contents for free. */
-type Entry = { id: string; text: string; level: 2 | 3 };
-const toc: Entry[] = [];
+type TocEntry = { id: string; text: string; level: 2 | 3 };
+const toc: TocEntry[] = [
+  { id: 'key-takeaways', text: 'Key takeaways', level: 2 },
+  ...headings
+    .filter(h => h.depth === 2 || h.depth === 3)
+    .map(h => ({ id: h.slug, text: h.text, level: h.depth as 2 | 3 }))
+];
 
-const intro = p.intro;
-
-toc.push({ id: 'key-takeaways', text: 'Key takeaways', level: 2 });
-
-const rendered = p.sections.map(s => {
-  toc.push({ id: s.id, text: s.h, level: 2 });
-  const html = s.html.replace(/<h3>([\s\S]*?)<\/h3>/g, (_m, inner) => {
-    const id = slugify(inner);
-    toc.push({ id, text: inner.replace(/<[^>]*>/g, ''), level: 3 });
-    return `<h3 id="${id}">${inner}</h3>`;
-  });
-  return { ...s, html };
-});
-
-if (p.table) toc.push({ id: 'comparison', text: p.table.h, level: 2 });
+/* Takeaways and the FAQ block sit outside the Markdoc body, so they are not in
+   `headings` and have to be added by hand. */
 if (p.faqs.length) {
   toc.push({ id: 'faq', text: 'Frequently asked questions', level: 2 });
   p.faqs.forEach(f => toc.push({ id: slugify(f.q), text: f.q, level: 3 }));
 }
 
-const words = rendered.reduce((n, s) => n + s.html.replace(/<[^>]*>/g, ' ').split(/\s+/).length, 0);
+const words = entry.body?.split(/\s+/).length ?? 0;
 const readTime = Math.max(2, Math.round(words / 220));
 const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
 /* Two other guides, preferring the same topic. */
-const related = [...posts.filter(x => x.slug !== p.slug)]
-  .sort((a, b) => (Number(b.category === p.category) - Number(a.category === p.category))
-                || b.date.localeCompare(a.date))
+const related = posts
+  .filter(x => x.id !== entry.id)
+  .sort((a, b) => (Number(b.data.category === p.category) - Number(a.data.category === p.category))
+                || b.data.date.localeCompare(a.data.date))
   .slice(0, 3);
 
 const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
@@ -94,7 +93,7 @@ const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FA
           <a href="/blogs/">Blogs</a><span aria-hidden="true">/</span>
           <span aria-current="page">{p.title}</span>
         </nav>
-        <p class="bl__eyebrow">{cat?.label}</p>
+        <p class="bl__eyebrow">{cat}</p>
         <h1 id="article-title">{p.title}</h1>
         <p class="ar__deck">{p.excerpt}</p>
         <div class="ar__meta" aria-label="Article details">
@@ -135,33 +134,16 @@ const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FA
         <ol>{toc.filter(t => t.level === 2).map(t => <li><a href={`#${t.id}`}>{t.text}</a></li>)}</ol>
       </nav>
 
-      {intro && <p set:html={intro} />}
+      {p.intro && <p set:html={p.intro} />}
 
       <h2 id="key-takeaways">Key takeaways</h2>
       <ul>{p.takeaways.map(t => <li set:html={t} />)}</ul>
 
-      {rendered.map(s => (
-        <>
-          <h2 id={s.id}>{s.h}</h2>
-          <Fragment set:html={s.html} />
-        </>
-      ))}
-
-      {p.table && (
-        <>
-          <h2 id="comparison">{p.table.h}</h2>
-          <div class="ar__table-wrap">
-            <table>
-              <thead><tr>{p.table.head.map(c => <th>{c}</th>)}</tr></thead>
-              <tbody>
-                {p.table.rows.map(r => (
-                  <tr><th scope="row">{r[0]}</th>{r.slice(1).map(c => <td>{c}</td>)}</tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
+      {/* Everything the client writes in the editor, including any comparison
+          table, renders here. .ar__table-wrap used to be applied by hand around a
+          structured table field; blog.css now styles tables inside .ar__body
+          directly so a markdown table gets the same treatment. */}
+      <Content />
 
       {p.faqs.length > 0 && (
         <>
@@ -190,13 +172,13 @@ const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FA
         <p class="ar__panel-eyebrow">Related guides</p>
         <div class="ar__related-list">
           {related.map(r => {
-            const ri = img(r.image, r.subject);
+            const ri = img(r.data.image, r.data.subject);
             return (
-              <a class="ar__related-card" href={`/blogs/${r.slug}/`}>
+              <a class="ar__related-card" href={`/blogs/${r.id}/`}>
                 {/* Decorative: the title next to it is the accessible label for this link. */}
                 <img src={ri.src} alt="" aria-hidden="true" width="72" height="56" loading="lazy" decoding="async" />
                 <div>
-                  <strong>{r.title}</strong>
+                  <strong>{r.data.title}</strong>
                   <span>Read</span>
                 </div>
               </a>

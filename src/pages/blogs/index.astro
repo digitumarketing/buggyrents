@@ -10,28 +10,30 @@ import '@/styles/blog.css';
 import Base from '@/layouts/Base.astro';
 import { img } from '@/data/images';
 import { site, waLink } from '@/data/site';
-import { posts, categories } from '@/data/posts';
+import { allPosts, categories } from '@/data/posts';
 
 const title = 'Desert Riding Guides and Tips | Buggy Rents Dubai';
 const description = 'Straight answers on dune buggies, quad bikes and desert safaris in Dubai. What things cost, what to wear, which timing to pick and how to choose between them.';
 
-const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+/* allPosts() already returns newest first, so the index no longer sorts its own
+   copy. One order, decided in one place. */
+const sorted = await allPosts();
 const lead = sorted[0];
-const leadImg = img(lead.image, lead.subject);
+const leadImg = img(lead.data.image, lead.data.subject);
 
 /* The hero card IS the featured slot for the newest guide, so the grid lists the
    rest. The reference repeats the lead post in both, which puts the same photo
    on screen twice and reads as a bug. Every post is still one click away. */
 const rest = sorted.slice(1);
 
-const topics = categories.filter(c => sorted.some(p => p.category === c.slug));
+const topics = categories.filter(c => sorted.some(p => p.data.category === c.slug));
 
 const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
   { '@type':'ListItem', position:1, name:'Home', item: site.domain },
   { '@type':'ListItem', position:2, name:'Blogs', item: `${site.domain}/blogs/` }]};
 const listSchema = { '@context':'https://schema.org', '@type':'ItemList',
-  itemListElement: sorted.map((p, i) => ({ '@type':'ListItem', position:i+1, name:p.title,
-    url: `${site.domain}/blogs/${p.slug}/` })) };
+  itemListElement: sorted.map((p, i) => ({ '@type':'ListItem', position:i+1, name:p.data.title,
+    url: `${site.domain}/blogs/${p.id}/` })) };
 
 const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 ---
@@ -62,11 +64,11 @@ const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numer
         </div>
 
         <aside class="bl__hero-visual" aria-label="Featured guide">
-          <a class="bl__hero-card" href={`/blogs/${lead.slug}/`} aria-label={`Read ${lead.title}`}>
+          <a class="bl__hero-card" href={`/blogs/${lead.id}/`} aria-label={`Read ${lead.data.title}`}>
             <img src={leadImg.src} alt={leadImg.alt} width="720" height="540" loading="eager" decoding="async" />
             <div class="bl__hero-card-copy">
               <span>Latest guide</span>
-              <strong>{lead.title}</strong>
+              <strong>{lead.data.title}</strong>
             </div>
           </a>
           <div class="bl__hero-stats" aria-label="Archive highlights">
@@ -115,13 +117,13 @@ const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numer
 
       <div class="bl__grid" id="bl-grid">
         {rest.map((p, i) => {
-          const m = img(p.image, p.subject);
-          const label = categories.find(c => c.slug === p.category)?.label;
+          const m = img(p.data.image, p.data.subject);
+          const label = categories.find(c => c.slug === p.data.category)?.label;
           return (
             <article class={`bl__card${i === 0 ? ' bl__card--featured' : ''}`}
-                     data-cat={p.category}
-                     data-search={`${p.title} ${p.excerpt} ${label}`.toLowerCase()}>
-              <a class="bl__card-link" href={`/blogs/${p.slug}/`} aria-label={`Read ${p.title}`}>
+                     data-cat={p.data.category}
+                     data-search={`${p.data.title} ${p.data.excerpt} ${label}`.toLowerCase()}>
+              <a class="bl__card-link" href={`/blogs/${p.id}/`} aria-label={`Read ${p.data.title}`}>
                 <span class="bl__media">
                   <img src={m.src} alt={m.alt} width="720" height="480"
                        loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
@@ -129,10 +131,10 @@ const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { day: 'numer
                 <span class="bl__card-copy">
                   <span class="bl__meta">
                     <span class="bl__tag">{label}</span>
-                    <span>{fmt(p.date)}</span>
+                    <span>{fmt(p.data.date)}</span>
                   </span>
-                  <strong>{p.title}</strong>
-                  <span>{p.excerpt}</span>
+                  <strong>{p.data.title}</strong>
+                  <span>{p.data.excerpt}</span>
                   <em>Read guide</em>
                 </span>
               </a>

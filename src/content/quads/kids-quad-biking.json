@@ -11,27 +11,37 @@
     {
       "label": "30 minutes",
       "minutes": 30,
-      "price": 75
+      "price": 75,
+      "badge": "Entry ride",
+      "blurb": "The lowest commitment. Enough to learn the controls and cross a few dune faces on the Kids Quad."
     },
     {
       "label": "1 hour",
       "minutes": 60,
-      "price": 140
+      "price": 140,
+      "badge": "Most balanced",
+      "blurb": "The sweet spot for most riders. Time to settle into the Kids Quad and get a proper run at the red dunes."
     },
     {
       "label": "2 hours",
       "minutes": 120,
-      "price": 250
+      "price": 250,
+      "badge": "Longer route",
+      "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Kids Quad."
     },
     {
       "label": "3 hours",
       "minutes": 180,
-      "price": 350
+      "price": 350,
+      "badge": "Half day",
+      "blurb": "A half-day session. Suits confident riders and groups pairing the ride with a camp stop."
     },
     {
       "label": "4 hours",
       "minutes": 240,
-      "price": 450
+      "price": 450,
+      "badge": "Full session",
+      "blurb": "The longest route we run on the Kids Quad. For experienced riders who want maximum time in the dunes."
     }
   ],
   "featured": true,

@@ -113,7 +113,9 @@ const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
             <article class="cl__value-card">
               <span>{c.badge}</span>
               <h3>{x.label}</h3>
-              <p>{c.blurb}</p>
+              {/* Guard rather than always render: an empty <p> left a visible gap
+                  between the heading and the price on a half-filled card. */}
+              {c.blurb && <p>{c.blurb}</p>}
               <div class="cl__value-price">
                 <strong>AED {x.price.toLocaleString('en-US')}</strong>
                 <small>Per vehicle</small>

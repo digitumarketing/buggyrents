@@ -11,27 +11,37 @@
     {
       "label": "30 minutes",
       "minutes": 30,
-      "price": 300
+      "price": 300,
+      "badge": "Entry ride",
+      "blurb": "The lowest commitment. Enough to learn the controls and cross a few dune faces on the Double Seat Open Desert."
     },
     {
       "label": "1 hour",
       "minutes": 60,
-      "price": 450
+      "price": 450,
+      "badge": "Most balanced",
+      "blurb": "The sweet spot for most riders. Time to settle into the Double Seat Open Desert and get a proper run at the red dunes."
     },
     {
       "label": "2 hours",
       "minutes": 120,
-      "price": 600
+      "price": 600,
+      "badge": "Longer route",
+      "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Double Seat Open Desert."
     },
     {
       "label": "3 hours",
       "minutes": 180,
-      "price": 900
+      "price": 900,
+      "badge": "Half day",
+      "blurb": "A half-day session. Suits confident riders and groups pairing the ride with a camp stop."
     },
     {
       "label": "4 hours",
       "minutes": 240,
-      "price": 1100
+      "price": 1100,
+      "badge": "Full session",
+      "blurb": "The longest route we run on the Double Seat Open Desert. For experienced riders who want maximum time in the dunes."
     }
   ],
   "order": 5

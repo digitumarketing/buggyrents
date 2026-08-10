@@ -465,3 +465,64 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   }
   console.log(`Price audit passed — ${prices.size} known prices, ${unknown.size} unmatched figure(s) in copy.`);
 }
+
+
+/* Cross-page image variety on tour pages.
+ *
+ * WHY THIS EXISTS
+ * Reported 10 Aug 2026: all eleven dune buggy tour pages opened with the same hero
+ * and carried the same three gallery photos, and the six quad pages did the same.
+ * Nothing was broken in a way any existing audit could see — every image existed,
+ * every alt was present, no page repeated an image within itself — so it shipped.
+ * A visitor comparing two buggies saw identical photography and reasonably assumed
+ * the pages were padding.
+ *
+ * The rule: no two tour pages in the same category may carry an identical set of
+ * content images. Heroes are excluded, because a shared category hero is a
+ * deliberate choice while the library has only one usable landscape shot per
+ * subject. Identical SETS fail; overlap is fine and unavoidable with 17 photos
+ * spread across 11 pages.
+ */
+{
+  const groups = {
+    'dune buggy': `${DIST}/dune-buggy-dubai`,
+    'quad bike':  `${DIST}/quad-bike-dubai`,
+    'dirt bike':  `${DIST}/ktm-dirt-bike-dubai`
+  };
+  const clashes = [];
+  let checked = 0;
+
+  for (const [label, dir] of Object.entries(groups)) {
+    let entries = [];
+    try { entries = readdirSync(dir); } catch { continue; }
+
+    const sets = new Map();   // fingerprint -> [page, …]
+    for (const name of entries) {
+      const file = join(dir, name, 'index.html');
+      let html;
+      try { html = readFileSync(file, 'utf8'); } catch { continue; }
+      if (name === 'price' || name === 'faq') continue;
+
+      const imgs = [...html.matchAll(/\/assets\/images\/lib\/([a-z0-9-]+)\.webp/g)]
+        .map(m => m[1]);
+      if (!imgs.length) continue;
+      checked++;
+
+      const key = [...new Set(imgs)].sort().join('|');
+      if (!sets.has(key)) sets.set(key, []);
+      sets.get(key).push(`/${name}/`);
+    }
+
+    for (const [, pgs] of sets) {
+      if (pgs.length > 1) clashes.push(`${label}: ${pgs.join(', ')} carry an identical image set`);
+    }
+  }
+
+  if (clashes.length) {
+    console.error('Tour pages share an identical set of images:');
+    clashes.forEach(c => console.error('  ' + c));
+    console.error('  Vary the gallery or the cross-sell cards so each page looks like its own machine.');
+    process.exit(1);
+  }
+  console.log(`Image variety audit passed — ${checked} tour pages, no two share an image set.`);
+}

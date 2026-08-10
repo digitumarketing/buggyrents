@@ -49,7 +49,12 @@ export const site = {
 
   awards: [
     { name: "TripAdvisor Travellers' Choice", year: 2024 }
-  ]
+  ],
+
+  /* Agency credit in the footer. rel="noopener" but NOT nofollow: this is a real
+     editorial credit on a site the agency built, which is exactly the kind of link
+     that is allowed to pass value. */
+  agency: { name: 'Digitum', url: 'https://digitum.marketing/' }
 } as const;
 
 export function waLink(message: string): string {

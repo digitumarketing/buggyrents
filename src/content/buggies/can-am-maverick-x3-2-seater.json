@@ -11,17 +11,23 @@
     {
       "label": "30 minutes",
       "minutes": 30,
-      "price": 600
+      "price": 600,
+      "badge": "Entry ride",
+      "blurb": "The lowest commitment. Enough to learn the controls and cross a few dune faces on the Can-Am X3 2-Seater."
     },
     {
       "label": "1 hour",
       "minutes": 60,
-      "price": 999
+      "price": 999,
+      "badge": "Most balanced",
+      "blurb": "The sweet spot for most riders. Time to settle into the Can-Am X3 2-Seater and get a proper run at the red dunes."
     },
     {
       "label": "2 hours",
       "minutes": 120,
-      "price": 1299
+      "price": 1299,
+      "badge": "Longer route",
+      "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Can-Am X3 2-Seater."
     }
   ],
   "featured": true,

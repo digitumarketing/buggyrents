@@ -44,6 +44,10 @@ const year = new Date().getFullYear();
   <div class="shell ftr__bottom">
     <p>© {year} {site.legalName}. All rights reserved.</p>
     <p class="ftr__note">Prices in AED and include VAT where applicable.</p>
+    <p class="ftr__credit">
+      Designed &amp; Marketing By
+      <a href={site.agency.url} target="_blank" rel="noopener">{site.agency.name}</a>
+    </p>
   </div>
 </footer>
 
@@ -73,6 +77,12 @@ const year = new Date().getFullYear();
 
   .ftr__bottom { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; padding-block: 1.25rem; border-top: 1px solid rgba(255,255,255,.14); font-size: var(--fs-xs); }
   .ftr__note { opacity: .7; }
+  /* The credit sits on the same row as the copyright and the VAT note. It is
+     underlined rather than coloured because the footer is navy and the brand
+     orange fails contrast on it at this size. */
+  .ftr__credit { opacity: .7; }
+  .ftr__credit a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  .ftr__credit a:hover { color: var(--c-gold); }
 
   @media (max-width: 860px) { .ftr__top { grid-template-columns: 1fr; } }
 </style>

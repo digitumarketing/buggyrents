@@ -1,10 +1,18 @@
 import { config, collection, singleton, fields } from '@keystatic/core';
 
+/* Badge and blurb used to be looked up in code from a hardcoded table keyed by the
+   duration label ("30 minutes", "1 hour", …). That worked for the durations we
+   shipped and failed the moment the client added one: a new "2 Hour" row matched
+   no key, so the card on the tour page rendered the fallback badge "Option" above
+   an empty paragraph. The copy belongs with the price it describes, so it is now
+   entered in the CMS alongside it and the card can never be half-built again. */
 const durationField = fields.array(
   fields.object({
-    label:   fields.text({ label: 'Duration label', defaultValue: '30 minutes' }),
+    label:   fields.text({ label: 'Duration label', description: 'Exactly as it should read on the page, e.g. "2 hours".', defaultValue: '30 minutes' }),
     minutes: fields.integer({ label: 'Minutes', defaultValue: 30 }),
-    price:   fields.integer({ label: 'Price (AED)', defaultValue: 0 })
+    price:   fields.integer({ label: 'Price (AED)', defaultValue: 0 }),
+    badge:   fields.text({ label: 'Card badge', description: 'Short tag above the duration, e.g. "Entry ride", "Most balanced".', defaultValue: '' }),
+    blurb:   fields.text({ label: 'Card description', description: 'One or two sentences on who this duration suits. Shown under the badge.', multiline: true, defaultValue: '' })
   }),
   { label: 'Durations & prices', itemLabel: p => `${p.fields.label.value} — AED ${p.fields.price.value}` }
 );
@@ -23,6 +31,13 @@ const vehicle = (label: string, path: string) =>
       minAge:    fields.integer({ label: 'Minimum age', defaultValue: 18 }),
       area:      fields.text({ label: 'Riding area' }),
       image:     fields.text({ label: 'Image path' }),
+      /* Optional. Left blank, the page falls back to the shared hero for its
+         category, which is why all eleven buggy pages currently open with the same
+         photo. There is exactly one buggy hero in the library at a usable size, so
+         this cannot be fixed in code: it needs landscape photography at 2000px or
+         wider, one per machine. The field is here so that the day those arrive the
+         client can assign them without a developer. */
+      heroImage: fields.text({ label: 'Hero image path (optional)', description: 'Leave blank to use the category hero. Needs to be at least 1600px wide.', defaultValue: '' }),
       blurb:     fields.text({ label: 'Short description', multiline: true }),
       durations: durationField,
       featured:  fields.checkbox({ label: 'Show on homepage', defaultValue: false }),

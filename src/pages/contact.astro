@@ -180,8 +180,18 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
       <div class="ct__panel">
         <p class="ct__kicker">02 / Where we are</p>
         <h2>The base at Al Awir</h2>
+        {/* The address links to the Google Business Profile rather than sitting as
+            plain text. Two reasons, and the second is the one that pays: it is the
+            single strongest internal signal tying this page to the profile, and
+            every guest who follows it lands on the place where they can leave the
+            review that feeds the 4.9 rating shown all over this site. */}
         <dl class="ct__office">
-          <dt>Address</dt><dd>{site.address.full}</dd>
+          <dt>Address</dt>
+          <dd>
+            <a class="ct__gbp" href={site.maps.link} target="_blank" rel="noopener">
+              {site.address.full}
+            </a>
+          </dd>
           <dt>Hours</dt><dd>Open 24 hours, 7 days a week</dd>
           <dt>Pickup</dt><dd>{transfers.summary} Outer emirates are quoted before you commit.</dd>
         </dl>
@@ -189,7 +199,11 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
           <iframe src={mapSrc} title="Buggy Rents base location on the Dubai to Hatta road"
                   loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         </div>
-        <p class="ct__coords">{site.geo.lat}, {site.geo.lng}</p>
+        <p class="ct__coords">
+          <a href={site.maps.link} target="_blank" rel="noopener">
+            View us on Google Maps and leave a review
+          </a>
+        </p>
       </div>
     </div>
   </section>

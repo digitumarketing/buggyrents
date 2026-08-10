@@ -15,7 +15,13 @@
  * the cheapest buggy would stop being the first thing a visitor sees.
  */
 
-export type Duration = { label: string; minutes: number; price: number; was?: number };
+/* badge and blurb are the tour-page card copy. They are optional so an older
+   content file still parses, and tours.ts falls back to its label table when they
+   are blank; anything the client types wins over that table. */
+export type Duration = {
+  label: string; minutes: number; price: number; was?: number;
+  badge?: string; blurb?: string;
+};
 
 export type Vehicle = {
   slug: string;
@@ -26,13 +32,25 @@ export type Vehicle = {
   seats: number;
   minAge: number;
   area: string;
-  image: string;   // key into src/data/images.ts
+  image: string;       // key into src/data/images.ts
+  heroImage?: string;  // optional per-vehicle hero, falls back to the category hero
   blurb: string;
   durations: Duration[];
   featured?: boolean;
 };
 
 type Raw = Omit<Vehicle, 'slug' | 'category'> & { order?: number };
+
+/* The duration label is free text in the CMS, and it is printed straight onto the
+   card, the price table, the schema Offer and the WhatsApp booking message. A
+   client typing "2Hour" therefore put "2Hour" in five places at once. Inserting the
+   missing space between a digit and a letter fixes the common slip without
+   rewriting anything the client meant: "2 hours" and "30 minutes" pass through
+   untouched. Trimming matters for the same reason. */
+const tidyDuration = (d: Vehicle['durations'][number]) => ({
+  ...d,
+  label: String(d.label ?? '').trim().replace(/(\d)([A-Za-z])/g, '$1 $2')
+});
 
 /* Keystatic writes either <slug>.json or <slug>/index.json depending on whether a
    collection carries assets. Match both so a future schema change cannot silently
@@ -48,7 +66,7 @@ const load = (
         .replace(/\.json$/, '')
         .split('/')
         .pop()!;
-      return { ...data, slug, category };
+      return { ...data, slug, category, durations: (data.durations ?? []).map(tidyDuration) };
     })
     .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
     .map(({ order, ...v }) => v as Vehicle);

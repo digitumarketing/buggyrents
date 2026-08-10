@@ -11,22 +11,30 @@
     {
       "label": "30 minutes",
       "minutes": 30,
-      "price": 350
+      "price": 350,
+      "badge": "Entry ride",
+      "blurb": "The lowest commitment. Enough to learn the controls and cross a few dune faces on the Polaris RZR 4-Seater."
     },
     {
       "label": "1 hour",
       "minutes": 60,
-      "price": 550
+      "price": 550,
+      "badge": "Most balanced",
+      "blurb": "The sweet spot for most riders. Time to settle into the Polaris RZR 4-Seater and get a proper run at the red dunes."
     },
     {
       "label": "2 hours",
       "minutes": 120,
-      "price": 1099
+      "price": 1099,
+      "badge": "Longer route",
+      "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Polaris RZR 4-Seater."
     },
     {
       "label": "4 hours",
       "minutes": 240,
-      "price": 2299
+      "price": 2299,
+      "badge": "Full session",
+      "blurb": "The longest route we run on the Polaris RZR 4-Seater. For experienced riders who want maximum time in the dunes."
     }
   ],
   "featured": true,

@@ -15,25 +15,48 @@ const HERO = {
 } as const;
 const base = (c: Vehicle['category']) => PARENT[c].href;
 
-const DURATION_BADGE: Record<string, string> = {
-  '30 minutes': 'Entry ride', '1 hour': 'Most balanced', '2 hours': 'Longer route',
-  '3 hours': 'Half day', '4 hours': 'Full session'
+/* These tables are the FALLBACK for duration cards. Anything the client types into
+   the badge and description fields in the CMS wins over them.
+
+   They are keyed by MINUTES, not by the label. The label is free text, so a client
+   adding a two-hour slot may reasonably type "2 Hour", "2 hrs" or "2Hour", none of
+   which matched the old label-keyed table. The card then rendered the fallback
+   badge "Option" above an empty paragraph, which is the bug reported on 10 Aug 2026.
+   Minutes is a number field, so 120 is 120 however the label is worded. */
+const DURATION_BADGE: Record<number, string> = {
+  30: 'Entry ride', 60: 'Most balanced', 120: 'Longer route',
+  180: 'Half day', 240: 'Full session'
 };
-const DURATION_BLURB = (v: Vehicle, label: string) => ({
-  '30 minutes': `The lowest commitment. Enough to learn the controls and cross a few dune faces on the ${v.shortName}.`,
-  '1 hour':     `The sweet spot for most riders. Time to settle into the ${v.shortName} and get a proper run at the red dunes.`,
-  '2 hours':    `A longer route with more varied terrain and photo stops, for riders already comfortable on the ${v.shortName}.`,
-  '3 hours':    `A half-day session. Suits confident riders and groups pairing the ride with a camp stop.`,
-  '4 hours':    `The longest route we run on the ${v.shortName}. For experienced riders who want maximum time in the dunes.`
-}[label] ?? '');
+const DURATION_BLURB = (v: Vehicle, minutes: number) => ({
+  30:  `The lowest commitment. Enough to learn the controls and cross a few dune faces on the ${v.shortName}.`,
+  60:  `The sweet spot for most riders. Time to settle into the ${v.shortName} and get a proper run at the red dunes.`,
+  120: `A longer route with more varied terrain and photo stops, for riders already comfortable on the ${v.shortName}.`,
+  180: `A half-day session. Suits confident riders and groups pairing the ride with a camp stop.`,
+  240: `The longest route we run on the ${v.shortName}. For experienced riders who want maximum time in the dunes.`
+}[minutes] ?? `A ${v.shortName} session on the guided ${v.area.toLowerCase()} route, priced per vehicle rather than per person.`);
 
 /* Pick gallery images from the same subject, excluding every image already
-   on the page (the vehicle card and all related cards). */
+   on the page (the vehicle card and all related cards).
+
+   THE BUG THIS FIXES, reported 10 Aug 2026: every one of the eleven buggy tour
+   pages showed the same three gallery photos, and the six quad pages did the same.
+   The old code took pick(0), pick(1), pick(2) from a pool built the same way for
+   every vehicle, so of course every page got the same first three entries. Only
+   the vehicle's own photo differed.
+
+   The fix is an OFFSET derived from the vehicle's position in its category, so
+   each vehicle starts at a different point in the pool and takes a different
+   window. With 17 buggy photos and 11 buggies, no two adjacent pages overlap and
+   the set as a whole is spread across the library instead of clustered at index 0.
+   audit-contrast.mjs now fails the build if two tour pages ever share an identical
+   gallery again, so this cannot quietly regress. */
 function galleryFor(v: Vehicle, taken: string[]) {
   const pool = bySubject(v.category).filter(n => !taken.includes(n));
   const fallback = bySubject(v.category).filter(n => n !== v.image);
   const src = pool.length >= 3 ? pool : fallback;
-  const pick = (i: number) => src[i % src.length];
+  const seat = Math.max(0, byCategory[v.category].findIndex(x => x.slug === v.slug));
+  const offset = seat * 3;
+  const pick = (i: number) => src[(offset + i) % src.length];
   return [
     { image: pick(0), kicker: `${v.seats}-seat profile`, title: `Open cockpit, roll cage and red-dune stance.`,
       body: `The ${v.shortName} is set up for the Lahbab route: ${v.engine}, ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'}, and a ride height that copes with soft sand.` },
@@ -90,7 +113,14 @@ const faqsFor = (v: Vehicle): { q: string; a: string }[] => {
 /* Every other vehicle in the same category first, then the closest alternative
    from another category. Same-category options are the genuinely relevant next choices. */
 const relatedFor = (v: Vehicle) => {
-  const sameCat = byCategory[v.category].filter(x => x.slug !== v.slug);
+  /* Rotated, not sliced from the top. The list is in a fixed fleet order, so taking
+     the first six gave nearly every buggy page the same six cross-sell cards and
+     put the same Polaris photo on sixteen pages. Starting each vehicle at its own
+     position walks the whole fleet instead, and still keeps the cards inside the
+     same category where the comparison is useful. */
+  const all = byCategory[v.category];
+  const at = Math.max(0, all.findIndex(x => x.slug === v.slug));
+  const sameCat = [...all.slice(at + 1), ...all.slice(0, at)];
   const otherCat = allVehicles.filter(x => x.category !== v.category)
     .sort((a, b) => Math.abs(fromPrice(a) - fromPrice(v)) - Math.abs(fromPrice(b) - fromPrice(v)))
     .slice(0, Math.max(0, 6 - sameCat.length));
@@ -158,7 +188,12 @@ ${v.durations.length > 2 ? `<p>Longer routes suit riders who already know what t
 export function tourData(v: Vehicle): ClusterData {
   const n = NOUN[v.category];
   const durationCopy: ClusterData['durationCopy'] = {};
-  v.durations.forEach(d => { durationCopy[d.label] = { badge: DURATION_BADGE[d.label] ?? 'Option', blurb: DURATION_BLURB(v, d.label) }; });
+  v.durations.forEach(d => {
+    durationCopy[d.label] = {
+      badge: d.badge?.trim() || DURATION_BADGE[d.minutes] || 'Option',
+      blurb: d.blurb?.trim() || DURATION_BLURB(v, d.minutes)
+    };
+  });
   const from = fromPrice(v);
   const related = relatedFor(v);
   return {
@@ -166,7 +201,7 @@ export function tourData(v: Vehicle): ClusterData {
     crumbParent: PARENT[v.category],
     title: `${v.name} Dubai | From AED ${from.toLocaleString('en-US')} | Buggy Rents`,
     description: `Book the ${v.name} in Dubai from AED ${from.toLocaleString('en-US')}. ${v.engine}, ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'}, age ${v.minAge}+, guided ${v.area.toLowerCase()} route. WhatsApp +971 56 209 5713.`,
-    heroImage: HERO[v.category],
+    heroImage: v.heroImage?.trim() || HERO[v.category],
     eyebrow: `${v.engine} · ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'} · age ${v.minAge}+`,
     h1Lead: v.shortName.split(' ')[0], h1Em: v.shortName.split(' ').slice(1).join(' '), h1Tail: 'Dubai',
     lede: `${v.blurb} Guided on the ${v.area.toLowerCase()}, with helmet, briefing, fuel and a lead guide included. Price is per ${n}, not per person.`,

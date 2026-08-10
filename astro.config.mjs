@@ -35,7 +35,13 @@ export default defineConfig({
      them becomes a 404 the moment the domain points here, and whatever ranking and
      backlinks they carry is thrown away. Two old URLs, /dune-buggy-dubai/ and
      /quad-bike-dubai/, happen to match the new ones exactly and need no redirect.
-     Verified against buggyrents.com/page-sitemap.xml on 10 Aug 2026. */
+     Verified against buggyrents.com/page-sitemap.xml on 10 Aug 2026.
+
+     Astro normalises a trailing slash away when it writes _redirects, so listing
+     "/contact-us/" as a second key does not produce a second rule, it produces a
+     duplicate of the first one and a stray meta-refresh HTML page. The
+     trailing-slash form of each URL, which is the form WordPress published and
+     Google indexed, is added by hand in public/_redirects instead. */
   redirects: {
     '/dune-buggy-rental-dubai': '/dune-buggy-dubai/',
     '/dune-buggy-rental':       '/dune-buggy-dubai/',

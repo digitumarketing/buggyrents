@@ -1,0 +1,18 @@
+# Trailing-slash forms of the legacy WordPress URLs.
+#
+# WordPress published every one of these with a trailing slash, so that is the
+# form Google has indexed and the form a real visitor clicks. Astro strips the
+# slash when it generates its own rules from astro.config.mjs, which left the
+# indexed form unmatched. Cloudflare reads the first matching line, so these sit
+# above the generated ones and both forms now answer with a 301.
+#
+# Do not delete. Without them every ranking page 404s.
+
+/dune-buggy-rental-dubai/   /dune-buggy-dubai/       301
+/dune-buggy-rental/         /dune-buggy-dubai/       301
+/atv-rental-dubai/          /quad-bike-dubai/        301
+/quad-bike-rental-dubai/    /quad-bike-dubai/        301
+/dirt-bike-rental-dubai/    /ktm-dirt-bike-dubai/    301
+/dirt-bike-dubai/           /ktm-dirt-bike-dubai/    301
+/contact-us/                /contact/                301
+/thank-you/                 /contact/                301

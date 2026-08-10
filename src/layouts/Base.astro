@@ -80,6 +80,24 @@ const localBusiness = {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" />
 
   <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+
+  {/* Google Analytics 4. Wrapped in import.meta.env.PROD on purpose: without it
+      every local dev page view and every audit run would land in the client's
+      reports as real traffic, and the first month of data is the one they will
+      judge the site on. is:inline stops Astro bundling it, which is what Google
+      expects for gtag. */}
+  {import.meta.env.PROD && (
+    <>
+      <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HKVDWC923V"></script>
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HKVDWC923V');
+      </script>
+    </>
+  )}
+
   <slot name="head" />
 </head>
 <body>

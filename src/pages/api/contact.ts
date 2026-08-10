@@ -17,11 +17,12 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-/* The Resend account is owned by Buggyrents@gmail.com, and their shared sender can
-   only deliver to the account owner. Verify buggyrents.com at resend.com, then set
-   CONTACT_FROM to a bookings@buggyrents.com address to stop landing in spam. */
+/* These are fallbacks only. The real values are CONTACT_FROM and CONTACT_INBOX in
+   wrangler.toml. buggyrents.com is verified at Resend, so mail leaves as the domain
+   itself; the resend.dev sender is kept here purely so a misconfigured preview
+   deploy still sends something rather than throwing. */
 const DEFAULT_INBOX = 'Buggyrents@gmail.com';
-const DEFAULT_FROM = 'Buggy Rents Website <onboarding@resend.dev>';
+const DEFAULT_FROM = 'Buggy Rents Website <bookings@buggyrents.com>';
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -84,7 +85,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
       body: JSON.stringify({
         from: env.CONTACT_FROM || DEFAULT_FROM,
         to: [env.CONTACT_INBOX || DEFAULT_INBOX],
-        reply_to: email || undefined,
+        /* bookings@ cannot receive mail, so without this a reply in Gmail would
+           bounce. Pointing it at the guest makes Reply do the obvious thing. When
+           the guest left the optional email blank, fall back to the booking inbox
+           so a reply at least stays with the team. */
+        reply_to: email || env.CONTACT_INBOX || DEFAULT_INBOX,
         subject: `Booking request from ${name} (${phone})${people ? ', ' + people + ' pax' : ''}`,
         text
       })

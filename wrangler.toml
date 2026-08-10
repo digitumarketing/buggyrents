@@ -33,8 +33,14 @@ not_found_handling = "404-page"
 run_worker_first = ["/keystatic", "/keystatic/*", "/api/*"]
 
 # Contact form delivery. Plain vars, not secrets.
-# Verify buggyrents.com at resend.com, then change CONTACT_FROM to
-# "Buggy Rents Website <bookings@buggyrents.com>" so mail stops landing in spam.
+#
+# buggyrents.com was verified at resend.com on 10 Aug 2026: DKIM on the root domain,
+# SPF and the return-path MX on send.buggyrents.com. Mail now leaves as the domain
+# itself rather than resend.dev, which is what keeps it out of spam.
+#
+# bookings@ is a SEND-ONLY address. Receiving is switched off at Resend, so nothing
+# can be read there. That is fine because the API route sets Reply-To to the guest's
+# own address, so hitting Reply in Gmail answers the guest, not this mailbox.
 [vars]
-CONTACT_FROM  = "Buggy Rents Website <onboarding@resend.dev>"
+CONTACT_FROM  = "Buggy Rents Website <bookings@buggyrents.com>"
 CONTACT_INBOX = "Buggyrents@gmail.com"

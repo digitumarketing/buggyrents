@@ -193,6 +193,55 @@ export default config({
       }
     }),
 
+    /* Ten pickup-route pages, one entry each. Only what is genuinely specific to
+       the place lives here. The sentences that appear on all ten are built in code
+       from these four values, so correcting a shared line is one edit rather than
+       ten, and the pages cannot drift apart over time. */
+    locations: collection({
+      label: 'Location pages',
+      slugField: 'name',
+      path: 'src/content/locations/*',
+      format: { data: 'json' },
+      columns: ['name', 'drive'],
+      schema: {
+        name:    fields.slug({
+          name: { label: 'Page name', description: 'Used in the title tag and the breadcrumb.' },
+          slug: { label: 'URL slug', description: 'Changing this breaks every link to the page and its Google ranking. Leave it alone once published.' }
+        }),
+        short:   fields.text({ label: 'Short name', description: 'The place on its own, e.g. "Dubai Marina". It is dropped into roughly thirty sentences across the page, so keep it short and natural.' }),
+        emirate: fields.text({ label: 'Emirate', description: 'Exactly "Dubai" for free pickup. Anything else makes the page say the transfer is quoted, so a typo here changes what the page promises.' }),
+        drive:   fields.text({ label: 'Drive time', description: 'e.g. "40-55 min". Printed in the stats strip, the FAQ and the guide.' }),
+        intro:   fields.text({ label: 'Opening paragraph', multiline: true }),
+        keywords: fields.array(fields.text({ label: 'Keyword' }), {
+          label: 'Target keywords', description: 'Never shown on the page. They record what this page is meant to rank for.', itemLabel: p => p.value
+        }),
+        order:   fields.integer({ label: 'Display order', defaultValue: 99 })
+      }
+    }),
+
+    /* Eight "who the ride is for" pages. Same split as the location pages. */
+    audiences: collection({
+      label: 'Audience pages',
+      slugField: 'name',
+      path: 'src/content/audiences/*',
+      format: { data: 'json' },
+      columns: ['name', 'pitch'],
+      schema: {
+        name:  fields.slug({
+          name: { label: 'Page name' },
+          slug: { label: 'URL slug', description: 'Changing this breaks every link to the page. Leave it alone once published.' }
+        }),
+        short: fields.text({ label: 'Short name', description: 'e.g. "Families". Used in the hero eyebrow.' }),
+        pitch: fields.text({ label: 'One-line pitch', description: 'Shown beside the heading, e.g. "One 4-seater keeps everyone together".' }),
+        vehicles: fields.text({ label: 'Recommended vehicles', description: 'e.g. "4-seater buggy - kids quad from age 6".' }),
+        intro: fields.text({ label: 'Opening paragraph', multiline: true }),
+        keywords: fields.array(fields.text({ label: 'Keyword' }), {
+          label: 'Target keywords', description: 'Never shown on the page.', itemLabel: p => p.value
+        }),
+        order: fields.integer({ label: 'Display order', defaultValue: 99 })
+      }
+    }),
+
     /* Reviews are a collection rather than one long field because they arrive one
        at a time. This gives an "add review" button instead of a wall of text, and
        a single review can be removed if a guest asks for it to come down.

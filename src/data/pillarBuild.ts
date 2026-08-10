@@ -3,6 +3,7 @@ import type { LfBlock } from '@/components/LongFormReader.astro';
 import { buggies, quads, dirtbikes, fromPrice, categoryFromPrice, type Vehicle } from '@/data/vehicles';
 import { sharedSafaris, privateSafaris, safariFromPrice } from '@/data/safari';
 import { transfers, policy, payment, bbqCombos } from '@/data/extras';
+import { pageTitle } from '@/data/seo';
 
 type Cat = 'buggy' | 'quad' | 'dirtbike';
 const NOUN = { buggy: 'dune buggy', quad: 'quad bike', dirtbike: 'dirt bike' } as const;
@@ -50,8 +51,8 @@ export function buildPillar(cat: Cat, o: {
 /* ─────────── DUNE BUGGY PILLAR ─────────── */
 export const buggyPillar = buildPillar('buggy', {
   crumb: 'Dune Buggy Dubai',
-  title: `Dune Buggy Dubai | Self-Drive Tours from AED ${fromPrice(buggies[0])} | Buggy Rents`,
-  description: `Dune buggy Dubai self-drive tours in the Lahbab red dunes. Eleven buggies from Polaris RZR to Can-Am Maverick R, from AED ${fromPrice(buggies[0])} per buggy. Free Dubai pickup, helmet and guide included.`,
+  title: pageTitle(`Dune Buggy Dubai | Self-Drive Tours from AED ${fromPrice(buggies[0])}`),
+  description: `Self-drive dune buggy tours in the Lahbab red dunes. Eleven buggies from AED ${fromPrice(buggies[0])} per buggy, not per person. Free Dubai pickup, helmet and guide included.`,
   eyebrow: 'Self-drive buggy tour in Dubai',
   h1: 'Dune Buggy Dubai',
   subhead: 'Self-drive dune buggy tours in the Lahbab red dunes, with Polaris and Can-Am machines for every level.',
@@ -104,7 +105,7 @@ export const buggyPillar = buildPillar('buggy', {
 export const ktmPillar = buildPillar('dirtbike', {
   crumb: 'KTM Dirt Bike Dubai',
   title: `KTM Dirt Bike Dubai | 450cc Enduro from AED ${fromPrice(dirtbikes[0])}`,
-  description: `KTM dirt bike Dubai: a 450cc desert enduro in the Lahbab red dunes from AED ${fromPrice(dirtbikes[0])}. Rider screening applies. Helmet, briefing and guide included, free Dubai pickup.`,
+  description: `KTM dirt bike Dubai: a 450cc desert enduro in the Lahbab red dunes from AED ${fromPrice(dirtbikes[0])}. Rider screening applies. Helmet, briefing and guide included.`,
   eyebrow: 'Guided desert enduro in Dubai',
   h1: 'KTM Dirt Bike Dubai',
   subhead: 'A 450cc desert enduro in the Lahbab red dunes, for riders who can already work a clutch, gears and throttle.',

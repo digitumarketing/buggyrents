@@ -74,6 +74,14 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   for (const f of files) {
     const src = readFileSync(f, 'utf8');
     for (const m of src.matchAll(/\brgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+\.\d+\s*\)/g)) bad.push(`${f}: ${m[0]}`);
+    /* clamp() with a missing comma, e.g. clamp(1rem.9rem + .45vw, 1.22rem).
+       CSS silently drops the whole declaration, so the element quietly renders at
+       its inherited size and nothing looks broken enough to notice. Two of these
+       had been shipping on the homepage hero and the long-form reader since the
+       first build. Same class of bug as the rgba one above: valid-looking, invalid. */
+    for (const m of src.matchAll(/clamp\(\s*[\d.]+(?:rem|px|em|vw)[\d.]/g)) bad.push(`${f}: ${m[0]}...  clamp() is missing a comma`);
+    /* The separator left behind when em dashes were stripped sitewide. */
+    for (const m of src.matchAll(/\s,\s\s/g)) bad.push(`${f}: stray " ,  " separator`);
   }
   if (bad.length) {
     console.error('Malformed colour values (missing alpha comma):');
@@ -535,4 +543,73 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     process.exit(1);
   }
   console.log(`Image variety audit passed — ${checked} tour pages, no two share an image set.`);
+}
+
+
+/* Title and meta description length.
+ *
+ * WHY THIS EXISTS
+ * On 10 Aug 2026, 40 of 64 titles and 29 descriptions were long enough that Google
+ * cut them off in search results. Nothing was broken, so nothing caught it: the
+ * markup was valid, the copy was good, and the part being thrown away was simply
+ * the end of it. On a tour page that meant the price disappeared from the result.
+ *
+ * WARN, NOT FAIL. These are rendering guidelines, not rules, and Google's cut-off
+ * moves with pixel width rather than character count. A hard failure would block a
+ * deploy over a two-character overrun, and worse, it would block the client's own
+ * content edits. The list is what matters: anything on it is a page whose search
+ * result is being truncated, and that is a copy decision for a person to make.
+ */
+{
+  const TITLE_MAX = 60;
+  const DESC_MAX = 160;
+
+  const pages = [];
+  const walkT = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkT(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkT(DIST);
+
+  const decode = s => s
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+
+  const longTitles = [];
+  const longDescs = [];
+  const missing = [];
+
+  for (const page of pages) {
+    if (page.includes('404')) continue;
+    const html = readFileSync(page, 'utf8');
+    const url = '/' + page.replace(/^dist\//, '').replace(/index\.html$/, '');
+
+    const t = decode((html.match(/<title>([\s\S]*?)<\/title>/) || [, ''])[1]).trim();
+    const d = decode((html.match(/<meta name="description" content="([\s\S]*?)"/) || [, ''])[1]).trim();
+
+    if (!t || !d) missing.push(`${url} (${!t ? 'no title' : 'no description'})`);
+    if (t.length > TITLE_MAX) longTitles.push(`${String(t.length).padStart(3)}  ${url}`);
+    if (d.length > DESC_MAX) longDescs.push(`${String(d.length).padStart(3)}  ${url}`);
+  }
+
+  /* A page with no title or description at all IS a failure. That is not a
+     guideline, it is a missing tag, and Google will invent something worse. */
+  if (missing.length) {
+    console.error('Pages missing a title or meta description:');
+    missing.forEach(m => console.error('  ' + m));
+    process.exit(1);
+  }
+
+  if (longTitles.length) {
+    console.warn(`  ${longTitles.length} title(s) over ${TITLE_MAX} characters, will be truncated in search results:`);
+    longTitles.slice(0, 8).forEach(t => console.warn('    ' + t));
+    if (longTitles.length > 8) console.warn(`    ...and ${longTitles.length - 8} more.`);
+  }
+  if (longDescs.length) {
+    console.warn(`  ${longDescs.length} description(s) over ${DESC_MAX} characters:`);
+    longDescs.slice(0, 8).forEach(t => console.warn('    ' + t));
+    if (longDescs.length > 8) console.warn(`    ...and ${longDescs.length - 8} more.`);
+  }
+  console.log(`Metadata audit passed — ${pages.length - 1} pages, ${longTitles.length} long title(s), ${longDescs.length} long description(s).`);
 }

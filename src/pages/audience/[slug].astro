@@ -7,6 +7,7 @@ import Faq from '@/components/home/Faq.astro';
 import { audiences } from '@/data/audiences';
 import { buggies, quads } from '@/data/vehicles';
 import { site } from '@/data/site';
+import { pageTitle, tidy } from '@/data/seo';
 
 export function getStaticPaths() {
   return audiences.map(a => ({ params: { slug: a.slug }, props: { aud: a } }));
@@ -26,14 +27,14 @@ const blocks = [
 ];
 ---
 <Base
-  title={`${aud.name} | Dubai Desert Tours | Buggy Rents`}
-  description={`${aud.name} ,  ${aud.pitch}. ${aud.vehicles}. Guided dune buggy and quad biking in the Lahbab red dunes. WhatsApp ${site.phone}.`}
+  title={pageTitle(`${aud.name} | Dubai Desert Tours`)}
+  description={tidy(`${aud.pitch}. ${aud.vehicles}. Guided buggy and quad routes in the Lahbab red dunes, priced per vehicle.`)}
 >
   <Hero
     eyebrow={`For ${aud.short.toLowerCase()} · Lahbab red dunes`}
     heading={aud.name}
     taglineEm={aud.pitch}
-    tagline={`,  ${aud.vehicles}`}
+    tagline={aud.vehicles}
   />
 
   <section class="section">

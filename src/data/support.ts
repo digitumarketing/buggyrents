@@ -12,6 +12,7 @@
 import type { SupportData } from '@/components/templates/Support.astro';
 import { policy, payment, transfers } from '@/data/extras';
 import { site } from '@/data/site';
+import { pageTitle } from '@/data/seo';
 
 const ABOUT = { name: 'About us', href: '/about-us/' };
 const KTM = { name: 'KTM Dirt Bike Dubai', href: '/ktm-dirt-bike-dubai/' };
@@ -118,7 +119,7 @@ export const refundPolicy: SupportData = {
   crumb: [ABOUT],
   short: 'Refund Policy',
   title: 'Refund and Cancellation Policy | Buggy Rents Dubai',
-  description: 'Free cancellation up to 24 hours before your slot, no deposit on standard bookings, and a full refund if we call off a ride for weather. The Buggy Rents refund policy in plain language.',
+  description: 'Free cancellation up to 24 hours before your slot, no deposit on standard bookings, and a full refund if we call off a ride for weather. In plain language.',
   heroImage: 'quad-biking-dubai-hero-red-dunes',
   finalImage: 'yamaha-raptor-700cc-quad-bike-lahbab-red-dunes', heroSubject: 'quad',
   kicker: 'Refund policy',
@@ -208,7 +209,7 @@ export const termsConditions: SupportData = {
   crumb: [ABOUT],
   short: 'Terms and Conditions',
   title: 'Terms and Conditions | Buggy Rents Dubai',
-  description: 'The terms you agree to when you ride a dune buggy, quad bike or dirt bike with Buggy Rents in Dubai. Age limits, rider responsibility, damage, payment and cancellation.',
+  description: 'The terms you agree to when you ride a buggy, quad or dirt bike with us in Dubai: age limits, rider responsibility, damage, payment and cancellation.',
   heroImage: 'dune-buggy-dubai-hero-red-dunes',
   finalImage: 'can-am-maverick-x3-rs-2-seater-dune-buggy-dubai', heroSubject: 'buggy',
   kicker: 'Terms and conditions',
@@ -387,8 +388,8 @@ export const ourFleet: SupportData = {
   slug: 'about-us/our-fleet',
   crumb: [ABOUT],
   short: 'Our Fleet',
-  title: 'Our Fleet | Dune Buggies, Quads and Dirt Bikes in Dubai | Buggy Rents',
-  description: 'Eleven dune buggies from Polaris RZR to Can-Am Maverick R, six quad bikes from kids 70cc to the Yamaha Raptor 700, and the KTM 450 enduro. What each machine suits, and who should avoid it.',
+  title: pageTitle('Our Fleet | Dune Buggies, Quads and Dirt Bikes in Dubai'),
+  description: 'Eleven dune buggies, six quad bikes from kids 70cc to the Raptor 700, and the KTM 450 enduro. What each machine suits, and who should avoid it.',
   heroImage: 'desert-adventure-dubai-hero-canam-maverick',
   finalImage: 'polaris-rzr-4-seater-dune-buggy-parked-dubai-base', heroSubject: 'buggy',
   kicker: 'Our fleet',
@@ -472,7 +473,7 @@ export const dirtBikeBeginners: SupportData = {
   slug: 'ktm-dirt-bike-dubai/dirt-bike-for-beginners',
   crumb: [KTM],
   short: 'Dirt Bike for Beginners',
-  title: 'Dirt Bike for Beginners in Dubai | Read This First | Buggy Rents',
+  title: pageTitle('Dirt Bike for Beginners in Dubai | Read This First'),
   description: 'Honest guidance on whether a beginner should ride a dirt bike in Dubai. The KTM 450 is not a learner machine. What to ride instead, and how to build up to it.',
   heroImage: 'ktm-dirt-bike-dubai-hero-sunrise-dunes',
   finalImage: 'ktm-dirt-bike-riders-red-dune-crest-dubai', heroSubject: 'dirtbike',
@@ -561,8 +562,8 @@ export const dirtBikeAdvanced: SupportData = {
   slug: 'ktm-dirt-bike-dubai/dirt-bike-for-advanced',
   crumb: [KTM],
   short: 'Dirt Bike for Advanced Riders',
-  title: 'Dirt Bike for Advanced Riders in Dubai | KTM 450 Enduro | Buggy Rents',
-  description: 'KTM 450 desert enduro sessions in Dubai for riders who already ride. Open red dune terrain, up to four hours, from AED 500. What the terrain demands and how the sessions run.',
+  title: pageTitle('Dirt Bike for Advanced Riders in Dubai | KTM 450 Enduro'),
+  description: 'KTM 450 desert enduro in Dubai for riders who already ride. Open red dune terrain, up to four hours, from AED 500. What it demands and how sessions run.',
   heroImage: 'ktm-dirt-bike-dubai-hero-sunrise-dunes',
   finalImage: 'ktm-450-enduro-rider-sand-spray-dubai', heroSubject: 'dirtbike',
   kicker: 'Dirt bike for advanced riders',

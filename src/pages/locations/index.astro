@@ -9,10 +9,11 @@ import { site, waLink } from '@/data/site';
 import { locations } from '@/data/locations';
 import { transfers } from '@/data/extras';
 import { buggies, fromPrice } from '@/data/vehicles';
+import { pageTitle } from '@/data/seo';
 
 const buggyFrom = Math.min(...buggies.map(fromPrice));
 
-const title = 'Dune Buggy Pickup Locations in Dubai and the UAE | Buggy Rents';
+const title = pageTitle('Dune Buggy Pickup Locations in Dubai and the UAE');
 const description = `We collect from ${locations.length} areas across Dubai and the northern emirates. Hotel pickup anywhere inside Dubai is free; outer emirates are quoted before you book.`;
 
 const h = hero('dune-buggy-dubai-hero-red-dunes');

@@ -7,6 +7,7 @@ import type { AboutData } from '@/components/templates/About.astro';
 import { buggies, quads, dirtbikes } from '@/data/vehicles';
 import { transfers, payment, policy } from '@/data/extras';
 import { site } from '@/data/site';
+import { pageTitle } from '@/data/seo';
 
 const fromPrice = (v: typeof buggies[number]) => Math.min(...v.durations.map(d => d.price));
 const catFrom = (list: typeof buggies) => Math.min(...list.map(fromPrice));
@@ -27,8 +28,8 @@ export const buggyFaq: AboutData = {
   slug: 'dune-buggy-dubai/faq',
   crumb: [{ name: 'Dune Buggy Dubai', href: '/dune-buggy-dubai/' }],
   short: 'FAQ',
-  title: 'Dune Buggy Dubai FAQ | Prices, Ages, Pickup and Timings | Buggy Rents',
-  description: `Answers to the questions people actually ask before booking a dune buggy in Dubai. Prices from AED ${buggyFrom} per buggy, age limits, free Dubai pickup, timings and what to wear.`,
+  title: pageTitle('Dune Buggy Dubai FAQ | Prices, Ages, Pickup and Timings'),
+  description: `The questions people actually ask before booking a dune buggy in Dubai: prices from AED ${buggyFrom} per buggy, age limits, free pickup, timings and what to wear.`,
   heroImage: 'dune-buggy-dubai-hero-red-dunes',
   finalImage: 'dune-buggy-convoy-crossing-dubai-red-dunes', heroSubject: 'buggy',
   kicker: 'Dune buggy FAQ',
@@ -146,8 +147,8 @@ export const quadFaq: AboutData = {
   slug: 'quad-bike-dubai/faq',
   crumb: [{ name: 'Quad Biking Dubai', href: '/quad-bike-dubai/' }],
   short: 'FAQ',
-  title: 'Quad Biking Dubai FAQ | Prices, Age Limits and Pickup | Buggy Rents',
-  description: `Answers to the questions people ask before booking quad biking in Dubai. Prices from AED ${quadFrom} per quad, kids from age 6, free Dubai pickup, timings and what to wear.`,
+  title: pageTitle('Quad Biking Dubai FAQ | Prices, Age Limits and Pickup'),
+  description: `The questions people ask before booking quad biking in Dubai: prices from AED ${quadFrom} per quad, kids from age 6, free pickup, timings and what to wear.`,
   heroImage: 'quad-biking-dubai-hero-red-dunes',
   finalImage: 'quad-bike-rental-dubai-rider-red-quad', heroSubject: 'quad',
   kicker: 'Quad biking FAQ',

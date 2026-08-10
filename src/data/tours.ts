@@ -1,6 +1,7 @@
 import type { ClusterData } from '@/components/templates/Cluster.astro';
 import { allVehicles, byCategory, fromPrice, type Vehicle } from '@/data/vehicles';
 import { bySubject } from '@/data/images';
+import { pageTitle, tidy } from '@/data/seo';
 
 const NOUN = { buggy: 'buggy', quad: 'quad', dirtbike: 'dirt bike' } as const;
 const PARENT = {
@@ -199,7 +200,7 @@ export function tourData(v: Vehicle): ClusterData {
   return {
     vehicle: v,
     crumbParent: PARENT[v.category],
-    title: `${v.name} Dubai | From AED ${from.toLocaleString('en-US')} | Buggy Rents`,
+    title: pageTitle(`${v.name} Dubai | From AED ${from.toLocaleString('en-US')}`),
     description: `Book the ${v.name} in Dubai from AED ${from.toLocaleString('en-US')}. ${v.engine}, ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'}, age ${v.minAge}+, guided ${v.area.toLowerCase()} route. WhatsApp +971 56 209 5713.`,
     heroImage: v.heroImage?.trim() || HERO[v.category],
     eyebrow: `${v.engine} · ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'} · age ${v.minAge}+`,

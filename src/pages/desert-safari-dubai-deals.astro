@@ -17,12 +17,13 @@ import { site, waLink } from '@/data/site';
 import { sharedSafaris, privateSafaris, safariFromPrice } from '@/data/safari';
 import { transfers, payment } from '@/data/extras';
 import { buggies, quads, fromPrice } from '@/data/vehicles';
+import { pageTitle } from '@/data/seo';
 
 const buggyFrom = Math.min(...buggies.map(fromPrice));
 const quadFrom = Math.min(...quads.map(fromPrice));
 
-const title = `Desert Safari Dubai | ${sharedSafaris.length + privateSafaris.length} Packages from AED ${safariFromPrice} | Buggy Rents`;
-const description = `Evening, morning, overnight and private desert safari packages in Dubai from AED ${safariFromPrice}. Dune bashing, camel ride, sandboarding, halal BBQ dinner and live shows, with free hotel pickup inside Dubai.`;
+const title = pageTitle(`Desert Safari Dubai | ${sharedSafaris.length + privateSafaris.length} Packages from AED ${safariFromPrice}`);
+const description = `Evening, morning, overnight and private desert safari packages in Dubai from AED ${safariFromPrice}. Dune bashing, camel ride, halal BBQ dinner, free Dubai pickup.`;
 
 const h = hero('desert-safari-dubai-hero-dune-bashing');
 const fin = img('private-desert-safari-4x4-dubai-red-dunes', 'safari');

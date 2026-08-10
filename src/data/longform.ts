@@ -14,7 +14,7 @@ export const homeLongForm: { heading: string; intro: string; blocks: LfBlock[] }
 <h4>Choose a dune buggy if</h4>
 <ul><li>It is your first time off-road in sand</li><li>You want to carry a passenger or the whole family</li><li>You prefer a roll cage, harness and steering wheel</li><li>You want to talk to the person next to you while driving</li></ul>
 <h4>Choose a quad bike if</h4>
-<ul><li>You want the most direct contact with the terrain</li><li>You are comfortable steering with your body weight</li><li>You are riding solo, or want your own machine</li><li>You want the cheapest entry point ,  <span class="pill">from AED 75</span></li></ul>` },
+<ul><li>You want the most direct contact with the terrain</li><li>You are comfortable steering with your body weight</li><li>You are riding solo, or want your own machine</li><li>You want the cheapest entry point, <span class="pill">from AED 75</span></li></ul>` },
 
     { h: 'Dune buggy Dubai price: what you actually pay',
       html: `<p class="lf-lead">Every price on this site is <strong>per vehicle, not per person</strong>. A 2-seater Polaris RZR at AED 300 covers two people for 30 minutes, not AED 300 each.</p>
@@ -23,7 +23,7 @@ export const homeLongForm: { heading: string; intro: string; blocks: LfBlock[] }
 
     { h: 'Where you ride: the Lahbab red dunes',
       html: `<p class="lf-lead">Our base sits on the Dubai-Hatta road at Al Awir, at the edge of the Lahbab red sand belt. The colour comes from iron oxide in the sand, not from a camera filter.</p>
-<p>Pickup runs from across the city ,  <a href="/locations/dune-buggy-near-downtown-dubai/">Downtown Dubai</a> is about 35 minutes, <a href="/locations/dune-buggy-near-dubai-marina/">Dubai Marina</a> around an hour, and we also run <a href="/locations/dune-buggy-from-sharjah/">Sharjah</a>, <a href="/locations/dune-buggy-from-ajman/">Ajman</a> and <a href="/locations/dune-buggy-from-abu-dhabi/">Abu Dhabi</a> transfers on request.</p>
+<p>Pickup runs from across the city: <a href="/locations/dune-buggy-near-downtown-dubai/">Downtown Dubai</a> is about 35 minutes, <a href="/locations/dune-buggy-near-dubai-marina/">Dubai Marina</a> around an hour, and we also run <a href="/locations/dune-buggy-from-sharjah/">Sharjah</a>, <a href="/locations/dune-buggy-from-ajman/">Ajman</a> and <a href="/locations/dune-buggy-from-abu-dhabi/">Abu Dhabi</a> transfers on request.</p>
 <p>The light is best early morning and late afternoon, when long shadows pull every ridge into focus. If photographs matter to you, book the last slot of the day.</p>` },
 
     { h: 'Best time for a desert safari Dubai',

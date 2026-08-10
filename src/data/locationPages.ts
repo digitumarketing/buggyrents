@@ -4,6 +4,7 @@ import { buggies, quads, dirtbikes, fromPrice } from '@/data/vehicles';
 import { safariFromPrice } from '@/data/safari';
 import { transfers, policy, payment } from '@/data/extras';
 import { site } from '@/data/site';
+import { pageTitle, tidy } from '@/data/seo';
 
 const inDubai = (l: Location) => l.emirate === 'Dubai';
 
@@ -15,8 +16,8 @@ export function locationData(l: Location): LocationData {
 
   return {
     slug: l.slug, name: l.name, short: l.short, emirate: l.emirate, drive: l.drive,
-    title: `${l.name} | ${l.drive} to the Red Dunes | Buggy Rents`,
-    description: `${l.name}: ${l.drive} to the Lahbab red dunes. Dune buggy, quad bike and desert safari with ${free ? 'free' : 'quoted'} pickup from ${l.short}. Prices per vehicle from AED ${fromPrice(quads[0])}.`,
+    title: pageTitle(`${l.name} | ${l.drive} to Lahbab`),
+    description: tidy(`${l.drive} from ${l.short} to the Lahbab red dunes. Buggy, quad and desert safari with ${free ? 'free' : 'quoted'} pickup. Per vehicle from AED ${fromPrice(quads[0])}.`),
     heroImage: 'desert-adventure-dubai-hero-canam-maverick',
     finalImage: 'dune-buggy-dubai-hero-red-dunes',
     kicker: free ? 'Dubai pickup planning' : 'Outer emirate pickup planning',

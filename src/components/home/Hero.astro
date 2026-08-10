@@ -9,7 +9,7 @@ const {
   eyebrow = 'Multi-activity · Lahbab red dunes · Al Awir base',
   heading = 'Experience Dubai’s Ultimate Desert Adventure: Dune Buggy, Quad Biking & Desert Safari Tours',
   taglineEm = 'Self-Drive Desert Adventures',
-  tagline = ',  Dune Buggy Rental, Quad Biking Dubai, KTM Dirt Bike & Bedouin BBQ Safari',
+  tagline = 'Dune Buggy Rental, Quad Biking Dubai, KTM Dirt Bike and Bedouin BBQ Safari',
   image = 'desert-adventure-dubai-hero-canam-maverick'
 } = Astro.props;
 ---
@@ -25,7 +25,7 @@ const {
 
     <div class="hero__main">
       <h1 class="hero__h1">{heading}</h1>
-      <p class="hero__tagline"><em>{taglineEm}</em> {tagline}</p>
+      <p class="hero__tagline"><em>{taglineEm}</em>{tagline ? ` \u00b7 ${tagline}` : ''}</p>
 
       <a class="hero__badge" href="#reviews">
         <img src="/assets/images/2025/01/tripadvisor-travelers-choice-awards-white-2024-768x768-1.png" alt="TripAdvisor Travellers' Choice award winner" width="72" height="72" decoding="async" />
@@ -67,7 +67,7 @@ const {
   .hero__main { max-width: 920px; margin-inline: auto; }
   .hero__h1 { color: #fff; font-size: clamp(1.85rem, 1.1rem + 2.6vw, 3.1rem); line-height: 1.1; letter-spacing: -.02em;
     text-shadow: 0 2px 18px rgba(0,0,0,.5); margin: 0 auto 14px; max-width: 24ch; }
-  .hero__tagline { font-family: var(--font-display); font-weight: 500; font-size: clamp(1rem.9rem + .45vw, 1.22rem);
+  .hero__tagline { font-family: var(--font-display); font-weight: 500; font-size: clamp(1rem, .9rem + .45vw, 1.22rem);
     color: rgba(255,255,255,.9); text-shadow: 0 2px 12px rgba(0,0,0,.4); max-width: 52ch; margin: 0 auto 22px; line-height: 1.5; }
   .hero__tagline em { font-style: italic; font-weight: 800; color: var(--c-gold); }
 

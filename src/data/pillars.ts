@@ -1,12 +1,13 @@
 import type { PillarData } from '@/components/templates/Pillar.astro';
 import { quads, buggies, categoryFromPrice } from '@/data/vehicles';
+import { pageTitle } from '@/data/seo';
 
 /* ---------------- QUAD BIKE, primary keyword: quad biking dubai (4,400 / KD 26) ---------------- */
 export const quadPillar: PillarData = {
   slug: 'quad-bike-dubai',
   crumb: 'Quad Bike Dubai',
-  title: 'Quad Biking Dubai | ATV Desert Tours from AED 75 | Buggy Rents',
-  description: 'Quad biking Dubai in the Lahbab red dunes. Six ATV options from a fenced kids area to the Yamaha Raptor 700cc. Prices per quad from AED 75. WhatsApp +971 56 209 5713.',
+  title: pageTitle('Quad Biking Dubai | ATV Desert Tours from AED 75'),
+  description: 'Quad biking Dubai in the Lahbab red dunes. Six ATVs from a fenced kids area to the Yamaha Raptor 700cc. Prices per quad from AED 75, free Dubai pickup.',
   eyebrow: 'Guided ATV tour in Dubai',
   h1: 'Quad Biking Dubai',
   subhead: 'Guided quad bike rental in the Lahbab red dunes, from a fenced kids area to open-desert Raptor runs.',

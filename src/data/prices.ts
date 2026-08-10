@@ -3,6 +3,7 @@ import { buggies, quads, dirtbikes, fromPrice, type Vehicle } from '@/data/vehic
 import { bbqCombos, quadSafariCombos, addOns, transfers, policy, payment } from '@/data/extras';
 import { sharedSafaris, privateSafaris, safariFromPrice } from '@/data/safari';
 import { bySubject } from '@/data/images';
+import { pageTitle } from '@/data/seo';
 
 const DUR = ['30 minutes', '1 hour', '2 hours', '3 hours', '4 hours'];
 const shortDur = (l: string) => l.replace(' minutes', ' min').replace(' hours', ' hr').replace(' hour', ' hr');
@@ -60,8 +61,8 @@ const gal = (subject: 'buggy'|'quad'|'dirtbike'|'safari', taken: string[] = []) 
 export const buggyPrices: PriceGuideData = {
   slug: '/dune-buggy-dubai/price/',
   crumbParent: { label: 'Dune Buggy Dubai', href: '/dune-buggy-dubai/' },
-  title: `Dune Buggy Dubai Price | From AED ${fromPrice(buggies[0])} per Buggy | Buggy Rents`,
-  description: `Dune buggy Dubai price list: 11 buggies from AED ${fromPrice(buggies[0])} for 30 minutes. Polaris RZR, Can-Am Maverick X3 and Turbo RR, plus BBQ combos. Price per buggy, free Dubai pickup.`,
+  title: pageTitle(`Dune Buggy Dubai Price | From AED ${fromPrice(buggies[0])} per Buggy`),
+  description: `Dune buggy Dubai prices: 11 buggies from AED ${fromPrice(buggies[0])} for 30 minutes. Polaris RZR, Can-Am X3 and Turbo RR, plus BBQ combos. Per buggy, free Dubai pickup.`,
   heroImage: 'dune-buggy-dubai-hero-red-dunes',
   eyebrow: '11 buggies · 4 durations · price per vehicle',
   h1Lead: 'Dune Buggy Dubai', h1Em: 'Price', h1Tail: 'Guide',
@@ -123,8 +124,8 @@ export const buggyPrices: PriceGuideData = {
 export const quadPrices: PriceGuideData = {
   slug: '/quad-bike-dubai/price/',
   crumbParent: { label: 'Quad Bike Dubai', href: '/quad-bike-dubai/' },
-  title: `Quad Biking Dubai Price | From AED ${fromPrice(quads[0])} | Buggy Rents`,
-  description: `Quad biking Dubai price list: six ATV options from AED ${fromPrice(quads[0])} for 30 minutes. Kids quads from age 6, boundary area, open desert and the Yamaha Raptor 700cc. Price per quad, free Dubai pickup.`,
+  title: pageTitle(`Quad Biking Dubai Price | From AED ${fromPrice(quads[0])}`),
+  description: `Quad biking Dubai prices: six ATVs from AED ${fromPrice(quads[0])} for 30 minutes. Kids from age 6, boundary area, open desert and the Raptor 700cc. Per quad, free Dubai pickup.`,
   heroImage: 'quad-biking-dubai-hero-red-dunes',
   eyebrow: '6 quads · 5 durations · price per quad',
   h1Lead: 'Quad Biking Dubai', h1Em: 'Price', h1Tail: 'Guide',
@@ -185,8 +186,8 @@ export const quadPrices: PriceGuideData = {
 export const safariPrices: PriceGuideData = {
   slug: '/desert-safari-dubai/price/',
   crumbParent: { label: 'Desert Safari Dubai', href: '/desert-safari-dubai-deals/' },
-  title: `Desert Safari Dubai Price | From AED ${safariFromPrice} per Person | Buggy Rents`,
-  description: `Desert safari Dubai price list: 12 shared and private packages from AED ${safariFromPrice} per person. Evening, VIP, overnight and private Land Cruiser safaris with dune bashing and a Bedouin BBQ camp.`,
+  title: pageTitle(`Desert Safari Dubai Price | From AED ${safariFromPrice} per Person`),
+  description: `Desert safari Dubai prices: 12 shared and private packages from AED ${safariFromPrice} per person. Evening, VIP, overnight and private Land Cruiser with BBQ camp.`,
   heroImage: 'desert-safari-dubai-hero-dune-bashing',
   eyebrow: '12 packages · shared and private · from AED 99',
   h1Lead: 'Desert Safari Dubai', h1Em: 'Price', h1Tail: 'Guide',

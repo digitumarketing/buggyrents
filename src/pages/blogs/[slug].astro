@@ -17,6 +17,7 @@ import Base from '@/layouts/Base.astro';
 import { img } from '@/data/images';
 import { site, waLink } from '@/data/site';
 import { allPosts, categoryLabel, type Post } from '@/data/posts';
+import { pageTitle } from '@/data/seo';
 
 export async function getStaticPaths() {
   const posts = await allPosts();
@@ -79,7 +80,7 @@ const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FA
   mainEntity: p.faqs.map(f => ({ '@type':'Question', name:f.q,
     acceptedAnswer:{ '@type':'Answer', text:f.a } })) } : null;
 ---
-<Base title={p.title + ' | Buggy Rents'} description={p.excerpt}>
+<Base title={pageTitle(p.title)} description={p.excerpt}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />
   {faqSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />}

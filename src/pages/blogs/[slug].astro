@@ -80,7 +80,7 @@ const faqSchema = p.faqs.length ? { '@context':'https://schema.org', '@type':'FA
   mainEntity: p.faqs.map(f => ({ '@type':'Question', name:f.q,
     acceptedAnswer:{ '@type':'Answer', text:f.a } })) } : null;
 ---
-<Base title={p.title + ' | Buggy Rents Dubai'} description={p.excerpt}>
+<Base title={p.title + ' | Buggy Rents'} description={p.excerpt}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(articleSchema)} />
   {faqSchema && <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />}

@@ -38,7 +38,7 @@ export const posts: Post[] = [
   /* ---------------------------------------------------- KD 9, quad price */
   {
     slug: 'quad-biking-dubai-price',
-    title: 'Quad Biking Dubai Price: What It Actually Costs in 2026',
+    title: 'Quad Biking Dubai Price: What It Costs in 2026',
     excerpt: 'Every quad we run, what each one costs by duration, and the age limits that decide which ones your group can even book. Prices are per quad, not per person.',
     date: '2026-08-08',
     category: 'quad', subject: 'quad',
@@ -121,7 +121,7 @@ export const posts: Post[] = [
   /* ------------------------------------------------- KD 20, buggy price */
   {
     slug: 'dune-buggy-dubai-price',
-    title: 'Dune Buggy Dubai Price: All Eleven Buggies Compared',
+    title: 'Dune Buggy Dubai Price: All 11 Buggies Compared',
     excerpt: 'What a dune buggy costs in Dubai, from AED 300 for 30 minutes to AED 2299 for four hours. Per buggy, not per person, which changes the maths for groups.',
     date: '2026-08-07',
     category: 'buggy', subject: 'buggy',
@@ -198,7 +198,7 @@ export const posts: Post[] = [
   /* --------------------------------------- KD 2, safari without bashing */
   {
     slug: 'dubai-desert-safari-without-dune-bashing',
-    title: 'Dubai Desert Safari Without Dune Bashing: How to Book It',
+    title: 'Dubai Desert Safari Without Dune Bashing',
     excerpt: 'You can do a Dubai desert safari with no dune bashing at all. Here is who should ask for it, what you still get, and exactly what to say when you book.',
     date: '2026-08-06',
     category: 'safari', subject: 'safari',
@@ -272,7 +272,7 @@ export const posts: Post[] = [
   /* ------------------------------------------------ KD 7, what to wear */
   {
     slug: 'what-to-wear-desert-safari-dubai',
-    title: 'What to Wear to a Desert Safari in Dubai, by Season',
+    title: 'What to Wear to a Desert Safari in Dubai',
     excerpt: 'What actually works in the desert, what people regret wearing, and how much the answer changes between a June evening and a January one.',
     date: '2026-08-05',
     category: 'planning', subject: 'safari',
@@ -347,7 +347,7 @@ export const posts: Post[] = [
   /* --------------------------------------------- KD 19, safari timings */
   {
     slug: 'desert-safari-dubai-timings',
-    title: 'Desert Safari Dubai Timings: Morning, Evening or Overnight',
+    title: 'Desert Safari Dubai Timings: Which One to Book',
     excerpt: 'When each safari starts, how long it runs door to door, and which one to pick for your trip. Includes why summer changes the answer completely.',
     date: '2026-08-04',
     category: 'safari', subject: 'safari',
@@ -418,7 +418,7 @@ export const posts: Post[] = [
   /* -------------------------------------------------- buggy vs quad */
   {
     slug: 'dune-buggy-vs-quad-bike-dubai',
-    title: 'Dune Buggy or Quad Bike in Dubai: Which One Should You Book?',
+    title: 'Dune Buggy or Quad Bike in Dubai: Which to Book',
     excerpt: 'Two machines, same desert, completely different days out. An honest comparison of cost, difficulty, who each suits and what people regret picking.',
     date: '2026-08-03',
     category: 'planning', subject: 'buggy',

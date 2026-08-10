@@ -103,7 +103,7 @@ export const buggyPillar = buildPillar('buggy', {
 /* ─────────── KTM DIRT BIKE PILLAR ─────────── */
 export const ktmPillar = buildPillar('dirtbike', {
   crumb: 'KTM Dirt Bike Dubai',
-  title: `KTM Dirt Bike Dubai | 450cc Desert Enduro from AED ${fromPrice(dirtbikes[0])} | Buggy Rents`,
+  title: `KTM Dirt Bike Dubai | 450cc Enduro from AED ${fromPrice(dirtbikes[0])}`,
   description: `KTM dirt bike Dubai: a 450cc desert enduro in the Lahbab red dunes from AED ${fromPrice(dirtbikes[0])}. Rider screening applies. Helmet, briefing and guide included, free Dubai pickup.`,
   eyebrow: 'Guided desert enduro in Dubai',
   h1: 'KTM Dirt Bike Dubai',

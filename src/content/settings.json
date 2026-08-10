@@ -1,0 +1,60 @@
+{
+  "name": "Buggy Rents",
+  "legalName": "Buggy Rents",
+  "domain": "https://buggyrents.com",
+  "tagline": "Dune buggy, quad bike and dirt bike tours in the Dubai desert",
+  "phone": "+971 56 209 5713",
+  "phoneRaw": "+971562095713",
+  "whatsapp": "971562095713",
+  "email": "Buggyrents@gmail.com",
+  "addressStreet": "Dubai-Hatta Rd",
+  "addressDistrict": "Al Awir Second",
+  "addressCity": "Dubai",
+  "addressCountry": "AE",
+  "addressFull": "Dubai-Hatta Rd, Al Awir Second, Dubai, UAE",
+  "mapsPlaceId": "ChIJo88Daad39T4RnM7myjfeJdQ",
+  "mapsLink": "https://local.google.com/place?id=15286868841387708060&use=srp",
+  "mapsEmbed": "https://maps.google.com/maps?q=place_id:ChIJo88Daad39T4RnM7myjfeJdQ&output=embed",
+  "hoursOpens": "00:00",
+  "hoursCloses": "23:59",
+  "hoursLabel": "Open 24/7",
+  "lat": 25.153303,
+  "lng": 55.635006,
+  "guides": "50+",
+  "fleetSize": "70+",
+  "founded": 2020,
+  "guestsServed": "17K+",
+  "tradeLicence": "",
+  "social": [
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/buggyrents"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/buggyrents/"
+    },
+    {
+      "name": "TikTok",
+      "url": "https://www.tiktok.com/@buggyrents"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/channel/UCxg840PdCcCJ0GCnG018EBg"
+    },
+    {
+      "name": "Pinterest",
+      "url": "https://www.pinterest.com/buggyrents/"
+    }
+  ],
+  "awards": [
+    {
+      "name": "TripAdvisor Travellers' Choice",
+      "year": 2024
+    }
+  ],
+  "agencyName": "Digitum",
+  "agencyUrl": "https://digitum.marketing/",
+  "totalReviews": 41,
+  "averageRating": 4.9
+}

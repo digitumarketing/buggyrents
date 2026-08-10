@@ -191,18 +191,218 @@ export default config({
           defaultValue: 'general'
         })
       }
+    }),
+
+    /* Reviews are a collection rather than one long field because they arrive one
+       at a time. This gives an "add review" button instead of a wall of text, and
+       a single review can be removed if a guest asks for it to come down.
+       The 4.9 rating and the review count live in Site settings, since they
+       describe the Google profile as a whole. */
+    reviews: collection({
+      label: 'Google reviews',
+      slugField: 'author',
+      path: 'src/content/reviews/*',
+      format: { data: 'json' },
+      columns: ['author', 'rating'],
+      schema: {
+        author: fields.slug({ name: { label: 'Guest name', description: 'Exactly as it appears on Google. Never invent a name.' } }),
+        rating: fields.integer({ label: 'Stars', description: 'Only 5-star reviews with text are shown in the slider.', defaultValue: 5 }),
+        text:   fields.text({ label: 'Review text', multiline: true }),
+        order:  fields.integer({ label: 'Display order', defaultValue: 99 })
+      }
     })
   },
   singletons: {
+    /* Flat on purpose. Keystatic renders a flat object as a plain list of labelled
+       inputs; nested objects become collapsible panels that hide the one field the
+       client came here to change. site.ts rebuilds the nested shape in code. */
     settings: singleton({
       label: 'Site settings',
       path: 'src/content/settings',
       format: { data: 'json' },
       schema: {
-        phone:    fields.text({ label: 'Phone', defaultValue: '+971 56 209 5713' }),
-        whatsapp: fields.text({ label: 'WhatsApp number', defaultValue: '971562095713' }),
-        email:    fields.text({ label: 'Email', defaultValue: 'Buggyrents@gmail.com' }),
-        address:  fields.text({ label: 'Address', defaultValue: 'Dubai-Hatta Rd, Al Awir Second, Dubai, UAE' })
+        name:      fields.text({ label: 'Business name' }),
+        legalName: fields.text({ label: 'Legal name', description: 'Used in the copyright line.' }),
+        domain:    fields.text({ label: 'Domain', description: 'With https and no trailing slash. Every canonical URL and schema link is built from this. Changing it wrongly breaks all of them.' }),
+        tagline:   fields.text({ label: 'Tagline', multiline: true }),
+
+        phone:     fields.text({ label: 'Phone, as displayed' }),
+        phoneRaw:  fields.text({ label: 'Phone, for tel: links', description: 'No spaces, e.g. +971562095713.' }),
+        whatsapp:  fields.text({ label: 'WhatsApp number', description: 'Digits only, no plus, e.g. 971562095713.' }),
+        email:     fields.text({ label: 'Email' }),
+
+        addressStreet:   fields.text({ label: 'Street' }),
+        addressDistrict: fields.text({ label: 'District' }),
+        addressCity:     fields.text({ label: 'City' }),
+        addressCountry:  fields.text({ label: 'Country code', description: 'Two letters, e.g. AE. Goes into schema, not onto the page.' }),
+        addressFull:     fields.text({ label: 'Full address, as displayed' }),
+
+        mapsPlaceId: fields.text({ label: 'Google Place ID' }),
+        mapsLink:    fields.text({ label: 'Google Business Profile link', description: 'The address links here from the footer and the contact page. It is where guests leave the reviews that feed the rating below.' }),
+        mapsEmbed:   fields.text({ label: 'Google Maps embed URL' }),
+
+        hoursOpens:  fields.text({ label: 'Opens', description: '24-hour time, e.g. 00:00.' }),
+        hoursCloses: fields.text({ label: 'Closes', description: '24-hour time, e.g. 23:59.' }),
+        hoursLabel:  fields.text({ label: 'Hours, as displayed' }),
+
+        lat: fields.number({ label: 'Latitude' }),
+        lng: fields.number({ label: 'Longitude' }),
+
+        guides:       fields.text({ label: 'Number of guides', description: 'e.g. 50+' }),
+        fleetSize:    fields.text({ label: 'Fleet size', description: 'e.g. 70+' }),
+        founded:      fields.integer({ label: 'Year founded' }),
+        guestsServed: fields.text({ label: 'Guests served', description: 'e.g. 17K+' }),
+
+        /* Deliberately empty. The client confirmed on 8 Aug 2026 that no number
+           exists yet. Leave it blank rather than typing anything that looks like
+           one: it appears on Terms, About, the footer and in schema. */
+        tradeLicence: fields.text({ label: 'Trade licence number', description: 'Leave blank until you hold a real number. Never enter a placeholder.' }),
+
+        /* Feeds schema sameAs, which is how Google ties this site, the Google
+           Business Profile and the social accounts into one entity. */
+        social: fields.array(
+          fields.object({
+            name: fields.text({ label: 'Network' }),
+            url:  fields.text({ label: 'Profile URL' })
+          }),
+          { label: 'Social profiles', itemLabel: p => p.fields.name.value }
+        ),
+
+        awards: fields.array(
+          fields.object({
+            name: fields.text({ label: 'Award' }),
+            year: fields.integer({ label: 'Year' })
+          }),
+          { label: 'Awards', itemLabel: p => p.fields.name.value }
+        ),
+
+        agencyName: fields.text({ label: 'Agency credit name' }),
+        agencyUrl:  fields.text({ label: 'Agency credit URL' }),
+
+        /* Shown on every page beside the Google logo, so these must match what the
+           profile actually says. */
+        totalReviews:  fields.integer({ label: 'Google review count' }),
+        averageRating: fields.number({ label: 'Google average rating' })
+      }
+    }),
+
+    homepage: singleton({
+      label: 'Homepage',
+      path: 'src/content/homepage',
+      format: { data: 'json' },
+      schema: {
+        trustStats: fields.array(
+          fields.object({
+            value:    fields.text({ label: 'Big number or phrase' }),
+            label:    fields.text({ label: 'Label' }),
+            sub:      fields.text({ label: 'Sub-label' }),
+            verified: fields.checkbox({ label: 'Show the verified tick', defaultValue: true })
+          }),
+          { label: 'Trust strip', itemLabel: p => `${p.fields.value.value} — ${p.fields.label.value}` }
+        ),
+
+        buggyIntro: fields.object({
+          eyebrow:    fields.text({ label: 'Eyebrow' }),
+          heading:    fields.text({ label: 'Heading' }),
+          sub:        fields.text({ label: 'Sub-heading' }),
+          paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Paragraphs', itemLabel: p => p.value.slice(0, 60) }),
+          checklist:  fields.array(fields.text({ label: 'Point' }), { label: 'Checklist', itemLabel: p => p.value }),
+          image:      fields.text({ label: 'Image key' })
+        }, { label: 'Dune buggy section' }),
+
+        quadIntro: fields.object({
+          eyebrow:    fields.text({ label: 'Eyebrow' }),
+          heading:    fields.text({ label: 'Heading' }),
+          sub:        fields.text({ label: 'Sub-heading' }),
+          paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Paragraphs', itemLabel: p => p.value.slice(0, 60) }),
+          checklist:  fields.array(fields.text({ label: 'Point' }), { label: 'Checklist', itemLabel: p => p.value }),
+          image:      fields.text({ label: 'Image key' })
+        }, { label: 'Quad bike section' }),
+
+        tourStyles: fields.array(
+          fields.object({
+            title: fields.text({ label: 'Title' }),
+            tag:   fields.text({ label: 'Tag' }),
+            body:  fields.text({ label: 'Description', multiline: true })
+          }),
+          { label: 'Who it suits', itemLabel: p => p.fields.title.value }
+        ),
+
+        /* Feeds FAQPage schema as well as the accordion, which is why question and
+           answer stay separate. */
+        faqs: fields.array(
+          fields.object({
+            q: fields.text({ label: 'Question' }),
+            a: fields.text({ label: 'Answer', multiline: true })
+          }),
+          { label: 'Homepage FAQ', itemLabel: p => p.fields.q.value }
+        ),
+
+        longFormHeading: fields.text({ label: 'Long-form reader heading' }),
+        longFormBlocks: fields.array(
+          fields.object({
+            h: fields.text({ label: 'Heading' }),
+            p: fields.text({ label: 'Paragraph', multiline: true })
+          }),
+          { label: 'Long-form reader blocks', itemLabel: p => p.fields.h.value }
+        )
+      }
+    }),
+
+    /* One line changed here appears in a dozen places across the support pages, the
+       location pages, the tour pages and the FAQ answers. That is the point: the
+       cancellation window is written once, not remembered on eleven pages. */
+    policies: singleton({
+      label: 'Combos, add-ons and policies',
+      path: 'src/content/policies',
+      format: { data: 'json' },
+      schema: {
+        bbqCombos: fields.array(
+          fields.object({
+            slug:     fields.text({ label: 'Slug' }),
+            name:     fields.text({ label: 'Name' }),
+            type:     fields.select({ label: 'Type', options: [{ label: 'Buggy', value: 'buggy' }, { label: 'Quad', value: 'quad' }], defaultValue: 'buggy' }),
+            includes: fields.text({ label: 'What is included', multiline: true }),
+            capacity: fields.text({ label: 'Capacity' }),
+            price:    fields.integer({ label: 'Price (AED)', defaultValue: 0 })
+          }),
+          { label: 'Buggy + BBQ combos', itemLabel: p => `${p.fields.name.value} — AED ${p.fields.price.value}` }
+        ),
+        quadSafariCombos: fields.array(
+          fields.object({
+            slug:     fields.text({ label: 'Slug' }),
+            name:     fields.text({ label: 'Name' }),
+            type:     fields.select({ label: 'Type', options: [{ label: 'Buggy', value: 'buggy' }, { label: 'Quad', value: 'quad' }], defaultValue: 'quad' }),
+            includes: fields.text({ label: 'What is included', multiline: true }),
+            capacity: fields.text({ label: 'Capacity' }),
+            price:    fields.integer({ label: 'Price (AED)', defaultValue: 0 })
+          }),
+          { label: 'Quad + safari combos', itemLabel: p => `${p.fields.name.value} — AED ${p.fields.price.value}` }
+        ),
+        addOns: fields.array(
+          fields.object({
+            name:  fields.text({ label: 'Add-on' }),
+            /* Blank is meaningful: it keeps the row out of the price comparison
+               table, which is right for anything quoted individually. 0 means
+               genuinely free and still appears. */
+            price: fields.integer({ label: 'Price (AED)', description: 'Enter 0 for free. Leave blank if it is quoted individually, which keeps it out of the price table. The label below is what actually prints, so "AED 0" never appears.' }),
+            label: fields.text({ label: 'Price label', description: 'e.g. Free, AED 100, Custom quote.' }),
+            note:  fields.text({ label: 'Note' })
+          }),
+          { label: 'Add-ons', itemLabel: p => `${p.fields.name.value} — ${p.fields.label.value}` }
+        ),
+
+        transfersSummary:      fields.text({ label: 'Pickup summary', description: 'Hotel pickup inside Dubai is FREE. Never write "quoted" for a Dubai pickup.', multiline: true }),
+        transfersOutsideDubai: fields.text({ label: 'Outer emirates pickup', multiline: true }),
+
+        paymentMethods: fields.array(fields.text({ label: 'Method' }), { label: 'Payment methods', itemLabel: p => p.value }),
+        paymentSummary: fields.text({ label: 'Payment summary', multiline: true }),
+        paymentDetail:  fields.text({ label: 'Payment detail', multiline: true }),
+
+        cancellationHours: fields.integer({ label: 'Free cancellation window (hours)', defaultValue: 24 }),
+        cancellation:      fields.text({ label: 'Cancellation policy', multiline: true }),
+        weather:           fields.text({ label: 'Weather policy', multiline: true }),
+        deposit:           fields.text({ label: 'Deposit policy', multiline: true })
       }
     })
   }

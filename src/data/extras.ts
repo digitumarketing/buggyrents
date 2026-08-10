@@ -1,55 +1,60 @@
-/* Combos, add-ons and policies — confirmed by client 7 Aug 2026. */
+/* Combos, add-ons and booking policies — an adapter over src/content/policies.json,
+ * which Keystatic owns. Confirmed by the client 7 Aug 2026, moved into the CMS in
+ * Phase 2 of the migration.
+ *
+ * These strings carry more weight than their length suggests. `transfers.summary`,
+ * `payment.summary` and the three policy lines are interpolated into the support
+ * pages, the location pages, the tour pages and the FAQ answers, so each one is
+ * written once here and appears in a dozen places. That is the point: a client
+ * changing the cancellation window changes it everywhere, not on the one page they
+ * happened to remember.
+ *
+ * Two rules the client cannot see in the CMS but the build enforces:
+ * - Hotel pickup inside Dubai is FREE. Never write "quoted" for a Dubai pickup.
+ * - No insurance claim, and no mention of its absence either. See CLAUDE.md.
+ */
+import raw from '@/content/policies.json';
 
 export type Combo = {
   slug: string; name: string; type: 'buggy' | 'quad';
   includes: string; capacity: string; price: number; note?: string;
 };
 
-/* Buggy + Bedouin BBQ dinner. Buggy session is 30 minutes on every combo. */
-export const bbqCombos: Combo[] = [
-  { slug: '2-seater-polaris-bbq', name: '2-Seater Polaris + Bedouin BBQ Dinner', type: 'buggy',
-    includes: '30-minute Polaris RZR session, then a Bedouin camp BBQ dinner with entertainment', capacity: '2 pax', price: 450 },
-  { slug: '4-seater-polaris-bbq', name: '4-Seater Polaris + Bedouin BBQ Dinner', type: 'buggy',
-    includes: '30-minute Polaris RZR 4-seater session, then a Bedouin camp BBQ dinner', capacity: '4 pax', price: 600 },
-  { slug: '2-seater-can-am-bbq', name: '2-Seater Can-Am X3 + Bedouin BBQ Dinner', type: 'buggy',
-    includes: '30-minute Can-Am Maverick X3 session, then a Bedouin camp BBQ dinner', capacity: '2 pax', price: 650 },
-  { slug: '4-seater-can-am-bbq', name: '4-Seater Can-Am X3 + Bedouin BBQ Dinner', type: 'buggy',
-    includes: '30-minute Can-Am Maverick X3 4-seater session, then a Bedouin camp BBQ dinner', capacity: '4 pax', price: 800 },
-  { slug: 'maverick-r-bbq', name: 'Can-Am Maverick R + Bedouin BBQ Dinner', type: 'buggy',
-    includes: '30-minute Can-Am Maverick R session, then a Bedouin camp BBQ dinner', capacity: '2 pax', price: 1000 }
-];
+/* Buggy + Bedouin BBQ dinner. The buggy session is 30 minutes on every combo,
+   which is a client decision, not an oversight. */
+export const bbqCombos = raw.bbqCombos as Combo[];
 
 /* Quad + desert safari. Two tiers, split by quad session length. */
-export const quadSafariCombos: Combo[] = [
-  { slug: 'safari-quad-30min', name: 'Desert Safari + 30-Minute Quad Bike', type: 'quad',
-    includes: 'Evening desert safari with dune bashing, camp dinner and a 30-minute quad session', capacity: 'Per person', price: 200 },
-  { slug: 'safari-quad-1hour', name: 'Desert Safari + 1-Hour Quad Bike', type: 'quad',
-    includes: 'Evening desert safari with dune bashing, camp dinner and a full hour on the quad', capacity: 'Per person', price: 300 }
-];
+export const quadSafariCombos = raw.quadSafariCombos as Combo[];
 
-export const addOns = [
-  { name: 'Sandboarding', price: 0, label: 'Free', note: 'Included on desert safari packages' },
-  { name: 'Camel ride', price: 100, label: 'AED 100', note: 'Per person' },
-  { name: 'Group and corporate bookings', price: null, label: 'Custom quote', note: 'Message on WhatsApp with group size and date' }
-];
+/* Three states, and the difference matters:
+     price 0    genuinely free. Sandboarding. The label prints, not "AED 0".
+     price 100  a real number, shown in the price table.
+     price null LEFT BLANK on purpose, because there is no number to show. Group
+                and corporate bookings are quoted individually. prices.ts filters
+                these out of the comparison table rather than printing a nonsense
+                figure, so blank has to survive the round trip through the CMS
+                instead of being read as zero. */
+export const addOns = raw.addOns as {
+  name: string; price: number | null; label: string; note: string;
+}[];
 
 export const transfers = {
   dubaiFree: true,
-  summary: 'Hotel pickup and drop-off within Dubai is free on every booking.',
-  outsideDubai: 'Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.'
+  summary: raw.transfersSummary,
+  outsideDubai: raw.transfersOutsideDubai
 };
 
 export const payment = {
-  methods: ['Cash', 'Card', 'Bank transfer'],
+  methods: raw.paymentMethods as string[],
   onTheSpot: true,
-  summary: 'Cash, card and bank transfer are all accepted, and you can pay on the spot at the base.',
-  detail: 'There is nothing to pay when you book. Settle up at the Al Awir base before you ride, by cash, card or bank transfer, whichever suits you.'
+  summary: raw.paymentSummary,
+  detail: raw.paymentDetail
 };
 
-/* Policy — client confirmed 7 Aug 2026. Original wording, not copied from any competitor. */
 export const policy = {
-  cancellationHours: 24,
-  cancellation: 'Cancel more than 24 hours before your slot and you get a full refund. Inside 24 hours we will always try to move you to another date rather than charge you.',
-  weather: 'If wind, heat or visibility make the route unsafe we contact you before you travel and reschedule at no cost. If no alternative date works, you get a full refund.',
-  deposit: 'No deposit is taken to hold a standard slot. Multi-vehicle and corporate bookings are confirmed separately.'
+  cancellationHours: raw.cancellationHours,
+  cancellation: raw.cancellation,
+  weather: raw.weather,
+  deposit: raw.deposit
 };

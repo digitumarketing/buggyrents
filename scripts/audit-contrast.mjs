@@ -423,7 +423,17 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   }
   for (const s of readJson('safari')) { add(s.price); add(s.was); }
 
-  /* Combos, add-ons and anything else priced outside the fleet. */
+  /* Combos, add-ons and anything else priced outside the fleet.
+     These moved from src/data/extras.ts into the CMS in Phase 2 of the migration.
+     The file is still scanned as a fallback so an older checkout still audits, but
+     policies.json is the real source now: when it was added to the CMS without
+     being added here, seven combo prices silently dropped off the known list and
+     started reporting as stale copy. */
+  try {
+    const pol = JSON.parse(readFileSync('src/content/policies.json', 'utf8'));
+    for (const c of [...(pol.bbqCombos ?? []), ...(pol.quadSafariCombos ?? []), ...(pol.addOns ?? [])])
+      add(Number(c.price));
+  } catch {}
   try {
     const extras = readFileSync('src/data/extras.ts', 'utf8');
     for (const m of extras.matchAll(/price:\s*(\d+)/g)) add(Number(m[1]));

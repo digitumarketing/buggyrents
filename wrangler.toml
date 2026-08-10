@@ -7,6 +7,14 @@ compatibility_flags = ["nodejs_compat"]
 # only /keystatic, /api/keystatic and /api/contact run on the Worker.
 main = "./dist/_worker.js/index.js"
 
+# The Cloudflare adapter turns on Astro sessions and expects a KV namespace called
+# SESSION. Without this binding anything touching a session fails at runtime with
+# "Invalid binding `SESSION`", and Keystatic's login would be the first casualty.
+# Created 10 Aug 2026 with: npx wrangler kv namespace create SESSION
+[[kv_namespaces]]
+binding = "SESSION"
+id = "26fbb3981e554353ad600fbb2b2f4850"
+
 [assets]
 directory = "./dist"
 binding = "ASSETS"

@@ -1,5 +1,24 @@
+# Buggy Rents — buggyrents.com
+#
+# Content signals record what this site permits. Cloudflare's AI Crawl Control was
+# adding its own block above this file with ai-train=no plus a Disallow for
+# ClaudeBot, GPTBot, CCBot, Google-Extended, Bytespider and others. Client decision,
+# 10 Aug 2026: AI crawlers are welcome. The reasoning is that a Dubai tour operator
+# gains more from appearing in an AI assistant's answer to "best dune buggy rental
+# in Dubai" than it loses by having public marketing copy read.
+#
+# Turning the managed block off is a DASHBOARD change and cannot be made from this
+# file: Cloudflare prepends its rules above whatever is here. See CLAUDE.md.
+#
+# Note on what this file can and cannot do: robots.txt states a preference. It is
+# not enforcement, and a crawler that ignores it will not be stopped by it.
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
+
+# The CMS. No public content, and no reason for anything to crawl it.
 Disallow: /keystatic/
+Disallow: /api/
 
 Sitemap: https://buggyrents.com/sitemap-index.xml

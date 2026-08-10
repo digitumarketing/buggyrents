@@ -1,0 +1,23 @@
+{
+  "name": "Private Safari With 4-Seater Buggy",
+  "group": "private",
+  "vehicle": "Private 4x4",
+  "capacity": "4 persons",
+  "duration": "7 hours",
+  "priceLabel": "Private 4x4",
+  "price": 1300,
+  "was": 1900,
+  "image": "desert-safari-dubai-dune-bashing-land-cruiser",
+  "blurb": "Your own vehicle and guide, plus a 4-seater dune buggy session so the whole group drives together.",
+  "includes": [
+    "Private hotel pickup and drop-off",
+    "Private 4x4 and guide",
+    "4-seater dune buggy session",
+    "Camel ride",
+    "Sandboarding",
+    "Halal BBQ dinner",
+    "Camp entertainment"
+  ],
+  "featured": true,
+  "order": 7
+}

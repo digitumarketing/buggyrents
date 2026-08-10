@@ -1,0 +1,22 @@
+{
+  "name": "Overnight Desert Safari Dubai",
+  "group": "shared",
+  "vehicle": "Shared 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "16 hours",
+  "priceLabel": "Per person",
+  "price": 250,
+  "was": 350,
+  "image": "fire-show-desert-safari-camp-dubai",
+  "blurb": "Stay the night. Evening safari, BBQ dinner, then sleep at camp under the stars and wake for sunrise over the red dunes.",
+  "includes": [
+    "Hotel pickup and drop-off",
+    "Dune bashing in a 4x4",
+    "Halal BBQ dinner",
+    "Overnight camp stay",
+    "Breakfast",
+    "Sunrise over the dunes",
+    "Camp entertainment"
+  ],
+  "order": 6
+}

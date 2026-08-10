@@ -1,0 +1,23 @@
+{
+  "name": "Can-Am Maverick R - 4 Seater",
+  "shortName": "Can-Am Maverick R 4-Seater",
+  "engine": "Turbo",
+  "seats": 4,
+  "minAge": 18,
+  "area": "Lahbab red dunes",
+  "image": "can-am-maverick-x3-turbo-dune-buggy-dubai",
+  "blurb": "Maverick R power carrying four. The top of the fleet for group bookings.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 999
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 1299
+    }
+  ],
+  "order": 11
+}

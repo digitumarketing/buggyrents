@@ -1,0 +1,29 @@
+{
+  "name": "Can-Am Maverick R - Yellow Turbo",
+  "shortName": "Can-Am Maverick R 2-Seater",
+  "engine": "Turbo",
+  "seats": 2,
+  "minAge": 18,
+  "area": "Lahbab red dunes",
+  "image": "can-am-maverick-x3-yellow-turbo-dune-buggy-dubai",
+  "blurb": "The fastest two-seat machine in the fleet. Experienced drivers only.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 900
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 1299
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 1999
+    }
+  ],
+  "featured": true,
+  "order": 10
+}

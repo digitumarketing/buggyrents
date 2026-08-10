@@ -14,7 +14,9 @@ const { vehicle: v } = Astro.props;
       {v.durations.map(d => (
         <tr>
           <th scope="row">{d.label}</th>
-          <td class="pt__price">AED {d.price}</td>
+          {/* "AED 0" reads like a pricing error. Sandboarding genuinely is free,
+              and "Free" is both clearer and a better thing to have on the page. */}
+          <td class="pt__price">{d.price > 0 ? `AED ${d.price}` : 'Free'}</td>
           <td class="pt__act">
             <a class="btn btn--primary" href={waLink(bookMessage(v.name, d.label, d.price))} target="_blank" rel="noopener">Book</a>
           </td>

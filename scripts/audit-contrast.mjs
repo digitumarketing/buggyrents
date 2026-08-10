@@ -381,3 +381,87 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   }
   console.log('Placeholder audit passed — no [object Object], undefined or TODO in output.');
 }
+
+
+/* Every AED figure on the site must trace back to a real price.
+ *
+ * Now that prices live in the CMS, a figure typed into prose goes stale the moment
+ * the client edits it, and the page then contradicts its own price table. This
+ * collects the real price set from the content files and checks every "AED n" in
+ * the built HTML against it, allowing the derivations the copy legitimately makes
+ * (a two seater split two ways, a four seater split four ways, and so on).
+ *
+ * Warns rather than fails: a genuinely new figure in an article is not a bug, and
+ * a hard failure here would block a deploy over a rounding sentence. The list is
+ * what matters. Anything on it is either a stale price or a number to derive.
+ */
+{
+  const readJson = d => {
+    try {
+      return readdirSync(join('src/content', d))
+        .filter(f => f.endsWith('.json'))
+        .map(f => JSON.parse(readFileSync(join('src/content', d, f), 'utf8')));
+    } catch { return []; }
+  };
+
+  const prices = new Set();
+  const add = n => { if (Number.isFinite(n) && n > 0) prices.add(Math.round(n)); };
+
+  for (const dir of ['buggies', 'quads', 'dirtbikes']) {
+    for (const v of readJson(dir)) {
+      const seats = Number(v.seats) || 1;
+      for (const d of v.durations ?? []) {
+        add(d.price);
+        add(d.was);
+        /* The copy routinely splits a vehicle price across its seats, which is the
+           whole per-vehicle argument, so those derived figures are legitimate. */
+        for (const n of [2, 3, 4]) if (seats >= n) { add(d.price / n); add(Math.floor(d.price / n)); }
+        add(d.price / seats);
+        add(Math.floor(d.price / seats));
+      }
+    }
+  }
+  for (const s of readJson('safari')) { add(s.price); add(s.was); }
+
+  /* Combos, add-ons and anything else priced outside the fleet. */
+  try {
+    const extras = readFileSync('src/data/extras.ts', 'utf8');
+    for (const m of extras.matchAll(/price:\s*(\d+)/g)) add(Number(m[1]));
+    for (const m of extras.matchAll(/\bAED\s*(\d+)/g)) add(Number(m[1]));
+  } catch {}
+
+  const pages = [];
+  const walkF = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkF(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkF(DIST);
+
+  const unknown = new Map();
+  for (const page of pages) {
+    const text = readFileSync(page, 'utf8')
+      .replace(/<script[\s\S]*?<\/script>/g, ' ')
+      .replace(/<style[\s\S]*?<\/style>/g, ' ')
+      .replace(/<[^>]*>/g, ' ');
+    /* Require a leading digit. "[\d,]+" also matched the bare comma in "the total
+       in AED, usually within minutes", which stripped to "" and parsed as zero,
+       reporting a phantom AED 0 on 28 pages. */
+    for (const m of text.matchAll(/AED\s*(\d[\d,]*)/g)) {
+      const n = Number(m[1].replace(/,/g, ''));
+      if (!prices.has(n)) {
+        if (!unknown.has(n)) unknown.set(n, new Set());
+        unknown.get(n).add(page.replace(/^dist/, '').replace(/index\.html$/, ''));
+      }
+    }
+  }
+
+  if (unknown.size) {
+    console.warn(`  ${unknown.size} AED figure(s) in copy do not match any current price:`);
+    for (const [n, pgs] of [...unknown.entries()].sort((a, b) => b[1].size - a[1].size).slice(0, 8)) {
+      console.warn(`    AED ${n}  on ${pgs.size} page(s), e.g. ${[...pgs][0]}`);
+    }
+    if (unknown.size > 8) console.warn(`    ...and ${unknown.size - 8} more.`);
+  }
+  console.log(`Price audit passed — ${prices.size} known prices, ${unknown.size} unmatched figure(s) in copy.`);
+}

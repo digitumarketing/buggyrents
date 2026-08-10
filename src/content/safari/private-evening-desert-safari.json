@@ -1,0 +1,22 @@
+{
+  "name": "Private Evening Desert Safari",
+  "group": "private",
+  "vehicle": "Private 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "7 hours",
+  "priceLabel": "Private vehicle",
+  "price": 650,
+  "was": 950,
+  "image": "sandboarding-desert-safari-dubai",
+  "blurb": "The standard evening safari on your own schedule rather than a shared one. Suits families and small groups.",
+  "includes": [
+    "Private hotel pickup and drop-off",
+    "Private vehicle and guide",
+    "Dune bashing",
+    "Camel ride",
+    "Sandboarding",
+    "Halal BBQ dinner",
+    "Camp entertainment"
+  ],
+  "order": 10
+}

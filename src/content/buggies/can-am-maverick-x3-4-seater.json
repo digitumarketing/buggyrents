@@ -1,0 +1,29 @@
+{
+  "name": "Can-Am Maverick X3 - 4 Seater",
+  "shortName": "Can-Am X3 4-Seater",
+  "engine": "Turbo",
+  "seats": 4,
+  "minAge": 18,
+  "area": "Lahbab red dunes",
+  "image": "can-am-maverick-x3-4-seater-family-buggy-ride-dubai",
+  "blurb": "Turbo performance with four seats. The pick for groups that do not want to split up.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 700
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 999
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 1499
+    }
+  ],
+  "featured": true,
+  "order": 7
+}

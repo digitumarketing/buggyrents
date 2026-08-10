@@ -1,0 +1,23 @@
+{
+  "name": "Couple VIP Evening Desert Safari",
+  "group": "private",
+  "vehicle": "Private 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "7 hours",
+  "priceLabel": "Private Land Cruiser",
+  "price": 600,
+  "was": 800,
+  "image": "camel-ride-desert-safari-dubai",
+  "blurb": "A private evening safari timed and paced for two, sunset stop, unhurried photos, and VIP seating at camp.",
+  "includes": [
+    "Private hotel pickup and drop-off",
+    "Private Land Cruiser and guide",
+    "Sunset dune drive",
+    "VIP camp seating",
+    "Camel ride",
+    "Halal BBQ dinner",
+    "Camp entertainment"
+  ],
+  "featured": true,
+  "order": 9
+}

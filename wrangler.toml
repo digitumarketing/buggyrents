@@ -1,26 +1,20 @@
 name = "buggyrents"
 compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
 
-# The public site is prerendered HTML. This Worker exists only to handle
-# POST /api/contact; every other request falls through to the static assets.
-# See worker/index.js for the one secret it needs (RESEND_API_KEY).
-main = "worker/index.js"
+# Astro builds the Worker now, because Keystatic and the contact endpoint both need
+# server routes. The 65 public pages are still prerendered HTML served from assets;
+# only /keystatic, /api/keystatic and /api/contact run on the Worker.
+main = "./dist/_worker.js/index.js"
 
 [assets]
 directory = "./dist"
 binding = "ASSETS"
-
-# dist/404.html now exists, so Cloudflare serves our own page on an unknown path
-# instead of a blank browser error.
 not_found_handling = "404-page"
 
-# Contact form delivery. Both are plain vars, not secrets.
-# The Resend account is owned by Buggyrents@gmail.com, so the shared sender
-# onboarding@resend.dev can deliver to it. That is the only address it can reach
-# until the domain is verified.
-# To send from our own domain: resend.com -> Domains -> add buggyrents.com, paste
-# the DKIM and SPF records into Cloudflare DNS, then change CONTACT_FROM to
-# "Buggy Rents Website <bookings@buggyrents.com>". CONTACT_INBOX stays as is.
+# Contact form delivery. Plain vars, not secrets.
+# Verify buggyrents.com at resend.com, then change CONTACT_FROM to
+# "Buggy Rents Website <bookings@buggyrents.com>" so mail stops landing in spam.
 [vars]
 CONTACT_FROM  = "Buggy Rents Website <onboarding@resend.dev>"
 CONTACT_INBOX = "Buggyrents@gmail.com"

@@ -1,0 +1,38 @@
+{
+  "name": "Double Seat Quad - Open Desert",
+  "shortName": "Double Seat Open Desert",
+  "engine": "350-450cc",
+  "seats": 2,
+  "minAge": 16,
+  "area": "Open desert, red dunes",
+  "image": "double-seat-quad-bike-dubai-friends-photo-stop",
+  "blurb": "Two up across the open red dunes. The biggest engine we put a passenger on.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 300
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 450
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 600
+    },
+    {
+      "label": "3 hours",
+      "minutes": 180,
+      "price": 900
+    },
+    {
+      "label": "4 hours",
+      "minutes": 240,
+      "price": 1100
+    }
+  ],
+  "order": 5
+}

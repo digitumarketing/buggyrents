@@ -1,0 +1,22 @@
+{
+  "name": "Evening Safari By Private Mini Bus",
+  "group": "private",
+  "vehicle": "Private bus",
+  "capacity": "10 to 12 persons",
+  "duration": "7 hours",
+  "priceLabel": "Private mini bus",
+  "price": 800,
+  "was": 1150,
+  "image": "bedouin-camp-majlis-seating-desert-safari-dubai",
+  "blurb": "For larger groups travelling together, one mini bus for 10 to 12 people rather than splitting across several 4x4s.",
+  "includes": [
+    "Private hotel pickup and drop-off",
+    "Private mini bus for 10–12",
+    "Desert camp transfer",
+    "Camel ride",
+    "Sandboarding",
+    "Halal BBQ dinner",
+    "Camp entertainment"
+  ],
+  "order": 12
+}

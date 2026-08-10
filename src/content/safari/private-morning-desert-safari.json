@@ -1,0 +1,21 @@
+{
+  "name": "Private Morning Desert Safari",
+  "group": "private",
+  "vehicle": "Private 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "4 to 5 hours",
+  "priceLabel": "Private Land Cruiser",
+  "price": 650,
+  "was": 950,
+  "image": "private-desert-safari-4x4-dubai-red-dunes",
+  "blurb": "A morning desert safari Dubai in your own Land Cruiser, cooler sand, quieter dunes, and back in time for the rest of the day.",
+  "includes": [
+    "Private hotel pickup and drop-off",
+    "Private Land Cruiser and guide",
+    "Morning dune bashing",
+    "Camel ride",
+    "Sandboarding",
+    "Refreshments"
+  ],
+  "order": 8
+}

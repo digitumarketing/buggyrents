@@ -1,0 +1,39 @@
+{
+  "name": "Single Seat Quad - Boundary Area",
+  "shortName": "Single Seat Boundary",
+  "engine": "150-250cc",
+  "seats": 1,
+  "minAge": 12,
+  "area": "2 km boundary area",
+  "image": "single-seat-quad-bike-rider-dubai-desert",
+  "blurb": "Ride inside a marked 2 km square. The easiest way to try a quad without committing to open desert.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 89
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 150
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 300
+    },
+    {
+      "label": "3 hours",
+      "minutes": 180,
+      "price": 400
+    },
+    {
+      "label": "4 hours",
+      "minutes": 240,
+      "price": 500
+    }
+  ],
+  "featured": true,
+  "order": 2
+}

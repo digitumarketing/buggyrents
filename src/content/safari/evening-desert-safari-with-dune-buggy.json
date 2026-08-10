@@ -1,0 +1,23 @@
+{
+  "name": "Evening Desert Safari + Dune Buggy",
+  "group": "shared",
+  "vehicle": "Shared 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "7 to 8 hours",
+  "priceLabel": "2 persons",
+  "price": 750,
+  "was": 1200,
+  "image": "desert-safari-dubai-dune-bashing-land-cruiser",
+  "blurb": "Evening desert safari paired with a self-drive dune buggy session. Priced for two people, not per head.",
+  "includes": [
+    "Hotel pickup and drop-off",
+    "Dune bashing in a 4x4",
+    "Self-drive dune buggy session",
+    "Camel ride",
+    "Sandboarding",
+    "Halal BBQ dinner",
+    "Camp entertainment"
+  ],
+  "featured": true,
+  "order": 5
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Desert Safari Private Land Cruiser",
+  "group": "private",
+  "vehicle": "Private 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "7 hours",
+  "priceLabel": "Private Land Cruiser",
+  "price": 750,
+  "was": 1100,
+  "image": "belly-dance-show-desert-safari-camp-dubai",
+  "blurb": "A dedicated Land Cruiser for your group, with a driver who tailors the dune route to how much bashing you actually want.",
+  "includes": [
+    "Private hotel pickup and drop-off",
+    "Dedicated Land Cruiser and driver",
+    "Adjustable dune route",
+    "Camel ride",
+    "Sandboarding",
+    "Halal BBQ dinner",
+    "Camp entertainment"
+  ],
+  "order": 11
+}

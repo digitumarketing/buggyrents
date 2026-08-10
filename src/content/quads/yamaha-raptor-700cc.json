@@ -1,0 +1,39 @@
+{
+  "name": "Yamaha Raptor 700cc",
+  "shortName": "Yamaha Raptor 700",
+  "engine": "700cc",
+  "seats": 1,
+  "minAge": 18,
+  "area": "Open desert, red dunes",
+  "image": "yamaha-raptor-700cc-quad-bike-lahbab-red-dunes",
+  "blurb": "The sport quad. Fast, light and demanding - for riders who already know what they are doing.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 500
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 700
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 1200
+    },
+    {
+      "label": "3 hours",
+      "minutes": 180,
+      "price": 1700
+    },
+    {
+      "label": "4 hours",
+      "minutes": 240,
+      "price": 2200
+    }
+  ],
+  "featured": true,
+  "order": 6
+}

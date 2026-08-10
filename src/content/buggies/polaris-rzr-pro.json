@@ -1,0 +1,28 @@
+{
+  "name": "Polaris RZR Pro",
+  "shortName": "Polaris RZR Pro",
+  "engine": "1000cc",
+  "seats": 2,
+  "minAge": 18,
+  "area": "Lahbab red dunes",
+  "image": "polaris-rzr-pro-white-dune-buggy-dubai",
+  "blurb": "The Pro chassis with longer travel suspension, aimed at drivers who already know the route.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 700
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 1100
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 1300
+    }
+  ],
+  "order": 5
+}

@@ -97,6 +97,8 @@ const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
           <div class="cl__ptable-scroll">
             <table>
               <thead><tr><th scope="col">Option</th>{t.columns.map(c => <th scope="col">{c}</th>)}</tr></thead>
+              {/* Price cells have three states, not two: null is "not offered",
+                  zero is genuinely free, and "AED 0" reads like a pricing bug. */}
               <tbody>
                 {t.rows.map(r => (
                   <tr>
@@ -105,7 +107,7 @@ const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
                       <span class="cl__pspec">{r.spec}</span>
                     </th>
                     {r.cells.map(v => (
-                      <td class={v === null ? '' : 'cl__pnum'}>{v === null ? <span class="cl__pdash">not offered</span> : `AED ${v.toLocaleString('en-US')}`}</td>
+                      <td class={v === null ? '' : 'cl__pnum'}>{v === null ? <span class="cl__pdash">not offered</span> : v === 0 ? 'Free' : `AED ${v.toLocaleString('en-US')}`}</td>
                     ))}
                   </tr>
                 ))}

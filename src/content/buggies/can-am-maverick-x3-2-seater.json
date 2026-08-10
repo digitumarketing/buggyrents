@@ -1,0 +1,29 @@
+{
+  "name": "Can-Am Maverick X3 - 2 Seater",
+  "shortName": "Can-Am X3 2-Seater",
+  "engine": "Turbo",
+  "seats": 2,
+  "minAge": 18,
+  "area": "Lahbab red dunes",
+  "image": "can-am-maverick-x3-black-2-seater-red-dune-dubai",
+  "blurb": "A serious step up in power and suspension travel. For riders who have driven a buggy before.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 600
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 999
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 1299
+    }
+  ],
+  "featured": true,
+  "order": 6
+}

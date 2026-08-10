@@ -1,0 +1,23 @@
+{
+  "name": "Evening Desert Safari Dubai",
+  "group": "shared",
+  "vehicle": "Shared 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "7 to 8 hours",
+  "priceLabel": "Per person",
+  "price": 99,
+  "was": 160,
+  "image": "desert-safari-dubai-dune-bashing-land-cruiser",
+  "blurb": "The classic evening desert safari Dubai: red dune bashing in a shared Land Cruiser, a sunset stop, then a Bedouin camp with halal BBQ dinner and live entertainment.",
+  "includes": [
+    "Hotel pickup and drop-off",
+    "Dune bashing in a 4x4",
+    "Sunset photo stop",
+    "Camel ride",
+    "Sandboarding",
+    "Halal BBQ dinner",
+    "Belly dance, tanoura and fire show"
+  ],
+  "featured": true,
+  "order": 1
+}

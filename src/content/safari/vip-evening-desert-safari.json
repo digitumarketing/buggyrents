@@ -1,0 +1,23 @@
+{
+  "name": "VIP Evening Desert Safari",
+  "group": "shared",
+  "vehicle": "Shared 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "7 to 8 hours",
+  "priceLabel": "Per person",
+  "price": 150,
+  "was": 250,
+  "image": "private-desert-safari-4x4-dubai-red-dunes",
+  "blurb": "The evening safari upgraded. VIP seating at the camp, a better dinner spread and a quieter section away from the main crowd.",
+  "includes": [
+    "Hotel pickup and drop-off",
+    "Dune bashing in a 4x4",
+    "VIP camp seating",
+    "Camel ride",
+    "Sandboarding",
+    "Premium halal BBQ dinner",
+    "Full entertainment programme"
+  ],
+  "featured": true,
+  "order": 2
+}

@@ -1,0 +1,23 @@
+{
+  "name": "VIP Evening Desert Safari + ATVs",
+  "group": "shared",
+  "vehicle": "Shared 4x4",
+  "capacity": "6 to 7 persons",
+  "duration": "7 to 8 hours",
+  "priceLabel": "Per person",
+  "price": 250,
+  "was": 350,
+  "image": "desert-safari-dubai-dune-bashing-land-cruiser",
+  "blurb": "VIP camp treatment plus a quad bike session, the fullest shared evening safari we run.",
+  "includes": [
+    "Hotel pickup and drop-off",
+    "Dune bashing in a 4x4",
+    "Quad bike ride",
+    "VIP camp seating",
+    "Camel ride",
+    "Sandboarding",
+    "Premium halal BBQ dinner",
+    "Full entertainment programme"
+  ],
+  "order": 4
+}

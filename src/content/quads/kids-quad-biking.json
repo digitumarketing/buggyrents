@@ -1,0 +1,39 @@
+{
+  "name": "Kids Quad Biking",
+  "shortName": "Kids Quad",
+  "engine": "70-90cc",
+  "seats": 1,
+  "minAge": 6,
+  "area": "Kids special area",
+  "image": "kids-quad-bike-dubai-fenced-riding-area",
+  "blurb": "A fenced, flat area away from the main dunes so younger riders get their own space.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 75
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 140
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 250
+    },
+    {
+      "label": "3 hours",
+      "minutes": 180,
+      "price": 350
+    },
+    {
+      "label": "4 hours",
+      "minutes": 240,
+      "price": 450
+    }
+  ],
+  "featured": true,
+  "order": 1
+}

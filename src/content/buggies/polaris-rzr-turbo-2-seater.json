@@ -1,0 +1,28 @@
+{
+  "name": "Polaris RZR Turbo - 2 Seater",
+  "shortName": "Polaris RZR Turbo 2-Seater",
+  "engine": "Turbo",
+  "seats": 2,
+  "minAge": 18,
+  "area": "Lahbab red dunes",
+  "image": "dune-buggy-sunrise-desert-tour-dubai",
+  "blurb": "Turbocharged Polaris for drivers who want more acceleration out of the bowls.",
+  "durations": [
+    {
+      "label": "30 minutes",
+      "minutes": 30,
+      "price": 800
+    },
+    {
+      "label": "1 hour",
+      "minutes": 60,
+      "price": 1099
+    },
+    {
+      "label": "2 hours",
+      "minutes": 120,
+      "price": 1999
+    }
+  ],
+  "order": 3
+}

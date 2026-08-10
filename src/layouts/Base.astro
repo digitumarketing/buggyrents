@@ -38,7 +38,11 @@ const localBusiness = {
     opens: site.hours.opens,
     closes: site.hours.closes
   },
-  priceRange: 'AED 75 – AED 2200'
+  priceRange: 'AED 75 to AED 2200',
+  /* sameAs is how Google links this site, the Google Business Profile and the five
+     social accounts into a single entity. Leaving it out was throwing away a real
+     local ranking signal for accounts the business already runs. */
+  sameAs: site.social.map(s => s.url)
 };
 ---
 <!doctype html>

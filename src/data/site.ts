@@ -34,8 +34,18 @@ export const site = {
      Add a trade licence number here only if you hold one; it will appear in the footer and About page. */
   tradeLicence: null as string | null,
 
-  /* No social accounts yet - omitted from header, footer and schema. */
-  social: [] as { name: string; url: string }[],
+  /* These were recorded as "none yet", which was wrong. All five are live and
+     linked from the current buggyrents.com footer, verified 10 Aug 2026. They
+     matter beyond the footer: schema sameAs is how Google ties the website, the
+     Google Business Profile and the social accounts into one entity, which is a
+     real local ranking signal that was being thrown away. */
+  social: [
+    { name: 'Facebook',  url: 'https://www.facebook.com/buggyrents' },
+    { name: 'Instagram', url: 'https://www.instagram.com/buggyrents/' },
+    { name: 'TikTok',    url: 'https://www.tiktok.com/@buggyrents' },
+    { name: 'YouTube',   url: 'https://www.youtube.com/channel/UCxg840PdCcCJ0GCnG018EBg' },
+    { name: 'Pinterest', url: 'https://www.pinterest.com/buggyrents/' }
+  ] as { name: string; url: string }[],
 
   awards: [
     { name: "TripAdvisor Travellers' Choice", year: 2024 }

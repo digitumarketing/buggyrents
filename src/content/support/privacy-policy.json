@@ -1,0 +1,200 @@
+{
+  "export": "privacyPolicy",
+  "path": "about-us/privacy-policy",
+  "crumb": [
+    {
+      "name": "About us",
+      "href": "/about-us/"
+    }
+  ],
+  "short": "Privacy Policy",
+  "title": "Privacy Policy | Buggy Rents Dubai",
+  "description": "What Buggy Rents does with the details you send when you book a dune buggy, quad bike or dirt bike in Dubai, and how to ask us to delete them.",
+  "heroImage": "dune-buggy-dubai-hero-red-dunes",
+  "finalImage": "polaris-rzr-1000-2-seater-dune-buggy-dubai",
+  "heroSubject": "buggy",
+  "kicker": "Privacy policy",
+  "h1Lead": "What we do with",
+  "h1Em": "the details you send us",
+  "lede": "Most of our bookings arrive on WhatsApp. This page explains what that means for your information, in plain language rather than legal boilerplate.",
+  "chips": [
+    "Booking data only",
+    "No selling of data",
+    "Deletion on request",
+    "Updated August 2026"
+  ],
+  "ctaPrimary": {
+    "label": "Ask a privacy question",
+    "message": "Hi Buggy Rents! I have a question about how you handle my details."
+  },
+  "ctaSecondary": {
+    "label": "Read the terms",
+    "href": "/about-us/terms-conditions/"
+  },
+  "panel": {
+    "kicker": "The short version",
+    "title": "We keep what a booking needs",
+    "sub": "Name, number, date, group size and pickup point. That is the whole list for a standard booking.",
+    "points": [
+      "We do not sell or rent your details to anyone",
+      "We do not run ad tracking pixels on this site",
+      "Ask us to delete your details and we will, at Buggyrents@gmail.com"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "Held",
+      "value": "Booking only",
+      "note": "Name, phone, date, group size, pickup point."
+    },
+    {
+      "tag": "Sold",
+      "value": "Never",
+      "note": "Your details are not passed to third parties."
+    },
+    {
+      "tag": "Channel",
+      "value": "WhatsApp",
+      "note": "Most bookings run through WhatsApp on your phone."
+    },
+    {
+      "tag": "Delete",
+      "value": "On ask",
+      "note": "Email us and we remove what we hold."
+    },
+    {
+      "tag": "Payment",
+      "value": "At base",
+      "note": "We take no card details when you book."
+    }
+  ],
+  "introKicker": "01 / The basics",
+  "introH2": "What we collect, and why each thing is needed",
+  "introLede": "Every item below exists because a booking cannot run without it. There is nothing collected for marketing.",
+  "introBody": [
+    "When you message us we end up holding your name, your phone number, the date you want, how many people are riding and where we are collecting you from. Ages come up too, because age decides which machines a guest can legally ride. A ten year old cannot ride a 450cc dirt bike, so we have to ask.",
+    "Because most people book on WhatsApp, that conversation sits in WhatsApp on your phone and on ours. WhatsApp is owned by Meta and its own privacy terms apply to the message itself. We treat what is inside the message as booking information and nothing more.",
+    "We do not take card numbers when you book. {paymentFull} That means there is no stored payment data on our side at all.",
+    "If you want the details we hold removed, email <a href=\"mailto:Buggyrents@gmail.com\">Buggyrents@gmail.com</a> and say so. We will confirm once it is done."
+  ],
+  "cardsKicker": "02 / What we hold",
+  "cardsH2": "Three categories, and nothing beyond them.",
+  "cardsLede": "If a piece of information does not fall into one of these, we have no reason to be holding it.",
+  "cards": [
+    {
+      "tag": "Contact",
+      "h": "How to reach you",
+      "p": "Your name and phone number, so a guide can call you on the day if the pickup point is hard to find."
+    },
+    {
+      "tag": "Booking",
+      "h": "What you booked",
+      "p": "Date, time slot, machine, duration, group size and ages. This is what the base works from."
+    },
+    {
+      "tag": "Pickup",
+      "h": "Where to collect you",
+      "p": "Hotel, tower, villa or landmark. Needed to plan the driver route and the timing."
+    }
+  ],
+  "checksKicker": "03 / Worth knowing",
+  "checksH2": "The parts people usually ask about.",
+  "checksLede": "These are the honest answers, including where our control ends.",
+  "checks": [
+    {
+      "tag": "WhatsApp",
+      "h": "The message is on Meta",
+      "p": "Your booking chat lives in WhatsApp. Meta terms cover the message itself. We only control what we do with the content."
+    },
+    {
+      "tag": "Photos",
+      "h": "We ask before posting",
+      "p": "Guides take photos on tour. If we want to use one publicly we ask you first. Say no and that is the end of it."
+    },
+    {
+      "tag": "Analytics",
+      "h": "Visitor counts only",
+      "p": "We may count page visits to see which pages help. That is aggregate traffic data, not a profile of you."
+    },
+    {
+      "tag": "Retention",
+      "h": "We are not archivists",
+      "p": "Old booking messages get cleared out over time. Nothing is kept because it might be useful one day."
+    }
+  ],
+  "stepsKicker": "04 / Booking path",
+  "stepsH2": "How a booking actually runs",
+  "stepsLede": "Four steps, and you can see exactly what information each one needs.",
+  "steps": [
+    {
+      "h": "Tell us the date and group",
+      "p": "Send your date, how many are riding, and the ages. Age decides which machines are even an option."
+    },
+    {
+      "h": "Pick the machine and duration",
+      "p": "We quote per vehicle, not per person, so a two seater split between two people halves the cost."
+    },
+    {
+      "h": "Confirm pickup",
+      "p": "{pickup} Outside Dubai we quote the transfer before you commit."
+    },
+    {
+      "h": "Pay at the base",
+      "p": "Nothing is due when you book. Settle at Al Awir before you ride, by cash, card or bank transfer."
+    }
+  ],
+  "faqKicker": "05 / Questions",
+  "faqH2": "Privacy questions we actually get",
+  "faqLede": "If yours is not here, message us and ask. We will answer it straight.",
+  "faqs": [
+    {
+      "q": "Do you sell my phone number to anyone?",
+      "a": "No. Your number is used to run your booking and to reach you on the day. It is not passed to other operators, marketing lists or data brokers."
+    },
+    {
+      "q": "Can you delete my details after my ride?",
+      "a": "Yes. Email Buggyrents@gmail.com and ask, and we will remove what we hold and confirm once it is done. You do not have to give a reason."
+    },
+    {
+      "q": "Do you store my card details?",
+      "a": "No. There is nothing to pay when you book. You pay at the Al Awir base before riding, by cash, card or bank transfer, so no card data is stored on our side."
+    },
+    {
+      "q": "Will you put my photo on the website?",
+      "a": "Not without asking. Guides take photos during tours, and if we want to use one publicly we ask you first. Declining changes nothing about your booking."
+    },
+    {
+      "q": "Who can see my booking information?",
+      "a": "The people running your booking: the person answering WhatsApp, the driver collecting you, and the guide taking you out. Nobody outside the operation."
+    },
+    {
+      "q": "Does this site track me across other websites?",
+      "a": "No. There are no advertising or retargeting pixels on this site. We may count page visits in aggregate to see which pages are useful."
+    }
+  ],
+  "linksKicker": "06 / Related",
+  "linksH2": "Other pages worth reading before you book",
+  "links": [
+    {
+      "tag": "Safety",
+      "title": "Safety Standards",
+      "desc": "Helmets, briefing, guide ratios and how we call off a ride.",
+      "href": "/about-us/safety-standards/"
+    },
+    {
+      "tag": "Refunds",
+      "title": "Refund Policy",
+      "desc": "Cancellations, weather calls and how money comes back.",
+      "href": "/about-us/refund-policy/"
+    },
+    {
+      "tag": "Terms",
+      "title": "Terms and Conditions",
+      "desc": "The rules you agree to when you ride with us.",
+      "href": "/about-us/terms-conditions/"
+    }
+  ],
+  "finalKicker": "Ask us anything",
+  "finalH2": "Still have a question about your details?",
+  "finalLede": "Message the team and ask. You do not need to book anything to get an answer."
+}

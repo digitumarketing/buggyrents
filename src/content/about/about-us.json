@@ -1,0 +1,256 @@
+{
+  "export": "aboutUs",
+  "path": "about-us",
+  "crumb": [],
+  "short": "About us",
+  "title": "About Buggy Rents | Desert Tours in Dubai Since 2020",
+  "description": "Buggy Rents has taken {guests} guests into the Dubai desert since 2020. {fleet} vehicles, {guides} guides, rated 4.9 on Google and a TripAdvisor Travellers' Choice winner.",
+  "heroImage": "desert-adventure-dubai-hero-canam-maverick",
+  "finalImage": "group-dune-buggy-tour-dubai-photo-stop",
+  "heroSubject": "buggy",
+  "kicker": "About us",
+  "h1Lead": "{guests} guests into the desert",
+  "h1Em": "since 2020",
+  "lede": "We run dune buggies, quad bikes and dirt bikes out of Al Awir on the Dubai to Hatta road. {fleet} vehicles, {guides} guides, and a 4.9 rating from guests who actually rode.",
+  "chips": [
+    "{guests} guests",
+    "4.9 on Google",
+    "TripAdvisor Travellers' Choice",
+    "Since 2020"
+  ],
+  "ctaPrimary": {
+    "label": "Plan a ride with us",
+    "message": "Hi Buggy Rents! I would like to plan a desert ride."
+  },
+  "ctaSecondary": {
+    "label": "See the fleet",
+    "href": "/about-us/our-fleet/"
+  },
+  "panel": {
+    "kicker": "Why guests pick us",
+    "title": "Per vehicle, not per person",
+    "sub": "A four seat buggy split between four people is under AED 90 each. Most operators quote per head.",
+    "points": [
+      "{guests} riders since 2020, rated 4.9 on Google",
+      "Free hotel pickup anywhere inside Dubai",
+      "No deposit, and free cancellation up to 24 hours before"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "Guests",
+      "value": "{guests}",
+      "note": "Riders taken out since 2020."
+    },
+    {
+      "tag": "Rating",
+      "value": "4.9",
+      "note": "From real Google reviews."
+    },
+    {
+      "tag": "Award",
+      "value": "TripAdvisor",
+      "note": "Travellers' Choice winner."
+    },
+    {
+      "tag": "Fleet",
+      "value": "{fleet}",
+      "note": "Buggies, quads and dirt bikes."
+    },
+    {
+      "tag": "Guides",
+      "value": "{guides}",
+      "note": "Nobody rides out alone."
+    }
+  ],
+  "introKicker": "01 / Who we are",
+  "introH2": "A desert operator, not a booking agency",
+  "introLede": "We own the machines, employ the guides and run the base. That is unusual in Dubai and it changes what we can do for you.",
+  "introBody": [
+    "Buggy Rents started in 2020 and has taken {guests} guests into the desert since. We operate from Al Awir on the Dubai to Hatta road, with {fleet} vehicles and {guides} guides. The red dunes at Lahbab and the terrain around Al Awir are our routes, and our guides ride them daily.",
+    "<strong>We are the operator.</strong> A lot of desert tour websites in Dubai are booking agencies that pass you to whoever has a machine free. We own the buggies, quads and dirt bikes, we employ the guides, and you pay us at our base. If something goes wrong there is nobody else to point at.",
+    "<strong>We price per vehicle.</strong> This matters more than it sounds. A four seat buggy at AED 350 for 30 minutes is AED 350 for the buggy, so four people pay under AED 90 each. Operators quoting per person look cheaper until you multiply by the group.",
+    "<strong>We are open 24/7</strong> and hotel pickup anywhere inside Dubai is free. Sunrise and late afternoon are the sessions worth booking, and being open around the clock is what makes an early start possible."
+  ],
+  "minis": [
+    {
+      "n": "01",
+      "h": "We own the fleet",
+      "p": "{fleet} vehicles, maintained at our own base rather than hired in when someone books."
+    },
+    {
+      "n": "02",
+      "h": "Real guides",
+      "p": "{guides} guides who ride these dunes daily and set the pace for the slowest rider."
+    },
+    {
+      "n": "03",
+      "h": "Honest pricing",
+      "p": "Per vehicle, no deposit, free Dubai pickup, and you pay at the base before you ride."
+    }
+  ],
+  "confirmKicker": "02 / What we do",
+  "confirmH2": "Four activities, one base.",
+  "confirmLede": "Everything runs from Al Awir, so a group can split across machines and still ride together.",
+  "confirm": [
+    {
+      "tag": "Buggy",
+      "h": "Dune buggies",
+      "p": "Eleven machines from the Polaris RZR 1000 to the Can-Am Maverick R, two and four seats, from AED {buggyFrom}."
+    },
+    {
+      "tag": "Quad",
+      "h": "Quad bikes",
+      "p": "Six quads from 70cc kids machines to the Yamaha Raptor 700cc, from AED {quadFrom}, with riders from age six."
+    },
+    {
+      "tag": "KTM",
+      "h": "Dirt bikes",
+      "p": "The KTM 450 desert enduro from AED {dirtbikeFrom}, for riders who already ride off road."
+    },
+    {
+      "tag": "Safari",
+      "h": "Desert safari",
+      "p": "Someone else drives. Dune bashing, camp dinner and a show, for guests who want the desert without controlling a machine."
+    }
+  ],
+  "bentoKicker": "03 / What guests notice",
+  "bentoH2": "The things that come up in reviews.",
+  "bentoLede": "Not what we would put on a poster, but what people actually mention afterwards.",
+  "bento": [
+    {
+      "tag": "Most mentioned",
+      "h": "The guides make the trip",
+      "p": "The single most common theme in our reviews is the guide. They set the pace for the slowest rider, know which dune faces hold, and will spend the session teaching someone nervous rather than showing off.",
+      "feature": true
+    },
+    {
+      "tag": "Pricing",
+      "h": "No surprises at the base",
+      "p": "The price you were quoted is the price you pay. Free Dubai pickup is genuinely free and there is no deposit to chase."
+    },
+    {
+      "tag": "Families",
+      "h": "Everyone gets to ride",
+      "p": "Kids quads from six, passengers of any age in a four seat buggy. Families rarely have to leave someone sitting out."
+    },
+    {
+      "tag": "Flexibility",
+      "h": "We move things when we can",
+      "p": "Weather, late flights, a change of plan. Message us and the first thing we try is a different slot, not a charge."
+    }
+  ],
+  "handledKicker": "04 / How we operate",
+  "handledH2": "What we handle, and what we ask of you",
+  "handledLede": "Clear on both sides before anyone gets on a machine.",
+  "handledList": [
+    {
+      "h": "What we handle",
+      "items": [
+        "Helmets fitted and checked before every ride",
+        "A full briefing on controls, route and boundary",
+        "A guide leading every ride at every duration",
+        "Free hotel pickup anywhere inside Dubai",
+        "Weather calls, made before you travel rather than at the base"
+      ]
+    },
+    {
+      "h": "What we ask of you",
+      "items": [
+        "Tell us the ages when you book, so we pick the right machines",
+        "Mention back, neck or heart issues, pregnancy or recent surgery",
+        "Follow the guide once you are on the sand",
+        "Check that your travel insurance includes desert sports",
+        "Message us early if plans change, so we can move the slot"
+      ]
+    }
+  ],
+  "reviewsKicker": "What guests say",
+  "reviewsH2": "Rated 4.9 by guests who actually rode.",
+  "reviewsLede": "Real Google reviews, alongside our TripAdvisor Travellers' Choice award.",
+  "askKicker": "05 / Get in touch",
+  "askH2": "Talk to the people running it",
+  "askLede": "WhatsApp reaches the team that operates the base, not a call centre. Ask anything, including whether we are the right fit.",
+  "askCards": [
+    {
+      "tag": "WhatsApp",
+      "value": "+971 56 209 5713",
+      "note": "Fastest route. Send the date, group size and ages.",
+      "href": "https://wa.me/971562095713"
+    },
+    {
+      "tag": "Phone",
+      "value": "Call the base",
+      "note": "Open 24/7. Useful when you are already on the road.",
+      "href": "tel:+971562095713"
+    },
+    {
+      "tag": "Email",
+      "value": "Buggyrents@gmail.com",
+      "note": "Better for corporate bookings and longer questions.",
+      "href": "mailto:Buggyrents@gmail.com"
+    }
+  ],
+  "faqKicker": "06 / About us FAQ",
+  "faqH2": "Questions about the operation",
+  "faqLede": "The things people ask before trusting an operator with their group.",
+  "faqs": [
+    {
+      "q": "How long have you been running?",
+      "a": "Since 2020. We have taken {guests} guests into the desert in that time, and we hold a TripAdvisor Travellers' Choice award and a 4.9 rating on Google."
+    },
+    {
+      "q": "Are you the actual operator?",
+      "a": "Yes. We own the vehicles, employ the guides and run the base at Al Awir. Many desert tour sites in Dubai are booking agencies that pass you on to whoever has a machine free."
+    },
+    {
+      "q": "Where are you based?",
+      "a": "Dubai-Hatta Rd, Al Awir Second, Dubai, UAE. It is on the Dubai to Hatta road, close to the Lahbab red dunes, which is why our routes start where they do."
+    },
+    {
+      "q": "What are your opening hours?",
+      "a": "Open 24/7. In practice sunrise and late afternoon are the sessions worth booking, and being open around the clock is what makes a pre dawn start possible."
+    },
+    {
+      "q": "How many vehicles do you have?",
+      "a": "{fleet} across buggies, quads and dirt bikes, with {guides} guides. Group bookings are usually possible at short notice."
+    },
+    {
+      "q": "Why are your prices per vehicle?",
+      "a": "Because that is what you are hiring. A four seat buggy costs the same to run whether one person or four are in it. Quoting per person looks cheaper on a search results page and costs more when you multiply by the group."
+    },
+    {
+      "q": "Do you take a deposit?",
+      "a": "No deposit on standard slots. {payment} Nothing is due when you book, and cancellation is free up to 24 hours before."
+    },
+    {
+      "q": "Can you handle corporate or large groups?",
+      "a": "Yes. Group bookings are quoted separately so we can plan vehicles and guides properly. Send the headcount and date and we will come back with options."
+    }
+  ],
+  "linksKicker": "07 / Read more",
+  "linksH2": "The pages people read next",
+  "links": [
+    {
+      "tag": "Fleet",
+      "title": "Our Fleet",
+      "desc": "Every machine we run and who each one suits.",
+      "href": "/about-us/our-fleet/"
+    },
+    {
+      "tag": "Safety",
+      "title": "Safety Standards",
+      "desc": "Helmets, briefings, guides and weather calls.",
+      "href": "/about-us/safety-standards/"
+    },
+    {
+      "tag": "Terms",
+      "title": "Terms and Conditions",
+      "desc": "Age limits, responsibility and how payment works.",
+      "href": "/about-us/terms-conditions/"
+    }
+  ],
+  "finalKicker": "Come and ride",
+  "finalH2": "Tell us who is coming and when",
+  "finalLede": "Ages, group size and a date. That is all we need to put together the right set of machines."
+}

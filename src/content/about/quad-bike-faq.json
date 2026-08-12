@@ -1,0 +1,277 @@
+{
+  "export": "quadFaq",
+  "path": "quad-bike-dubai/faq",
+  "crumb": [
+    {
+      "name": "Quad Biking Dubai",
+      "href": "/quad-bike-dubai/"
+    }
+  ],
+  "short": "FAQ",
+  "title": "Quad Biking Dubai FAQ | Prices, Age Limits and Pickup",
+  "description": "The questions people ask before booking quad biking in Dubai: prices from AED {quadFrom} per quad, kids from age 6, free pickup, timings and what to wear.",
+  "heroImage": "quad-biking-dubai-hero-red-dunes",
+  "finalImage": "quad-bike-rental-dubai-rider-red-quad",
+  "heroSubject": "quad",
+  "kicker": "Quad biking FAQ",
+  "h1Lead": "Quad biking Dubai questions,",
+  "h1Em": "answered properly",
+  "lede": "The questions people actually ask before booking a quad. Prices are per quad and start at AED {quadFrom}, with kids riding their own machines from age six.",
+  "chips": [
+    "From AED {quadFrom} per quad",
+    "Kids from age 6",
+    "Free Dubai pickup",
+    "Six quads"
+  ],
+  "ctaPrimary": {
+    "label": "Ask your question",
+    "message": "Hi Buggy Rents! I have a question about quad biking."
+  },
+  "ctaSecondary": {
+    "label": "See all prices",
+    "href": "/quad-bike-dubai/price/"
+  },
+  "panel": {
+    "kicker": "Quick answer",
+    "title": "From AED {quadFrom} per quad",
+    "sub": "Kids quads from age six in a fenced area. Adults from age twelve on the boundary routes.",
+    "points": [
+      "{pickup}",
+      "No deposit, and free cancellation up to 24 hours before",
+      "Open desert routes go out into the red dunes with a guide"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "From",
+      "value": "AED {quadFrom}",
+      "note": "30 minutes on a kids quad."
+    },
+    {
+      "tag": "Ages",
+      "value": "6+",
+      "note": "Youngest riders on their own machine."
+    },
+    {
+      "tag": "Quads",
+      "value": "6",
+      "note": "Kids 70cc up to the Raptor 700."
+    },
+    {
+      "tag": "Pickup",
+      "value": "Free",
+      "note": "Anywhere inside Dubai."
+    },
+    {
+      "tag": "Rating",
+      "value": "4.9",
+      "note": "From real Google reviews."
+    }
+  ],
+  "introKicker": "01 / Start here",
+  "introH2": "Age and route decide almost everything",
+  "introLede": "Unlike buggies, quads are sorted primarily by who is riding rather than by budget.",
+  "introBody": [
+    "<strong>Age sets the machine.</strong> Kids quads at 70cc to 90cc start at age six, in a fenced riding area with a guide. Single seat boundary quads at 150cc to 250cc start at twelve. Open desert quads start at fourteen or sixteen depending on the engine, and the Yamaha Raptor 700cc is eighteen and over. Guides confirm ages at the base, so bring ID if a rider is close to a limit.",
+    "<strong>Boundary or open desert.</strong> Boundary routes are fenced and controlled, which is the right place for a first ride or a nervous rider. Open desert routes go out into the red dunes with a guide leading. That is the real thing, and it is why the minimum age is higher.",
+    "<strong>Prices are per quad.</strong> A double seat quad carries two people, so AED 150 for 30 minutes on a boundary double is AED {quadFrom} each. That is often the cheapest way for a couple or a parent and child to ride together.",
+    "Quads are more physical than buggies. You steer with your body as much as the handlebars, and an hour is real work. That is exactly why people who ride quads keep riding quads."
+  ],
+  "minis": [
+    {
+      "n": "01",
+      "h": "Age first",
+      "p": "From six on kids machines, twelve on boundary singles, eighteen on the Raptor 700."
+    },
+    {
+      "n": "02",
+      "h": "Boundary or open",
+      "p": "Fenced and controlled for first rides, red dunes with a guide for the real thing."
+    },
+    {
+      "n": "03",
+      "h": "Per quad",
+      "p": "A double seat quad splits between two riders, which is usually the cheapest option."
+    }
+  ],
+  "confirmKicker": "02 / Before you book",
+  "confirmH2": "Four things worth confirming first.",
+  "confirmLede": "Get these right and the machine picks itself.",
+  "confirm": [
+    {
+      "tag": "Ages",
+      "h": "Everyone riding",
+      "p": "Each quad has a minimum age set by engine size and route. Guides enforce it at the base, so send us the ages when you book."
+    },
+    {
+      "tag": "Route",
+      "h": "Boundary or open desert",
+      "p": "First time or nervous, take the boundary. Ridden before and want the dunes, take the open desert route."
+    },
+    {
+      "tag": "Experience",
+      "h": "Ridden one before",
+      "p": "It changes what we recommend. Complete beginners do better starting on a boundary route for 30 minutes."
+    },
+    {
+      "tag": "Fitness",
+      "h": "Quads are hard work",
+      "p": "More physical than a buggy. If anyone in the group is unsure, a shorter duration is the better call."
+    }
+  ],
+  "bentoKicker": "03 / Pick your question",
+  "bentoH2": "Jump straight to what you need.",
+  "bentoLede": "The topics people message us about most.",
+  "bento": [
+    {
+      "tag": "Most asked",
+      "h": "How much is quad biking in Dubai?",
+      "p": "From AED {quadFrom} for 30 minutes on a kids quad, AED 89 on a single seat boundary quad, and up to AED 2200 for four hours on a Yamaha Raptor 700cc. Prices are per quad.",
+      "feature": true
+    },
+    {
+      "tag": "Kids",
+      "h": "How young can children ride?",
+      "p": "Six years old on the 70cc to 90cc kids quads, in a fenced riding area with a guide watching."
+    },
+    {
+      "tag": "Beginners",
+      "h": "Never ridden one before?",
+      "p": "Take a boundary route for 30 minutes. Fenced, controlled, and you learn what loose sand does with no consequence."
+    },
+    {
+      "tag": "Two up",
+      "h": "Can two people share?",
+      "p": "Yes, on the double seat quads. It is often the cheapest way for a couple or a parent and child."
+    }
+  ],
+  "handledKicker": "04 / What is included",
+  "handledH2": "What comes with the ride, and what to sort yourself",
+  "handledLede": "The same list for every quad and every duration.",
+  "handledList": [
+    {
+      "h": "Included in the price",
+      "items": [
+        "Helmet, fitted and checked before you move",
+        "Briefing on the controls, the route and the boundary",
+        "A guide on every ride, including the 30 minute slots",
+        "Fuel, water and free pickup anywhere inside Dubai",
+        "Sandboarding at no extra cost if you want to try it"
+      ]
+    },
+    {
+      "h": "Worth sorting yourself",
+      "items": [
+        "Closed shoes and long trousers, quads throw more sand than buggies",
+        "Sunglasses or goggles if you wear contact lenses",
+        "Check that your travel insurance includes desert sports",
+        "Cash, card or bank transfer for payment at the base",
+        "ID for any rider close to an age limit"
+      ]
+    }
+  ],
+  "reviewsKicker": "What guests say",
+  "reviewsH2": "Rated 4.9 by guests who actually rode.",
+  "reviewsLede": "Real Google reviews from riders, alongside our TripAdvisor Travellers' Choice award.",
+  "askKicker": "05 / Still stuck",
+  "askH2": "Ask the team directly",
+  "askLede": "Send the ages and the group size and we will tell you exactly which quads work. No pressure to book.",
+  "askCards": [
+    {
+      "tag": "WhatsApp",
+      "value": "+971 56 209 5713",
+      "note": "Fastest route. Send the date, group size and ages.",
+      "href": "https://wa.me/971562095713"
+    },
+    {
+      "tag": "Phone",
+      "value": "Call the base",
+      "note": "Open 24/7. Useful when you are already on the road.",
+      "href": "tel:+971562095713"
+    },
+    {
+      "tag": "Email",
+      "value": "Buggyrents@gmail.com",
+      "note": "Better for corporate bookings and longer questions.",
+      "href": "mailto:Buggyrents@gmail.com"
+    }
+  ],
+  "faqKicker": "06 / Full FAQ",
+  "faqH2": "Quad biking questions in full",
+  "faqLede": "Everything else people ask before booking a quad in Dubai.",
+  "faqs": [
+    {
+      "q": "How much is quad biking in Dubai?",
+      "a": "From AED {quadFrom} for 30 minutes on a kids quad and AED 89 on a single seat boundary quad. Open desert singles start at AED 200 and the Yamaha Raptor 700cc at AED {dirtbikeFrom}. Prices are per quad."
+    },
+    {
+      "q": "What is the minimum age for quad biking?",
+      "a": "Six on the 70cc to 90cc kids quads in a fenced area. Twelve on single seat boundary quads, fourteen on double seat boundary and single seat open desert, sixteen on double seat open desert, and eighteen on the Raptor 700cc."
+    },
+    {
+      "q": "Can children ride their own quad?",
+      "a": "Yes, from age six on the kids machines, in a fenced riding area with a guide supervising. It is the reason a lot of families book with us."
+    },
+    {
+      "q": "What is the difference between boundary and open desert?",
+      "a": "Boundary routes are fenced and controlled, which suits first timers. Open desert routes go out into the red dunes with a guide leading, which is why the minimum age is higher."
+    },
+    {
+      "q": "Is a quad harder than a buggy?",
+      "a": "More physical, yes. You steer with body weight as much as the handlebars, and an hour is real work. A buggy is easier to be competent in quickly."
+    },
+    {
+      "q": "Can two people share a quad?",
+      "a": "On the double seat machines, yes. A boundary double at AED 150 for 30 minutes works out at AED {quadFrom} each, which is usually the cheapest way to ride together."
+    },
+    {
+      "q": "Do you pick up from hotels?",
+      "a": "Yes, free anywhere inside Dubai. {pickup} Outside Dubai we quote the transfer before you commit."
+    },
+    {
+      "q": "What should I wear for quad biking?",
+      "a": "Closed shoes and long trousers. Quads throw up more sand than buggies do, so cover your legs. Bring sunglasses, or goggles if you wear contact lenses."
+    },
+    {
+      "q": "Do I need a licence?",
+      "a": "No. Riding is on private desert terrain with a guide rather than on public roads. Age and following the briefing are what matter."
+    },
+    {
+      "q": "Do I pay a deposit?",
+      "a": "No deposit on standard slots. {payment} Nothing is due when you book."
+    },
+    {
+      "q": "Can I cancel?",
+      "a": "Free cancellation up to 24 hours before your slot. Inside 24 hours we will try to move you to another date rather than charge you."
+    },
+    {
+      "q": "Which quad suits a first timer?",
+      "a": "A single seat boundary quad at AED 89 for 30 minutes. Fenced, controlled, and enough to know whether you want the open desert next time."
+    }
+  ],
+  "linksKicker": "07 / Keep reading",
+  "linksH2": "Where to go next",
+  "links": [
+    {
+      "tag": "Prices",
+      "title": "Quad Bike Dubai Price",
+      "desc": "Every quad and every duration on one page.",
+      "href": "/quad-bike-dubai/price/"
+    },
+    {
+      "tag": "Fleet",
+      "title": "Quad Biking Dubai",
+      "desc": "Six quads with routes, ages and engine sizes.",
+      "href": "/quad-bike-dubai/"
+    },
+    {
+      "tag": "Buggies",
+      "title": "Dune Buggy Dubai",
+      "desc": "A wheel instead of handlebars, from AED {buggyFrom}.",
+      "href": "/dune-buggy-dubai/"
+    }
+  ],
+  "finalKicker": "Question not answered?",
+  "finalH2": "Message us and we will answer it",
+  "finalLede": "Send the ages and the group size. That is enough for us to tell you exactly what works."
+}

@@ -1,0 +1,200 @@
+{
+  "export": "ourFleet",
+  "path": "about-us/our-fleet",
+  "crumb": [
+    {
+      "name": "About us",
+      "href": "/about-us/"
+    }
+  ],
+  "short": "Our Fleet",
+  "title": "Our Fleet | Dune Buggies, Quads and Dirt Bikes in Dubai",
+  "description": "Eleven dune buggies, six quad bikes from kids 70cc to the Raptor 700, and the KTM 450 enduro. What each machine suits, and who should avoid it.",
+  "heroImage": "desert-adventure-dubai-hero-canam-maverick",
+  "finalImage": "polaris-rzr-4-seater-dune-buggy-parked-dubai-base",
+  "heroSubject": "buggy",
+  "kicker": "Our fleet",
+  "h1Lead": "Every machine we run, and",
+  "h1Em": "who each one suits",
+  "lede": "{fleet} vehicles across buggies, quads and dirt bikes. The useful question is not which is fastest, it is which one fits the person riding it.",
+  "chips": [
+    "11 dune buggies",
+    "6 quad bikes",
+    "KTM 450 enduro",
+    "Ages 6 and up"
+  ],
+  "ctaPrimary": {
+    "label": "Which machine suits me?",
+    "message": "Hi Buggy Rents! Can you help me pick the right machine?"
+  },
+  "ctaSecondary": {
+    "label": "See buggy prices",
+    "href": "/dune-buggy-dubai/price/"
+  },
+  "panel": {
+    "kicker": "Start here",
+    "title": "Price is per vehicle",
+    "sub": "Not per person. A four seater split between four people is the cheapest way for a group to ride.",
+    "points": [
+      "Two seat buggies from AED {buggyFrom} for 30 minutes",
+      "Quads from AED {quadFrom}, kids from age 6",
+      "The KTM 450 needs real off road experience"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "Fleet",
+      "value": "{fleet}",
+      "note": "Vehicles across all three categories."
+    },
+    {
+      "tag": "Buggies",
+      "value": "11",
+      "note": "Polaris RZR through to Can-Am Maverick R."
+    },
+    {
+      "tag": "Quads",
+      "value": "6",
+      "note": "Kids 70cc up to the Yamaha Raptor 700."
+    },
+    {
+      "tag": "Enduro",
+      "value": "KTM 450",
+      "note": "One machine, for experienced riders only."
+    },
+    {
+      "tag": "Guides",
+      "value": "{guides}",
+      "note": "Guides across the operation."
+    }
+  ],
+  "introKicker": "01 / How to choose",
+  "introH2": "Three categories, and the honest difference between them",
+  "introLede": "Most people arrive asking which is fastest. The better question is how much you want to be doing yourself.",
+  "introBody": [
+    "<strong>Buggies</strong> have a wheel, a seat and a roll cage, which makes them the easiest thing to be competent in quickly. If you can drive a car you can drive a buggy. They are also the only option where a group rides together in one machine, so a nervous passenger can come along without having to control anything.",
+    "<strong>Quads</strong> have handlebars, and you steer by shifting your weight as much as by turning. That makes them more physical and more direct. People who ride quads tend to prefer them for exactly that reason. They start at age six on the kids machines in a fenced area, which is why families end up here.",
+    "<strong>The KTM 450</strong> is a different proposition entirely. It is a desert enduro, it needs clutch control and real off road ability, and it is not something to learn on. We screen riders at the base, and if you are not ready we move you to a quad or a buggy for the same slot and adjust the price. That is not a sales tactic, it is what keeps people out of hospital.",
+    "Within each category the differences are engine size, seat count and where you are allowed to ride. Boundary routes are fenced and controlled. Open desert routes go out into the red dunes with a guide, and carry a higher minimum age for that reason."
+  ],
+  "cardsKicker": "02 / The three categories",
+  "cardsH2": "What each one actually feels like.",
+  "cardsLede": "Pick by how much work you want to do, not by top speed.",
+  "cards": [
+    {
+      "tag": "Buggy",
+      "h": "Easiest to be good at",
+      "p": "Wheel, pedals, roll cage and a seatbelt. Two and four seat options mean a group can ride together, and a nervous passenger does not have to drive."
+    },
+    {
+      "tag": "Quad",
+      "h": "More physical, more direct",
+      "p": "Handlebars and body weight. Harder work across a full hour, and the reason quad riders stay quad riders. Kids machines start at age six."
+    },
+    {
+      "tag": "Dirt bike",
+      "h": "For riders who already ride",
+      "p": "The KTM 450 is a real desert enduro. Clutch control and off road experience are required, and guides assess that at the base."
+    }
+  ],
+  "checksKicker": "03 / Choosing well",
+  "checksH2": "Details that decide which machine fits.",
+  "checksLede": "These four settle it faster than any spec sheet.",
+  "checks": [
+    {
+      "tag": "Age",
+      "h": "Age sets the options",
+      "p": "Kids quads from 6, boundary singles from 12, open desert from 14 or 16, and the Raptor 700 from 14. Guides check at the base."
+    },
+    {
+      "tag": "Group",
+      "h": "Group size changes the maths",
+      "p": "Prices are per vehicle. Four people in a four seater pay a quarter each, which usually beats four separate quads."
+    },
+    {
+      "tag": "Route",
+      "h": "Boundary or open desert",
+      "p": "Boundary areas are fenced and controlled, better for first timers. Open desert goes out into the red dunes with a guide."
+    },
+    {
+      "tag": "Comfort",
+      "h": "Back, neck and heart",
+      "p": "Desert terrain is rough. Existing back or neck problems usually point towards a buggy and a shorter duration."
+    }
+  ],
+  "stepsKicker": "04 / Booking path",
+  "stepsH2": "How to get to the right machine",
+  "stepsLede": "Tell us the group and we will narrow it down before you pay anything.",
+  "steps": [
+    {
+      "h": "Tell us the date and group",
+      "p": "Send your date, how many are riding, and the ages. Age decides which machines are even an option."
+    },
+    {
+      "h": "Pick the machine and duration",
+      "p": "We quote per vehicle, not per person, so a two seater split between two people halves the cost."
+    },
+    {
+      "h": "Confirm pickup",
+      "p": "{pickup} Outside Dubai we quote the transfer before you commit."
+    },
+    {
+      "h": "Pay at the base",
+      "p": "Nothing is due when you book. Settle at Al Awir before you ride, by cash, card or bank transfer."
+    }
+  ],
+  "faqKicker": "05 / Questions",
+  "faqH2": "Fleet questions we actually get",
+  "faqLede": "The practical ones, answered without the sales pitch.",
+  "faqs": [
+    {
+      "q": "Which buggy should a first timer take?",
+      "a": "A Polaris RZR 1000 two seater. It is the most forgiving machine we run and the cheapest way into a buggy at AED {buggyFrom} for 30 minutes. Move up to a Turbo or a Maverick once you know what the sand feels like."
+    },
+    {
+      "q": "Is a buggy or a quad better?",
+      "a": "Neither is better, they are different. A buggy is easier to be competent in quickly and lets a group ride together. A quad is more physical and more direct. If you are unsure, a buggy is the safer first choice."
+    },
+    {
+      "q": "Can my child ride?",
+      "a": "From age six on the kids quads, 70cc to 90cc, in a fenced riding area with a guide. Older children move up by age and engine size. Children can also ride as passengers in a two or four seat buggy."
+    },
+    {
+      "q": "What if I book the KTM and cannot handle it?",
+      "a": "It happens and it is not a problem. The guide moves you to a quad or a buggy for the same slot and we adjust the price. Nobody is sent out on a 450 they cannot control."
+    },
+    {
+      "q": "Is a four seater slower than a two seater?",
+      "a": "Loaded with four people, yes, noticeably. If outright pace matters, take two seaters. If riding together matters more, take the four seater."
+    },
+    {
+      "q": "How many vehicles do you have?",
+      "a": "{fleet} across the operation, so group bookings are usually possible at short notice. Tell us the group size and date and we will confirm what is available."
+    }
+  ],
+  "linksKicker": "06 / Related",
+  "linksH2": "Where to go next",
+  "links": [
+    {
+      "tag": "Buggies",
+      "title": "Dune Buggy Dubai",
+      "desc": "All eleven buggies with prices and durations.",
+      "href": "/dune-buggy-dubai/"
+    },
+    {
+      "tag": "Quads",
+      "title": "Quad Biking Dubai",
+      "desc": "Six quads from kids 70cc to the Raptor 700.",
+      "href": "/quad-bike-dubai/"
+    },
+    {
+      "tag": "Safety",
+      "title": "Safety Standards",
+      "desc": "Helmets, briefing, guides and honest limits.",
+      "href": "/about-us/safety-standards/"
+    }
+  ],
+  "finalKicker": "Not sure which one?",
+  "finalH2": "Tell us who is riding and we will pick for you",
+  "finalLede": "Ages, group size and whether anyone has ridden before. That is enough for a straight recommendation."
+}

@@ -613,3 +613,47 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   }
   console.log(`Metadata audit passed — ${pages.length - 1} pages, ${longTitles.length} long title(s), ${longDescs.length} long description(s).`);
 }
+
+
+/* Unfilled CMS tokens.
+ *
+ * Copy in the CMS carries placeholders like {buggyFrom} and {cancellation} so a
+ * sentence stays editable while the number inside it stays derived. tokens.ts throws
+ * on an unknown token, but only for strings that actually pass through fill(). A
+ * field added to a schema and then forgotten in the adapter would print the raw
+ * placeholder straight onto the page, and "from AED {buggyFrom}" on a live booking
+ * page is worse than any build error.
+ *
+ * This checks the built HTML instead of the source, so it catches the gap between
+ * the two. FAILS the build: there is no version of this that is acceptable to ship.
+ */
+{
+  const pages = [];
+  const walkTok = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkTok(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkTok(DIST);
+
+  const hits = [];
+  for (const page of pages) {
+    const text = readFileSync(page, 'utf8')
+      .replace(/<script[\s\S]*?<\/script>/g, ' ')
+      .replace(/<style[\s\S]*?<\/style>/g, ' ')
+      .replace(/<[^>]*>/g, ' ');
+    /* Deliberately narrow: {word} only. Loosening it to any braces would trip over
+       legitimate JSON-LD and inline CSS that survive the strip above. */
+    for (const m of text.matchAll(/\{([a-zA-Z][a-zA-Z0-9]{2,})\}/g)) {
+      hits.push(`${page.replace(/^dist/, '')}: ${m[0]}`);
+    }
+  }
+
+  if (hits.length) {
+    console.error('Unfilled CMS token(s) rendered onto a page:');
+    [...new Set(hits)].slice(0, 10).forEach(h => console.error('  ' + h));
+    console.error('  The field is missing a fill() or fillDeep() call in its adapter.');
+    process.exit(1);
+  }
+  console.log(`Token audit passed — no unfilled placeholders across ${pages.length} pages.`);
+}

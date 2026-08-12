@@ -1,0 +1,200 @@
+{
+  "export": "dirtBikeAdvanced",
+  "path": "ktm-dirt-bike-dubai/dirt-bike-for-advanced",
+  "crumb": [
+    {
+      "name": "KTM Dirt Bike Dubai",
+      "href": "/ktm-dirt-bike-dubai/"
+    }
+  ],
+  "short": "Dirt Bike for Advanced Riders",
+  "title": "Dirt Bike for Advanced Riders in Dubai | KTM 450 Enduro",
+  "description": "KTM 450 desert enduro in Dubai for riders who already ride. Open red dune terrain, up to four hours, from AED {dirtbikeFrom}. What it demands and how sessions run.",
+  "heroImage": "ktm-dirt-bike-dubai-hero-sunrise-dunes",
+  "finalImage": "ktm-450-enduro-rider-sand-spray-dubai",
+  "heroSubject": "dirtbike",
+  "kicker": "Dirt bike for advanced riders",
+  "h1Lead": "KTM 450 enduro on",
+  "h1Em": "open red dune terrain",
+  "lede": "If you already ride off road, this is the page that matters. Real dune terrain, sessions up to four hours, and guides who will let you actually ride.",
+  "chips": [
+    "KTM 450 enduro",
+    "Open red dunes",
+    "Up to 4 hours",
+    "From AED {dirtbikeFrom}"
+  ],
+  "ctaPrimary": {
+    "label": "Book a session",
+    "message": "Hi Buggy Rents! I ride off road and want to book the KTM 450. What durations are open?"
+  },
+  "ctaSecondary": {
+    "label": "See KTM prices",
+    "href": "/ktm-dirt-bike-dubai/"
+  },
+  "panel": {
+    "kicker": "For riders who ride",
+    "title": "Real dune terrain, not a track",
+    "sub": "Lahbab and the Al Awir red dunes. Soft sand, real gradients and enough space to open it up.",
+    "points": [
+      "30 minutes AED {dirtbikeFrom}, up to 4 hours AED 2000",
+      "Guides set the pace to the group, so ride with peers",
+      "Sunrise and late afternoon are the sessions worth booking"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "Bike",
+      "value": "KTM 450",
+      "note": "Desert enduro, maintained in house."
+    },
+    {
+      "tag": "Terrain",
+      "value": "Red dunes",
+      "note": "Open desert, not a fenced circuit."
+    },
+    {
+      "tag": "Max",
+      "value": "4 hours",
+      "note": "Longest session we run on the enduro."
+    },
+    {
+      "tag": "From",
+      "value": "AED {dirtbikeFrom}",
+      "note": "30 minutes, per bike."
+    },
+    {
+      "tag": "Age",
+      "value": "14+",
+      "note": "Minimum age for the KTM 450, with rider screening on top."
+    }
+  ],
+  "introKicker": "01 / The terrain",
+  "introH2": "What Dubai dune riding actually demands",
+  "introLede": "If your off road experience is trails and hardpack, sand will still surprise you. Here is how.",
+  "introBody": [
+    "The Al Awir and Lahbab dunes are soft sand with real gradient. That combination rewards momentum and punishes anything tentative. Riders coming from trails or hardpack motocross usually have the bike control already and spend the first twenty minutes recalibrating throttle and body position for a surface that moves.",
+    "Gradient is the part people underestimate. A dune face that looks moderate from the bottom is steeper than it appears, and the crest is often sharper than expected. Guides know which faces hold and which collapse, and that local knowledge is most of what you are paying for out here.",
+    "Session length matters more than on a quad. Thirty minutes on a 450 in soft sand is a real workout. Two hours is a serious session, and four hours is for riders who genuinely ride regularly. Start shorter than your ego suggests, especially in summer.",
+    "<strong>Timing:</strong> sunrise and late afternoon are the sessions worth booking. The sand is firmer, the light is better and the heat is manageable. Midday in summer is survivable but it is not the ride you came for."
+  ],
+  "cardsKicker": "02 / Session lengths",
+  "cardsH2": "Pick by fitness, not by ambition.",
+  "cardsLede": "Sand riding is far more physical than the equivalent time on a trail.",
+  "cards": [
+    {
+      "tag": "30 to 60 min",
+      "h": "Recalibration",
+      "p": "Enough to adjust to sand if you already ride. AED {dirtbikeFrom} for 30 minutes, AED 700 for the hour. A sensible first booking."
+    },
+    {
+      "tag": "2 hours",
+      "h": "A real session",
+      "p": "AED 1200. Long enough to cover proper ground and ride varied dune faces rather than one area."
+    },
+    {
+      "tag": "3 to 4 hours",
+      "h": "For regular riders",
+      "p": "AED 1500 and AED 2000. Only worth booking if you ride often. Sand fatigue is real and it arrives faster than expected."
+    }
+  ],
+  "checksKicker": "03 / Worth knowing",
+  "checksH2": "Practical points before you book.",
+  "checksLede": "The things experienced riders actually ask us.",
+  "checks": [
+    {
+      "tag": "Gear",
+      "h": "Bring your own if you have it",
+      "p": "Helmets are provided and fitted. If you have your own boots, gloves and goggles, bring them. Sand finds every gap."
+    },
+    {
+      "tag": "Pace",
+      "h": "Guides ride to the group",
+      "p": "Book with riders of similar ability, or tell us you are riding solo. A mixed group means somebody is bored and somebody is out of their depth."
+    },
+    {
+      "tag": "Timing",
+      "h": "Sunrise is the best sand",
+      "p": "Firmer surface, better light, manageable heat. Late afternoon is second best. Midday in summer is the worst of it."
+    },
+    {
+      "tag": "Bikes",
+      "h": "Maintained in house",
+      "p": "The 450s are serviced at our own base rather than sent out, so a bike that comes back wrong does not go out again the next morning."
+    }
+  ],
+  "stepsKicker": "04 / Booking path",
+  "stepsH2": "How to set up a session",
+  "stepsLede": "Tell us your experience honestly and the session gets built around it.",
+  "steps": [
+    {
+      "h": "Tell us what you ride",
+      "p": "Trails, motocross, enduro, and how often. It decides the route and the pace the guide sets."
+    },
+    {
+      "h": "Pick the duration",
+      "p": "Start at 30 or 60 minutes if you have not ridden sand before. Extend on a later booking once you know."
+    },
+    {
+      "h": "Book sunrise or late afternoon",
+      "p": "Firmer sand and better light. Say which you want and we will check the slot."
+    },
+    {
+      "h": "Pay at the base",
+      "p": "Nothing due at booking. Cash, card or bank transfer at Al Awir before you ride."
+    }
+  ],
+  "faqKicker": "05 / Questions",
+  "faqH2": "Questions from riders who already ride",
+  "faqLede": "The practical detail, not the beginner explanation.",
+  "faqs": [
+    {
+      "q": "How does dune riding compare to motocross?",
+      "a": "The bike control transfers but the surface does not. Sand moves under you and rewards momentum. Most motocross riders adjust within twenty minutes, mostly on throttle discipline and body position on climbs."
+    },
+    {
+      "q": "Can I ride at my own pace?",
+      "a": "Within reason. The guide sets a route and a boundary, but on open dune terrain there is real space. Book with riders of similar ability, or tell us you are riding solo and we will plan for it."
+    },
+    {
+      "q": "What is the longest session?",
+      "a": "Four hours at AED 2000. Genuinely demanding in soft sand. Unless you ride regularly, two hours at AED 1200 is a better session."
+    },
+    {
+      "q": "Can I bring my own gear?",
+      "a": "Yes, and we recommend it if you have it. Helmets are provided and fitted. Your own boots, gloves and goggles will be more comfortable than anything loaned."
+    },
+    {
+      "q": "Do you have anything other than the KTM 450?",
+      "a": "No. One bike, chosen because it suits this terrain. No Husqvarna and no smaller capacity option."
+    },
+    {
+      "q": "Should I check my travel insurance?",
+      "a": "Yes. Riding is at your own risk, and most standard travel policies exclude off road motorcycling specifically. Worth confirming yours covers it before you travel."
+    }
+  ],
+  "linksKicker": "06 / Related",
+  "linksH2": "Where to go next",
+  "links": [
+    {
+      "tag": "KTM",
+      "title": "KTM Dirt Bike Dubai",
+      "desc": "The bike, the routes and every duration.",
+      "href": "/ktm-dirt-bike-dubai/"
+    },
+    {
+      "tag": "Beginners",
+      "title": "Dirt Bike for Beginners",
+      "desc": "Send anyone in your group who has not ridden here.",
+      "href": "/ktm-dirt-bike-dubai/dirt-bike-for-beginners/"
+    },
+    {
+      "tag": "Safety",
+      "title": "Safety Standards",
+      "desc": "How we run briefings, guides and weather calls.",
+      "href": "/about-us/safety-standards/"
+    }
+  ],
+  "finalKicker": "Ready to ride",
+  "finalH2": "Tell us what you ride and we will set the session",
+  "finalLede": "Experience level, preferred duration and sunrise or afternoon. That is all we need."
+}

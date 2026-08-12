@@ -1,0 +1,164 @@
+{
+  "category": "dirtbike",
+  "crumb": "KTM Dirt Bike Dubai",
+  "title": "KTM Dirt Bike Dubai | 450cc Enduro from AED {dirtbikeFrom}",
+  "description": "KTM dirt bike Dubai: a 450cc desert enduro in the Lahbab red dunes from AED {dirtbikeFrom}. Rider screening applies. Helmet, briefing and guide included.",
+  "eyebrow": "Guided desert enduro in Dubai",
+  "h1": "KTM Dirt Bike Dubai",
+  "subhead": "A 450cc desert enduro in the Lahbab red dunes, for riders who can already work a clutch, gears and throttle.",
+  "lede": "The hardest thing we run and the most rewarding once it clicks. Sessions from 30 minutes to four hours with helmet, briefing, fuel and a lead guide included. Rider screening applies before we hand a bike over.",
+  "stats": [],
+  "fleetKicker": "01 / The bike",
+  "fleetH2": "The KTM 450 desert enduro.",
+  "fleetLede": "One machine, five durations. A 450 in soft sand is unforgiving, which is why we screen riders rather than take the booking blind.",
+  "uspKicker": "02 / Why book this tour",
+  "uspH2": "Is the KTM 450 right for you?",
+  "uspLede": "This is the one activity where the honest answer is sometimes no. Read this before booking.",
+  "usps": [
+    {
+      "h": "You need real experience",
+      "p": "Clutch, gears and throttle control on loose surfaces. If you have only ridden on tarmac, sand will surprise you within the first minute."
+    },
+    {
+      "h": "Age 14 and over",
+      "p": "The dirt bike is released from 14, and the guide still screens every rider before handing one over. Anyone not ready for a clutch and gears is moved to a quad or a buggy for the same slot."
+    },
+    {
+      "h": "Start on a quad if unsure",
+      "p": "A quad teaches you how sand behaves with far less consequence. Plenty of riders do a quad session first and come back for the KTM."
+    },
+    {
+      "h": "Everything else included",
+      "p": "Helmet, safety briefing, fuel, water and a lead guide who stays with you. Free hotel pickup within Dubai."
+    }
+  ],
+  "flowKicker": "03 / Tour flow",
+  "flowH2": "From pickup to the red dune trails.",
+  "flowLede": "Pickup, screening, briefing, then a guided route matched to how you actually ride.",
+  "steps": [
+    {
+      "label": "Pickup",
+      "h": "Free Dubai pickup",
+      "p": "Hotel pickup within Dubai is included, or self-drive directions to the Al Awir base."
+    },
+    {
+      "label": "Briefing",
+      "h": "Gear and controls",
+      "p": "Helmet fitting, controls walkthrough and the guide signals for your dirt bike group."
+    },
+    {
+      "label": "Warm-up",
+      "h": "Flat-ground practice",
+      "p": "The guide checks your control on flat sand before anyone moves onto bigger dune faces."
+    },
+    {
+      "label": "Ride",
+      "h": "Guided desert route",
+      "p": "A lead guide sets the pace and a sweep stays at the back so the group never splits."
+    },
+    {
+      "label": "Return",
+      "h": "Photos and drop-off",
+      "p": "Photo stop at the best light, back to base, then transfer or self-drive return."
+    }
+  ],
+  "faqKicker": "04 / FAQ",
+  "faqH2": "Answers before you book.",
+  "faqLede": "Experience requirements, price, safety and what happens if the guide says no.",
+  "faqs": [
+    {
+      "q": "How much is a KTM dirt bike in Dubai?",
+      "a": "KTM 450 dirt bike sessions run AED {dirtbikeFrom} for 30 minutes, AED 700 for 1 hour, AED 1,200 for 2 hours, AED 1,500 for 3 hours, AED 2,000 for 4 hours."
+    },
+    {
+      "q": "Do I need dirt bike experience?",
+      "a": "Yes. You need to be comfortable with clutch, gears and throttle before we hand over a 450. If you are not, the quad fleet is the better starting point and nobody will think less of you for it."
+    },
+    {
+      "q": "What is the minimum age?",
+      "a": "Fourteen. Age is the starting point rather than the whole test: the guide watches how you handle the clutch and place the bike on flat sand before the route opens up, and a rider who is not ready moves to a quad or a buggy for the same slot."
+    },
+    {
+      "q": "What if the guide says I am not ready?",
+      "a": "It happens, and it is not a problem. We move you to a quad or a buggy for the same slot and adjust the price. Better a good ride on the right machine than a bad one on the wrong machine."
+    },
+    {
+      "q": "Is a licence required?",
+      "a": "No licence is required on guided desert routes. Bring photo ID for the booking record."
+    },
+    {
+      "q": "What should I wear?",
+      "a": "Closed boots or trainers that cover the ankle, long trousers, and clothes you do not mind getting sandy. We provide the helmet. Bring gloves if you have them."
+    },
+    {
+      "q": "Is hotel pickup free?",
+      "a": "Hotel pickup and drop-off within Dubai is free on every booking. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking."
+    },
+    {
+      "q": "How and when do I pay?",
+      "a": "There is nothing to pay when you book. Settle up at the Al Awir base before you ride, by cash, card or bank transfer, whichever suits you."
+    }
+  ],
+  "lfKicker": "05 / Guide",
+  "lfHeading": "KTM Dirt Bike Dubai: desert enduro routes, rider requirements and prices",
+  "lfIntro": "Everything worth knowing before booking a <strong>KTM dirt bike in Dubai</strong>: what riding a 450 in soft sand actually demands, the screening we do, current prices, and when a quad is the better choice.",
+  "lfBlocks": [
+    {
+      "h": "Why sand is different",
+      "html": "<p class=\"lf-lead\">A 450 that feels planted on a trail behaves nothing like it on a dune face.</p><p>Soft sand swallows the front wheel, momentum becomes the thing keeping you upright, and the throttle does most of the steering. Riders with road experience often find the first ten minutes genuinely humbling.</p><p>That is why we screen before handing a bike over, and why the warm-up happens on flat ground where mistakes cost nothing.</p>"
+    },
+    {
+      "h": "The screening, and why we do it",
+      "html": "<p class=\"lf-lead\">A short conversation and a warm-up lap, not a test.</p><p>The guide watches how you handle the clutch and how you place the bike on flat sand. If it looks fine, the route opens up. If it does not, we move you to a <a href=\"/quad-bike-dubai/\">quad</a> or a <a href=\"/dune-buggy-dubai/\">buggy</a> for the same slot and adjust the price.</p><p>Nobody is sent into the dunes on a machine they cannot control.</p>"
+    },
+    {
+      "h": "Prices and durations",
+      "html": "<p class=\"lf-lead\">Five durations, priced per bike.</p><p><span class=\"pill\">30 minutes AED {dirtbikeFrom}</span> <span class=\"pill\">1 hour AED 700</span> <span class=\"pill\">2 hours AED 1,200</span> <span class=\"pill\">3 hours AED 1,500</span> <span class=\"pill\">4 hours AED 2,000</span></p><p>An hour is the sweet spot for most riders. Beyond two hours a 450 in sand is genuinely tiring, and that suits riders who already know what that feels like.</p>"
+    },
+    {
+      "h": "When a quad is the better booking",
+      "html": "<p class=\"lf-lead\">If you have never ridden off-road, start on a quad.</p><p>Four wheels remove the balance problem entirely, so you learn how sand behaves without also managing a bike that wants to fall over. The <a href=\"/quad-bike-dubai/yamaha-raptor-700cc/\">Yamaha Raptor 700</a> is fast enough to be interesting for experienced riders.</p><p>Plenty of guests do a quad session on one trip and the KTM on the next.</p>"
+    },
+    {
+      "h": "Safety, gear and conditions",
+      "html": "<p class=\"lf-lead\">Helmet included and mandatory. Long trousers and ankle-covering shoes strongly recommended.</p><p>Guides carry recovery gear and stay with you throughout. If wind, heat or visibility make the route unsafe we contact you before you travel and reschedule at no cost. If no alternative date works, you get a full refund.</p><p>Free hotel pickup within Dubai. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.</p>"
+    },
+    {
+      "h": "Booking and payment",
+      "html": "<p class=\"lf-lead\">Message us with your date, riding experience and the duration you want.</p><p>Being honest about experience helps: it decides whether we prep a KTM or suggest something else, and it saves everyone time on the day.</p><p>There is nothing to pay when you book. Settle up at the Al Awir base before you ride, by cash, card or bank transfer, whichever suits you. Cancel more than 24 hours before your slot and you get a full refund. Inside 24 hours we will always try to move you to another date rather than charge you.</p>"
+    }
+  ],
+  "relKicker": "06 / Next choices",
+  "relH2": "Compare the other ways to ride the same dunes.",
+  "relLede": "Same base, same guides, very different levels of difficulty.",
+  "related": [
+    {
+      "tag": "Quad from AED {quadFrom}",
+      "title": "Quad Biking Dubai",
+      "desc": "Four wheels, no balance problem. The right first step.",
+      "href": "/quad-bike-dubai/",
+      "img": "quad-bike-group-tour-dubai-open-desert"
+    },
+    {
+      "tag": "Buggy from AED {buggyFrom}",
+      "title": "Dune Buggy Dubai",
+      "desc": "Roll cage, harness and a passenger seat. The easiest of the three.",
+      "href": "/dune-buggy-dubai/",
+      "img": "dune-buggy-sunset-ride-lahbab-red-dunes-dubai"
+    },
+    {
+      "tag": "Safari from AED 99",
+      "title": "Desert Safari Dubai",
+      "desc": "Someone else drives. Dune bashing and a Bedouin camp dinner.",
+      "href": "/desert-safari-dubai-deals/",
+      "img": "private-desert-safari-4x4-dubai-red-dunes"
+    },
+    {
+      "tag": "Prices",
+      "title": "Quad Biking Dubai Price",
+      "desc": "Six quads and every duration on one page.",
+      "href": "/quad-bike-dubai/price/",
+      "img": "quad-biking-dubai-ladies-group-desert-tour"
+    }
+  ]
+}

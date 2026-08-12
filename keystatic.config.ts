@@ -193,6 +193,192 @@ export default config({
       }
     }),
 
+    /* The three category pillar pages: dune buggy, quad bike, KTM dirt bike.
+       Every hand-written word on those pages lives here. The fleet list and the
+       hero image do not: they are wired from the category in code, because a
+       client editing a copy of the fleet would be maintaining it twice.
+
+       Prices in this copy are written as {buggyFrom}, {quadFrom}, {dirtbikeFrom},
+       {rating} and {reviewCount}. The build fills them in from the real data, so a
+       headline stays editable without its number going stale. A token that is
+       misspelled fails the build rather than printing onto the page. */
+    pillars: collection({
+      label: 'Category pages',
+      slugField: 'crumb',
+      path: 'src/content/pillars/*',
+      format: { data: 'json' },
+      columns: ['crumb'],
+      schema: {
+        crumb: fields.slug({
+          name: { label: 'Breadcrumb name', description: 'Shown in the breadcrumb trail, e.g. "Dune Buggy Dubai".' },
+          slug: { label: 'URL slug', description: 'Must stay as it is. These are the highest-ranking pages on the site.' }
+        }),
+        category: fields.select({
+          label: 'Fleet shown on this page',
+          description: 'Decides which vehicles and which hero image the page uses.',
+          options: [
+            { label: 'Dune buggies', value: 'buggy' },
+            { label: 'Quad bikes', value: 'quad' },
+            { label: 'Dirt bikes', value: 'dirtbike' }
+          ],
+          defaultValue: 'buggy'
+        }),
+
+        title:       fields.text({ label: 'Search result title', description: 'Aim for 60 characters or fewer. The build warns if it will be truncated.' }),
+        description: fields.text({ label: 'Search result description', description: 'Aim for 160 characters or fewer.', multiline: true }),
+        eyebrow:     fields.text({ label: 'Hero eyebrow' }),
+        h1:          fields.text({ label: 'H1' }),
+        subhead:     fields.text({ label: 'Hero subheading', multiline: true }),
+        lede:        fields.text({ label: 'Hero paragraph', multiline: true }),
+        stats: fields.array(
+          fields.object({
+            v: fields.text({ label: 'Value' }),
+            l: fields.text({ label: 'Label' })
+          }),
+          { label: 'Hero stats', itemLabel: p => `${p.fields.v.value} — ${p.fields.l.value}` }
+        ),
+
+        fleetKicker: fields.text({ label: 'Fleet section kicker' }),
+        fleetH2:     fields.text({ label: 'Fleet section heading' }),
+        fleetLede:   fields.text({ label: 'Fleet section intro', multiline: true }),
+
+        uspKicker: fields.text({ label: 'Selling points kicker' }),
+        uspH2:     fields.text({ label: 'Selling points heading' }),
+        uspLede:   fields.text({ label: 'Selling points intro', multiline: true }),
+        usps: fields.array(
+          fields.object({
+            h: fields.text({ label: 'Heading' }),
+            p: fields.text({ label: 'Text', multiline: true })
+          }),
+          { label: 'Selling points', itemLabel: p => p.fields.h.value }
+        ),
+
+        flowKicker: fields.text({ label: 'Tour flow kicker' }),
+        flowH2:     fields.text({ label: 'Tour flow heading' }),
+        flowLede:   fields.text({ label: 'Tour flow intro', multiline: true }),
+        steps: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Step label' }),
+            h:     fields.text({ label: 'Heading' }),
+            p:     fields.text({ label: 'Text', multiline: true })
+          }),
+          { label: 'Tour flow steps', itemLabel: p => p.fields.h.value }
+        ),
+
+        faqKicker: fields.text({ label: 'FAQ kicker' }),
+        faqH2:     fields.text({ label: 'FAQ heading' }),
+        faqLede:   fields.text({ label: 'FAQ intro', multiline: true }),
+        faqs: fields.array(
+          fields.object({
+            q: fields.text({ label: 'Question' }),
+            a: fields.text({ label: 'Answer', multiline: true })
+          }),
+          { label: 'FAQ', description: 'These also feed the FAQ rich result in Google, so keep answers self-contained.', itemLabel: p => p.fields.q.value }
+        ),
+
+        lfKicker:  fields.text({ label: 'Guide kicker' }),
+        lfHeading: fields.text({ label: 'Guide heading' }),
+        lfIntro:   fields.text({ label: 'Guide intro', description: 'HTML is allowed here.', multiline: true }),
+        lfBlocks: fields.array(
+          fields.object({
+            h:    fields.text({ label: 'Heading' }),
+            html: fields.text({ label: 'HTML', description: 'Paragraphs, lists and links. Class names such as lf-lead and pill are styled by the template.', multiline: true })
+          }),
+          { label: 'Guide sections', itemLabel: p => p.fields.h.value }
+        ),
+
+        relKicker: fields.text({ label: 'Cross-sell kicker' }),
+        relH2:     fields.text({ label: 'Cross-sell heading' }),
+        relLede:   fields.text({ label: 'Cross-sell intro', multiline: true }),
+        related: fields.array(
+          fields.object({
+            tag:   fields.text({ label: 'Tag' }),
+            title: fields.text({ label: 'Title' }),
+            desc:  fields.text({ label: 'Description', multiline: true }),
+            href:  fields.text({ label: 'Link' }),
+            img:   fields.text({ label: 'Image key' })
+          }),
+          { label: 'Cross-sell cards', itemLabel: p => p.fields.title.value }
+        )
+      }
+    }),
+
+    /* Seven policy and information pages, and the three About / FAQ pages.
+       Both use a shared field set because both templates take the same shape: hero,
+       trust strip, intro, cards, checks, steps, optional long-form guide, FAQ,
+       related links, final CTA.
+
+       Two fields are structural rather than copy and must not be edited:
+       - "export" is the name the code looks the page up by. Change it and the page
+         disappears from the build.
+       - "path" is the URL. Change it and every link to the page breaks, along with
+         whatever ranking it has.
+       They are visible rather than hidden so nobody wonders where the URL is set. */
+    support: collection({
+      label: 'Policy and info pages',
+      slugField: 'short',
+      path: 'src/content/support/*',
+      format: { data: 'json' },
+      columns: ['short', 'path'],
+      schema: supportSchema()
+    }),
+
+    about: collection({
+      label: 'About and FAQ pages',
+      slugField: 'short',
+      path: 'src/content/about/*',
+      format: { data: 'json' },
+      columns: ['short', 'path'],
+      schema: {
+        ...supportSchema(),
+        reviewsKicker: fields.text({ label: 'Reviews section kicker' }),
+        reviewsH2:     fields.text({ label: 'Reviews section heading' }),
+        reviewsLede:   fields.text({ label: 'Reviews section intro', multiline: true }),
+        askKicker:     fields.text({ label: 'Contact section kicker' }),
+        askH2:         fields.text({ label: 'Contact section heading' }),
+        askLede:       fields.text({ label: 'Contact section intro', multiline: true }),
+        askCards: fields.array(
+          fields.object({
+            tag:   fields.text({ label: 'Channel' }),
+            value: fields.text({ label: 'Value' }),
+            note:  fields.text({ label: 'Note', multiline: true }),
+            href:  fields.text({ label: 'Link' })
+          }),
+          { label: 'Contact cards', itemLabel: p => p.fields.tag.value }
+        ),
+        bentoKicker: fields.text({ label: 'Question picker kicker' }),
+        bentoH2:     fields.text({ label: 'Question picker heading' }),
+        bentoLede:   fields.text({ label: 'Question picker intro', multiline: true }),
+        bento: fields.array(
+          fields.object({
+            tag:     fields.text({ label: 'Tag' }),
+            h:       fields.text({ label: 'Heading' }),
+            p:       fields.text({ label: 'Text', multiline: true }),
+            feature: fields.checkbox({ label: 'Make this tile large', defaultValue: false })
+          }),
+          { label: 'Question tiles', itemLabel: p => p.fields.h.value }
+        ),
+        handledKicker: fields.text({ label: 'What is handled kicker' }),
+        handledH2:     fields.text({ label: 'What is handled heading' }),
+        handledLede:   fields.text({ label: 'What is handled intro', multiline: true }),
+        handledList: fields.array(
+          fields.object({
+            h: fields.text({ label: 'Group heading' }),
+            items: fields.array(fields.text({ label: 'Item' }), { label: 'Items', itemLabel: p => p.value })
+          }),
+          { label: 'What is handled', itemLabel: p => p.fields.h.value }
+        ),
+        minis: fields.array(
+          fields.object({
+            n: fields.text({ label: 'Number or figure' }),
+            h: fields.text({ label: 'Heading' }),
+            p: fields.text({ label: 'Text', multiline: true })
+          }),
+          { label: 'Intro mini cards', itemLabel: p => p.fields.h.value }
+        )
+      }
+    }),
+
     /* Ten pickup-route pages, one entry each. Only what is genuinely specific to
        the place lives here. The sentences that appear on all ten are built in code
        from these four values, so correcting a shared line is one edit rather than
@@ -456,3 +642,141 @@ export default config({
     })
   }
 });
+
+/* Shared by the support pages and the About / FAQ pages. Both templates take the
+   same eleven sections, so describing the fields twice would guarantee the two
+   drift apart the first time one of them changes. */
+function supportSchema() {
+  return {
+    short: fields.slug({
+      name: { label: 'Page name', description: 'The last item in the breadcrumb.' },
+      slug: { label: 'File name', description: 'Internal only. Not the URL.' }
+    }),
+    export: fields.text({ label: 'Code reference', description: 'DO NOT EDIT. The name the build looks this page up by.' }),
+    path:   fields.text({ label: 'URL path', description: 'DO NOT EDIT once published. Changing it breaks every link to this page and loses its ranking.' }),
+
+    title:       fields.text({ label: 'Search result title', description: '60 characters or fewer.' }),
+    description: fields.text({ label: 'Search result description', description: '160 characters or fewer.', multiline: true }),
+
+    crumb: fields.array(
+      fields.object({
+        name: fields.text({ label: 'Name' }),
+        href: fields.text({ label: 'Link' })
+      }),
+      { label: 'Breadcrumb trail', description: 'Between Home and this page.', itemLabel: p => p.fields.name.value }
+    ),
+
+    heroImage:   fields.text({ label: 'Hero image key' }),
+    finalImage:  fields.text({ label: 'Final CTA image key' }),
+    heroSubject: fields.text({ label: 'Hero image subject', description: 'buggy, quad, dirtbike or safari. The build fails if the image does not match.' }),
+
+    kicker: fields.text({ label: 'Hero kicker' }),
+    h1Lead: fields.text({ label: 'H1, plain part' }),
+    h1Em:   fields.text({ label: 'H1, highlighted part' }),
+    lede:   fields.text({ label: 'Hero paragraph', multiline: true }),
+    chips:  fields.array(fields.text({ label: 'Chip' }), { label: 'Hero chips', itemLabel: p => p.value }),
+
+    ctaPrimary: fields.object({
+      label:   fields.text({ label: 'Button text' }),
+      message: fields.text({ label: 'WhatsApp message', multiline: true })
+    }, { label: 'Primary button' }),
+    ctaSecondary: fields.object({
+      label: fields.text({ label: 'Button text' }),
+      href:  fields.text({ label: 'Link' })
+    }, { label: 'Secondary button' }),
+
+    panel: fields.object({
+      kicker: fields.text({ label: 'Kicker' }),
+      title:  fields.text({ label: 'Title' }),
+      sub:    fields.text({ label: 'Subtitle', multiline: true }),
+      points: fields.array(fields.text({ label: 'Point' }), { label: 'Points', itemLabel: p => p.value })
+    }, { label: 'Hero panel' }),
+
+    trust: fields.array(
+      fields.object({
+        tag:   fields.text({ label: 'Tag' }),
+        value: fields.text({ label: 'Value' }),
+        note:  fields.text({ label: 'Note' })
+      }),
+      { label: 'Trust strip', itemLabel: p => `${p.fields.value.value} — ${p.fields.tag.value}` }
+    ),
+
+    introKicker: fields.text({ label: 'Intro kicker' }),
+    introH2:     fields.text({ label: 'Intro heading' }),
+    introLede:   fields.text({ label: 'Intro lede', multiline: true }),
+    introBody:   fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Intro paragraphs', itemLabel: p => p.value.slice(0, 60) }),
+
+    cardsKicker: fields.text({ label: 'Cards kicker' }),
+    cardsH2:     fields.text({ label: 'Cards heading' }),
+    cardsLede:   fields.text({ label: 'Cards intro', multiline: true }),
+    cards: fields.array(
+      fields.object({
+        tag: fields.text({ label: 'Tag' }),
+        h:   fields.text({ label: 'Heading' }),
+        p:   fields.text({ label: 'Text', multiline: true })
+      }),
+      { label: 'Cards', itemLabel: p => p.fields.h.value }
+    ),
+
+    checksKicker: fields.text({ label: 'Checks kicker' }),
+    checksH2:     fields.text({ label: 'Checks heading' }),
+    checksLede:   fields.text({ label: 'Checks intro', multiline: true }),
+    checks: fields.array(
+      fields.object({
+        tag: fields.text({ label: 'Tag' }),
+        h:   fields.text({ label: 'Heading' }),
+        p:   fields.text({ label: 'Text', multiline: true })
+      }),
+      { label: 'Checks', itemLabel: p => p.fields.h.value }
+    ),
+
+    stepsKicker: fields.text({ label: 'Steps kicker' }),
+    stepsH2:     fields.text({ label: 'Steps heading' }),
+    stepsLede:   fields.text({ label: 'Steps intro', multiline: true }),
+    steps: fields.array(
+      fields.object({
+        h: fields.text({ label: 'Heading' }),
+        p: fields.text({ label: 'Text', multiline: true })
+      }),
+      { label: 'Steps', itemLabel: p => p.fields.h.value }
+    ),
+
+    guideKicker: fields.text({ label: 'Guide kicker' }),
+    guideH2:     fields.text({ label: 'Guide heading' }),
+    guideIntro:  fields.text({ label: 'Guide intro', description: 'HTML is allowed.', multiline: true }),
+    guideBlocks: fields.array(
+      fields.object({
+        h:    fields.text({ label: 'Heading' }),
+        html: fields.text({ label: 'HTML', multiline: true })
+      }),
+      { label: 'Guide sections', itemLabel: p => p.fields.h.value }
+    ),
+
+    faqKicker: fields.text({ label: 'FAQ kicker' }),
+    faqH2:     fields.text({ label: 'FAQ heading' }),
+    faqLede:   fields.text({ label: 'FAQ intro', multiline: true }),
+    faqs: fields.array(
+      fields.object({
+        q: fields.text({ label: 'Question' }),
+        a: fields.text({ label: 'Answer', multiline: true })
+      }),
+      { label: 'FAQ', description: 'Also feeds the FAQ rich result in Google, so each answer must stand on its own.', itemLabel: p => p.fields.q.value }
+    ),
+
+    linksKicker: fields.text({ label: 'Related links kicker' }),
+    linksH2:     fields.text({ label: 'Related links heading' }),
+    links: fields.array(
+      fields.object({
+        tag:   fields.text({ label: 'Tag' }),
+        title: fields.text({ label: 'Title' }),
+        desc:  fields.text({ label: 'Description', multiline: true }),
+        href:  fields.text({ label: 'Link' })
+      }),
+      { label: 'Related links', itemLabel: p => p.fields.title.value }
+    ),
+
+    finalKicker: fields.text({ label: 'Final CTA kicker' }),
+    finalH2:     fields.text({ label: 'Final CTA heading' }),
+    finalLede:   fields.text({ label: 'Final CTA text', multiline: true })
+  };
+}

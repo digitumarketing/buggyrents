@@ -1,0 +1,164 @@
+{
+  "category": "buggy",
+  "crumb": "Dune Buggy Dubai",
+  "title": "Dune Buggy Dubai | Self-Drive Tours from AED {buggyFrom}",
+  "description": "Self-drive dune buggy tours in the Lahbab red dunes. Eleven buggies from AED {buggyFrom} per buggy, not per person. Free Dubai pickup, helmet and guide included.",
+  "eyebrow": "Self-drive buggy tour in Dubai",
+  "h1": "Dune Buggy Dubai",
+  "subhead": "Self-drive dune buggy tours in the Lahbab red dunes, with Polaris and Can-Am machines for every level.",
+  "lede": "Choose a 30-minute, 1-hour, 2-hour or 4-hour guided buggy route with helmet, briefing, fuel and a lead guide included. Prices are per buggy rather than per person, so a 2-seater at AED {buggyFrom} covers both of you.",
+  "stats": [],
+  "fleetKicker": "01 / Buggy fleet",
+  "fleetH2": "Choose your dune buggy.",
+  "fleetLede": "Eleven self-drive buggies sorted by seats and power. Polaris if it is your first time, Can-Am if it is not, Maverick R if you already know exactly what you are asking for.",
+  "uspKicker": "02 / Why book this tour",
+  "uspH2": "Pick the right buggy before you book.",
+  "uspLede": "Seats and power decide the price. Service, gear and guide support are identical on every slot.",
+  "usps": [
+    {
+      "h": "Entry ride from AED {buggyFrom}",
+      "p": "The lowest public starting point is a 30-minute Polaris RZR 1000 2-seater. Because pricing is per buggy, that is AED 150 each for two riders."
+    },
+    {
+      "h": "Polaris or Can-Am",
+      "p": "Polaris RZR is the stable, forgiving first-time choice. Can-Am Maverick X3 and Turbo RR add serious power and suspension travel for experienced drivers."
+    },
+    {
+      "h": "2 or 4 seats",
+      "p": "A 4-seater carries four people for one price, which makes it the cheapest way to get a family or group into the dunes."
+    },
+    {
+      "h": "Everything included",
+      "p": "Helmet, safety briefing, harness check, fuel, water and a lead guide. Free hotel pickup within Dubai. No fuel surcharge or gear fee."
+    }
+  ],
+  "flowKicker": "03 / Tour flow",
+  "flowH2": "From hotel pickup to red dune riding.",
+  "flowLede": "A simple flow from pickup through safety briefing, guided driving in the Lahbab red dunes, and return.",
+  "steps": [
+    {
+      "label": "Pickup",
+      "h": "Free Dubai pickup",
+      "p": "Hotel pickup within Dubai is included, or self-drive directions to the Al Awir base."
+    },
+    {
+      "label": "Briefing",
+      "h": "Gear and controls",
+      "p": "Helmet fitting, controls walkthrough and the guide signals for your dune buggy group."
+    },
+    {
+      "label": "Warm-up",
+      "h": "Flat-ground practice",
+      "p": "The guide checks your control on flat sand before anyone moves onto bigger dune faces."
+    },
+    {
+      "label": "Ride",
+      "h": "Guided desert route",
+      "p": "A lead guide sets the pace and a sweep stays at the back so the group never splits."
+    },
+    {
+      "label": "Return",
+      "h": "Photos and drop-off",
+      "p": "Photo stop at the best light, back to base, then transfer or self-drive return."
+    }
+  ],
+  "faqKicker": "04 / FAQ",
+  "faqH2": "Answers before you book.",
+  "faqLede": "Clear answers on dune buggy Dubai price, who can drive, what is included and how pickup works.",
+  "faqs": [
+    {
+      "q": "How much is a dune buggy in Dubai?",
+      "a": "Dune buggy Dubai starts at AED {buggyFrom} for 30 minutes in a Polaris RZR 1000 2-seater. The Can-Am Maverick X3 starts at AED 600 and the Maverick R at AED 900. Every price is per buggy, not per person."
+    },
+    {
+      "q": "Do I need off-road experience?",
+      "a": "No. The Polaris RZR is forgiving and the briefing plus warm-up on flat sand covers everything. Tell us when you book if it is your first time and the guide holds the pace back."
+    },
+    {
+      "q": "Do I need a driving licence?",
+      "a": "No licence is required on guided routes. Drivers must be 14 or over. Bring photo ID for the booking record."
+    },
+    {
+      "q": "Can children ride?",
+      "a": "Children can sit as passengers in a 4-seater buggy driven by an adult. For children who want to drive, the fenced kids quad area takes riders from age 6."
+    },
+    {
+      "q": "What is the difference between a 2-seater and a 4-seater?",
+      "a": "Seats and price. A 4-seater carries four people for one price, so it is usually cheaper per head. The chassis and route are the same."
+    },
+    {
+      "q": "Is hotel pickup free?",
+      "a": "Hotel pickup and drop-off within Dubai is free on every booking. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking."
+    },
+    {
+      "q": "How and when do I pay?",
+      "a": "There is nothing to pay when you book. Settle up at the Al Awir base before you ride, by cash, card or bank transfer, whichever suits you."
+    },
+    {
+      "q": "Can I cancel or reschedule?",
+      "a": "Cancel more than 24 hours before your slot and you get a full refund. Inside 24 hours we will always try to move you to another date rather than charge you."
+    }
+  ],
+  "lfKicker": "05 / Guide",
+  "lfHeading": "Dune Buggy Dubai: self-drive routes, prices and vehicle choice in the Lahbab red dunes",
+  "lfIntro": "Everything you need before booking <strong>dune buggy Dubai</strong>: the eleven-machine fleet, what separates a Polaris from a Can-Am, current <strong>dune buggy rental Dubai</strong> prices, and how the guided red-dune route actually runs.",
+  "lfBlocks": [
+    {
+      "h": "What a dune buggy ride involves",
+      "html": "<p class=\"lf-lead\">A dune buggy here is a side-by-side you drive yourself, not a passenger ride.</p><p>You get the wheel, the pedals and a briefing, and a guide rides with the group to set the route and read the sand ahead. Every vehicle has a full roll cage, four-point harnesses and helmets included.</p><p>All sessions run from our Al Awir base at the edge of the <span class=\"pill\">Lahbab red dunes</span>, roughly 45 minutes from Downtown Dubai.</p>"
+    },
+    {
+      "h": "Polaris, Can-Am or Maverick R",
+      "html": "<p class=\"lf-lead\">Three tiers, and the difference is power rather than service.</p><p>The <a href=\"/dune-buggy-dubai/polaris-rzr-1000-2-seater/\">Polaris RZR 1000</a> from AED {buggyFrom} is the balanced starting point. The <a href=\"/dune-buggy-dubai/can-am-maverick-x3-2-seater/\">Can-Am Maverick X3</a> from AED 600 is a serious step up. The <a href=\"/dune-buggy-dubai/can-am-maverick-r-turbo/\">Maverick R</a> from AED 900 is the fastest thing we run, and it is not a beginner machine.</p><p>Turbo and Turbo RR variants sit between them for drivers who want more without going to the top of the range.</p>"
+    },
+    {
+      "h": "Per buggy, never per person",
+      "html": "<p class=\"lf-lead\">This changes the maths more than most people expect.</p><p>A 2-seater at AED {buggyFrom} for 30 minutes is AED {buggyFrom} total, so AED 150 each. A <a href=\"/dune-buggy-dubai/polaris-rzr-1000-4-seater/\">4-seater at AED 350</a> works out under AED 90 per person for four. Compare that with per-head safari pricing and the buggy is consistently cheaper for groups.</p><p>See the <a href=\"/dune-buggy-dubai/price/\">full price guide</a> for every buggy and duration side by side.</p>"
+    },
+    {
+      "h": "Which duration to book",
+      "html": "<p class=\"lf-lead\">Thirty minutes is a taster. An hour is where most first-timers should land.</p><p>The briefing and warm-up eat into a short slot, so on a 30-minute booking you are properly riding for about 20 minutes. Two hours and four hours suit experienced drivers, or groups pairing the ride with a camp stop.</p>"
+    },
+    {
+      "h": "Safety and what is included",
+      "html": "<p class=\"lf-lead\">Helmets are mandatory and included. The briefing is not optional.</p><p>Harnesses are checked before every departure, guides carry recovery gear and stay with the group, and we do not run when wind or heat make the route unsafe. If wind, heat or visibility make the route unsafe we contact you before you travel and reschedule at no cost. If no alternative date works, you get a full refund.</p><p>Included in every price: the buggy, helmet, briefing, fuel, water and a lead guide, plus free hotel pickup within Dubai.</p>"
+    },
+    {
+      "h": "Booking, payment and cancellation",
+      "html": "<p class=\"lf-lead\">Message us on WhatsApp with your date, group size and which buggy you want.</p><p>There is nothing to pay when you book. Settle up at the Al Awir base before you ride, by cash, card or bank transfer, whichever suits you.</p><p>Cancel more than 24 hours before your slot and you get a full refund. Inside 24 hours we will always try to move you to another date rather than charge you. No deposit is taken to hold a standard slot. Multi-vehicle and corporate bookings are confirmed separately.</p>"
+    }
+  ],
+  "relKicker": "06 / Next choices",
+  "relH2": "Add a quad, KTM dirt bike or desert safari to your buggy day.",
+  "relLede": "Same base, same guides. What changes is how much control you want and how hard you want to work for it.",
+  "related": [
+    {
+      "tag": "Quad from AED {quadFrom}",
+      "title": "Quad Biking Dubai",
+      "desc": "Handlebars instead of a wheel. More physical, more direct.",
+      "href": "/quad-bike-dubai/",
+      "img": "quad-biking-dubai-open-desert-three-riders"
+    },
+    {
+      "tag": "Enduro from AED {dirtbikeFrom}",
+      "title": "KTM Dirt Bike Dubai",
+      "desc": "A 450cc desert enduro for riders who can work a clutch.",
+      "href": "/ktm-dirt-bike-dubai/",
+      "img": "ktm-dirt-bike-fleet-lined-up-dubai-desert"
+    },
+    {
+      "tag": "Safari from AED 99",
+      "title": "Desert Safari Dubai",
+      "desc": "Someone else drives. Dune bashing, camp dinner and a show.",
+      "href": "/desert-safari-dubai-deals/",
+      "img": "desert-safari-dubai-dune-bashing-land-cruiser"
+    },
+    {
+      "tag": "Prices",
+      "title": "Dune Buggy Dubai Price",
+      "desc": "All eleven buggies and every duration on one page.",
+      "href": "/dune-buggy-dubai/price/",
+      "img": "dune-buggy-convoy-crossing-dubai-red-dunes"
+    }
+  ]
+}

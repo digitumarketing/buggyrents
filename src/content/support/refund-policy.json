@@ -1,0 +1,200 @@
+{
+  "export": "refundPolicy",
+  "path": "about-us/refund-policy",
+  "crumb": [
+    {
+      "name": "About us",
+      "href": "/about-us/"
+    }
+  ],
+  "short": "Refund Policy",
+  "title": "Refund and Cancellation Policy | Buggy Rents Dubai",
+  "description": "Free cancellation up to 24 hours before your slot, no deposit on standard bookings, and a full refund if we call off a ride for weather. In plain language.",
+  "heroImage": "quad-biking-dubai-hero-red-dunes",
+  "finalImage": "yamaha-raptor-700cc-quad-bike-lahbab-red-dunes",
+  "heroSubject": "quad",
+  "kicker": "Refund policy",
+  "h1Lead": "Free cancellation up to",
+  "h1Em": "24 hours before",
+  "lede": "No deposit on a standard slot, so there is usually nothing to refund in the first place. Here is exactly how cancellations, weather calls and no shows work.",
+  "chips": [
+    "24 hour free cancellation",
+    "No deposit taken",
+    "Weather refunded in full",
+    "Pay at the base"
+  ],
+  "ctaPrimary": {
+    "label": "Change my booking",
+    "message": "Hi Buggy Rents! I need to change or cancel a booking."
+  },
+  "ctaSecondary": {
+    "label": "See the terms",
+    "href": "/about-us/terms-conditions/"
+  },
+  "panel": {
+    "kicker": "The short version",
+    "title": "Nothing is due upfront",
+    "sub": "You pay at the base before you ride. Cancel more than 24 hours out and there is nothing to reclaim.",
+    "points": [
+      "Full refund if we call the ride off for weather",
+      "Inside 24 hours we try to move you before we charge",
+      "Multi vehicle and corporate bookings are confirmed separately"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "Free",
+      "value": "24 hrs",
+      "note": "Cancel more than a day ahead at no cost."
+    },
+    {
+      "tag": "Deposit",
+      "value": "None",
+      "note": "Standard slots are held without payment."
+    },
+    {
+      "tag": "Weather",
+      "value": "Full",
+      "note": "We call it off, you get everything back."
+    },
+    {
+      "tag": "Pay",
+      "value": "At base",
+      "note": "Cash, card or bank transfer before riding."
+    },
+    {
+      "tag": "Move",
+      "value": "Free",
+      "note": "Rescheduling costs nothing when we can do it."
+    }
+  ],
+  "introKicker": "01 / How it works",
+  "introH2": "Why most cancellations cost nothing at all",
+  "introLede": "The policy is simple because the payment model is simple. No money moves until you are standing at the base.",
+  "introBody": [
+    "{deposit} Because of that, cancelling a standard booking usually involves no money at all. You tell us, we release the slot, and that is the end of it.",
+    "{cancellation}",
+    "{weather}",
+    "The one case where we do ask for something is a no show with no message. If a driver has left for your hotel and a guide is holding machines that nobody else could book, that slot is genuinely gone. Even then, message us. If there is a real reason we would rather move you than charge you."
+  ],
+  "cardsKicker": "02 / Three situations",
+  "cardsH2": "What happens in each case.",
+  "cardsLede": "Almost every cancellation falls into one of these three.",
+  "cards": [
+    {
+      "tag": "More than 24 hrs",
+      "h": "Cancel free",
+      "p": "Message us any time up to 24 hours before your slot. Nothing is charged and nothing needs refunding, because nothing was paid."
+    },
+    {
+      "tag": "Inside 24 hrs",
+      "h": "We try to move you",
+      "p": "Late changes happen. Our first move is to find you another date rather than charge you. Tell us as early as you can."
+    },
+    {
+      "tag": "Weather call",
+      "h": "Full refund",
+      "p": "If wind, heat or visibility make the route unsafe, we contact you before you travel. Reschedule at no cost, or take everything back."
+    }
+  ],
+  "checksKicker": "03 / Before you book",
+  "checksH2": "Details that affect what you pay.",
+  "checksLede": "Worth checking now rather than discovering at the base.",
+  "checks": [
+    {
+      "tag": "Per vehicle",
+      "h": "Prices are per machine",
+      "p": "A two seater at AED {buggyFrom} is AED {buggyFrom} for the buggy, not per person. Two people riding together halves it each."
+    },
+    {
+      "tag": "Pickup",
+      "h": "Dubai transfers are free",
+      "p": "{pickup} Outside Dubai we quote the transfer before you commit, so there is no surprise."
+    },
+    {
+      "tag": "Groups",
+      "h": "Larger bookings differ",
+      "p": "Multi vehicle and corporate bookings are confirmed separately and may carry their own terms. We tell you upfront."
+    },
+    {
+      "tag": "Payment",
+      "h": "Three ways to pay",
+      "p": "{payment} Nothing is taken at booking time."
+    }
+  ],
+  "stepsKicker": "04 / Changing a booking",
+  "stepsH2": "How to cancel or move a slot",
+  "stepsLede": "One message does it. There is no form and no account to log into.",
+  "steps": [
+    {
+      "h": "Message the same WhatsApp thread",
+      "p": "Reply on the chat you booked in so we can find the slot straight away."
+    },
+    {
+      "h": "Say cancel or move",
+      "p": "If you want a different date, give us two options and we will check what is open."
+    },
+    {
+      "h": "We confirm in writing",
+      "p": "You get a message back confirming the slot is released or moved. Keep it."
+    },
+    {
+      "h": "Nothing to reclaim",
+      "p": "Because no deposit was taken, a standard cancellation involves no refund process at all."
+    }
+  ],
+  "faqKicker": "05 / Questions",
+  "faqH2": "Refund questions we actually get",
+  "faqLede": "Straight answers, including the cases where you would not get money back.",
+  "faqs": [
+    {
+      "q": "How late can I cancel for free?",
+      "a": "Up to 24 hours before your slot. Because no deposit is taken on a standard booking, there is normally nothing to refund anyway. Just message us so we can release the machine."
+    },
+    {
+      "q": "What if the weather is bad on the day?",
+      "a": "We make that call, not you. If wind, heat or visibility make the route unsafe we contact you before you travel and reschedule at no cost. If no other date works, you get a full refund."
+    },
+    {
+      "q": "Do I lose anything if I cancel two hours before?",
+      "a": "Message us and find out rather than assuming. Our first move is to offer you another date. We only treat it as a lost slot if nobody tells us anything and a driver has already left."
+    },
+    {
+      "q": "Is a deposit needed to hold a slot?",
+      "a": "No, not on standard bookings. Multi vehicle and corporate bookings are confirmed separately and we explain any conditions upfront."
+    },
+    {
+      "q": "Can I get a refund if I change my mind at the base?",
+      "a": "If you have not paid and not ridden, you simply do not pay. If you decide the machine is not for you after the briefing, talk to the guide. We would rather move you to something easier than take money for a ride you did not enjoy."
+    },
+    {
+      "q": "What if only part of my group turns up?",
+      "a": "Tell us as soon as you know. We charge for the machines that go out, so dropping a vehicle before the day costs nothing."
+    }
+  ],
+  "linksKicker": "06 / Related",
+  "linksH2": "Other pages worth reading before you book",
+  "links": [
+    {
+      "tag": "Terms",
+      "title": "Terms and Conditions",
+      "desc": "The rules you agree to when you ride with us.",
+      "href": "/about-us/terms-conditions/"
+    },
+    {
+      "tag": "Safety",
+      "title": "Safety Standards",
+      "desc": "Helmets, briefing, guide ratios and how we call off a ride.",
+      "href": "/about-us/safety-standards/"
+    },
+    {
+      "tag": "Privacy",
+      "title": "Privacy Policy",
+      "desc": "What we do with the details you send when booking.",
+      "href": "/about-us/privacy-policy/"
+    }
+  ],
+  "finalKicker": "Need to change something?",
+  "finalH2": "Message us and we will sort the slot",
+  "finalLede": "Earlier is always better. Even inside 24 hours, tell us and we will try to move you."
+}

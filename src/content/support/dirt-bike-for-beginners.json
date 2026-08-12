@@ -1,0 +1,200 @@
+{
+  "export": "dirtBikeBeginners",
+  "path": "ktm-dirt-bike-dubai/dirt-bike-for-beginners",
+  "crumb": [
+    {
+      "name": "KTM Dirt Bike Dubai",
+      "href": "/ktm-dirt-bike-dubai/"
+    }
+  ],
+  "short": "Dirt Bike for Beginners",
+  "title": "Dirt Bike for Beginners in Dubai | Read This First",
+  "description": "Honest guidance on whether a beginner should ride a dirt bike in Dubai. The KTM 450 is not a learner machine. What to ride instead, and how to build up to it.",
+  "heroImage": "ktm-dirt-bike-dubai-hero-sunrise-dunes",
+  "finalImage": "ktm-dirt-bike-riders-red-dune-crest-dubai",
+  "heroSubject": "dirtbike",
+  "kicker": "Dirt bike for beginners",
+  "h1Lead": "Read this before you book",
+  "h1Em": "a dirt bike in Dubai",
+  "lede": "We would rather talk you out of the wrong machine than take your money and watch it go badly. Here is the honest position on beginners and the KTM 450.",
+  "chips": [
+    "KTM 450 only",
+    "Clutch control needed",
+    "Quad first if unsure",
+    "Free switch at the base"
+  ],
+  "ctaPrimary": {
+    "label": "Am I ready for it?",
+    "message": "Hi Buggy Rents! I have never ridden a dirt bike. What do you recommend?"
+  },
+  "ctaSecondary": {
+    "label": "Start on a quad instead",
+    "href": "/quad-bike-dubai/"
+  },
+  "panel": {
+    "kicker": "The honest answer",
+    "title": "The 450 is not a learner bike",
+    "sub": "It is a desert enduro with a clutch and real power. If you have never ridden off road, start elsewhere.",
+    "points": [
+      "No experience at all means a quad is the right call",
+      "Guides assess riders at the base, not at booking",
+      "Not ready is not a problem. We switch you and adjust the price"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "Bike",
+      "value": "KTM 450",
+      "note": "One machine. No beginner tier exists."
+    },
+    {
+      "tag": "Skill",
+      "value": "Clutch",
+      "note": "You need to work a clutch on loose sand."
+    },
+    {
+      "tag": "Age",
+      "value": "14+",
+      "note": "Minimum age for the enduro, with rider screening on top."
+    },
+    {
+      "tag": "Switch",
+      "value": "Free",
+      "note": "Move to a quad or buggy at the base."
+    },
+    {
+      "tag": "Start",
+      "value": "AED {dirtbikeFrom}",
+      "note": "30 minutes on the KTM 450."
+    }
+  ],
+  "introKicker": "01 / Straight answer",
+  "introH2": "Should a complete beginner book a dirt bike in Dubai?",
+  "introLede": "Usually no, and we will say so before you pay rather than after.",
+  "introBody": [
+    "We run one dirt bike, the KTM 450, and there is no beginner version of it. It is a desert enduro built for people who already ride. It has a clutch, real power and a seat height that catches people out the moment a foot goes down in soft sand.",
+    "If you have never ridden a motorcycle off road, this is not where to start. Soft sand punishes hesitation in a way that tarmac does not, and the failure mode is not a gentle stop. Most people who insist on starting here spend the session picking the bike up rather than riding it.",
+    "<strong>What to do instead:</strong> take a quad. Same desert, same guides, same red dunes, and you spend the hour riding rather than recovering. The single seat open desert quad at AED 200 for 30 minutes gets you into the same terrain the dirt bike rides. If you enjoy it and want the next step, come back for the KTM.",
+    "If you have ridden off road before and just have not ridden in sand, that is a different conversation. Sand is its own skill but it builds fast on existing ability. Tell the guide what you have ridden and they will judge it at the base."
+  ],
+  "cardsKicker": "02 / Where you actually stand",
+  "cardsH2": "Three honest categories.",
+  "cardsLede": "Find yourself here before you book anything.",
+  "cards": [
+    {
+      "tag": "Never ridden",
+      "h": "Take a quad",
+      "p": "No motorcycle experience at all means the 450 will not go well. A quad gives you the same desert and the same guide, and you will actually enjoy it."
+    },
+    {
+      "tag": "Road rider",
+      "h": "Talk to the guide",
+      "p": "Road experience helps with the clutch but sand behaves differently. Come with realistic expectations and let the guide assess you at the base."
+    },
+    {
+      "tag": "Off road rider",
+      "h": "You are fine",
+      "p": "If you have ridden trails or motocross, the 450 in sand is a step you can take. Sand is a new skill but it builds on what you already have."
+    }
+  ],
+  "checksKicker": "03 / What catches people out",
+  "checksH2": "The parts nobody warns beginners about.",
+  "checksLede": "None of this is meant to put you off. It is meant to make the choice informed.",
+  "checks": [
+    {
+      "tag": "Sand",
+      "h": "It moves under you",
+      "p": "Sand does not grip like dirt or tarmac. Momentum keeps you upright, and hesitating is what puts people down."
+    },
+    {
+      "tag": "Weight",
+      "h": "Picking it up is the work",
+      "p": "A dropped 450 in soft sand is genuinely heavy. Beginners spend more energy lifting the bike than riding it."
+    },
+    {
+      "tag": "Heat",
+      "h": "Effort plus temperature",
+      "p": "Riding a dirt bike badly is exhausting, and Dubai heat compounds it. A 30 minute session is plenty for a first attempt."
+    },
+    {
+      "tag": "Clutch",
+      "h": "No automatic option",
+      "p": "The 450 needs clutch control. If you have never used a clutch, this is not the place to learn one."
+    }
+  ],
+  "stepsKicker": "04 / How to build up",
+  "stepsH2": "The route from never ridden to the KTM",
+  "stepsLede": "Most people who end up loving the dirt bike started somewhere else.",
+  "steps": [
+    {
+      "h": "Start on a boundary quad",
+      "p": "Fenced, controlled, and you learn what loose sand does to steering without any consequence."
+    },
+    {
+      "h": "Move to open desert",
+      "p": "The single seat open desert quad rides the same red dunes the dirt bike does, with a guide setting the pace."
+    },
+    {
+      "h": "Talk to a guide",
+      "p": "Tell them you want to try the KTM. They will tell you honestly whether you are close, based on what they saw."
+    },
+    {
+      "h": "Book 30 minutes first",
+      "p": "AED {dirtbikeFrom} for a short session is the sensible first attempt. Extend it later once you know how it feels."
+    }
+  ],
+  "faqKicker": "05 / Questions",
+  "faqH2": "Beginner questions we actually get",
+  "faqLede": "Answered the way we would answer a friend.",
+  "faqs": [
+    {
+      "q": "Can I ride a dirt bike with zero experience?",
+      "a": "We would advise against it, and the guide may decline at the base. The KTM 450 is a desert enduro with a clutch, not a learner machine. A quad gets you into the same desert and you will enjoy it far more."
+    },
+    {
+      "q": "Do you offer dirt bike lessons?",
+      "a": "We do not run a formal beginner course. Guides give a full briefing and set the pace, but that is not the same as teaching someone to ride a motorcycle from scratch."
+    },
+    {
+      "q": "What happens if I book it and cannot handle it?",
+      "a": "The guide moves you to a quad or a buggy for the same slot and we adjust the price. There is no penalty and no argument. It is a normal outcome and we plan for it."
+    },
+    {
+      "q": "Is a quad really that different?",
+      "a": "Yes. A quad has four wheels and stays upright on its own, so a mistake means slowing down rather than falling. It is the reason we send beginners there first."
+    },
+    {
+      "q": "How old do I need to be?",
+      "a": "Eighteen for the KTM 450. Quads start much younger, from age six on the kids machines and twelve on the boundary singles."
+    },
+    {
+      "q": "Is a motorcycle licence needed?",
+      "a": "Not for our routes, since riding is on private desert terrain with a guide rather than on public roads. What matters is actual ability, and the guide assesses that at the base."
+    }
+  ],
+  "linksKicker": "06 / Related",
+  "linksH2": "Where to go next",
+  "links": [
+    {
+      "tag": "Quads",
+      "title": "Quad Biking Dubai",
+      "desc": "The right starting point for most first timers.",
+      "href": "/quad-bike-dubai/"
+    },
+    {
+      "tag": "Advanced",
+      "title": "Dirt Bike for Advanced Riders",
+      "desc": "If you already ride, start here instead.",
+      "href": "/ktm-dirt-bike-dubai/dirt-bike-for-advanced/"
+    },
+    {
+      "tag": "KTM",
+      "title": "KTM Dirt Bike Dubai",
+      "desc": "The bike, the routes and the prices.",
+      "href": "/ktm-dirt-bike-dubai/"
+    }
+  ],
+  "finalKicker": "Not sure where you sit?",
+  "finalH2": "Tell us what you have ridden before",
+  "finalLede": "Two lines about your experience is enough for us to point you at the right machine."
+}

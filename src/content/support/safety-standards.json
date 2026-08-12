@@ -1,0 +1,200 @@
+{
+  "export": "safetyStandards",
+  "path": "about-us/safety-standards",
+  "crumb": [
+    {
+      "name": "About us",
+      "href": "/about-us/"
+    }
+  ],
+  "short": "Safety Standards",
+  "title": "Safety Standards | Buggy Rents Dubai",
+  "description": "Helmets on every ride, a briefing before you move, guides on every route and honest limits on who rides what. How Buggy Rents runs safety in the Dubai desert.",
+  "heroImage": "quad-biking-dubai-hero-red-dunes",
+  "finalImage": "quad-biking-dubai-open-desert-three-riders",
+  "heroSubject": "quad",
+  "kicker": "Safety standards",
+  "h1Lead": "Guides, helmets and",
+  "h1Em": "honest limits",
+  "lede": "{guests} guests since 2020, a 4.9 rating from real Google reviews and a TripAdvisor Travellers' Choice award. Here is the way we run a ride that gets those results.",
+  "chips": [
+    "Helmet on every ride",
+    "Guide on every route",
+    "Briefing before you move",
+    "Ages 6 and up"
+  ],
+  "ctaPrimary": {
+    "label": "Ask a safety question",
+    "message": "Hi Buggy Rents! I have a safety question before booking."
+  },
+  "ctaSecondary": {
+    "label": "See the fleet",
+    "href": "/about-us/our-fleet/"
+  },
+  "panel": {
+    "kicker": "Why guests trust us",
+    "title": "{guests} riders since 2020",
+    "sub": "Rated 4.9 on Google and a TripAdvisor Travellers' Choice winner. Beginners are the majority of our guests, not the exception.",
+    "points": [
+      "Helmets fitted and checked before every single ride",
+      "{guides} guides, and nobody rides out alone",
+      "Kids ride from age 6 in their own fenced area"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "Guests",
+      "value": "{guests}",
+      "note": "Riders taken out since 2020."
+    },
+    {
+      "tag": "Rating",
+      "value": "4.9",
+      "note": "From real Google reviews, not stock quotes."
+    },
+    {
+      "tag": "Award",
+      "value": "TripAdvisor",
+      "note": "Travellers' Choice winner."
+    },
+    {
+      "tag": "Guides",
+      "value": "{guides}",
+      "note": "Nobody rides out on their own."
+    },
+    {
+      "tag": "Helmet",
+      "value": "Always",
+      "note": "Fitted and checked before you move."
+    }
+  ],
+  "introKicker": "01 / The approach",
+  "introH2": "What actually keeps a desert ride safe",
+  "introLede": "Equipment matters. Judgement matters more, and that is the part that sits with the guide.",
+  "introBody": [
+    "A helmet is the easy part. Every guest gets one, fitted and checked before the machine moves, on every ride including the 30 minute slots. That is not optional and it is not a paid extra.",
+    "The part that actually prevents incidents is the briefing and the guide. Before anyone rides, the controls get explained, the route gets set and the boundary gets marked. On the sand, the guide sets the pace for the slowest rider in the group, not the fastest. That is deliberate, and occasionally it annoys the confident one in the group.",
+    "Guides can also change the plan. Heat, wind and visibility shift through the day in the desert, and a route that worked at eight in the morning may not work at two in the afternoon. If conditions turn, the guide shortens the route, changes the area, or calls it off. That call is theirs and it is not up for negotiation.",
+    "<strong>Before you travel,</strong> check that your travel insurance includes desert sports and off road activities. Many standard travel policies quietly exclude them, and it takes two minutes to confirm. It is the single most useful thing you can do before any adventure booking in Dubai, with us or anyone else."
+  ],
+  "cardsKicker": "02 / On every ride",
+  "cardsH2": "Three things that never vary.",
+  "cardsLede": "Duration, machine and group size make no difference to any of these.",
+  "cards": [
+    {
+      "tag": "Gear",
+      "h": "Helmet fitted and checked",
+      "p": "Every rider, every ride, including 30 minute slots. A guide checks the fit rather than handing it over and hoping."
+    },
+    {
+      "tag": "Briefing",
+      "h": "Controls before you move",
+      "p": "Throttle, brake, steering and the boundary, explained on the machine you are about to ride. Ask questions here."
+    },
+    {
+      "tag": "Guide",
+      "h": "Nobody rides alone",
+      "p": "A guide leads every route and rides at the pace of the slowest person in the group. That is the point of them."
+    }
+  ],
+  "checksKicker": "03 / Tell us first",
+  "checksH2": "Conditions that change our recommendation.",
+  "checksLede": "None of these mean you cannot ride. They mean we point you at the right machine.",
+  "checks": [
+    {
+      "tag": "Back",
+      "h": "Back and neck",
+      "p": "Desert terrain is genuinely rough. Existing back or neck problems usually point towards a buggy over a quad, or a shorter duration."
+    },
+    {
+      "tag": "Heart",
+      "h": "Heart conditions",
+      "p": "Heat plus adrenaline is a real combination. Tell us and we will suggest a cooler slot and a calmer route."
+    },
+    {
+      "tag": "Pregnancy",
+      "h": "Pregnancy",
+      "p": "We do not recommend buggies, quads or dirt bikes during pregnancy. A desert safari with a driver is the better option."
+    },
+    {
+      "tag": "Surgery",
+      "h": "Recent surgery",
+      "p": "If you are still recovering, wait. The impacts on open desert routes are heavier than people expect."
+    }
+  ],
+  "stepsKicker": "04 / At the base",
+  "stepsH2": "The safety sequence before every ride",
+  "stepsLede": "Same order for every guest, every time.",
+  "steps": [
+    {
+      "h": "Age and fit check",
+      "p": "Guides confirm ages against the machine and check anything medical you told us about."
+    },
+    {
+      "h": "Helmet fitted",
+      "p": "Sized and checked by a guide. A loose helmet is worse than no briefing."
+    },
+    {
+      "h": "Controls and boundary",
+      "p": "Explained on the actual machine, with the route and the limits made clear before you move."
+    },
+    {
+      "h": "Guide leads out",
+      "p": "Pace set for the slowest rider. Conditions can change the route at any point and the guide makes that call."
+    }
+  ],
+  "faqKicker": "05 / Questions",
+  "faqH2": "Safety questions we actually get",
+  "faqLede": "Including the ones with answers people do not want to hear.",
+  "faqs": [
+    {
+      "q": "Should I check my travel insurance?",
+      "a": "Yes, we recommend it for any adventure activity in Dubai. Check that your policy includes desert sports and off road activities before you travel, because many standard travel policies exclude them."
+    },
+    {
+      "q": "Is a helmet included or an extra?",
+      "a": "Included, always, on every ride and every duration. A guide fits and checks it before you move."
+    },
+    {
+      "q": "Can beginners ride safely?",
+      "a": "Yes, and most of our guests are beginners. The briefing assumes no experience, and the guide sets the pace for the slowest rider. Start with a boundary quad or a two seater buggy rather than a Raptor or the KTM."
+    },
+    {
+      "q": "What happens if the weather turns?",
+      "a": "We make the call, not you. If wind, heat or visibility make a route unsafe we contact you before you travel and reschedule at no cost, or refund you in full."
+    },
+    {
+      "q": "Can children ride?",
+      "a": "From age six on kids quads, in a fenced area with a guide. Older children move up by engine size and age. Guides enforce the limits at the base rather than at booking, so bring ID if a rider is close to the line."
+    },
+    {
+      "q": "Can a guide stop my ride?",
+      "a": "Yes. For unsafe riding, alcohol, or conditions turning. It is rare, but the guide has the final say and that is what makes the system work."
+    }
+  ],
+  "linksKicker": "06 / Related",
+  "linksH2": "Other pages worth reading before you book",
+  "links": [
+    {
+      "tag": "Terms",
+      "title": "Terms and Conditions",
+      "desc": "Age limits, rider responsibility and damage.",
+      "href": "/about-us/terms-conditions/"
+    },
+    {
+      "tag": "Fleet",
+      "title": "Our Fleet",
+      "desc": "Every machine we run, and who each one suits.",
+      "href": "/about-us/our-fleet/"
+    },
+    {
+      "tag": "Refunds",
+      "title": "Refund Policy",
+      "desc": "Weather calls, cancellations and how money comes back.",
+      "href": "/about-us/refund-policy/"
+    }
+  ],
+  "finalKicker": "Not sure what suits you?",
+  "finalH2": "Tell us the concern and we will point you right",
+  "finalLede": "A medical detail or a nervous rider changes the recommendation. Better said now than at the base."
+}

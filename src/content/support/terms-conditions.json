@@ -1,0 +1,200 @@
+{
+  "export": "termsConditions",
+  "path": "about-us/terms-conditions",
+  "crumb": [
+    {
+      "name": "About us",
+      "href": "/about-us/"
+    }
+  ],
+  "short": "Terms and Conditions",
+  "title": "Terms and Conditions | Buggy Rents Dubai",
+  "description": "The terms you agree to when you ride a buggy, quad or dirt bike with us in Dubai: age limits, rider responsibility, damage, payment and cancellation.",
+  "heroImage": "dune-buggy-dubai-hero-red-dunes",
+  "finalImage": "can-am-maverick-x3-rs-2-seater-dune-buggy-dubai",
+  "heroSubject": "buggy",
+  "kicker": "Terms and conditions",
+  "h1Lead": "What you agree to when",
+  "h1Em": "you ride with us",
+  "lede": "Short, readable, and written so you can actually check it before you book rather than after something goes wrong.",
+  "chips": [
+    "Age limits are firm",
+    "Rider responsibility",
+    "Damage explained",
+    "Updated August 2026"
+  ],
+  "ctaPrimary": {
+    "label": "Ask about the terms",
+    "message": "Hi Buggy Rents! I have a question about your terms and conditions."
+  },
+  "ctaSecondary": {
+    "label": "See the refund policy",
+    "href": "/about-us/refund-policy/"
+  },
+  "panel": {
+    "kicker": "The good news first",
+    "title": "No deposit, free cancellation",
+    "sub": "Book the slot, pay at the base, and cancel free up to 24 hours before. Nothing is locked in when you message us.",
+    "points": [
+      "Free hotel pickup anywhere inside Dubai",
+      "Every price is per vehicle, so groups split the cost",
+      "Kids ride from age 6 on their own machines"
+    ]
+  },
+  "trust": [
+    {
+      "tag": "Ages",
+      "value": "6 to 14+",
+      "note": "Something for every age in the group."
+    },
+    {
+      "tag": "Deposit",
+      "value": "None",
+      "note": "Nothing to pay until you reach the base."
+    },
+    {
+      "tag": "Damage",
+      "value": "At cost",
+      "note": "Charged only where guide instructions were ignored."
+    },
+    {
+      "tag": "Pay",
+      "value": "At base",
+      "note": "Cash, card or bank transfer before riding."
+    },
+    {
+      "tag": "Cancel",
+      "value": "24 hrs",
+      "note": "Free cancellation more than a day ahead."
+    }
+  ],
+  "introKicker": "01 / The agreement",
+  "introH2": "What booking a ride actually commits you to",
+  "introLede": "Booking means you accept the points on this page. There is nothing hidden further down.",
+  "introBody": [
+    "Booking a slot with Buggy Rents means you accept these terms for everyone in your group. If you are booking for other people, it is on you to pass on the age limits and the medical points before they arrive at the base.",
+    "<strong>Age limits are firm.</strong> Every machine has a minimum age set by engine size and how the route runs. Kids quads start at six. The Yamaha Raptor 700cc is eighteen and over. Guides check at the base, and a rider under the limit does not ride. Bring ID if anyone is close to the line, because we would rather check than guess.",
+    "<strong>Riding is at your own risk.</strong> Desert riding is an adventure sport and it carries real risk of injury, which you accept when you get on a machine. Before you travel, check that your travel insurance includes desert sports and off road activities. Many standard policies exclude them, and it takes two minutes to confirm.",
+    "<strong>Follow the guide.</strong> Every ride goes out with a guide and a briefing. The route, the speed and the boundary are set by the guide on the day and can change with conditions. Ignoring instructions is the one thing that turns a normal ride into an incident, and it is also the situation where damage gets charged."
+  ],
+  "cardsKicker": "02 / Your responsibilities",
+  "cardsH2": "Three things that are on the rider.",
+  "cardsLede": "Everything else is on us. These three are not.",
+  "cards": [
+    {
+      "tag": "Honesty",
+      "h": "Declare medical limits",
+      "p": "Pregnancy, back, neck or heart conditions and recent surgery all change what you should ride. Tell us before you book, not at the base."
+    },
+    {
+      "tag": "Conduct",
+      "h": "Ride within the briefing",
+      "p": "Stay inside the route and boundary the guide sets. Alcohol and riding do not mix, and a guide can end a ride on the spot."
+    },
+    {
+      "tag": "Care",
+      "h": "Look after the machine",
+      "p": "Normal wear is ours. Damage from ignoring the guide, riding out of bounds or deliberate misuse is charged at repair cost."
+    }
+  ],
+  "checksKicker": "03 / Money and timing",
+  "checksH2": "The commercial terms in full.",
+  "checksLede": "All of it is on this page. Nothing appears for the first time at the base.",
+  "checks": [
+    {
+      "tag": "Pricing",
+      "h": "Per vehicle, always",
+      "p": "Every price on this site is for the machine, not per person. A four seater split between four people is the cheapest way to ride."
+    },
+    {
+      "tag": "Payment",
+      "h": "On the spot",
+      "p": "{payment} Nothing is due at booking time."
+    },
+    {
+      "tag": "Transfers",
+      "h": "Free inside Dubai",
+      "p": "{pickup} Outer emirates are quoted before you commit."
+    },
+    {
+      "tag": "Timing",
+      "h": "Slots can move",
+      "p": "Heat, wind and visibility can shift a slot. We contact you before you travel rather than leaving you waiting."
+    }
+  ],
+  "stepsKicker": "04 / On the day",
+  "stepsH2": "What happens between arriving and riding",
+  "stepsLede": "The order is the same for every guest, on every machine.",
+  "steps": [
+    {
+      "h": "Arrive and check in",
+      "p": "Ages are confirmed and any medical points you told us about are checked with the guide."
+    },
+    {
+      "h": "Briefing and gear",
+      "p": "Helmet fitted, controls explained, route and boundary set. Ask questions here rather than out on the sand."
+    },
+    {
+      "h": "Pay before you ride",
+      "p": "Settle at the base by cash, card or bank transfer. You see the machine before any money moves."
+    },
+    {
+      "h": "Ride with the guide",
+      "p": "The guide sets the pace and can change the route or end the ride if conditions or behaviour require it."
+    }
+  ],
+  "faqKicker": "05 / Questions",
+  "faqH2": "Terms questions we actually get",
+  "faqLede": "Including the ones people are reluctant to ask.",
+  "faqs": [
+    {
+      "q": "Do I need my own travel insurance?",
+      "a": "We recommend it. Desert riding is an adventure sport and riding is at your own risk, so check that your travel insurance includes desert sports and off road activities before you travel. Many standard policies exclude them."
+    },
+    {
+      "q": "What happens if I damage a buggy?",
+      "a": "Normal wear and tear is ours to deal with. Damage that comes from ignoring the guide, riding outside the boundary or deliberate misuse is charged at repair cost, and we show you the cost."
+    },
+    {
+      "q": "Can you make an exception on the age limit?",
+      "a": "No. Age limits are set by engine size and route, and guides enforce them at the base. If a rider is under the limit for one machine we will move them to one that fits rather than turn them away."
+    },
+    {
+      "q": "Can I ride if I have a bad back?",
+      "a": "Tell us before you book. Desert terrain is genuinely rough, and back, neck and heart conditions, pregnancy and recent surgery all change the recommendation. Often we can suggest a gentler option, but we need to know first."
+    },
+    {
+      "q": "Is a licence needed to ride?",
+      "a": "Not for buggies and quads on our routes, since riding is on private desert terrain with a guide rather than on public roads. The KTM 450 needs real off road ability, and the guide assesses that at the base."
+    },
+    {
+      "q": "What if the guide stops my ride?",
+      "a": "A guide can end a ride for unsafe behaviour, alcohol, or conditions turning. It is rare. If it happens because conditions turned, we sort out a reschedule or a refund."
+    }
+  ],
+  "linksKicker": "06 / Related",
+  "linksH2": "Other pages worth reading before you book",
+  "links": [
+    {
+      "tag": "Safety",
+      "title": "Safety Standards",
+      "desc": "Helmets, briefing, guide ratios and how we call off a ride.",
+      "href": "/about-us/safety-standards/"
+    },
+    {
+      "tag": "Refunds",
+      "title": "Refund Policy",
+      "desc": "Cancellations, weather calls and how money comes back.",
+      "href": "/about-us/refund-policy/"
+    },
+    {
+      "tag": "Privacy",
+      "title": "Privacy Policy",
+      "desc": "What we do with the details you send when booking.",
+      "href": "/about-us/privacy-policy/"
+    }
+  ],
+  "finalKicker": "Unclear on anything?",
+  "finalH2": "Ask before you book, not after",
+  "finalLede": "If a term here affects whether a ride works for you, message us and we will give you a straight answer."
+}

@@ -229,7 +229,7 @@ export const termsConditions: SupportData = {
     ]
   },
   trust: [
-    { tag: 'Ages', value: '6 to 18', note: 'Something for every age in the group.' },
+    { tag: 'Ages', value: '6 to 14+', note: 'Something for every age in the group.' },
     { tag: 'Deposit', value: 'None', note: 'Nothing to pay until you reach the base.' },
     { tag: 'Damage', value: 'At cost', note: 'Charged only where guide instructions were ignored.' },
     { tag: 'Pay', value: 'At base', note: 'Cash, card or bank transfer before riding.' },
@@ -436,7 +436,7 @@ export const ourFleet: SupportData = {
   checksH2: 'Details that decide which machine fits.',
   checksLede: 'These four settle it faster than any spec sheet.',
   checks: [
-    { tag: 'Age', h: 'Age sets the options', p: 'Kids quads from 6, boundary singles from 12, open desert from 14 or 16, and the Raptor 700 from 18. Guides check at the base.' },
+    { tag: 'Age', h: 'Age sets the options', p: 'Kids quads from 6, boundary singles from 12, open desert from 14 or 16, and the Raptor 700 from 14. Guides check at the base.' },
     { tag: 'Group', h: 'Group size changes the maths', p: 'Prices are per vehicle. Four people in a four seater pay a quarter each, which usually beats four separate quads.' },
     { tag: 'Route', h: 'Boundary or open desert', p: 'Boundary areas are fenced and controlled, better for first timers. Open desert goes out into the red dunes with a guide.' },
     { tag: 'Comfort', h: 'Back, neck and heart', p: 'Desert terrain is rough. Existing back or neck problems usually point towards a buggy and a shorter duration.' }
@@ -496,7 +496,7 @@ export const dirtBikeBeginners: SupportData = {
   trust: [
     { tag: 'Bike', value: 'KTM 450', note: 'One machine. No beginner tier exists.' },
     { tag: 'Skill', value: 'Clutch', note: 'You need to work a clutch on loose sand.' },
-    { tag: 'Age', value: '18+', note: 'Minimum age for the enduro.' },
+    { tag: 'Age', value: '14+', note: 'Minimum age for the enduro, with rider screening on top.' },
     { tag: 'Switch', value: 'Free', note: 'Move to a quad or buggy at the base.' },
     { tag: 'Start', value: 'AED 500', note: '30 minutes on the KTM 450.' }
   ],
@@ -587,7 +587,7 @@ export const dirtBikeAdvanced: SupportData = {
     { tag: 'Terrain', value: 'Red dunes', note: 'Open desert, not a fenced circuit.' },
     { tag: 'Max', value: '4 hours', note: 'Longest session we run on the enduro.' },
     { tag: 'From', value: 'AED 500', note: '30 minutes, per bike.' },
-    { tag: 'Age', value: '18+', note: 'Minimum age for the KTM 450.' }
+    { tag: 'Age', value: '14+', note: 'Minimum age for the KTM 450, with rider screening on top.' }
   ],
   introKicker: '01 / The terrain',
   introH2: 'What Dubai dune riding actually demands',

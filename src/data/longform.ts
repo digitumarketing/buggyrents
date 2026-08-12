@@ -37,7 +37,7 @@ export const homeLongForm: { heading: string; intro: string; blocks: LfBlock[] }
 
     { h: 'Safety, licences and age limits',
       html: `<p class="lf-lead">No driving licence is required on guided <strong>dune buggy Dubai</strong> and <strong>quad biking Dubai</strong> routes. Age limits do apply.</p>
-<ul><li>Dune buggy driver: 18+, passengers of any age in a 4-seater</li><li>Kids quad, fenced area: from 6</li><li>Quad, boundary area: from 12</li><li>Quad, open desert: from 14</li><li>Yamaha Raptor 700cc and KTM 450: 18+ with rider screening</li></ul>
+<ul><li>Dune buggy driver: 14+, passengers of any age in a 4-seater</li><li>Kids quad, fenced area: from 6</li><li>Quad, boundary area: from 12</li><li>Quad, open desert: from 14</li><li>Yamaha Raptor 700cc and KTM 450: 18+ with rider screening</li></ul>
 <p>Helmets are mandatory and included. Harnesses are checked before every departure and a guide rides with the group, we do not send unaccompanied vehicles into the dunes.</p>` },
 
     { h: 'How to book',

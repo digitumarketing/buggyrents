@@ -1,34 +1,64 @@
 ---
-/* Real guest reviews are NOT yet supplied.
-   Nothing is invented here - the section renders an explicit empty state. */
-const reviews: { name: string; text: string; when: string }[] = [];
+/* Homepage reviews.
+ *
+ * This component used to hold a hardcoded empty array and render a placeholder
+ * saying "awaiting real review data". That was true when it was written and stopped
+ * being true the moment the 17 Google reviews were supplied, but nothing linked the
+ * two, so the homepage kept apologising for missing data that the rest of the site
+ * had been showing for days. It now renders the same carousel every other page uses.
+ *
+ * The award tile sits below it rather than inside, because the TripAdvisor mark is a
+ * standing credential and the reviews are a rolling feed. They are different claims.
+ */
+import ReviewsCarousel from '@/components/ReviewsCarousel.astro';
+import { site } from '@/data/site';
+
+const award = site.awards[0];
 ---
-<section class="section" id="reviews">
-  <div class="shell">
-    <p class="eyebrow">Voices from the dunes</p>
-    <h2>What guests say after the ride</h2>
-    {reviews.length === 0 ? (
-      <div class="rv__empty">
-        <p class="rv__empty-t">Awaiting real review data</p>
-        <p class="rv__empty-b">This section is built and ready. It needs your actual Google and TripAdvisor reviews, review count, average rating and a set of recent quotes. Nothing has been invented to fill the gap.</p>
-      </div>
-    ) : null}
-    <div class="rv__award">
-      <img src="/assets/images/2025/01/Buggy-Rents-Travellers-Choice.webp" alt="TripAdvisor Travellers' Choice award" loading="lazy" decoding="async" width="180" height="180" />
-      <div>
-        <h3>TripAdvisor Travellers' Choice</h3>
-        <p>Awarded to businesses that consistently earn great reviews from travellers.</p>
+<ReviewsCarousel
+  kicker="Voices from the dunes"
+  heading="What guests say after the ride"
+  lede="Recent five-star reviews from our Google Business Profile, shown alongside the TripAdvisor Travellers' Choice award."
+/>
+
+{award && (
+  <section class="aw" aria-label="Award">
+    <div class="shell">
+      <div class="aw__tile">
+        {/* Every TripAdvisor asset supplied is a WHITE logo on transparency, so on
+            the white card it was invisible. Rather than fake a colour version, the
+            tile behind it is navy: the mark is legible, and it is still the real
+            artwork rather than a redrawn one. The 768px source is used because the
+            91px file that was here before was soft even at 110px wide. */}
+        <div class="aw__mark">
+          <img src="/assets/brand/tripadvisor-travellers-choice-white.png"
+               alt={`${award.name} award`} width="768" height="768"
+               loading="lazy" decoding="async" />
+        </div>
+        <div class="aw__copy">
+          <p class="eyebrow">Recognised by travellers</p>
+          <h3>{award.name}</h3>
+          <p>Awarded to businesses that consistently earn great reviews from travellers, based on a full year of feedback rather than a single good month.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+)}
 
 <style>
-  .rv__empty { margin-top: 1.75rem; border: 2px dashed var(--c-orange-line); background: var(--c-orange-soft); border-radius: var(--radius-lg); padding: 1.5rem; }
-  .rv__empty-t { font-family: var(--font-display); font-weight: 800; color: var(--c-orange-dark); }
-  .rv__empty-b { margin-top: .5rem; font-size: var(--fs-sm); color: var(--c-ink-muted); max-width: 68ch; }
-  .rv__award { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--c-line); border-radius: var(--radius-lg); background: #fff; box-shadow: var(--shadow-tile); }
-  .rv__award img { width: 110px; height: auto; flex: none; }
-  .rv__award h3 { font-size: 1.1rem; }
-  .rv__award p { font-size: var(--fs-sm); color: var(--c-ink-muted); margin-top: .4rem; max-width: 52ch; }
+  .aw { padding-bottom: var(--section-gap); background: #fff; }
+  .aw__tile { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 2rem);
+    align-items: center; padding: clamp(1.4rem, 2.5vw, 2rem);
+    border: 1px solid var(--c-line); border-radius: var(--radius-lg);
+    background: var(--c-sand-soft); box-shadow: var(--shadow-tile); }
+  .aw__mark { display: grid; place-items: center; width: clamp(96px, 12vw, 128px);
+    aspect-ratio: 1; border-radius: 16px; background: var(--c-navy); padding: 14px; }
+  .aw__mark img { width: 100%; height: auto; }
+  .aw__copy h3 { font-size: clamp(1.05rem, .95rem + .4vw, 1.3rem); color: var(--c-navy); margin-top: .3rem; }
+  .aw__copy > p:last-child { margin-top: .5rem; font-size: var(--fs-sm); color: var(--c-ink-muted);
+    line-height: 1.6; max-width: 62ch; }
+  @media (max-width: 560px) {
+    .aw__tile { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+    .aw__copy > p:last-child { margin-inline: auto; }
+  }
 </style>

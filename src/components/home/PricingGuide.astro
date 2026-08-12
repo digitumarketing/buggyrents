@@ -48,7 +48,13 @@ const tables = [
                   <td>{v.minAge}+</td>
                   {t.cols.map(c => {
                     const p = cell(v, c);
-                    return <td class="pg__num">{p ? p.toLocaleString('en-US') : <span class="pg__dash">, </span>}</td>;
+                    {/* The "not offered" cell was a comma, another leftover from
+                        stripping em dashes sitewide. It rendered as a stray speck
+                        in an otherwise empty cell, which reads as a typo rather
+                        than as "this duration is not available". */}
+                    return <td class="pg__num">{p
+                      ? p.toLocaleString('en-US')
+                      : <span class="pg__dash" aria-label="Not available">&ndash;</span>}</td>;
                   })}
                 </tr>
               ))}
@@ -69,7 +75,19 @@ const tables = [
   .pg__scroll { overflow-x: auto; }
   .pg table { width: 100%; border-collapse: collapse; min-width: 560px; }
   .pg thead { background: var(--c-navy); color: #fff; }
-  .pg th.pg td { padding: .8rem 1rem; text-align: left; white-space: nowrap; }
+  /* Was ".pg th.pg td", which is a missing comma: it reads as "a td inside an
+     element with classes th and pg", matches nothing, and so neither the padding
+     nor the alignment ever applied. The table fell back to browser defaults, where
+     th is centred and td is left, which is why the vehicle names sat centred over
+     left-aligned numbers. Same class of bug as the clamp() and rgba() ones. */
+  .pg th, .pg td { padding: .8rem 1rem; white-space: nowrap; vertical-align: middle; }
+
+  /* Vehicle name left, every number right. Right-aligning figures lines the
+     thousands up under each other, so 999 and 2,299 are visibly different lengths
+     rather than two centred blobs. The header has to follow the column it labels,
+     otherwise "30 MIN" floats away from the prices underneath it. */
+  .pg th:first-child, .pg td:first-child { text-align: left; }
+  .pg th:not(:first-child), .pg td:not(:first-child) { text-align: right; }
   .pg thead th { font-family: var(--font-display); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; font-weight: 700; }
   .pg tbody tr + tr { border-top: 1px solid var(--c-line-soft); }
   .pg tbody tr:hover { background: var(--c-orange-soft); }

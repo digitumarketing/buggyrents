@@ -74,7 +74,7 @@ export const buggyPillar = buildPillar('buggy', {
   faqs: [
     { q: 'How much is a dune buggy in Dubai?', a: `Dune buggy Dubai starts at AED ${fromPrice(buggies[0])} for 30 minutes in a Polaris RZR 1000 2-seater. The Can-Am Maverick X3 starts at AED 600 and the Maverick R at AED 900. Every price is per buggy, not per person.` },
     { q: 'Do I need off-road experience?', a: 'No. The Polaris RZR is forgiving and the briefing plus warm-up on flat sand covers everything. Tell us when you book if it is your first time and the guide holds the pace back.' },
-    { q: 'Do I need a driving licence?', a: 'No licence is required on guided routes. Drivers must be 18 or over. Bring photo ID for the booking record.' },
+    { q: 'Do I need a driving licence?', a: 'No licence is required on guided routes. Drivers must be 14 or over. Bring photo ID for the booking record.' },
     { q: 'Can children ride?', a: 'Children can sit as passengers in a 4-seater buggy driven by an adult. For children who want to drive, the fenced kids quad area takes riders from age 6.' },
     { q: 'What is the difference between a 2-seater and a 4-seater?', a: 'Seats and price. A 4-seater carries four people for one price, so it is usually cheaper per head. The chassis and route are the same.' },
     { q: 'Is hotel pickup free?', a: transfers.summary + ' ' + transfers.outsideDubai },
@@ -116,7 +116,7 @@ export const ktmPillar = buildPillar('dirtbike', {
   uspLede: 'This is the one activity where the honest answer is sometimes no. Read this before booking.',
   usps: [
     { h: 'You need real experience', p: 'Clutch, gears and throttle control on loose surfaces. If you have only ridden on tarmac, sand will surprise you within the first minute.' },
-    { h: 'Age 18 and over', p: 'No exceptions on the dirt bike. Riders under 18 who want their own machine should look at the quad fleet instead.' },
+    { h: 'Age 14 and over', p: 'The dirt bike is released from 14, and the guide still screens every rider before handing one over. Anyone not ready for a clutch and gears is moved to a quad or a buggy for the same slot.' },
     { h: 'Start on a quad if unsure', p: 'A quad teaches you how sand behaves with far less consequence. Plenty of riders do a quad session first and come back for the KTM.' },
     { h: 'Everything else included', p: 'Helmet, safety briefing, fuel, water and a lead guide who stays with you. Free hotel pickup within Dubai.' }
   ],
@@ -127,7 +127,7 @@ export const ktmPillar = buildPillar('dirtbike', {
   faqs: [
     { q: 'How much is a KTM dirt bike in Dubai?', a: `KTM 450 dirt bike sessions run AED ${dirtbikes[0].durations.map(d => `${d.price.toLocaleString('en-US')} for ${d.label}`).join(', AED ')}.` },
     { q: 'Do I need dirt bike experience?', a: 'Yes. You need to be comfortable with clutch, gears and throttle before we hand over a 450. If you are not, the quad fleet is the better starting point and nobody will think less of you for it.' },
-    { q: 'What is the minimum age?', a: 'Eighteen, with no exceptions. The bike is too heavy and too fast in sand for younger riders.' },
+    { q: 'What is the minimum age?', a: 'Fourteen. Age is the starting point rather than the whole test: the guide watches how you handle the clutch and place the bike on flat sand before the route opens up, and a rider who is not ready moves to a quad or a buggy for the same slot.' },
     { q: 'What if the guide says I am not ready?', a: 'It happens, and it is not a problem. We move you to a quad or a buggy for the same slot and adjust the price. Better a good ride on the right machine than a bad one on the wrong machine.' },
     { q: 'Is a licence required?', a: 'No licence is required on guided desert routes. Bring photo ID for the booking record.' },
     { q: 'What should I wear?', a: 'Closed boots or trainers that cover the ankle, long trousers, and clothes you do not mind getting sandy. We provide the helmet. Bring gloves if you have them.' },

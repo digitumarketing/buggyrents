@@ -79,7 +79,7 @@ export function locationData(l: Location): LocationData {
     checks: [
       { tag: 'Pickup', h: 'Exact pickup point', p: `${l.short} has multiple towers, gates and lobbies. A map pin removes the guesswork.` },
       { tag: 'Timing', h: 'Departure window', p: `Allow ${l.drive} each way. Late-afternoon slots give the best light in the dunes.` },
-      { tag: 'Riders', h: 'Ages in the group', p: 'Minimum age varies by vehicle: 6 for the kids quad area, 18 for a buggy or the Raptor 700.' },
+      { tag: 'Riders', h: 'Ages in the group', p: 'Minimum age varies by vehicle: 6 for the kids quad area, 14 for a buggy, the Raptor 700 or the KTM 450.' },
       { tag: 'Total', h: 'Price agreed upfront', p: `${transferLine} ${payment.summary}` }
     ],
     faqChips: [free ? 'Free pickup' : 'Transfer quote', l.drive, 'Per vehicle pricing'],
@@ -107,7 +107,7 @@ export function locationData(l: Location): LocationData {
       { h: 'Which activity is worth the journey',
         html: `<p class="lf-lead">The drive should shape the booking, not just the budget.</p><p>If you are travelling ${l.drive}, book at least an hour. A 30-minute taster works when the base is nearby, but from ${l.short} the travel time outweighs the ride.</p><p>The <a href="/quad-bike-dubai/">quad fleet</a> starts at AED ${fromPrice(quads[0])} and splits by riding area rather than model. The <a href="/dune-buggy-dubai/">buggies</a> start at AED ${fromPrice(buggies[0])} and carry two or four people for one price, which is usually the cheapest way to move a group.</p>` },
       { h: 'What to agree before you travel',
-        html: `<p class="lf-lead">Four things, and all of them take one WhatsApp message.</p><ul><li>The exact pickup address or map pin, not just "${l.short}".</li><li>Rider ages, because minimum age varies from 6 to 18 depending on the machine.</li><li>The vehicle and duration, so we can hold the right slot.</li><li>The total in AED, ${free ? 'which includes free Dubai pickup' : 'including the transfer from ' + l.short}.</li></ul>` },
+        html: `<p class="lf-lead">Four things, and all of them take one WhatsApp message.</p><ul><li>The exact pickup address or map pin, not just "${l.short}".</li><li>Rider ages, because minimum age varies from 6 to 14 depending on the machine.</li><li>The vehicle and duration, so we can hold the right slot.</li><li>The total in AED, ${free ? 'which includes free Dubai pickup' : 'including the transfer from ' + l.short}.</li></ul>` },
       { h: 'Timing, weather and the best slot',
         html: `<p class="lf-lead">Late afternoon is the pick from ${l.short}.</p><p>You leave after the worst of the heat, ride as the light turns, and the red dunes photograph at their best in the last hour before sunset. October to April is the most comfortable season; May to September works with early-morning slots.</p><p>${policy.weather}</p>` },
       { h: 'Payment and cancellation',

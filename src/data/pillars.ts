@@ -52,7 +52,7 @@ export const quadPillar: PillarData = {
   faqs: [
     { q: 'How much is quad biking in Dubai?', a: 'Quad biking Dubai starts at AED 75 for 30 minutes on the kids quad and AED 89 for adults in the boundary area. Open-desert single seats start at AED 200, and the Yamaha Raptor 700cc starts at AED 500. Every price is per quad.' },
     { q: 'Do I need experience to ride a quad bike?', a: 'No. The boundary area exists exactly for first-timers, a marked 2 km square on a smaller engine with a guide present. Open desert and the Raptor 700cc do expect prior riding experience.' },
-    { q: 'What is the minimum age for quad biking Dubai?', a: 'Six for the fenced kids area on a 70–90cc quad, 12 for the boundary area, 14 for open desert, and 18 for the Yamaha Raptor 700cc.' },
+    { q: 'What is the minimum age for quad biking Dubai?', a: 'Six for the fenced kids area on a 70–90cc quad, 12 for the boundary area, and 14 for open desert and the Yamaha Raptor 700cc.' },
     { q: 'Do I need a driving licence?', a: 'No licence is required on guided quad bike Dubai routes. Bring photo ID for the booking record.' },
     { q: 'Can two people share one quad?', a: 'Yes. The double-seat quads in both the boundary area and open desert carry a passenger at no extra charge, one price covers both riders.' },
     { q: 'What should I wear for quad biking?', a: 'Closed shoes, clothes you do not mind getting sandy, and sunglasses. We provide the helmet. Avoid loose scarves and anything that can catch.' },

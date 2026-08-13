@@ -1,0 +1,274 @@
+---
+/* dbr-cluster for safari packages — 10 sections, same order and same cl__ classes
+   as Cluster.astro and BuggyRents-polaris-rzr-2-seater.html:
+   1 hero · 2 spec-strip · 3 packages --light · 4 included --sand · 5 flow --light
+   6 why --dark · 7 safety --sand · 8 FAQ --light · 9 related --sand · 10 guide --light
+ *
+ * WHY THIS IS NOT Cluster.astro
+ * Cluster.astro is typed against `Vehicle` and reads seats, engine, minAge and a
+ * durations array off it, then prints "Per vehicle" under every price. Safari
+ * packages have none of those fields and their pricing is mixed: shared packages
+ * are PER PERSON, private ones are PER VEHICLE. Bending Cluster.astro to accept
+ * both shapes would have put a union type through the twenty existing tour pages
+ * for no benefit to them, and the one thing that must never break here is the
+ * price basis. This file therefore reuses the section structure and the entire
+ * cluster.css stylesheet, and carries its own data type.
+ *
+ * The same reasoning is why the pillar at desert-safari-dubai/index.astro does not
+ * use Pillar.astro. See the comment at the top of that file.
+ *
+ * EVERY PRICE PRINTS ITS BASIS. `priceLabel` comes from the CMS and is rendered
+ * under the amount on every card, in the schema Offer name and in the WhatsApp
+ * message. Losing it would quietly show a family of six a per person price as if
+ * it were the total. */
+import '@/styles/cluster.css';
+import Base from '@/layouts/Base.astro';
+import LongFormReader from '@/components/LongFormReader.astro';
+import ReviewsCarousel from '@/components/ReviewsCarousel.astro';
+import { img, hero } from '@/data/images';
+import { site, waLink } from '@/data/site';
+import { pageTitle } from '@/data/seo';
+import { SAFARI_BASE, safariPackagesByPage, type SafariPageDef } from '@/data/safariPages';
+
+interface Props { page: SafariPageDef }
+const { page: d } = Astro.props;
+
+const packages = safariPackagesByPage[d.slug];
+const url = `${site.domain}${SAFARI_BASE}${d.slug}/`;
+const money = (n: number) => n.toLocaleString('en-US');
+
+/* The lowest price on the page, used in the hero panel. Read from the packages
+   rather than written down, so it can never drift from the cards below it. */
+const cheapest = packages.reduce((a, b) => (b.price < a.price ? b : a));
+const rest = packages.filter(p => p !== cheapest);
+
+const bookMsg = (p: (typeof packages)[number]) =>
+  `Hi Buggy Rents! I would like to book the ${p.name} (AED ${p.price}, ${p.priceLabel}). Could you confirm availability?`;
+
+const productSchema = {
+  '@context': 'https://schema.org', '@type': 'Product',
+  name: d.title.split('|')[0].trim(),
+  description: d.description,
+  image: new URL(img(d.gallery[0].image).src, site.domain).href,
+  brand: { '@type': 'Brand', name: site.name },
+  offers: packages.map(p => ({
+    '@type': 'Offer', name: `${p.name}, ${p.priceLabel}`, price: p.price, priceCurrency: 'AED',
+    availability: 'https://schema.org/InStock', url
+  }))
+};
+const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
+  {'@type':'ListItem',position:1,name:'Home',item:site.domain},
+  {'@type':'ListItem',position:2,name:'Desert Safari Dubai',item:`${site.domain}${SAFARI_BASE}`},
+  {'@type':'ListItem',position:3,name:d.shortName,item:url}]};
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
+  mainEntity: d.faqs.map(f => ({'@type':'Question', name: f.q, acceptedAnswer:{'@type':'Answer', text: f.a}})) };
+
+const h = hero('desert-safari-dubai-hero-dune-bashing', 'safari');
+---
+<Base title={pageTitle(d.title)} description={d.description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(productSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+
+  <!-- 1 hero -->
+  <section class="cl__hero">
+    <img class="cl__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="cl__hero-scrim"></div>
+    <div class="cl__shell cl__hero-inner">
+      <nav class="cl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span>
+        <a href={SAFARI_BASE}>Desert Safari Dubai</a><span aria-hidden="true">/</span>
+        <span>{d.shortName}</span>
+      </nav>
+      <div class="cl__hero-grid">
+        <div class="cl__hero-copy">
+          <p class="cl__eyebrow"><span></span>{d.eyebrow}</p>
+          <h1>{d.h1Lead} <em>{d.h1Em}</em> {d.h1Tail}</h1>
+          <p class="cl__hero-lede">{d.lede}</p>
+          <div class="cl__chips">
+            {d.chips.map(c => <span>{c}</span>)}
+          </div>
+          <div class="cl__hero-actions">
+            <a class="btn btn--primary btn--lg" href={waLink(bookMsg(cheapest))}>Check availability</a>
+            <a class="btn btn--onDark btn--lg" href="#combos">See packages</a>
+          </div>
+        </div>
+        <aside class="cl__panel">
+          <p>Starts from</p>
+          <strong>AED {money(cheapest.price)}</strong>
+          <span>{cheapest.name} / {cheapest.priceLabel}</span>
+          <ul>
+            {rest.map(p => <li>AED {money(p.price)} for the {p.name}, {p.priceLabel.toLowerCase()}.</li>)}
+            <li>Every price above states whether it is per person or per vehicle.</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 spec strip -->
+  <section class="cl__spec-strip">
+    <div class="cl__shell cl__spec-grid">
+      {d.specs.map(s => <article><span>{s.label}</span><strong>{s.value}</strong></article>)}
+    </div>
+  </section>
+
+  <!-- 3 packages -->
+  <section class="cl__section cl__section--light" id="combos">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">{d.packagesKicker}</p><h2>{d.packagesH2}</h2></div>
+        <p>{d.packagesLede}</p>
+      </header>
+      <div class="cl__value-grid">
+        {packages.map(p => (
+          <article class="cl__value-card">
+            <span>{p.vehicle}</span>
+            <h3>{p.name}</h3>
+            {p.blurb && <p>{p.blurb}</p>}
+            <div class="cl__value-price">
+              <strong>AED {money(p.price)}</strong>
+              {/* The basis is the whole point of a safari price. Never drop it. */}
+              <small>{p.priceLabel}</small>
+            </div>
+            <a class="btn btn--primary" href={waLink(bookMsg(p))}>Check availability</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 included -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header><p class="cl__kicker">02 / Included</p><h2 class="cl__wide-title">What is included before you book.</h2></header>
+      <div class="cl__split" style="margin-top:2rem">
+        <article class="cl__list-card">
+          <h3>Included on this safari</h3>
+          <ul>{d.included.map(x => <li>{x}</li>)}</ul>
+        </article>
+        <article class="cl__list-card cl__list-card--check">
+          <h3>Check before booking</h3>
+          <ul>{d.checkBefore.map(x => <li>{x}</li>)}</ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 flow -->
+  <section class="cl__section cl__section--light">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">03 / How the day runs</p><h2>{d.flowH2}</h2></div>
+        <p>{d.flowLede}</p>
+      </header>
+      <ol class="cl__flow">
+        {d.flow.map((s,i) => <li><span>{i+1}</span><strong>{s.h}</strong><p>{s.p}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 why --dark -->
+  <section class="cl__section cl__section--dark">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">04 / Why this one</p><h2>{d.whyH2}</h2></div>
+        <p>{d.whyLede}</p>
+      </header>
+      <div class="cl__gallery">
+        <figure class="cl__photo">
+          <img src={img(d.gallery[0].image).src} alt={img(d.gallery[0].image).alt} loading="lazy" decoding="async" width="800" height="533" />
+          <figcaption>
+            <span>{d.gallery[0].kicker}</span><strong>{d.gallery[0].title}</strong>
+            {d.gallery[0].body && <p>{d.gallery[0].body}</p>}
+          </figcaption>
+        </figure>
+        <div class="cl__detail-grid">
+          {d.gallery.slice(1).map(g => (
+            <figure class="cl__photo">
+              <img src={img(g.image).src} alt={img(g.image).alt} loading="lazy" decoding="async" width="480" height="320" />
+              <figcaption><span>{g.kicker}</span><strong>{g.title}</strong></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 safety -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">05 / Safety and fit</p><h2>What to know before the day.</h2></div>
+        <p>Nothing on a safari starts until the briefing is done and the group knows the plan.</p>
+      </header>
+      <div class="cl__safety-grid">
+        {d.safety.map(s => (
+          <article class="cl__safety-card">
+            <span class="cl__safety-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <span class="cl__safety-label">{s.label}</span>
+            <h3>{s.h}</h3>
+            <p>{s.p}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 FAQ -->
+  <section class="cl__section cl__section--light" id="faq">
+    <div class="cl__shell cl__faq-layout">
+      <aside>
+        <p class="cl__kicker">06 / FAQ</p>
+        <h2>{d.shortName} questions.</h2>
+        <p>The questions people ask before booking this one: timing, price basis, who it suits and how pickup works.</p>
+      </aside>
+      <div class="cl__faq-list">
+        {d.faqs.map((f,i) => (
+          <details open={i === 0}>
+            <summary><span>Q{String(i+1).padStart(2,'0')}</span><h3>{f.q}</h3><b aria-hidden="true">+</b></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <ReviewsCarousel
+    kicker="What guests say"
+    heading="Rated 4.9 by guests who came with us."
+    lede="Real Google reviews, alongside our TripAdvisor Travellers' Choice award." />
+
+  <!-- 9 related -->
+  <section class="cl__section cl__section--sand">
+    <div class="cl__shell">
+      <header class="cl__head">
+        <div><p class="cl__kicker">07 / Related choices</p><h2>Compare the next options before you book.</h2></div>
+        <p>Same desert and the same camp. What changes is the time of day, who drives and how the price is counted.</p>
+      </header>
+      <div class="cl__related-grid">
+        {d.related.map(r => (
+          <a class="cl__related-card" href={r.href}>
+            <span class="cl__related-media"><img src={img(r.img).src} alt={img(r.img).alt} loading="lazy" decoding="async" width="480" height="320" /></span>
+            <span class="cl__related-body">
+              <span>{r.tag}</span><strong>{r.title}</strong><p>{r.desc}</p><em>{r.from}</em>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 guide (scrollable long-form reader with mid + closing CTA) -->
+  <LongFormReader
+    eyebrow={d.guideKicker}
+    heading={d.guideH2}
+    intro={d.guideIntro}
+    blocks={d.guideBlocks}
+    closeHeading="Book your Dubai desert safari"
+    closeLede="Send the date and how many of you there are, and we will come back with shared and private totals so you can see which one works out cheaper." />
+</Base>

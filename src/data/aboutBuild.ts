@@ -42,4 +42,5 @@ function get(name: string): AboutData {
 
 export const buggyFaq = get('buggyFaq');
 export const quadFaq = get('quadFaq');
+export const safariFaq = get('safariFaq');
 export const aboutUs = get('aboutUs');

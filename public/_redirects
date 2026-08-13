@@ -16,3 +16,7 @@
 /dirt-bike-dubai/           /ktm-dirt-bike-dubai/    301
 /contact-us/                /contact/                301
 /thank-you/                 /contact/                301
+
+# Safari pillar moved from /desert-safari-dubai-deals/ to /desert-safari-dubai/
+# on 12 Aug 2026. Indexed and carrying 248 internal links, so it must 301.
+/desert-safari-dubai-deals/ /desert-safari-dubai/    301

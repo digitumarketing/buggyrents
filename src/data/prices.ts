@@ -185,7 +185,7 @@ export const quadPrices: PriceGuideData = {
 /* ─────────────── SAFARI PRICES ─────────────── */
 export const safariPrices: PriceGuideData = {
   slug: '/desert-safari-dubai/price/',
-  crumbParent: { label: 'Desert Safari Dubai', href: '/desert-safari-dubai-deals/' },
+  crumbParent: { label: 'Desert Safari Dubai', href: '/desert-safari-dubai/' },
   title: pageTitle(`Desert Safari Dubai Price | From AED ${safariFromPrice} per Person`),
   description: `Desert safari Dubai prices: 12 shared and private packages from AED ${safariFromPrice} per person. Evening, VIP, overnight and private Land Cruiser with BBQ camp.`,
   heroImage: 'desert-safari-dubai-hero-dune-bashing',
@@ -248,7 +248,7 @@ export const safariPrices: PriceGuideData = {
     { tag: 'Buggy prices', title: 'Dune Buggy Dubai Price', desc: '11 buggies from Polaris RZR to Can-Am Maverick R.', from: `From AED ${fromPrice(buggies[0])}`, href: '/dune-buggy-dubai/price/', img: buggies[0].image },
     { tag: 'Quad prices', title: 'Quad Biking Dubai Price', desc: 'Six quads from a fenced kids area to the Raptor 700.', from: `From AED ${fromPrice(quads[0])}`, href: '/quad-bike-dubai/price/', img: quads[0].image },
     { tag: 'Dirt bike', title: 'KTM Dirt Bike Dubai', desc: 'A 450cc desert enduro for experienced riders.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/ktm-450-dirt-bike/', img: dirtbikes[0].image },
-    { tag: 'All safaris', title: 'Desert Safari Dubai', desc: 'Every shared and private safari package explained.', from: `From AED ${safariFromPrice}`, href: '/desert-safari-dubai-deals/', img: 'private-desert-safari-4x4-dubai-red-dunes' }
+    { tag: 'All safaris', title: 'Desert Safari Dubai', desc: 'Every shared and private safari package explained.', from: `From AED ${safariFromPrice}`, href: '/desert-safari-dubai/', img: 'private-desert-safari-4x4-dubai-red-dunes' }
   ],
   guideKicker: 'Safari price guide',
   guideH2: 'Desert safari Dubai prices explained, shared against private',

@@ -1,0 +1,144 @@
+{
+  "export": "safariFaq",
+  "path": "desert-safari-dubai/faq",
+  "crumb": [{ "name": "Desert Safari Dubai", "href": "/desert-safari-dubai/" }],
+  "short": "FAQ",
+  "title": "Desert Safari Dubai FAQ | Timings, Prices and Pickup",
+  "description": "The questions people ask before booking a desert safari in Dubai: timings, what to wear, per person or per vehicle pricing, pickup and what the camp includes.",
+  "heroImage": "desert-safari-dubai-hero-dune-bashing",
+  "finalImage": "bedouin-camp-majlis-seating-desert-safari-dubai",
+  "heroSubject": "safari",
+  "kicker": "Desert safari FAQ",
+  "h1Lead": "Desert safari Dubai questions,",
+  "h1Em": "answered properly",
+  "lede": "Timings, what to wear, and the one thing that catches everyone out: some safaris are priced per person and some per vehicle. Packages start at AED {safariFrom}.",
+  "chips": ["From AED {safariFrom}", "Free Dubai pickup", "Evening, morning, overnight", "No deposit"],
+  "ctaPrimary": {
+    "label": "Ask your question",
+    "message": "Hi Buggy Rents! I have a question about the desert safari."
+  },
+  "ctaSecondary": { "label": "See all packages", "href": "/desert-safari-dubai/" },
+  "panel": {
+    "kicker": "Quick answer",
+    "title": "From AED {safariFrom} per person",
+    "sub": "Shared safaris are per person. Private safaris are priced per vehicle, which usually wins from four people up.",
+    "points": [
+      "{pickup}",
+      "{deposit}",
+      "{cancellation}",
+      "Halal BBQ dinner and shows on the evening packages"
+    ]
+  },
+  "trust": [
+    { "tag": "From", "value": "AED {safariFrom}", "note": "Shared evening safari, per person." },
+    { "tag": "Rating", "value": "{rating}", "note": "From {reviewCount} Google reviews." },
+    { "tag": "Guests", "value": "{guests}", "note": "Taken to the desert since {founded}." },
+    { "tag": "Pickup", "value": "Free", "note": "Anywhere inside Dubai." },
+    { "tag": "Open", "value": "24/7", "note": "Message any hour and we answer." }
+  ],
+  "introKicker": "01 / Start here",
+  "introH2": "Time of day and price basis decide everything",
+  "introLede": "Two questions settle almost every safari booking, and neither of them is which company you use.",
+  "introBody": [
+    "<strong>Time of day sets the trip.</strong> The evening safari is what most people mean: afternoon pickup, dune bashing while the light is good, then a Bedouin camp for dinner and the shows. It runs 7 to 8 hours. The morning safari is 4 to 5 hours, quieter, colder in winter and the only comfortable option from June to September. The overnight safari adds a night in the camp and runs 16 hours.",
+    "<strong>Price basis sets the cost.</strong> Shared safaris are priced per person because you share a Land Cruiser with other guests. Private safaris are priced per vehicle. That means the shared number always looks cheaper on screen and often is not: for two people it wins, by four the totals cross, and above that a private vehicle is usually cheaper outright as well as better.",
+    "<strong>Everything else is smaller than people think.</strong> The destination is the same across almost every operator in Dubai, the Lahbab red dunes about an hour south east of the city. What genuinely varies is who is in your vehicle, how long the photo stops last and what order you are dropped home in."
+  ],
+  "minis": [
+    { "n": "01", "h": "Pick the time", "p": "Evening for the full camp programme, morning for quiet and summer, overnight to stay." },
+    { "n": "02", "h": "Count your group", "p": "Shared is per person, private is per vehicle. Four is roughly where it flips." },
+    { "n": "03", "h": "Say who is coming", "p": "Ages, allergies and anyone who would rather skip the dune bashing." },
+    { "n": "04", "h": "Book with nothing down", "p": "{deposit} {cancellation}" }
+  ],
+  "confirmKicker": "02 / Before you book",
+  "confirmH2": "Four things worth confirming first.",
+  "confirmLede": "Get these right and the package picks itself.",
+  "confirm": [
+    { "tag": "Basis", "h": "Per person or per vehicle", "p": "Every card on our safari pages says which. If a quote elsewhere does not, ask before you compare it with anything." },
+    { "tag": "Season", "h": "Which month you are here", "p": "June to September the afternoon desert is genuinely hard work. The morning safari is the version that stays enjoyable." },
+    { "tag": "Group", "h": "How many of you", "p": "Six shared seats cost six times. One private Land Cruiser costs once and seats six to seven." },
+    { "tag": "Comfort", "h": "Anyone who should skip the dunes", "p": "Pregnancy, back trouble or motion sickness. Tell us and the driver takes a calmer route to the camp." }
+  ],
+  "bentoKicker": "03 / Pick your question",
+  "bentoH2": "Jump straight to what you need.",
+  "bentoLede": "The topics people message us about most.",
+  "bento": [
+    { "tag": "Most asked", "h": "How much is a desert safari in Dubai?", "p": "From AED {safariFrom} per person on the shared evening safari. Private safaris are priced per vehicle instead and start higher, but for four or more they usually work out cheaper in total.", "feature": true },
+    { "tag": "Timings", "h": "What time does it start and finish?", "p": "Evening safaris collect around 3pm and drop back between 9pm and 10pm. Morning safaris collect before dawn and finish late morning. Both windows move through the year because they are set by the sun." },
+    { "tag": "Clothing", "h": "What should I wear?", "p": "Comfortable clothes and closed shoes. Bring a layer in winter, when the desert gets genuinely cold after sunset, and something to keep sand out of your camera." },
+    { "tag": "Location", "h": "Where does it go?", "p": "The Lahbab red dunes, 45 to 60 minutes south east of the city on the E66. The camps sit among the dunes rather than at the roadside." },
+    { "tag": "Food", "h": "Is the dinner halal?", "p": "Yes, and vegetarian dishes are always on the buffet. Tell us about allergies when you book so the camp knows in advance." },
+    { "tag": "Children", "h": "Is it suitable for kids?", "p": "Yes, and children usually enjoy the dune drive most. Tell us their ages so the camp seats you together and the drive is pitched right." }
+  ],
+  "handledKicker": "04 / What is included",
+  "handledH2": "What comes with a safari, and what to sort yourself",
+  "handledLede": "The shared evening safari, which is the package most people book.",
+  "handledList": [
+    {
+      "h": "Included in the price",
+      "items": [
+        "Hotel pickup and drop-off, free anywhere inside Dubai",
+        "Dune bashing in a 4x4 with a desert-trained driver",
+        "Sunset photo stop on the Lahbab red dunes",
+        "Camel ride and sandboarding at the camp",
+        "Halal BBQ dinner with vegetarian options",
+        "Belly dance, tanoura and fire show after dinner",
+        "Arabic coffee, dates, shisha and henna at the camp"
+      ]
+    },
+    {
+      "h": "Bring or arrange yourself",
+      "items": [
+        "A warm layer for winter evenings, which get colder than people expect",
+        "Closed shoes. The camp floor is sand and it gets into everything",
+        "A camera and something to keep it in during the dune drive",
+        "A check that your own travel insurance includes desert sports and off road activities, because many standard policies exclude them",
+        "Transfers from outside Dubai, which we quote before you book"
+      ]
+    }
+  ],
+  "reviewsKicker": "What guests say",
+  "reviewsH2": "Rated {rating} by guests who came with us.",
+  "reviewsLede": "Real Google reviews, alongside our TripAdvisor Travellers' Choice award.",
+  "askKicker": "05 / Still stuck",
+  "askH2": "Ask the team directly",
+  "askLede": "Send the date and how many of you there are and we will put the shared and private totals side by side. No pressure to book.",
+  "askCards": [
+    { "tag": "WhatsApp", "value": "{phone}", "note": "Fastest route. Send the date, group size and ages.", "href": "https://wa.me/971562095713" },
+    { "tag": "Phone", "value": "Call the base", "note": "Open 24/7, useful if your date is tomorrow.", "href": "tel:+971562095713" },
+    { "tag": "Email", "value": "{email}", "note": "Best for group and corporate bookings.", "href": "mailto:Buggyrents@gmail.com" }
+  ],
+  "faqKicker": "06 / Full FAQ",
+  "faqH2": "Desert safari questions in full",
+  "faqLede": "Everything else people ask before booking a safari in Dubai.",
+  "faqs": [
+    { "q": "How much is a desert safari in Dubai?", "a": "From AED {safariFrom} per person for the shared evening safari, which includes pickup, dune bashing, the camel ride, sandboarding, a halal BBQ dinner and the show programme. Private safaris are priced per vehicle rather than per head, starting higher but usually working out cheaper for a family or a group of four or more." },
+    { "q": "Is the price per person or per vehicle?", "a": "It depends on the package, and every card on our safari pages states which. Shared safaris are per person because you share a Land Cruiser with other guests. Private safaris are per vehicle. Comparing the two headline numbers directly is the single most common mistake people make when booking a safari in Dubai." },
+    { "q": "What time does a desert safari start and finish?", "a": "The evening safari collects around 3pm and drops back between 9pm and 10pm, running 7 to 8 hours door to door. The morning safari collects before dawn and finishes late morning at 4 to 5 hours. Both windows shift through the year because they are timed to sunset and sunrise rather than to the clock." },
+    { "q": "How long is a desert safari in Dubai?", "a": "Seven to eight hours for the evening safari, four to five for the morning one and sixteen for the overnight, all door to door including the drive each way. About two hours of any safari is travelling, because the dunes are 45 to 60 minutes outside the city." },
+    { "q": "What should I wear to a desert safari?", "a": "Comfortable clothes and closed shoes. Sand gets everywhere and the camp floor is sand, so sandals are a poor choice. In winter bring a jacket, because the desert drops sharply once the sun goes and guests underestimate this every year. In summer, light clothing and the morning safari." },
+    { "q": "Where does the desert safari go?", "a": "The Lahbab dunes, often called the red dunes, roughly 45 to 60 minutes south east of Dubai on the E66 Hatta road. The sand there carries iron oxide, which is what gives it the deep colour, and the Bedouin camps sit among the dunes rather than at the roadside." },
+    { "q": "Can I do a desert safari without dune bashing?", "a": "Yes. Tell us when you book and the driver takes a calmer route to the camp, and everything at the camp is unchanged. Guests who are pregnant, have back trouble or simply do not enjoy it take this option regularly, and it costs no more or less." },
+    { "q": "Is the BBQ dinner halal?", "a": "Yes. Vegetarian dishes are always available on the buffet. Tell us about allergies or dietary needs when you book so the camp knows in advance rather than being asked on the night." },
+    { "q": "Do you pick up from the hotel?", "a": "{pickup} {pickupOuter} We confirm the pickup point and the window the day before, because the timing moves with the season." },
+    { "q": "Is a desert safari safe for children?", "a": "Yes, and children usually enjoy the dune drive most of anyone in the vehicle. Tell us their ages when you book so the camp seats you together and the driver pitches the drive right. If a child finds it too much, saying so stops it immediately." },
+    { "q": "What is the difference between a VIP and a private safari?", "a": "VIP normally means better camp seating and a longer buffet while you still share the 4x4 with other guests. Private means the vehicle itself is yours. They are different purchases and they are frequently confused. If sharing a table is the problem, buy VIP. If sharing a car is the problem, buy private." },
+    { "q": "Which safari is best in summer?", "a": "The morning one. Between June and September the afternoon desert is uncomfortable in a way that spoils the trip, while the same dunes before 9am are pleasant. The dune drive, the camel ride and the sandboarding are all included on the morning safari." },
+    { "q": "Can I add a buggy or a quad to a safari?", "a": "Yes, and it is the most popular combination we run. There are packages with a self-drive dune buggy session and packages with a quad ride at the camp, and you can also book a buggy or quad tour separately and add a safari to it, which gives you far more time on the machine." },
+    { "q": "Do I pay a deposit?", "a": "{deposit} {payment} {cancellation}" },
+    { "q": "What happens if the weather is bad?", "a": "{weather}" }
+  ],
+  "linksKicker": "07 / Keep reading",
+  "linksH2": "Where to go next",
+  "links": [
+    { "tag": "All packages", "title": "Desert Safari Dubai", "desc": "Every shared and private safari, with the price basis on each card.", "href": "/desert-safari-dubai/" },
+    { "tag": "Prices", "title": "Safari price list", "desc": "The full comparison in one table.", "href": "/desert-safari-dubai/price/" },
+    { "tag": "Evening", "title": "Evening Desert Safari", "desc": "Dune bashing, dinner and the shows after dark.", "href": "/desert-safari-dubai/evening-desert-safari/" },
+    { "tag": "Morning", "title": "Morning Desert Safari", "desc": "Dawn pickup, sunrise on the dunes, back before lunch.", "href": "/desert-safari-dubai/morning-desert-safari/" },
+    { "tag": "Location", "title": "Red Dunes, Lahbab", "desc": "Where a Dubai safari actually goes, and how far it is.", "href": "/desert-safari-dubai/red-dune-desert-safari/" },
+    { "tag": "Timings", "title": "Desert safari timings", "desc": "The full guide to when each safari runs through the year.", "href": "/blogs/desert-safari-dubai-timings/" }
+  ],
+  "finalKicker": "Question not answered?",
+  "finalH2": "Message us and we will answer it",
+  "finalLede": "Send the date and how many of you there are. That is enough for us to come back with shared and private totals and a pickup plan."
+}

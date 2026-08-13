@@ -165,7 +165,7 @@ ${v.durations.length > 2 ? `<p>Longer routes suit riders who already know what t
       html: `<p class="lf-lead">Hotel pickup within Dubai is free, and it is arranged when you book rather than sorted out at the base.</p>
 <p>Most guests self-drive to Al Awir, and there is parking on site. If you would rather be collected, hotel pickup within Dubai is included at no extra cost: send your hotel name or a pinned location when you book.</p>
 <p>Drive times vary more than people expect. Downtown and Deira are around 35 minutes, Dubai Marina and Palm Jumeirah closer to an hour. Outer-emirate pickups from Sharjah, Ajman, Abu Dhabi or Ras Al Khaimah take longer and are quoted separately. See the <a href="/locations/dune-buggy-near-downtown-dubai/">Downtown</a>, <a href="/locations/dune-buggy-near-dubai-marina/">Marina</a>, <a href="/locations/dune-buggy-from-sharjah/">Sharjah</a> and <a href="/locations/dune-buggy-from-abu-dhabi/">Abu Dhabi</a> pages for what to confirm before leaving.</p>
-<p>If the ride is part of a bigger day, the late-afternoon slot pairs naturally with a <a href="/desert-safari-dubai-deals/">desert safari</a> and BBQ camp stop, rather than booking the two as separate trips on separate days.</p>` },
+<p>If the ride is part of a bigger day, the late-afternoon slot pairs naturally with a <a href="/desert-safari-dubai/">desert safari</a> and BBQ camp stop, rather than booking the two as separate trips on separate days.</p>` },
 
     { h: 'Best time of year, and what to wear',
       html: `<p class="lf-lead">October to April is the most comfortable window, with daytime highs of 24 to 30 degrees and cool evenings.</p>

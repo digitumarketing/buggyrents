@@ -1,0 +1,9 @@
+---
+import SafariCluster from '@/components/templates/SafariCluster.astro';
+import { safariPages } from '@/data/safariPages';
+export function getStaticPaths() {
+  return safariPages.map(p => ({ params: { slug: p.slug }, props: { page: p } }));
+}
+const { page } = Astro.props;
+---
+<SafariCluster page={page} />

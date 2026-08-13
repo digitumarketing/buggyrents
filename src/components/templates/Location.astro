@@ -6,7 +6,7 @@ import '@/styles/location.css';
 import Base from '@/layouts/Base.astro';
 import LongFormReader from '@/components/LongFormReader.astro';
 import type { LfBlock } from '@/components/LongFormReader.astro';
-import { img, hero } from '@/data/images';
+import { img, hero, heroes } from '@/data/images';
 import { site, waLink, bookMessage } from '@/data/site';
 
 export type LocationData = {
@@ -23,14 +23,32 @@ export type LocationData = {
   nearby: { tag: string; title: string; desc: string; href: string }[];
   guideKicker: string; guideH2: string; guideIntro: string; guideBlocks: LfBlock[];
   finalH2: string; finalLede: string;
+  /* Optional parent, added 12 Aug 2026 so the safari red dunes page can use this
+     template without pretending to live under /locations/. The ten pickup-area
+     pages omit it and keep the exact output they had before, which the byte
+     comparison confirms. Do not make it required. */
+  parent?: { label: string; href: string; compareLabel: string };
 };
 interface Props { data: LocationData }
 const { data: d } = Astro.props;
 
+const parent = d.parent ?? { label: 'Locations', href: '/locations/', compareLabel: 'Compare locations' };
+const pageUrl = `${site.domain}${parent.href}${d.slug}/`;
+
+/* The closing CTA background. The ten pickup-area pages pass a hero name, which is
+   what this always resolved. The safari red dunes page cannot: there is exactly one
+   safari hero and it is already this page's own hero, so reusing it would put the
+   same photo at the top and bottom of one page. Falling back to the content library
+   lets it pass a lib name instead. Hero is still tried first, so the ten existing
+   pages resolve exactly as before and byte-compare identical. */
+const finalSrc = d.finalImage in heroes
+  ? hero(d.finalImage).src
+  : img(d.finalImage).src;
+
 const crumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
   {'@type':'ListItem',position:1,name:'Home',item:site.domain},
-  {'@type':'ListItem',position:2,name:'Locations',item:`${site.domain}/locations/`},
-  {'@type':'ListItem',position:3,name:d.short,item:`${site.domain}/locations/${d.slug}/`}]};
+  {'@type':'ListItem',position:2,name:parent.label,item:`${site.domain}${parent.href}`},
+  {'@type':'ListItem',position:3,name:d.short,item:pageUrl}]};
 const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
   mainEntity: d.faqs.map(f => ({'@type':'Question', name: f.q, acceptedAnswer:{'@type':'Answer', text: f.a}})) };
 const areaSchema = { '@context':'https://schema.org','@type':'Service',
@@ -51,7 +69,7 @@ const areaSchema = { '@context':'https://schema.org','@type':'Service',
     <div class="lo__shell lo__hero-inner">
       <nav class="lo__crumbs" aria-label="Breadcrumb">
         <a href="/">Home</a><span aria-hidden="true">/</span>
-        <a href="/locations/">Locations</a><span aria-hidden="true">/</span>
+        <a href={parent.href}>{parent.label}</a><span aria-hidden="true">/</span>
         <span>{d.short}</span>
       </nav>
       <div class="lo__hero-grid">
@@ -62,7 +80,7 @@ const areaSchema = { '@context':'https://schema.org','@type':'Service',
           <div class="lo__chips">{d.chips.map(c => <span>{c}</span>)}</div>
           <div class="lo__actions">
             <a class="btn btn--primary btn--lg" href={waLink(`Hi Buggy Rents! I'd like a pickup from ${d.short}. Could you confirm availability?`)}>Ask transfer quote</a>
-            <a class="btn btn--onDark btn--lg" href="/locations/">Compare locations</a>
+            <a class="btn btn--onDark btn--lg" href={parent.href}>{parent.compareLabel}</a>
           </div>
         </div>
         <aside class="lo__panel">
@@ -186,7 +204,7 @@ const areaSchema = { '@context':'https://schema.org','@type':'Service',
   </section>
 
   <section class="lo__final" id="book">
-    <img class="lo__final-media" src={hero(d.finalImage).src} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+    <img class="lo__final-media" src={finalSrc} alt="" loading="lazy" decoding="async" aria-hidden="true" />
     <div class="lo__final-scrim"></div>
     <div class="lo__shell lo__final-inner">
       <p class="lo__kicker">Confirm pickup</p>

@@ -505,7 +505,13 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   const groups = {
     'dune buggy': `${DIST}/dune-buggy-dubai`,
     'quad bike':  `${DIST}/quad-bike-dubai`,
-    'dirt bike':  `${DIST}/ktm-dirt-bike-dubai`
+    'dirt bike':  `${DIST}/ktm-dirt-bike-dubai`,
+    /* Added 12 Aug 2026 with the safari cluster. This is the group most likely to
+       trip the rule, because the library holds seven safari photos against eight
+       pages. The sets in safariPages.ts are chosen to stay distinct. When the
+       client supplies the landscape shots in CLAUDE.md section 5b, widen those
+       sets rather than letting two pages converge. */
+    'desert safari': `${DIST}/desert-safari-dubai`
   };
   const clashes = [];
   let checked = 0;
@@ -656,4 +662,68 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     process.exit(1);
   }
   console.log(`Token audit passed — no unfilled placeholders across ${pages.length} pages.`);
+}
+
+
+/* Directory roots resolve.
+ *
+ * WHY THIS EXISTS
+ * Found 12 Aug 2026. /desert-safari-dubai/price/ was live and indexed while
+ * /desert-safari-dubai/ itself returned the 404 page, because the pillar had been
+ * built at /desert-safari-dubai-deals/ instead. The URL implied a parent that did
+ * not exist, and the breadcrumb schema on the child jumped sideways to the -deals
+ * URL to cover for it.
+ *
+ * No existing audit could see it. The link audit only checks links that are
+ * written, and nothing linked to the missing parent. The orphan audit only looks
+ * at pages that exist. A page that should exist and does not is invisible to both,
+ * which is exactly why it survived a launch and five CMS migrations.
+ *
+ * The rule: if dist/x/ contains any page, dist/x/index.html must exist. A visitor
+ * who deletes the last segment of a URL is doing the most ordinary thing on the
+ * web, and a crawler follows the same hierarchy when it works out site structure.
+ *
+ * Excludes the two directories that are containers rather than pages: assets and
+ * the Astro build output.
+ */
+{
+  const SKIP = new Set(['_astro', 'assets', '_worker.js']);
+  const missing = [];
+  let checked = 0;
+
+  const check = dir => {
+    let entries;
+    try { entries = readdirSync(dir); } catch { return; }
+
+    const subdirs = entries.filter(e => {
+      if (SKIP.has(e)) return false;
+      try { return statSync(join(dir, e)).isDirectory(); } catch { return false; }
+    });
+
+    /* Does anything below this directory render a page? If so the directory is a
+       real path segment and its own root has to answer. */
+    const hasChildPages = subdirs.some(s => existsSync(join(dir, s, 'index.html')));
+
+    if (dir !== DIST && hasChildPages) {
+      checked++;
+      if (!existsSync(join(dir, 'index.html'))) {
+        missing.push(
+          `${dir.replace(/^dist/, '')}/ has child pages but no page of its own, ` +
+          `so it answers with the 404: ` +
+          subdirs.filter(s => existsSync(join(dir, s, 'index.html')))
+                 .slice(0, 3).map(s => `${dir.replace(/^dist/, '')}/${s}/`).join(', ')
+        );
+      }
+    }
+    subdirs.forEach(s => check(join(dir, s)));
+  };
+  check(DIST);
+
+  if (missing.length) {
+    console.error('Directory root does not resolve:');
+    missing.forEach(m => console.error('  ' + m));
+    console.error('  Either build a page at that path or 301 it to the right one.');
+    process.exit(1);
+  }
+  console.log(`Root-resolves audit passed — ${checked} directories with children, all have a page.`);
 }

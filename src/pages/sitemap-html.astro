@@ -9,6 +9,7 @@ import { buggies, quads, dirtbikes } from '@/data/vehicles';
 import { locations } from '@/data/locations';
 import { audiences } from '@/data/audiences';
 import { allPosts } from '@/data/posts';
+import { safariPages } from '@/data/safariPages';
 
 const title = 'Sitemap | Buggy Rents Dubai';
 const description = 'Every page on buggyrents.com in one list: dune buggies, quad bikes, dirt bikes, desert safari, pickup locations, audience guides and policies.';
@@ -44,7 +45,11 @@ const groups = [
     { label: 'Dirt bike for advanced riders', href: '/ktm-dirt-bike-dubai/dirt-bike-for-advanced/' }
   ]},
   { h: 'Desert safari', links: [
-    { label: 'Desert Safari Dubai', href: '/desert-safari-dubai-deals/' }
+    { label: 'Desert Safari Dubai', href: '/desert-safari-dubai/' },
+    { label: 'Desert safari prices', href: '/desert-safari-dubai/price/' },
+    { label: 'Desert safari FAQ', href: '/desert-safari-dubai/faq/' },
+    ...safariPages.map(p => ({ label: p.shortName, href: `/desert-safari-dubai/${p.slug}/` })),
+    { label: 'Red Dunes, Lahbab', href: '/desert-safari-dubai/red-dune-desert-safari/' }
   ]},
   { h: 'Pickup locations', links: [
     { label: 'All locations', href: '/locations/' },
@@ -54,7 +59,10 @@ const groups = [
     { label: 'All guides', href: '/blogs/' },
     ...posts.map(p => ({ label: p.data.title, href: `/blogs/${p.id}/` }))
   ]},
-  { h: 'Who it suits', links: audiences.map(a => ({ label: a.name, href: `/audience/${a.slug}/` })) },
+  { h: 'Who it suits', links: [
+    { label: 'All audience guides', href: '/audience/' },
+    ...audiences.map(a => ({ label: a.name, href: `/audience/${a.slug}/` }))
+  ]},
   { h: 'Policies', links: [
     { label: 'Safety standards', href: '/about-us/safety-standards/' },
     { label: 'Terms and conditions', href: '/about-us/terms-conditions/' },

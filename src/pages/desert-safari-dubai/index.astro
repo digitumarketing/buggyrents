@@ -18,6 +18,7 @@ import { sharedSafaris, privateSafaris, safariFromPrice } from '@/data/safari';
 import { transfers, payment } from '@/data/extras';
 import { buggies, quads, fromPrice } from '@/data/vehicles';
 import { pageTitle } from '@/data/seo';
+import { SAFARI_BASE } from '@/data/safariPages';
 
 const buggyFrom = Math.min(...buggies.map(fromPrice));
 const quadFrom = Math.min(...quads.map(fromPrice));
@@ -65,7 +66,7 @@ const lfBlocks = [
 
 const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
   { '@type':'ListItem', position:1, name:'Home', item: site.domain },
-  { '@type':'ListItem', position:2, name:'Desert Safari Dubai', item: `${site.domain}/desert-safari-dubai-deals/` }]};
+  { '@type':'ListItem', position:2, name:'Desert Safari Dubai', item: `${site.domain}/desert-safari-dubai/` }]};
 const faqSchema = { '@context':'https://schema.org', '@type':'FAQPage',
   mainEntity: faqs.map(f => ({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
 const svcSchema = { '@context':'https://schema.org', '@type':'Service',
@@ -74,11 +75,26 @@ const svcSchema = { '@context':'https://schema.org', '@type':'Service',
   areaServed: { '@type':'Place', name: 'Dubai, United Arab Emirates' },
   offers: [...sharedSafaris, ...privateSafaris].map(s => ({
     '@type':'Offer', name: `${s.name}, ${s.priceLabel}`, price: s.price, priceCurrency: 'AED',
-    availability: 'https://schema.org/InStock', url: `${site.domain}/desert-safari-dubai-deals/` })) };
+    availability: 'https://schema.org/InStock', url: `${site.domain}/desert-safari-dubai/` })) };
 
 const groups = [
   { key: 'shared', kicker: 'Shared safaris', h: 'Shared 4x4 packages, priced per person', lede: 'You share a Land Cruiser with other guests. The cheapest way into the desert, and the one most people book.', list: sharedSafaris },
   { key: 'private', kicker: 'Private safaris', h: 'Private packages, priced per vehicle', lede: 'The vehicle is yours. For four or more people this often costs less in total than the same number of shared seats.', list: privateSafaris }
+];
+
+/* The cluster. Added 12 Aug 2026 with the six tour pages, the red dunes location
+   page and the safari FAQ. Kept here rather than in nav.ts because these are body
+   links carrying descriptive anchors, which is what passes authority down to a
+   child page. The nav dropdown is navigation and does a different job. */
+const children = [
+  { tag: 'Most booked', title: 'Evening Desert Safari', desc: 'Afternoon pickup, dune bashing, halal BBQ dinner and the shows after dark.', href: `${SAFARI_BASE}evening-desert-safari/` },
+  { tag: 'Quieter and cooler', title: 'Morning Desert Safari', desc: 'Dawn pickup, sunrise on the dunes and back before lunch. The summer answer.', href: `${SAFARI_BASE}morning-desert-safari/` },
+  { tag: 'Stay the night', title: 'Overnight Desert Safari', desc: 'Dinner, the shows, a night in the camp and sunrise from where you slept.', href: `${SAFARI_BASE}overnight-desert-safari/` },
+  { tag: 'Per vehicle', title: 'Private and VIP Safari', desc: 'Six private packages. Usually cheaper than shared seats from four people up.', href: `${SAFARI_BASE}private-desert-safari/` },
+  { tag: 'Ride a quad', title: 'Quad Bike Desert Safari', desc: 'The safari with a quad ride built into the camp stop. Also sold as ATV safari.', href: `${SAFARI_BASE}quad-bike-desert-safari/` },
+  { tag: 'Drive a buggy', title: 'Dune Buggy Desert Safari', desc: 'A self-drive buggy session, then hand the dunes back to a driver.', href: `${SAFARI_BASE}dune-buggy-desert-safari/` },
+  { tag: 'Where it goes', title: 'Red Dunes, Lahbab', desc: 'The location every Dubai safari drives to, with times and what the sand is like.', href: `${SAFARI_BASE}red-dune-desert-safari/` },
+  { tag: 'Questions', title: 'Desert Safari FAQ', desc: 'Timings, what to wear, pickup and the per person versus per vehicle question.', href: `${SAFARI_BASE}faq/` }
 ];
 ---
 <Base title={title} description={description}>
@@ -225,13 +241,39 @@ const groups = [
     </div>
   </section>
 
-  <!-- 8 cross-sell -->
+  <!-- 8 cross-sell. This is the hub half of the cluster: without these links the
+       six child pages are orphans and the FAQ and red dunes pages have no parent
+       passing authority down to them. -->
   <section class="pl__section pl__section--light" aria-labelledby="sf-rel-h">
     <div class="pl__shell">
       <header class="pl__section-head">
         <div>
+          <p class="pl__kicker">Go deeper</p>
+          <h2 id="sf-rel-h">Every safari, explained on its own page</h2>
+        </div>
+        <p>Timings, who each one suits and whether it is priced per person or per vehicle.</p>
+      </header>
+      <div class="pl__related-grid">
+        {children.map(c => (
+          <a class="pl__related-card" href={c.href}>
+            <div class="pl__related-body">
+              <span>{c.tag}</span>
+              <strong>{c.title}</strong>
+              <p>{c.desc}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 drive it yourself -->
+  <section class="pl__section pl__section--sand" aria-labelledby="sf-drive-h">
+    <div class="pl__shell">
+      <header class="pl__section-head">
+        <div>
           <p class="pl__kicker">Rather drive yourself?</p>
-          <h2 id="sf-rel-h">The desert with you at the wheel</h2>
+          <h2 id="sf-drive-h">The desert with you at the wheel</h2>
         </div>
         <p>Mixed groups often book both, then meet at the camp for dinner.</p>
       </header>

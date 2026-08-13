@@ -62,7 +62,7 @@ export function locationData(l: Location): LocationData {
         href: '/dune-buggy-dubai/', img: buggies[0].image },
       { tag: `Safari, from AED ${safariFromPrice}`, title: 'Desert Safari Dubai',
         desc: 'Someone else drives. Dune bashing, sunset stop and a Bedouin BBQ camp dinner.',
-        href: '/desert-safari-dubai-deals/', img: 'desert-safari-dubai-dune-bashing-land-cruiser' },
+        href: '/desert-safari-dubai/', img: 'desert-safari-dubai-dune-bashing-land-cruiser' },
       { tag: `Dirt bike, from AED ${fromPrice(dirtbikes[0])}`, title: 'KTM Dirt Bike Dubai',
         desc: 'A 450cc desert enduro for riders who can already work a clutch and gears.',
         href: '/ktm-dirt-bike-dubai/', img: dirtbikes[0].image }

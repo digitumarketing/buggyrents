@@ -1,0 +1,151 @@
+---
+/* Audience hub. A simple index over the 8 audience pages, in the same shape as the
+   locations hub.
+ *
+ * WHY THIS PAGE EXISTS
+ * It was missing. /audience/ had eight child pages under it and no page of its
+ * own, so deleting the last segment of any of those URLs landed on the 404. It was
+ * found on 12 Aug 2026 by the root-resolves audit, added the same day after the
+ * identical bug turned up on the safari pillar, and no earlier audit could see it:
+ * the link audit only checks links that exist, and nothing linked here.
+ *
+ * The eight pages themselves were never orphaned. They are linked from the buggy
+ * pillar and from each other. What was missing was the hub that groups them, which
+ * is the page most likely to rank for the broad "dune buggy for ..." queries and
+ * the natural parent in the breadcrumb trail. */
+import '@/styles/pillar.css';
+import Base from '@/layouts/Base.astro';
+import { hero, img } from '@/data/images';
+import { site, waLink } from '@/data/site';
+import { audiences } from '@/data/audiences';
+import { buggies, quads, fromPrice } from '@/data/vehicles';
+import { transfers } from '@/data/extras';
+import { pageTitle } from '@/data/seo';
+
+const buggyFrom = Math.min(...buggies.map(fromPrice));
+const quadFrom = Math.min(...quads.map(fromPrice));
+
+const title = pageTitle('Dune Buggy Dubai for Couples, Families and Groups');
+const description =
+  `Which desert ride suits who you are travelling with. ${audiences.length} guides covering couples, ` +
+  `families, kids, corporate groups and more, with the vehicle that fits each one.`;
+
+const h = hero('desert-adventure-dubai-hero-canam-maverick');
+/* A different photo from the hero, so the page never shows the same image twice. */
+const fin = img('group-dune-buggy-tour-dubai-photo-stop', 'buggy');
+
+const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
+  { '@type':'ListItem', position:1, name:'Home', item: site.domain },
+  { '@type':'ListItem', position:2, name:'Who it suits', item: `${site.domain}/audience/` }]};
+const listSchema = { '@context':'https://schema.org', '@type':'ItemList',
+  itemListElement: audiences.map((a, i) => ({ '@type':'ListItem', position:i+1, name:a.name,
+    url: `${site.domain}/audience/${a.slug}/` })) };
+---
+<Base title={title} description={description}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(crumbSchema)} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(listSchema)} />
+
+  <section class="pl__hero">
+    <img class="pl__hero-media" src={h.src} alt={h.alt}
+         style={`object-position:${h.focal} center`}
+         width={h.w} height={h.h} fetchpriority="high" decoding="async" />
+    <div class="pl__hero-scrim" aria-hidden="true"></div>
+    <div class="pl__shell pl__hero-inner">
+      <nav class="pl__crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Who it suits</span>
+      </nav>
+      <div class="pl__hero-copy">
+        <p class="pl__eyebrow">Who it suits</p>
+        <h1>The right ride for <em>who you are with</em></h1>
+        <p class="pl__hero-subhead">Two seats or four, a fenced area or open desert, one machine or a convoy.</p>
+        <p class="pl__hero-lede">
+          Choosing a buggy is usually less about the machine than about the group. These {audiences.length} guides
+          cover the questions each kind of group actually asks, from car seats and ages to how a convoy is run.
+          Buggies start at AED {buggyFrom} and quads at AED {quadFrom}, both per vehicle.
+        </p>
+        <div class="pl__hero-actions">
+          <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! Could you tell me which vehicle suits my group?')}>Ask what suits your group</a>
+          <a class="btn btn--onDark btn--lg" href="/dune-buggy-dubai/">See the buggies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pl__section pl__section--light">
+    <div class="pl__shell">
+      <header class="pl__section-head">
+        <div>
+          <p class="pl__kicker">Pick your group</p>
+          <h2>Guides by who is coming with you</h2>
+        </div>
+        <p>
+          Each page covers the vehicles that work, the ages involved and what tends to go wrong
+          when a group books the wrong one.
+        </p>
+      </header>
+      <div class="ah__grid">
+        {audiences.map(a => (
+          <a class="ah__card" href={`/audience/${a.slug}/`}>
+            <span class="ah__tag">{a.pitch}</span>
+            <strong>{a.short}</strong>
+            <p>{a.intro.split('.')[0]}.</p>
+            <dl class="ah__meta">
+              <div><dt>Usual pick</dt><dd>{a.vehicles}</dd></div>
+            </dl>
+            <em>View guide &rarr;</em>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ah__final">
+    <img class="ah__final-media" src={fin.src} alt="" width="1600" height="900" decoding="async" aria-hidden="true" />
+    <div class="ah__final-scrim" aria-hidden="true"></div>
+    <div class="pl__shell ah__final-inner">
+      <p class="pl__kicker">Not sure which fits?</p>
+      <h2>Tell us who is coming and we will say</h2>
+      <p>
+        Send the ages, how many of you there are and who wants to drive. That is enough for us to
+        recommend the vehicles, price it per vehicle and confirm the pickup. {transfers.summary}
+      </p>
+      <div class="pl__hero-actions">
+        <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! Here is my group, could you suggest what suits us?')}>Ask on WhatsApp</a>
+        <a class="btn btn--onDark btn--lg" href={`tel:${site.phoneRaw}`}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ah__final { position: relative; overflow: hidden; background: var(--c-navy-dark);
+    isolation: isolate; padding-block: var(--section-gap); }
+  .ah__final-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .ah__final-scrim { position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(15,18,24,.82), rgba(15,18,24,.90)); }
+  .ah__final-inner { position: relative; z-index: 2; text-align: center; color: #fff; }
+  .ah__final-inner .pl__kicker { color: var(--c-gold); }
+  .ah__final-inner h2 { color: #fff; margin-top: .6rem; }
+  .ah__final-inner > p { margin-top: .9rem; font-size: var(--fs-sm); color: rgba(255,255,255,.85);
+    max-width: 58ch; margin-inline: auto; line-height: 1.7; }
+  .ah__final-inner .pl__hero-actions { justify-content: center; }
+
+  .ah__grid { display: grid; gap: clamp(1rem,2vw,1.4rem); margin-top: clamp(1.6rem,3vw,2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); }
+  .ah__card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--c-line);
+    border-radius: 16px; padding: clamp(1.3rem,2vw,1.7rem); text-decoration: none;
+    box-shadow: 0 10px 30px rgba(50,61,78,.05); transition: transform .16s ease, box-shadow .16s ease; }
+  .ah__card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(50,61,78,.10); }
+  .ah__tag { font-family: var(--font-display); font-weight: 700; font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--c-orange-text); }
+  .ah__card strong { margin-top: .45rem; color: var(--c-navy); font-family: var(--font-display);
+    font-size: clamp(1.1rem,1rem + .4vw,1.3rem); }
+  .ah__card p { margin: .55rem 0 0; font-size: var(--fs-sm); color: var(--c-ink-soft); line-height: 1.6; }
+  .ah__meta { display: grid; gap: .4rem; margin: 1rem 0 0; padding-top: .9rem;
+    border-top: 1px solid var(--c-line); }
+  .ah__meta > div { display: flex; justify-content: space-between; gap: 1rem; }
+  .ah__meta dt { font-size: var(--fs-xs); color: var(--c-ink-soft); }
+  .ah__meta dd { margin: 0; font-size: var(--fs-xs); font-weight: 700; color: var(--c-navy); text-align: right; }
+  .ah__card em { margin-top: .9rem; font-style: normal; font-family: var(--font-display);
+    font-weight: 700; font-size: var(--fs-sm); color: var(--c-orange-dark); }
+</style>

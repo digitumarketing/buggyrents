@@ -28,7 +28,18 @@ export const mainNav: NavItem[] = [
     { label: 'For beginners', href: '/ktm-dirt-bike-dubai/dirt-bike-for-beginners/' },
     { label: 'For advanced riders', href: '/ktm-dirt-bike-dubai/dirt-bike-for-advanced/' }
   ]},
-  { label: 'Desert Safari', href: '/desert-safari-dubai-deals/' },
+  { label: 'Desert Safari', href: '/desert-safari-dubai/', children: [
+    { label: 'All safaris', href: '/desert-safari-dubai/' },
+    { label: 'Evening Safari', href: '/desert-safari-dubai/evening-desert-safari/' },
+    { label: 'Morning Safari', href: '/desert-safari-dubai/morning-desert-safari/' },
+    { label: 'Overnight Safari', href: '/desert-safari-dubai/overnight-desert-safari/' },
+    { label: 'Private and VIP', href: '/desert-safari-dubai/private-desert-safari/' },
+    { label: 'Quad Bike Safari', href: '/desert-safari-dubai/quad-bike-desert-safari/' },
+    { label: 'Dune Buggy Safari', href: '/desert-safari-dubai/dune-buggy-desert-safari/' },
+    { label: 'Red Dunes, Lahbab', href: '/desert-safari-dubai/red-dune-desert-safari/' },
+    { label: 'Prices', href: '/desert-safari-dubai/price/' },
+    { label: 'FAQ', href: '/desert-safari-dubai/faq/' }
+  ]},
   { label: 'About', href: '/about-us/', children: [
     { label: 'About us', href: '/about-us/' },
     { label: 'Our fleet', href: '/about-us/our-fleet/' },
@@ -44,13 +55,15 @@ export const footerNav = {
     { label: 'Dune buggy Dubai', href: '/dune-buggy-dubai/' },
     { label: 'Quad bike Dubai', href: '/quad-bike-dubai/' },
     { label: 'KTM dirt bike Dubai', href: '/ktm-dirt-bike-dubai/' },
-    { label: 'Desert safari', href: '/desert-safari-dubai-deals/' }
+    { label: 'Desert safari', href: '/desert-safari-dubai/' }
   ],
   Prices: [
     { label: 'Buggy prices', href: '/dune-buggy-dubai/price/' },
     { label: 'Quad prices', href: '/quad-bike-dubai/price/' },
+    { label: 'Safari prices', href: '/desert-safari-dubai/price/' },
     { label: 'Buggy FAQ', href: '/dune-buggy-dubai/faq/' },
-    { label: 'Quad FAQ', href: '/quad-bike-dubai/faq/' }
+    { label: 'Quad FAQ', href: '/quad-bike-dubai/faq/' },
+    { label: 'Safari FAQ', href: '/desert-safari-dubai/faq/' }
   ],
   Company: [
     { label: 'About us', href: '/about-us/' },

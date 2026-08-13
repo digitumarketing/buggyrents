@@ -50,7 +50,15 @@ export default defineConfig({
     '/dirt-bike-rental-dubai':  '/ktm-dirt-bike-dubai/',
     '/dirt-bike-dubai':         '/ktm-dirt-bike-dubai/',
     '/contact-us':              '/contact/',
-    '/thank-you':               '/contact/'
+    '/thank-you':               '/contact/',
+
+    /* The safari pillar used to live at /desert-safari-dubai-deals/. That slug
+       targeted "desert safari dubai deals" (390 searches) while the clean path
+       /desert-safari-dubai/, which matches the 49,500-volume head term and the
+       convention every other pillar follows, returned a 404. Moved 12 Aug 2026.
+       The old URL carried 248 internal links and is indexed, so it must 301
+       rather than disappear. As above, the slashed form is in public/_redirects. */
+    '/desert-safari-dubai-deals': '/desert-safari-dubai/'
   },
 
   build: { inlineStylesheets: 'auto' },

@@ -1,0 +1,149 @@
+---
+/* Red dune desert safari, and where a Dubai desert safari actually goes.
+ *
+ * WHY THIS PAGE EXISTS
+ * Three keywords with real volume and low difficulty describe the same question,
+ * and the site answered none of them: red dune desert safari dubai (1,000, KD 22),
+ * dubai desert safari location (720, KD 20) and desert safari dubai location map
+ * (110, KD 21). All three are somebody asking where they are being taken. That is
+ * one page, not three.
+ *
+ * It uses the dbr-location template rather than the cluster one because it is a
+ * place page, not a product page: there is no package called "red dune safari",
+ * and inventing one would have made it the doorway page CLAUDE.md warns about.
+ * Every safari we run goes to Lahbab, so this page describes the destination and
+ * sends the booking to the packages.
+ *
+ * Location.astro takes an optional `parent` so the breadcrumb reads
+ * Home / Desert Safari Dubai / Red Dunes rather than claiming to sit under
+ * /locations/, which holds pickup areas and is a different thing. */
+import Location from '@/components/templates/Location.astro';
+import type { LocationData } from '@/components/templates/Location.astro';
+import { SAFARI_BASE } from '@/data/safariPages';
+import { allSafaris } from '@/data/safari';
+import { transfers } from '@/data/extras';
+import { site } from '@/data/site';
+import { pageTitle } from '@/data/seo';
+import { buggies, quads, fromPrice } from '@/data/vehicles';
+
+const safariFrom = Math.min(...allSafaris.map(s => s.price));
+const buggyFrom = Math.min(...buggies.map(fromPrice));
+const quadFrom = Math.min(...quads.map(fromPrice));
+const money = (n: number) => n.toLocaleString('en-US');
+
+const data: LocationData = {
+  slug: 'red-dune-desert-safari',
+  name: 'Red dune desert safari, Lahbab',
+  short: 'Red Dunes',
+  emirate: 'Dubai',
+  drive: '45 to 60 minutes from central Dubai',
+  parent: { label: 'Desert Safari Dubai', href: SAFARI_BASE, compareLabel: 'See all safaris' },
+
+  title: pageTitle('Red Dune Desert Safari Dubai, Lahbab'),
+  description:
+    'Where a Dubai desert safari actually goes. The Lahbab red dunes, 45 to 60 minutes from the city, ' +
+    'with drive times, the camp location and what the sand is like.',
+
+  heroImage: 'desert-safari-dubai-hero-dune-bashing',
+  finalImage: 'private-desert-safari-4x4-dubai-red-dunes',
+
+  kicker: 'Red dunes and safari location',
+  h1Lead: 'Red dune desert safari in Dubai,', h1Em: 'the Lahbab dunes',
+  lede:
+    'Almost every desert safari sold in Dubai goes to the same place. It is worth knowing where that is, ' +
+    'how far it is and what makes the sand red before you book one.',
+  chips: ['45 to 60 minutes out', 'Lahbab red dunes', 'Free Dubai pickup', 'Camp at the dunes'],
+
+  stats: [
+    { label: 'Drive from Downtown', value: '45 to 60 min', sub: 'Traffic on the E66 decides which end' },
+    { label: 'Dune height', value: 'Up to 60 m', sub: 'The tallest sand within reach of the city' },
+    { label: 'Our base', value: 'Al Awir', sub: 'On the Dubai to Hatta road, en route' },
+    { label: 'Pickup', value: 'Free in Dubai', sub: 'Outer emirates quoted before booking' }
+  ],
+
+  fitH2: 'Why the sand at Lahbab is red',
+  fitIntro:
+    'The colour is iron oxide in the grains, which is why this stretch photographs the way it does and why ' +
+    'every operator in the city drives past closer sand to reach it. It is a real geographic feature, not a marketing name.',
+  fitPoints: [
+    'Lahbab sits roughly 45 to 60 minutes from central Dubai on the E66, the Dubai to Hatta road.',
+    'The dunes reach around 60 metres, which is the tallest soft sand within an hour of the city.',
+    'Iron oxide in the grains gives the deep orange to red colour, strongest in low morning and evening light.',
+    'The Bedouin camps sit among the dunes rather than at the edge, so the drive continues after you leave tarmac.',
+    'Our own base is at Al Awir on the same road, which is why pickup and the drive out are one journey rather than two.',
+    'Big Red, the dune most visitors have heard of, is further along the same road and is a separate stop.'
+  ],
+
+  activities: [
+    { tag: `Safari from AED ${money(safariFrom)}`, title: 'Evening desert safari', desc: 'The full programme at the camp: dune bashing, dinner and the shows after dark.', href: `${SAFARI_BASE}evening-desert-safari/`, img: 'desert-safari-dubai-dune-bashing-land-cruiser' },
+    { tag: 'Best light', title: 'Morning desert safari', desc: 'The red is strongest at dawn and there are almost no other vehicles out there.', href: `${SAFARI_BASE}morning-desert-safari/`, img: 'sandboarding-desert-safari-dubai' },
+    { tag: `Buggy from AED ${money(buggyFrom)}`, title: 'Drive the red dunes', desc: 'Buggy routes run on the same sand, with you at the wheel instead.', href: '/dune-buggy-dubai/', img: 'dune-buggy-climbing-red-dune-convoy-dubai' },
+    { tag: `Quad from AED ${money(quadFrom)}`, title: 'Quad the open desert', desc: 'Open desert quad tiers leave the fenced area for this terrain.', href: '/quad-bike-dubai/', img: 'quad-biking-dubai-open-desert-three-riders' }
+  ],
+
+  flow: [
+    { label: 'Pickup', h: 'We collect you', p: `${transfers.summary} The pickup window is set by sunset rather than the clock, so it moves through the year.` },
+    { label: 'E66', h: 'Out on the Hatta road', p: 'The drive runs south east out of the city. Most of the hour is tarmac and it passes our Al Awir base on the way.' },
+    { label: 'Tyres', h: 'Deflating at the edge', p: 'Vehicles stop where the tarmac ends and let the tyres down. This is the point the safari actually starts.' },
+    { label: 'Dunes', h: 'Into the red sand', p: 'Roughly forty minutes across the dunes to the camp, with a stop on a crest while the light is good.' },
+    { label: 'Camp', h: 'Arrive at the camp', p: 'The camps sit among the dunes rather than at the roadside, so you are properly in the desert once you stop.' }
+  ],
+
+  checksH2: 'What to confirm before you book a red dune safari',
+  checksLede:
+    'The destination is the same across almost every operator in Dubai. What differs is how you get there, ' +
+    'who is in the vehicle with you and what happens at the far end.',
+  checks: [
+    { tag: 'Distance', h: 'It is an hour each way', p: 'Two hours of the trip are driving. That is normal and worth knowing if you have young children or a tight evening.' },
+    { tag: 'Timing', h: 'Light decides the colour', p: 'The red reads strongest in the hour after sunrise and before sunset. Midday flattens it, which is why no safari runs then.' },
+    { tag: 'Vehicle', h: 'Shared or private', p: 'Shared is priced per person, private per vehicle. Around four people the totals cross and private usually wins.' },
+    { tag: 'Season', h: 'Summer changes the answer', p: 'June to September the afternoon is genuinely hard work. The morning safari is the comfortable version in those months.' }
+  ],
+
+  panel: {
+    kicker: 'Plan the trip',
+    title: 'Send your date and group size',
+    sub: 'We will confirm the pickup window and the total in AED',
+    points: [
+      'Free hotel pickup anywhere inside Dubai',
+      'Outer emirates quoted before you commit',
+      'No deposit, pay on the day',
+      'Shared and private totals side by side'
+    ]
+  },
+
+  faqs: [
+    { q: 'Where is the desert safari in Dubai actually located?', a: 'Almost every desert safari in Dubai goes to the Lahbab dunes, roughly 45 to 60 minutes south east of the city on the E66 Dubai to Hatta road. The Bedouin camps sit among the dunes rather than at the roadside, so the last stretch is driven on sand after the tyres are let down.' },
+    { q: 'What are the red dunes in Dubai?', a: 'Lahbab, often called the red dunes, is a stretch of sand whose grains carry iron oxide, which gives it a deep orange to red colour that the paler sand nearer the coast does not have. The dunes reach around 60 metres, and it is the tallest soft sand within an hour of the city.' },
+    { q: 'How far is the red dune desert safari from Dubai?', a: 'Between 45 and 60 minutes from Downtown or Marina depending on traffic on the E66. Our base at Al Awir sits on the same road, so the pickup and the drive out are a single journey rather than a detour.' },
+    { q: 'Is Lahbab the same as Big Red?', a: 'No, though they are on the same road. Big Red is a single well known dune further along towards Hatta and is a separate stop, popular with quad and buggy riders. Lahbab is the wider dune area where the safari camps are.' },
+    { q: 'What time of day are the red dunes reddest?', a: 'In the hour after sunrise and the hour before sunset, when the light is low and warm. Midday sun flattens the colour, which is one reason no safari operates in the middle of the day.' },
+    { q: 'Can I drive on the red dunes myself?', a: `Yes, but not in the safari 4x4. A dune buggy from AED ${money(buggyFrom)} or a quad from AED ${money(quadFrom)} puts you on the same terrain with a guide leading, and both are priced per vehicle. The open desert quad tiers are the ones that leave the fenced area.` },
+    { q: 'Do you pick up from anywhere in Dubai?', a: `${transfers.summary} ${transfers.outsideDubai}` }
+  ],
+  faqChips: ['Location', 'Drive time', 'Red dunes', 'Best light'],
+
+  nearby: [
+    { tag: 'All packages', title: 'Desert Safari Dubai', desc: 'Every shared and private safari we run, with the price basis on each card.', href: SAFARI_BASE },
+    { tag: 'Prices', title: 'Safari price list', desc: 'The full comparison in one table, per person and per vehicle.', href: `${SAFARI_BASE}price/` },
+    { tag: 'Same dunes', title: 'Big Red and Hatta road', desc: 'Buggy pickup and routes along the same stretch of the E66.', href: '/locations/dune-buggy-big-red-hatta-road/' },
+    { tag: 'Nearby sand', title: 'Fossil Rock', desc: 'The other landmark route, harder sand and a different drive.', href: '/locations/dune-buggy-fossil-rock/' }
+  ],
+
+  guideKicker: 'The desert around Dubai',
+  guideH2: 'Which stretch of desert you are actually being taken to',
+  guideIntro:
+    'Dubai has several usable dune areas and they are not interchangeable. Knowing which one a trip goes to tells you more about it than the price does.',
+  guideBlocks: [
+    { h: 'Lahbab, the red dunes', html: `<p>This is where the safari industry operates. Forty five minutes to an hour out on the E66, dunes to around sixty metres, and sand that carries enough iron oxide to read orange to red in low light. The camps sit inside the dune field, so you drive on sand for the last stretch rather than parking at the edge.</p><p>It is the right destination for a safari because it does two things at once: the dunes are big enough for the drive to be worth doing, and the area is broad enough that a camp can sit in it without the whole trip feeling like a car park. Every package on the <a href="${SAFARI_BASE}">safari page</a> ends up here.</p>` },
+    { h: 'Big Red, further along the same road', html: `<p>Big Red is a single very large dune closer to Hatta, and it is the one most visitors have heard of. It has a roadside strip of rental outfits and it is busy, loud and popular with quad riders rather than safari vehicles.</p><p>If somebody has described a desert safari to you that involved queueing at the roadside, they were probably at Big Red rather than at a camp. We run buggy and quad pickup along that stretch, and the <a href="/locations/dune-buggy-big-red-hatta-road/">Big Red page</a> covers it, but the safaris do not stop there.</p>` },
+    { h: 'Fossil Rock, and why it is different', html: `<p>Fossil Rock sits towards Sharjah and the sand there is firmer, with a rock outcrop at the centre of it. It is a better ride than it is a photograph, which is why it appears on buggy and dirt bike routes far more often than it appears on safari itineraries.</p><p>Riders who have done Lahbab often ask for it second, because harder sand behaves differently under a machine. The <a href="/locations/dune-buggy-fossil-rock/">Fossil Rock page</a> has the drive times and what the terrain asks of you.</p>` },
+    { h: 'Getting the light right matters more than the operator', html: `<p>The single biggest variable in how the red dunes look is not which company you book, it is what time you arrive. In the hour after sunrise and the hour before sunset the colour is genuinely deep. At midday the same sand looks beige.</p><p>That is why safaris run at the two ends of the day and why the <a href="${SAFARI_BASE}morning-desert-safari/">morning safari</a> is the one photographers book. It is also why summer visitors should take the morning slot: from June to September the afternoon out here is uncomfortable enough to spoil the trip, and the sand looks identical either way.</p>` }
+  ],
+
+  finalH2: 'Book the red dunes',
+  finalLede:
+    'Send the date and how many of you there are. We will confirm the pickup window, the drive time from where you are staying and the total in AED.'
+};
+---
+<Location data={data} />

@@ -295,6 +295,22 @@ dubai (KD 22, 480) · dune buggy dubai price (KD 20, 320) · desert safari dubai
 - **Before exporting, always check the original's pixel size.** Several files in
   `images-library/` are WordPress thumbnails, not originals. A descriptive filename does not
   mean a usable file.
+- **31 new photos added 25 Aug 2026** from the client's "new hero" folder. 48 files arrived;
+  5 were exact duplicates, 11 were portrait or square, 3 were 720px, and one was a
+  **Husqvarna, not a KTM** and must never go on a dirt bike page: the fleet is KTM 450 only.
+  That leaves 31, all landscape at 1600px.
+  - **15 became per-vehicle heroes.** All eleven buggies and four of the six quads now open
+    with their own photo instead of the shared category hero. `heroImage` on the vehicle in
+    the CMS is what does this. Distinct heroes across tour pages went from 3 to 20.
+  - **16 went into the content library**, which took the buggy pool from 17 photos to 33 and
+    the quad pool up with it. That matters more than it sounds: `galleryFor()` picks from
+    that pool, so doubling it is what actually fixes gallery repetition, rather than the
+    index-offset workaround alone.
+  - **Still uncovered: kids quad, double-seat open desert, the KTM 450, and every safari
+    page.** No usable photo arrived for any of them.
+  - The 2560px category heroes were **kept**. The new files are 1600px, which is the floor
+    rather than the target, so replacing a 2560px pillar hero with one would be a downgrade.
+    Per-vehicle heroes are where 1600px is genuinely an improvement over sharing.
 - **Known gap — client action needed.** 12 shipped images are between 500px and 900px and are
   already at their native maximum, confirmed by perceptual-hash matching against all 177
   originals. There is no larger copy in the library. Ask the client for replacements at 2000px+:

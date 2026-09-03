@@ -103,7 +103,7 @@ export const buggyPrices: PriceGuideData = {
   ],
   related: [
     { tag: 'Quad prices', title: 'Quad Biking Dubai Price', desc: 'Six quads from a fenced kids area to the Raptor 700.', from: `From AED ${fromPrice(quads[0])}`, href: '/quad-bike-dubai/price/', img: quads[0].image },
-    { tag: 'Dirt bike', title: 'KTM Dirt Bike Dubai', desc: 'A 450cc desert enduro for experienced riders.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/ktm-450-dirt-bike/', img: dirtbikes[0].image },
+    { tag: 'Dirt bike prices', title: 'KTM Dirt Bike Dubai Price', desc: 'The 450cc enduro and every duration on one page.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/price/', img: dirtbikes[0].image },
     { tag: 'Safari prices', title: 'Desert Safari Dubai Price', desc: '12 shared and private safari packages with camp dinner.', from: `From AED ${safariFromPrice}`, href: '/desert-safari-dubai/price/', img: 'desert-safari-dubai-dune-bashing-land-cruiser' },
     { tag: 'All buggies', title: 'Dune Buggy Dubai', desc: 'The full fleet with specs, routes and booking detail.', from: `From AED ${fromPrice(buggies[0])}`, href: '/dune-buggy-dubai/', img: 'dune-buggy-convoy-crossing-dubai-red-dunes' }
   ],
@@ -165,7 +165,7 @@ export const quadPrices: PriceGuideData = {
   ],
   related: [
     { tag: 'Buggy prices', title: 'Dune Buggy Dubai Price', desc: '11 buggies from Polaris RZR to Can-Am Maverick R.', from: `From AED ${fromPrice(buggies[0])}`, href: '/dune-buggy-dubai/price/', img: buggies[0].image },
-    { tag: 'Dirt bike', title: 'KTM Dirt Bike Dubai', desc: 'A 450cc desert enduro for experienced riders.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/ktm-450-dirt-bike/', img: dirtbikes[0].image },
+    { tag: 'Dirt bike prices', title: 'KTM Dirt Bike Dubai Price', desc: 'The 450cc enduro and every duration on one page.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/price/', img: dirtbikes[0].image },
     { tag: 'Safari prices', title: 'Desert Safari Dubai Price', desc: '12 shared and private safari packages.', from: `From AED ${safariFromPrice}`, href: '/desert-safari-dubai/price/', img: 'desert-safari-dubai-dune-bashing-land-cruiser' },
     { tag: 'All quads', title: 'Quad Biking Dubai', desc: 'The full quad fleet with routes and age limits.', from: `From AED ${fromPrice(quads[0])}`, href: '/quad-bike-dubai/', img: 'quad-biking-dubai-open-desert-three-riders' }
   ],
@@ -247,7 +247,7 @@ export const safariPrices: PriceGuideData = {
   related: [
     { tag: 'Buggy prices', title: 'Dune Buggy Dubai Price', desc: '11 buggies from Polaris RZR to Can-Am Maverick R.', from: `From AED ${fromPrice(buggies[0])}`, href: '/dune-buggy-dubai/price/', img: buggies[0].image },
     { tag: 'Quad prices', title: 'Quad Biking Dubai Price', desc: 'Six quads from a fenced kids area to the Raptor 700.', from: `From AED ${fromPrice(quads[0])}`, href: '/quad-bike-dubai/price/', img: quads[0].image },
-    { tag: 'Dirt bike', title: 'KTM Dirt Bike Dubai', desc: 'A 450cc desert enduro for experienced riders.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/ktm-450-dirt-bike/', img: dirtbikes[0].image },
+    { tag: 'Dirt bike prices', title: 'KTM Dirt Bike Dubai Price', desc: 'The 450cc enduro and every duration on one page.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/price/', img: dirtbikes[0].image },
     { tag: 'All safaris', title: 'Desert Safari Dubai', desc: 'Every shared and private safari package explained.', from: `From AED ${safariFromPrice}`, href: '/desert-safari-dubai/', img: 'private-desert-safari-4x4-dubai-red-dunes' }
   ],
   guideKicker: 'Safari price guide',
@@ -260,5 +260,63 @@ export const safariPrices: PriceGuideData = {
     { h: 'Adding a quad or a buggy', html: `<p class="lf-lead">Three packages bundle a ride into the safari.</p><p>Evening Safari + ATVs is AED 199 per person. Evening Safari + Dune Buggy is AED 750 for two people, which is the better deal for a couple since it is priced per pair rather than per head. Private Safari With 4-Seater Buggy is AED 1,300 for a group of four.</p><p>Compare these against booking a <a href="/dune-buggy-dubai/price/">standalone buggy slot</a> plus a safari separately. For short sessions the combo usually wins; for a proper hour in the dunes, book the buggy on its own.</p>` },
     { h: 'Morning, evening or overnight', html: `<p class="lf-lead">Evening is the default and the most popular. Morning and overnight suit different plans.</p><p>Private Morning Desert Safari at AED 650 runs 4 to 5 hours in cooler sand with quieter dunes, and gets you back for the rest of the day. The Overnight Desert Safari at AED 250 per person runs 16 hours: evening safari, dinner, a night at camp and sunrise over the red dunes.</p>` },
     { h: 'Booking, payment and cancellation', html: `<p class="lf-lead">Nothing is due when you book.</p><p>${payment.detail}</p><p>${policy.cancellation} ${policy.weather}</p>` }
+  ]
+};
+
+/* ─────────────── KTM DIRT BIKE PRICES ─────────────── */
+
+export const dirtbikePrices: PriceGuideData = {
+  slug: '/ktm-dirt-bike-dubai/price/',
+  crumbParent: { label: 'KTM Dirt Bike Dubai', href: '/ktm-dirt-bike-dubai/' },
+  title: pageTitle(`KTM Dirt Bike Dubai Price | From AED ${fromPrice(dirtbikes[0])}`),
+  description: `KTM dirt bike Dubai prices: 450cc enduro from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 2,000 for four hours. One machine, five durations, riders 14+. Free Dubai pickup.`,
+  heroImage: 'ktm-dirt-bike-dubai-hero-sunrise-dunes',
+  eyebrow: 'KTM 450 · 5 durations · price per bike',
+  h1Lead: 'KTM Dirt Bike Dubai', h1Em: 'Price', h1Tail: 'Guide',
+  lede: `The full KTM dirt bike Dubai price list on the 450cc desert enduro, from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 2,000 for a four-hour session. One machine, priced purely by how long you ride, for people who can already handle a clutch, gears and throttle in sand.`,
+  chips: [`From AED ${fromPrice(dirtbikes[0])}`, 'KTM 450', 'Age 14 and up', 'Free Dubai pickup'],
+  panel: { kicker: 'Starts from', title: `AED ${fromPrice(dirtbikes[0])}`,
+    sub: 'KTM 450, 30 minutes',
+    points: ['One machine, the 450cc KTM desert enduro.', 'Five durations, 30 minutes to 4 hours.', 'Price is per bike. Experienced riders only, from age 14.'] },
+  specs: [
+    { label: 'Machine', value: 'KTM 450' },
+    { label: 'From', value: `AED ${fromPrice(dirtbikes[0])}` },
+    { label: 'Durations', value: '30 min to 4 hr' },
+    { label: 'Minimum age', value: 'Age 14' },
+    { label: 'Dubai pickup', value: 'Free' }
+  ],
+  tables: [
+    vehicleTable(dirtbikes, '/ktm-dirt-bike-dubai/', 'KTM dirt bike prices', 'Price is per bike, one rider. You must be comfortable with clutch, gears and throttle before you ride.')
+  ],
+  included: includedBase, checkBefore: checkBase, flow: flowBase,
+  whyH2: 'What the dirt bike price actually buys.',
+  whyLede: 'There is one machine and one variable, time. The price ladder is simply how long you are out in the dunes.',
+  gallery: gal('dirtbike', dirtbikes.map(v => v.image)), gallerySubject: 'dirtbike',
+  safety: safetyBase,
+  faqs: [
+    { q: 'What is the cheapest KTM dirt bike price in Dubai?', a: `AED ${fromPrice(dirtbikes[0])} for a 30-minute session on the KTM 450. That is the entry ride, enough to learn the controls and cross a few dune faces.` },
+    { q: 'Is the price per person or per bike?', a: 'Per bike. A dirt bike carries one rider, so the price is for you and the machine, with a lead guide on the route.' },
+    { q: 'Why does a dirt bike cost more than a buggy or quad?', a: 'It is a single-rider machine that needs a dedicated guide, and it is harder to ride, so the sessions run smaller and more supervised. That is what the higher starting price reflects, not a bigger engine alone.' },
+    { q: 'What experience and age do I need?', a: 'Riders must be 14 or over and already comfortable with a clutch, gears and throttle. This is not a beginner machine and we do not run learner sessions on it. If you have never ridden a geared bike, start on a quad.' },
+    { q: 'Is hotel pickup included?', a: transfers.summary + ' ' + transfers.outsideDubai },
+    { q: 'How do I pay?', a: payment.detail },
+    { q: 'Can I cancel and get a refund?', a: policy.cancellation },
+    { q: 'Are there hidden charges?', a: 'No. Helmet, briefing, fuel and a guide are in the price, and Dubai pickup costs nothing. Only outer-emirate transfers are extra.' }
+  ],
+  related: [
+    { tag: 'Buggy prices', title: 'Dune Buggy Dubai Price', desc: '11 buggies from Polaris RZR to Can-Am Maverick R.', from: `From AED ${fromPrice(buggies[0])}`, href: '/dune-buggy-dubai/price/', img: buggies[0].image },
+    { tag: 'Quad prices', title: 'Quad Biking Dubai Price', desc: 'Six quads, five durations, from age 6.', from: `From AED ${fromPrice(quads[0])}`, href: '/quad-bike-dubai/price/', img: quads[0].image },
+    { tag: 'Safari prices', title: 'Desert Safari Dubai Price', desc: '12 shared and private safari packages.', from: `From AED ${safariFromPrice}`, href: '/desert-safari-dubai/price/', img: 'desert-safari-dubai-dune-bashing-land-cruiser' },
+    { tag: 'The machine', title: 'KTM Dirt Bike Dubai', desc: 'The full page on the 450, routes and who it suits.', from: `From AED ${fromPrice(dirtbikes[0])}`, href: '/ktm-dirt-bike-dubai/', img: dirtbikes[0].image }
+  ],
+  guideKicker: 'Dirt bike price guide',
+  guideH2: 'How KTM dirt bike Dubai prices work, and which session to book',
+  guideIntro: 'The full <strong>KTM dirt bike Dubai price</strong> list explained: why there is one machine and one price variable, who the ride is actually for, and which duration is worth paying for.',
+  guideBlocks: [
+    { h: 'One machine, priced by time', html: `<p class="lf-lead">There is no fleet to choose from here, only the <a href="/ktm-dirt-bike-dubai/ktm-450-dirt-bike/">KTM 450</a>, so the price is set purely by how long you ride.</p><p>It runs from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 700 for an hour, AED 1,200 for two hours, AED 1,500 for three and AED 2,000 for the full four-hour session. No seat options, no engine tiers, just time in the dunes.</p>` },
+    { h: 'It is not a beginner machine', html: `<p class="lf-lead">This is the one place on the site where price is not the thing that should decide your booking.</p><p>The KTM 450 is a geared enduro bike for riders 14 and over who can already work a clutch, gears and throttle. If you have never ridden a manual bike in sand, the AED ${fromPrice(dirtbikes[0])} entry ride is not a shortcut into it, a <a href="/quad-bike-dubai/price/">quad</a> is where to start.</p>` },
+    { h: 'Which duration to pay for', html: `<p class="lf-lead">The 30-minute slot is a control-check, not a real ride.</p><p>At AED ${fromPrice(dirtbikes[0])} it is enough to learn the bike and cross a few faces. Most riders want the AED 700 hour, which is the balanced session. Two hours and beyond, AED 1,200 to AED 2,000, are for riders who are already fit and confident on a bike, because a dirt bike is far more physical than a buggy or a quad.</p>` },
+    { h: 'What is included at every price', html: `<p class="lf-lead">Helmet, safety briefing, fuel, water and a lead guide are in the price, on the AED ${fromPrice(dirtbikes[0])} slot and the AED 2,000 slot alike.</p><p>${transfers.summary}</p><p>${payment.detail}</p>` },
+    { h: 'How it compares to a buggy or quad', html: `<p class="lf-lead">The dirt bike starts higher than either of the other two, and the reason is the ride, not the engine.</p><p>A single-rider machine needs its own guide and runs in smaller, more supervised sessions, so the AED ${fromPrice(dirtbikes[0])} start sits above the buggy and quad. If you want two people on one price or a first time in the dunes, a <a href="/dune-buggy-dubai/price/">buggy</a> or <a href="/quad-bike-dubai/price/">quad</a> is both cheaper and easier. ${policy.cancellation}</p>` }
   ]
 };

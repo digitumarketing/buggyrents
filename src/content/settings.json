@@ -56,5 +56,8 @@
   "agencyName": "Digitum",
   "agencyUrl": "https://digitum.marketing/",
   "totalReviews": 41,
-  "averageRating": 4.9
+  "averageRating": 4.9,
+  "gtmId": "",
+  "headCode": "",
+  "bodyCode": ""
 }

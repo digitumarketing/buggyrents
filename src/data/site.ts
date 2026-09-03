@@ -61,7 +61,16 @@ export const site = {
 
   /* Agency credit in the footer. noopener but deliberately not nofollow: a real
      editorial credit on a site the agency built is allowed to pass value. */
-  agency: { name: raw.agencyName, url: raw.agencyUrl }
+  agency: { name: raw.agencyName, url: raw.agencyUrl },
+
+  /* Analytics & verification codes the client pastes in the CMS. Base.astro
+     injects these on the production build only. Empty strings mean "nothing to
+     inject", which is the default and leaves the built HTML unchanged. */
+  tracking: {
+    gtmId: (raw.gtmId || '').trim(),
+    headCode: raw.headCode || '',
+    bodyCode: raw.bodyCode || ''
+  }
 };
 
 export function waLink(message: string): string {

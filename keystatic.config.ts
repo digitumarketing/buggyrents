@@ -517,7 +517,15 @@ export default config({
         /* Shown on every page beside the Google logo, so these must match what the
            profile actually says. */
         totalReviews:  fields.integer({ label: 'Google review count' }),
-        averageRating: fields.number({ label: 'Google average rating' })
+        averageRating: fields.number({ label: 'Google average rating' }),
+
+        /* Analytics & verification codes. Injected on the LIVE (production) site
+           only, so local dev and audit runs never land in the client's reports.
+           GA4 also runs hardcoded in Base.astro; these fields cover GTM and
+           anything else the client needs to paste and verify. */
+        gtmId:    fields.text({ label: 'Google Tag Manager ID', description: 'e.g. GTM-XXXXXXX. Leave blank if not using GTM. Adds the GTM container (head + <noscript>) to every page.' }),
+        headCode: fields.text({ label: 'Head code (analytics / verification)', description: 'Raw HTML injected into <head> on the live site: GA4 gtag, Search Console or Bing verification meta tags, Meta Pixel, etc. Paste the whole snippet. Leave blank if unused.', multiline: true }),
+        bodyCode: fields.text({ label: 'Body code (after <body>)', description: 'Raw HTML injected right after the opening <body> tag, e.g. the GTM <noscript> fallback. Leave blank if unused.', multiline: true })
       }
     }),
 

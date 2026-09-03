@@ -26,7 +26,8 @@ export const mainNav: NavItem[] = [
     { label: 'Dirt bike tours', href: '/ktm-dirt-bike-dubai/' },
     { label: 'KTM 450', href: '/ktm-dirt-bike-dubai/ktm-450-dirt-bike/' },
     { label: 'For beginners', href: '/ktm-dirt-bike-dubai/dirt-bike-for-beginners/' },
-    { label: 'For advanced riders', href: '/ktm-dirt-bike-dubai/dirt-bike-for-advanced/' }
+    { label: 'For advanced riders', href: '/ktm-dirt-bike-dubai/dirt-bike-for-advanced/' },
+    { label: 'Prices', href: '/ktm-dirt-bike-dubai/price/' }
   ]},
   { label: 'Desert Safari', href: '/desert-safari-dubai/', children: [
     { label: 'All safaris', href: '/desert-safari-dubai/' },
@@ -61,6 +62,7 @@ export const footerNav = {
     { label: 'Buggy prices', href: '/dune-buggy-dubai/price/' },
     { label: 'Quad prices', href: '/quad-bike-dubai/price/' },
     { label: 'Safari prices', href: '/desert-safari-dubai/price/' },
+    { label: 'Dirt bike prices', href: '/ktm-dirt-bike-dubai/price/' },
     { label: 'Buggy FAQ', href: '/dune-buggy-dubai/faq/' },
     { label: 'Quad FAQ', href: '/quad-bike-dubai/faq/' },
     { label: 'Safari FAQ', href: '/desert-safari-dubai/faq/' }

@@ -100,8 +100,11 @@ const localBusiness = {
 
   {/* Google Tag Manager and any pasted head code, from Site settings in the CMS.
       PROD-only for the same reason as GA4 above: keep dev and audit runs out of the
-      client's data. Empty settings inject nothing, so the default build is unchanged. */}
-  {import.meta.env.PROD && site.tracking.gtmId && (
+      client's data. Empty settings inject nothing, so the default build is unchanged.
+
+      pastedGtm suppresses this block when the pasted code already loads GTM, so
+      filling in both fields cannot load the container twice. See site.ts. */}
+  {import.meta.env.PROD && site.tracking.gtmId && !site.tracking.pastedGtm && (
     <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${site.tracking.gtmId}');`} />
   )}
   {import.meta.env.PROD && site.tracking.headCode && <Fragment set:html={site.tracking.headCode} />}
@@ -109,7 +112,7 @@ const localBusiness = {
   <slot name="head" />
 </head>
 <body>
-  {import.meta.env.PROD && site.tracking.gtmId && (
+  {import.meta.env.PROD && site.tracking.gtmId && !site.tracking.pastedGtm && (
     <noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${site.tracking.gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />
   )}
   {import.meta.env.PROD && site.tracking.bodyCode && <Fragment set:html={site.tracking.bodyCode} />}

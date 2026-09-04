@@ -69,7 +69,23 @@ export const site = {
   tracking: {
     gtmId: (raw.gtmId || '').trim(),
     headCode: raw.headCode || '',
-    bodyCode: raw.bodyCode || ''
+    bodyCode: raw.bodyCode || '',
+
+    /* True when a pasted snippet already loads GTM, which means the ID field must
+       not load it a second time.
+
+       On 3 Sep 2026 the client filled in the ID *and* pasted the container snippet
+       Google hands out, which is the obvious reading of two fields both labelled
+       for analytics code. Every live page then loaded GTM-PP58RGD2 twice, so every
+       pageview and every tag inside the container fired twice and the client's
+       reports silently doubled. No audit could see it: both snippets were valid
+       HTML referencing files that exist.
+
+       The ID field loses rather than the pasted code, because the paste is the
+       more specific instruction — it may carry consent settings or a custom
+       dataLayer the generated snippet does not. Matching on the hostname catches
+       the container script, the ns.html iframe and a gtag.js paste alike. */
+    pastedGtm: /googletagmanager\.com/i.test(`${raw.headCode || ''}${raw.bodyCode || ''}`)
   }
 };
 

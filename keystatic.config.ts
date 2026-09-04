@@ -523,9 +523,9 @@ export default config({
            only, so local dev and audit runs never land in the client's reports.
            GA4 also runs hardcoded in Base.astro; these fields cover GTM and
            anything else the client needs to paste and verify. */
-        gtmId:    fields.text({ label: 'Google Tag Manager ID', description: 'e.g. GTM-XXXXXXX. Leave blank if not using GTM. Adds the GTM container (head + <noscript>) to every page.' }),
-        headCode: fields.text({ label: 'Head code (analytics / verification)', description: 'Raw HTML injected into <head> on the live site: GA4 gtag, Search Console or Bing verification meta tags, Meta Pixel, etc. Paste the whole snippet. Leave blank if unused.', multiline: true }),
-        bodyCode: fields.text({ label: 'Body code (after <body>)', description: 'Raw HTML injected right after the opening <body> tag, e.g. the GTM <noscript> fallback. Leave blank if unused.', multiline: true })
+        gtmId:    fields.text({ label: 'Google Tag Manager ID', description: 'e.g. GTM-XXXXXXX. This is the only place GTM needs to go: the ID alone builds both halves of the container, the head script and the <noscript> fallback, on every page. Do not also paste the snippet into the two fields below. Leave blank if not using GTM.' }),
+        headCode: fields.text({ label: 'Head code (verification and pixels)', description: 'Raw HTML injected into <head> on the live site. For Search Console or Bing verification tags, a Meta or TikTok pixel, and similar. NOT for Google Tag Manager — use the ID field above, or the container loads twice and every figure in your reports doubles. Leave blank if unused.', multiline: true }),
+        bodyCode: fields.text({ label: 'Body code (after <body>)', description: 'Raw HTML injected right after the opening <body> tag, for a pixel that needs to sit there. NOT for the GTM <noscript> fallback, which the ID field above already adds. Leave blank if unused.', multiline: true })
       }
     }),
 

@@ -336,6 +336,15 @@ make them unreadable in the editor. The price audit covers them instead.
 2. If articles: get their prompt, and offer to save it as a reusable skill.
 3. Put the desert safari number in front of them once, then follow their call.
 4. Chase the photography list — it has been open the longest and blocks the most.
+5. **Install `@astrojs/check` and run `npx astro check`.** It was skipped on 4 Sep 2026
+   because it prompts to `npm i @astrojs/check typescript` and installing a dependency
+   mid-task was not worth it. Nothing typechecks the repo today: `astro build` transpiles
+   TypeScript with esbuild, which strips types without checking them. The 15 audits all
+   run on built HTML, so a type error that still emits valid output passes everything.
+   That gap now matters more than it did, because `src/data/nav.ts` reads a JSON file the
+   client can change: a shape change in `navigation.json` would surface as a type error,
+   and nothing is looking.
 
-Before starting anything, run a build and confirm all 13 audits still pass. The client
-edits content through the CMS between sessions, so the tree will have moved.
+Before starting anything, run a build and confirm all 15 audits still pass. The client
+edits content through the CMS between sessions, so the tree will have moved. CLAUDE.md §7
+is the one place the audit count is maintained; this line has already been wrong once.

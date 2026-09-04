@@ -738,7 +738,19 @@ export default config({
    audit-links.mjs is for. The two together cover shape and existence.
 
    The trailing slash is not cosmetic. Every URL on this site ends in one, and a link
-   without it costs the visitor a redirect on the way to the same page. */
+   without it costs the visitor a redirect on the way to the same page.
+
+   KNOWN LIMIT: fragments are rejected. /dune-buggy-dubai/#faq cannot be entered, and
+   neither can a query string. That is deliberate rather than an oversight, because
+   requiring the URL to end in a slash is what makes the trailing-slash rule
+   enforceable, and no menu link needs a fragment today: the section maps use in-page
+   anchors within a page, not menu links into one.
+
+   If a menu link to a section is ever genuinely wanted, widen the first alternative to
+   allow an optional #fragment rather than removing the anchoring, and extend
+   audit-links.mjs at the same time to check the fragment exists on the target page.
+   Allowing fragments without that check would let the menu point at an anchor that
+   quietly stopped existing, which is the harder bug of the two to notice. */
 function navLinkFields() {
   return {
     label: fields.text({

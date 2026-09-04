@@ -43,15 +43,23 @@ type RawLink = { label: string; href: string };
  * wrong shape to reason about for a file the CMS rewrites. Keystatic omits a field
  * whose value is empty: it dropped four empty strings from settings.json on 3 Sep
  * 2026 in one client save, which is what left `raw.tradeLicence` failing to compile
- * in site.ts. Whether it does the same to an empty ARRAY is untested, because no
- * Keystatic-written file in this repo has ever contained one, and navigation.json is
- * the first CMS-owned file that does: Contact and Guides both carry `children: []`.
+ * in site.ts for two days.
  *
- * If it does drop them, `item.children.length` becomes undefined.length, which
- * throws during the build. That fails loudly and the live site keeps serving, so it
- * is not a silent corruption, but it would block the client's own next deploy until
- * a developer looked at it. The optional marker plus `?.` below costs nothing and is
- * correct whichever way Keystatic behaves.
+ * DO NOT REMOVE THE `?.` BELOW. It is belt-and-braces, not a fix, and the reason it
+ * looks unnecessary is written here so nobody deletes it as dead defence.
+ *
+ * When it was added, whether Keystatic dropped an empty ARRAY the way it drops an
+ * empty string was unknown: no Keystatic-written file in this repo had ever contained
+ * one, and navigation.json was the first CMS-owned file that did, since Contact and
+ * Guides both carry `children: []`. Had it dropped them, `item.children.length` would
+ * have been undefined.length, throwing during the build and blocking the client's own
+ * next deploy.
+ *
+ * It does NOT drop them. Confirmed 4 Sep 2026 by two round-trip saves the client made
+ * through the CMS (commits fd2c53a and b5a3107, a header reorder and its reversal):
+ * both empty arrays survived intact. So this line cannot currently fire. Keep it
+ * anyway. It costs nothing, it is correct under either behaviour, and the behaviour
+ * is Keystatic's to change in a version bump rather than ours to rely on.
  *
  * The cast is the same approach vehicles.ts and safari.ts already take with their
  * globs; this file is one of the few that read a JSON import directly. */

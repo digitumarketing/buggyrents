@@ -588,6 +588,39 @@ All five items are done and verified on the live domain:
 
 Keystatic is proven end to end: commit `8b5fe74` was written to `main` by the CMS itself.
 
+### How Keystatic actually writes — verified 4 Sep 2026, do not re-derive
+
+Three behaviours, all confirmed by the client's own saves rather than by reading the
+docs. They decide how an adapter must read a CMS-owned file, so they are recorded here
+instead of being worked out again from scratch.
+
+| Behaviour | Verified by |
+|---|---|
+| A `format: { data: 'json' }` singleton writes a **flat file at `src/content/<name>.json`** | Five CMS-authored commits, e.g. `49145f1` for `path: 'src/content/settings'` |
+| **Empty strings are dropped**, the key disappears entirely | `f23d19c`, one client save removed `tradeLicence`, `gtmId`, `headCode`, `bodyCode` together, all four empty |
+| **Empty arrays are preserved** | `fd2c53a` and `b5a3107`, two round-trip saves on `navigation.json`; `children: []` on Contact and Guides survived both |
+
+Two consequences worth carrying forward:
+
+- **It is NOT `<name>/index.json`.** `docs/buggyrents-nav-cms.md` claimed that and it is
+  wrong. Pointing an adapter there gets a missing file, or worse a stale one that keeps
+  serving while every client edit silently does nothing.
+- **Empty string dropped means any field the client can clear is optional in TypeScript**,
+  whether or not it is optional in the schema. That is what broke `site.ts`, and it broke
+  quietly: the runtime fallback produced the right value, so only `npm run typecheck`
+  could see it, and nothing was running it.
+
+A CMS write is also a **minimal diff**, not a reformat: both navigation saves were 26
+insertions and 26 deletions on a 290-line file, a block move, and the file came back
+byte-for-byte canonical (`JSON.stringify(value, null, 2)` plus a trailing newline). Seed
+a new content file in exactly that form and the first client save will not churn it.
+
+**`nav.ts` reads `children` with `?.` even though empty arrays are preserved.** That is
+deliberate belt-and-braces, explained in full at the top of the file. It cannot fire
+today. Do not remove it on the grounds that it is unreachable: the guarantee belongs to
+Keystatic and a version bump can withdraw it, and the failure it prevents is a build
+crash that blocks the client's own next deploy.
+
 ### CMS migration — agreed scope, 10 Aug 2026
 
 Client wants **every hand-written word on all 65 pages editable**, organised **page by page**.

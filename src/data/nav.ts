@@ -1,83 +1,49 @@
+/* Header and footer menus — an adapter over src/content/navigation.json, which
+ * Keystatic owns.
+ *
+ * The exported shape is unchanged from when the arrays lived here, so Header.astro
+ * and Footer.astro were not touched. That is the point of the adapter: the CMS needs
+ * a shape it can render as draggable rows, the components need the shape they already
+ * use, and the conversion happens once, here.
+ *
+ * WHY THIS MOVED, HAVING DELIBERATELY NOT MOVED BEFORE
+ * Navigation was kept in code until 4 Sep 2026 because a header or footer href
+ * renders on all 75 pages, so one typo is 75 broken links rather than one, and the
+ * reasoning was that nobody should be able to do that from a CMS. The reasoning was
+ * sound; the safety net it assumed did not exist. Two now do: audit-links.mjs
+ * resolves every internal href at build time and fails the deploy, and the URL field
+ * in keystatic.config.ts refuses a malformed path before it can be saved.
+ *
+ * TWO CONVERSIONS, BOTH LOAD-BEARING
+ *
+ * 1. Empty children become undefined. Keystatic cannot express "no dropdown" as an
+ *    absent array; it writes []. Header.astro tests `item.children ?`, the array
+ *    itself rather than its length, and [] is truthy in JavaScript. Passed straight
+ *    through, Contact and Guides would each gain a has-sub class and render an empty
+ *    hover dropdown. Nothing would error and no audit would notice.
+ *
+ * 2. Footer columns become an object keyed by heading. Footer.astro iterates
+ *    Object.entries(footerNav). The CMS needs an array because only an array can be
+ *    dragged into a new order, and object keys cannot. Rebuilding the object here
+ *    means the client can reorder columns and the component never learns about it.
+ *
+ * Do not "simplify" either one by changing the components to match the JSON. The
+ * components are shared by all 75 pages; this file is the only thing that has to
+ * know the CMS shape.
+ */
+import raw from '@/content/navigation.json';
+
 export type NavItem = { label: string; href: string; children?: { label: string; href: string }[] };
 
-export const mainNav: NavItem[] = [
-  { label: 'Dune Buggy', href: '/dune-buggy-dubai/', children: [
-    { label: 'All buggies', href: '/dune-buggy-dubai/' },
-    { label: 'Polaris RZR 2-Seater', href: '/dune-buggy-dubai/polaris-rzr-1000-2-seater/' },
-    { label: 'Polaris RZR 4-Seater', href: '/dune-buggy-dubai/polaris-rzr-1000-4-seater/' },
-    { label: 'Can-Am X3 2-Seater', href: '/dune-buggy-dubai/can-am-maverick-x3-2-seater/' },
-    { label: 'Can-Am X3 4-Seater', href: '/dune-buggy-dubai/can-am-maverick-x3-4-seater/' },
-    { label: 'Can-Am Maverick R', href: '/dune-buggy-dubai/can-am-maverick-r-turbo/' },
-    { label: 'Prices', href: '/dune-buggy-dubai/price/' },
-    { label: 'FAQ', href: '/dune-buggy-dubai/faq/' }
-  ]},
-  { label: 'Quad Bike', href: '/quad-bike-dubai/', children: [
-    { label: 'All quads', href: '/quad-bike-dubai/' },
-    { label: 'Kids Quad', href: '/quad-bike-dubai/kids-quad-biking/' },
-    { label: 'Single Seat - Boundary', href: '/quad-bike-dubai/single-seat-boundary/' },
-    { label: 'Double Seat - Boundary', href: '/quad-bike-dubai/double-seat-boundary/' },
-    { label: 'Single Seat - Open Desert', href: '/quad-bike-dubai/single-seat-open-desert/' },
-    { label: 'Double Seat - Open Desert', href: '/quad-bike-dubai/double-seat-open-desert/' },
-    { label: 'Yamaha Raptor 700cc', href: '/quad-bike-dubai/yamaha-raptor-700cc/' },
-    { label: 'Prices', href: '/quad-bike-dubai/price/' },
-    { label: 'FAQ', href: '/quad-bike-dubai/faq/' }
-  ]},
-  { label: 'Dirt Bike', href: '/ktm-dirt-bike-dubai/', children: [
-    { label: 'Dirt bike tours', href: '/ktm-dirt-bike-dubai/' },
-    { label: 'KTM 450', href: '/ktm-dirt-bike-dubai/ktm-450-dirt-bike/' },
-    { label: 'For beginners', href: '/ktm-dirt-bike-dubai/dirt-bike-for-beginners/' },
-    { label: 'For advanced riders', href: '/ktm-dirt-bike-dubai/dirt-bike-for-advanced/' },
-    { label: 'Prices', href: '/ktm-dirt-bike-dubai/price/' }
-  ]},
-  { label: 'Desert Safari', href: '/desert-safari-dubai/', children: [
-    { label: 'All safaris', href: '/desert-safari-dubai/' },
-    { label: 'Evening Safari', href: '/desert-safari-dubai/evening-desert-safari/' },
-    { label: 'Morning Safari', href: '/desert-safari-dubai/morning-desert-safari/' },
-    { label: 'Overnight Safari', href: '/desert-safari-dubai/overnight-desert-safari/' },
-    { label: 'Private and VIP', href: '/desert-safari-dubai/private-desert-safari/' },
-    { label: 'Quad Bike Safari', href: '/desert-safari-dubai/quad-bike-desert-safari/' },
-    { label: 'Dune Buggy Safari', href: '/desert-safari-dubai/dune-buggy-desert-safari/' },
-    { label: 'Red Dunes, Lahbab', href: '/desert-safari-dubai/red-dune-desert-safari/' },
-    { label: 'Prices', href: '/desert-safari-dubai/price/' },
-    { label: 'FAQ', href: '/desert-safari-dubai/faq/' }
-  ]},
-  { label: 'About', href: '/about-us/', children: [
-    { label: 'About us', href: '/about-us/' },
-    { label: 'Our fleet', href: '/about-us/our-fleet/' },
-    { label: 'Safety standards', href: '/about-us/safety-standards/' },
-    { label: 'Refund policy', href: '/about-us/refund-policy/' }
-  ]},
-  { label: 'Contact', href: '/contact/' },
-  { label: 'Guides', href: '/blogs/' }
-];
+type RawLink = { label: string; href: string };
 
-export const footerNav = {
-  Tours: [
-    { label: 'Dune buggy Dubai', href: '/dune-buggy-dubai/' },
-    { label: 'Quad bike Dubai', href: '/quad-bike-dubai/' },
-    { label: 'KTM dirt bike Dubai', href: '/ktm-dirt-bike-dubai/' },
-    { label: 'Desert safari', href: '/desert-safari-dubai/' }
-  ],
-  Prices: [
-    { label: 'Buggy prices', href: '/dune-buggy-dubai/price/' },
-    { label: 'Quad prices', href: '/quad-bike-dubai/price/' },
-    { label: 'Safari prices', href: '/desert-safari-dubai/price/' },
-    { label: 'Dirt bike prices', href: '/ktm-dirt-bike-dubai/price/' },
-    { label: 'Buggy FAQ', href: '/dune-buggy-dubai/faq/' },
-    { label: 'Quad FAQ', href: '/quad-bike-dubai/faq/' },
-    { label: 'Safari FAQ', href: '/desert-safari-dubai/faq/' }
-  ],
-  Company: [
-    { label: 'About us', href: '/about-us/' },
-    { label: 'Guides', href: '/blogs/' },
-    { label: 'Our fleet', href: '/about-us/our-fleet/' },
-    { label: 'Safety standards', href: '/about-us/safety-standards/' },
-    { label: 'Contact', href: '/contact/' }
-  ],
-  Legal: [
-    { label: 'Privacy policy', href: '/about-us/privacy-policy/' },
-    { label: 'Terms & conditions', href: '/about-us/terms-conditions/' },
-    { label: 'Refund policy', href: '/about-us/refund-policy/' },
-    { label: 'Sitemap', href: '/sitemap-html/' }
-  ]
-};
+export const mainNav: NavItem[] = raw.header.map((item): NavItem => ({
+  label: item.label,
+  href: item.href,
+  /* Absent rather than empty. See conversion 1 above. */
+  ...(item.children.length ? { children: item.children.map((c: RawLink) => ({ label: c.label, href: c.href })) } : {})
+}));
+
+export const footerNav: Record<string, RawLink[]> = Object.fromEntries(
+  raw.footerColumns.map(col => [col.heading, col.links.map((l: RawLink) => ({ label: l.label, href: l.href }))])
+);

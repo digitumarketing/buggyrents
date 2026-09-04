@@ -313,13 +313,20 @@ make them unreadable in the editor. The price audit covers them instead.
   hand-written ids like `#cost` to derived ones like `#which-is-actually-cheaper`.
   Only the in-page contents linked to them, so nothing broke, but any external deep
   link would have.
-- Navigation stays in code deliberately. A header or footer href renders on all 75 pages,
-  so a mistyped one is 75 broken links rather than one. The labels almost never change,
-  so exposing them to editing buys nothing.
+- ~~Navigation stays in code deliberately.~~ **Reversed 4 Sep 2026 — navigation is now in
+  the CMS.** Kept rather than deleted, because the risk the decision was guarding against
+  is real and still applies: a header or footer href renders on all 75 pages, so a
+  mistyped one is 75 broken links rather than one.
 
-  This entry originally said a mistyped href failed the link audit. No link audit existed
-  when it was written; `scripts/audit-links.mjs` added one on 4 Sep 2026, and only from
-  that date does the build actually catch it.
+  The entry originally justified itself by saying a mistyped href failed the link audit.
+  No link audit existed when it was written. Two guards exist now, which is what made
+  the move safe: `scripts/audit-links.mjs` fails the deploy on an href that resolves to
+  nothing, and the URL field in the navigation singleton rejects a malformed path at
+  save time. Do not move navigation back into code without replacing both.
+
+  `src/data/nav.ts` is now an adapter over `src/content/navigation.json`; `Header.astro`
+  and `Footer.astro` were not touched and all 75 pages built byte-identical. See CLAUDE.md
+  for the two conversions the adapter performs, both of which matter.
 
 ---
 

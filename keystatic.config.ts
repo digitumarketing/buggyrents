@@ -452,6 +452,70 @@ export default config({
     })
   },
   singletons: {
+    /* Header and footer menus.
+
+       Navigation was held in code until 4 Sep 2026 on the grounds that a mistyped
+       href renders on all 75 pages, so one typo is 75 broken links. The reason that
+       argument no longer blocks this: scripts/audit-links.mjs now resolves every
+       internal href at build time and fails the deploy, and the URL field below
+       refuses a malformed path at save time. The risk the old decision was guarding
+       against is covered twice over.
+
+       Two things deliberately absent, because nothing renders them and a field the
+       client can edit with no effect on the site is worse than no field at all:
+       - "Open in a new tab". Every menu link is internal; the components emit no
+         target or rel on them.
+       - Header call and WhatsApp buttons. Those are built from the phone number in
+         Site settings and a generated booking message, so they are already editable
+         in one place and cannot drift from the rest of the site.
+
+       nav.ts turns this into the shape the components expect. An item with an empty
+       "Dropdown items" list becomes a plain link there, and the footer columns become
+       an object keyed by heading. */
+    navigation: singleton({
+      label: 'Navigation (header & footer)',
+      path: 'src/content/navigation',
+      format: { data: 'json' },
+      schema: {
+        header: fields.array(
+          fields.object({
+            ...navLinkFields(),
+            children: fields.array(fields.object(navLinkFields()), {
+              label: 'Dropdown items',
+              description: 'Leave empty and this stays a plain link with no dropdown.',
+              itemLabel: p => p.fields.label.value || 'Untitled link'
+            })
+          }),
+          {
+            label: 'Header menu',
+            description: 'Drag the handle on the left of a row to reorder. The order here is the order across the top of every page.',
+            itemLabel: p => p.fields.label.value || 'Untitled item'
+          }
+        ),
+
+        /* An array rather than one field per column, so a column can be added,
+           removed or dragged. nav.ts rebuilds the object the footer iterates. */
+        footerColumns: fields.array(
+          fields.object({
+            heading: fields.text({
+              label: 'Column heading',
+              description: 'Printed above the list, e.g. Tours.',
+              validation: { isRequired: true }
+            }),
+            links: fields.array(fields.object(navLinkFields()), {
+              label: 'Links',
+              itemLabel: p => p.fields.label.value || 'Untitled link'
+            })
+          }),
+          {
+            label: 'Footer columns',
+            description: 'Drag to reorder the columns, or the links inside one. The contact details, social links and the copyright line are not here: they come from Site settings so they stay the same everywhere.',
+            itemLabel: p => p.fields.heading.value || 'Untitled column'
+          }
+        )
+      }
+    }),
+
     /* Flat on purpose. Keystatic renders a flat object as a plain list of labelled
        inputs; nested objects become collapsible panels that hide the one field the
        client came here to change. site.ts rebuilds the nested shape in code. */
@@ -654,6 +718,47 @@ export default config({
     })
   }
 });
+
+/* One menu link. Used by the top-level header items, their dropdown items and every
+   footer column, so the URL rule below is stated once and applies everywhere.
+
+   A function rather than a shared const because Keystatic field objects carry
+   internal state; reusing one instance across four places in a schema makes the
+   four share it. Same reason supportSchema() below is a function.
+
+   WHY THE URL IS VALIDATED HERE AS WELL AS AT BUILD TIME
+   The build audit is the backstop and it works, but it fails on Cloudflare after the
+   client has already hit save, which means their next content edit cannot deploy
+   either until someone fixes the menu. Rejecting the bad value in the editor keeps
+   that from ever reaching the repo.
+
+   The pattern catches a missing leading or trailing slash, a bare domain, http
+   instead of https, and an empty path segment. It cannot know whether a page exists:
+   /ktm-dirt-bike-dubai/prices/ is correctly shaped and still a 404. That is what
+   audit-links.mjs is for. The two together cover shape and existence.
+
+   The trailing slash is not cosmetic. Every URL on this site ends in one, and a link
+   without it costs the visitor a redirect on the way to the same page. */
+function navLinkFields() {
+  return {
+    label: fields.text({
+      label: 'Label',
+      description: 'What the visitor reads in the menu.',
+      validation: { isRequired: true }
+    }),
+    href: fields.text({
+      label: 'URL',
+      description: 'A page on this site, written with a slash at each end, e.g. /dune-buggy-dubai/price/. External links need the full address starting https://. Phone and email links are written tel:+971562095713 and mailto:name@example.com.',
+      validation: {
+        isRequired: true,
+        pattern: {
+          regex: /^(?:\/(?:[A-Za-z0-9._~%-]+\/)*|https:\/\/[^\s]+|tel:\+?[0-9-]+|mailto:[^\s@]+@[^\s@]+\.[^\s@]+)$/,
+          message: 'Needs a slash at the start and the end, like /dune-buggy-dubai/price/. Or a full https://, tel: or mailto: address.'
+        }
+      }
+    })
+  };
+}
 
 /* Shared by the support pages and the About / FAQ pages. Both templates take the
    same eleven sections, so describing the fields twice would guarantee the two

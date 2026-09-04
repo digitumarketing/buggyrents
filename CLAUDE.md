@@ -586,6 +586,7 @@ moment they miss one. Layout, section order and the 11 template systems stay in 
 | 3 | 10 location + 8 audience pages | **done** |
 | 4 | 3 category pillar pages | **done** |
 | 5 | 7 support pages, About, 2 FAQ pages | **done** |
+| 6 | header and footer menus | **done** 4 Sep 2026, reversing the "nav stays in code" decision |
 
 **Phases 4 and 5 detail.** `pillars.ts`, `support.ts` and `aboutBuild.ts` are adapters over
 `src/content/{pillars,support,about}/*.json`. `pillarBuild.ts` is gone; both pillar pages
@@ -655,13 +656,34 @@ typo there changes what the page promises a guest.
 
 All 18 pages came out byte-identical.
 
-**Navigation stays in code, deliberately.** Header and footer links are structural, and a
-mistyped href there is 75 broken links at once rather than one. The labels almost never
-change, so exposing them to editing buys nothing.
+**Navigation moved into the CMS on 4 Sep 2026. This entry used to say the opposite.**
 
-That risk was unguarded until 4 Sep 2026. This paragraph used to claim the link audit
-caught a mistyped href and blocked the build; there was no link audit, so nothing caught
-it. There is one now — see §7 — and the reasoning above is finally true.
+The original decision was that header and footer links stay in code, because they are
+structural: a mistyped href renders on all 75 pages, so one typo is 75 broken links
+rather than one. That reasoning was correct, and it is kept here because the risk it
+describes has not gone away.
+
+What changed is that the risk is now covered, twice, where before it was covered not
+at all. The entry claimed a mistyped href "fails the link audit, which fails the build";
+there was no link audit, so nothing caught it. Both guards exist as of 4 Sep 2026:
+
+- `scripts/audit-links.mjs` resolves every internal href in the built HTML and fails
+  the deploy on anything that does not exist. That covers a wrong slug.
+- The URL field in the navigation singleton refuses a malformed path at save time, so
+  a missing trailing slash or a bare domain never reaches the repo. That covers the
+  one thing the audit cannot see, since `/x` resolves on disk but 301s on Cloudflare.
+
+**Do not reverse this back without replacing both guards.** The reason navigation was
+safe to move is not that the risk was overstated; it is that two specific mechanisms now
+absorb it.
+
+`src/data/nav.ts` is an adapter over `src/content/navigation.json`. It performs two
+conversions that are load-bearing and documented in full at the top of that file: an
+empty dropdown array becomes `undefined` (because `[]` is truthy, and `Header.astro`
+tests the array rather than its length, so passing it through renders an empty hover
+dropdown on Contact and Guides), and the footer column array becomes the object keyed
+by heading that `Footer.astro` iterates. `Header.astro` and `Footer.astro` were not
+touched, and all 75 pages built byte-identical.
 
 **Every phase is verified by byte-comparing all 65 built pages against the previous build.**
 Phase 1 result: 59 identical, 6 changed, and the 6 are exactly the articles. Word counts and

@@ -570,14 +570,24 @@ All five items are done and verified on the live domain:
    the container lives on Google's servers and is edited in the GTM UI. Hardcoded means
    verifiable on every deploy. GTM stays installed for every other pixel.
 
-   **OPEN — action needed in the GTM UI.** Container `GTM-PP58RGD2` holds a single
-   `__googtag` tag configuring the *same* property `G-HKVDWC923V` on the `gtm.init`
-   trigger, so GA4 is set up twice on every live page and every figure in the client's
-   reports is doubled from 3 Sep 2026, when the container went live. The fix is to delete
-   that tag from the container; nothing in this repo can do it. Until it is deleted the
-   analytics audit will pass, because only one configuration is in the HTML, and print a
-   warning that the container cannot be verified from here. **A passing audit does not
-   mean this is fixed.** Confirm in GA4 DebugView that one `page_view` fires per load.
+   **CLOSED 4 Sep 2026.** Container `GTM-PP58RGD2` had held a single `__googtag` tag
+   configuring the *same* property `G-HKVDWC923V` on the `gtm.init` trigger, so GA4 was
+   set up twice on every live page and every figure in the client's reports was doubled
+   from 3 Sep 2026, when the container went live. The client deleted and published it.
+   Verified against the live container: `"tags":[]`, no `G-` id anywhere, and the file
+   shrank from 351,825 to 331,180 bytes. The live homepage now carries exactly one gtag
+   loader and one `gtag('config')` call.
+
+   **The audit still warns, and that is correct.** It cannot read a container's tags, so
+   it reports the combination of a property in the HTML alongside a loaded container as
+   unverifiable. The warning describes a permanent blind spot rather than an outstanding
+   bug: the container can gain a GA4 tag again at any time without touching this repo.
+   Re-check by hand if the reports ever look doubled again.
+
+   **The container is now empty of tags.** It still loads on every page, so until the
+   first real pixel goes in it is doing nothing. Not worth removing given it is there
+   deliberately for future pixels, but do not treat its presence as evidence that
+   anything is being tracked through it.
 3. buggyrents.com verified at Resend. DKIM sits on the root domain, which is why the From
    address can be any `@buggyrents.com` mailbox. The `send` MX and TXT records are the
    bounce and SPF subdomain, **not** a sending address — `send@buggyrents.com` is a

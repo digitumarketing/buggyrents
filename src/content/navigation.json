@@ -39,32 +39,6 @@
       ]
     },
     {
-      "label": "Dirt Bike",
-      "href": "/ktm-dirt-bike-dubai/",
-      "children": [
-        {
-          "label": "Dirt bike tours",
-          "href": "/ktm-dirt-bike-dubai/"
-        },
-        {
-          "label": "KTM 450",
-          "href": "/ktm-dirt-bike-dubai/ktm-450-dirt-bike/"
-        },
-        {
-          "label": "For beginners",
-          "href": "/ktm-dirt-bike-dubai/dirt-bike-for-beginners/"
-        },
-        {
-          "label": "For advanced riders",
-          "href": "/ktm-dirt-bike-dubai/dirt-bike-for-advanced/"
-        },
-        {
-          "label": "Prices",
-          "href": "/ktm-dirt-bike-dubai/price/"
-        }
-      ]
-    },
-    {
       "label": "Quad Bike",
       "href": "/quad-bike-dubai/",
       "children": [
@@ -103,6 +77,32 @@
         {
           "label": "FAQ",
           "href": "/quad-bike-dubai/faq/"
+        }
+      ]
+    },
+    {
+      "label": "Dirt Bike",
+      "href": "/ktm-dirt-bike-dubai/",
+      "children": [
+        {
+          "label": "Dirt bike tours",
+          "href": "/ktm-dirt-bike-dubai/"
+        },
+        {
+          "label": "KTM 450",
+          "href": "/ktm-dirt-bike-dubai/ktm-450-dirt-bike/"
+        },
+        {
+          "label": "For beginners",
+          "href": "/ktm-dirt-bike-dubai/dirt-bike-for-beginners/"
+        },
+        {
+          "label": "For advanced riders",
+          "href": "/ktm-dirt-bike-dubai/dirt-bike-for-advanced/"
+        },
+        {
+          "label": "Prices",
+          "href": "/ktm-dirt-bike-dubai/price/"
         }
       ]
     },

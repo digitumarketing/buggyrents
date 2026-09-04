@@ -323,9 +323,10 @@ dubai (KD 22, 480) · dune buggy dubai price (KD 20, 320) · desert safari dubai
   `ktm-450-dirt-bike-rider-dubai-desert` (569) · `ktm-dirt-bike-fleet-lined-up-dubai-desert` (700) ·
   `dirt-bike-desert-motocross-action-dubai` (720) · `dirt-bike-group-tour-dubai-desert` (700).
   **Landscape shots at 2000px+ are the single highest-value asset request.**
-- **All four audits now run on every build** — `"build": "astro build && npm run audit"`.
+- **All the audits run on every build** — `"build": "astro build && npm run audit"`.
   Before 8 Aug 2026 the build script was `astro build` alone, so none of the audits ever ran
-  on Cloudflare. Do not remove the `&& npm run audit`.
+  on Cloudflare. Do not remove the `&& npm run audit`. The current count is in §7; do not
+  restate it here, because a second copy of the number is a second thing to get wrong.
 
 ---
 
@@ -421,19 +422,46 @@ Both default to the previous behaviour and the ten pickup pages built byte-ident
 ## 7. Build state
 
 **All 11 template systems are built. 74 pages, zero broken links, zero orphans.**
-Was 65 before the safari cluster of 12 Aug 2026.
+Was 65 before the safari cluster of 12 Aug 2026. The link and orphan claim is measured
+rather than assumed as of 4 Sep 2026: 9,073 internal links, all resolving. Before that
+date it was an assertion nothing checked.
 
-**A 14th audit: root-resolves.** If `dist/x/` contains child pages, `dist/x/index.html` must
-exist. This is the bug that put `/desert-safari-dubai/price/` live under a parent that 404d,
-and no existing audit could see it: the link audit only checks links that are written, and
-nothing linked to the missing parent. It found a second instance the first time it ran,
-`/audience/`, which had eight child pages and no hub. That hub is now built.
+**`npm run build` runs 15 audits and every one of them fails the build.** Do not remove
+the `&& npm run audit`. In `scripts/audit-contrast.mjs`: contrast on card surfaces,
+colour syntax, image reuse and alt text, image resolution, insurance claims, em dashes,
+missing referenced assets, placeholders such as `[object Object]`, a price cross-check,
+cross-page image variety, metadata, CMS tokens, and root-resolves. Then
+`scripts/audit-links.mjs` (internal links and orphans) and `scripts/audit-contrast-dom.mjs`
+(the full DOM cascade walk).
 
-`npm run build` runs eleven audits, all of which fail the build: contrast (both the
-token check and a full DOM cascade walk), colour syntax, image reuse and alt text,
-image resolution, **cross-page image variety**, insurance claims, em dashes, missing
-referenced assets, placeholders such as `[object Object]`, and a price cross-check.
-Do not remove `&& npm run audit`.
+**If you add or remove one, change the number here.** It has been wrong twice: this
+paragraph said eleven and `keystatic.config.ts` said nine, while the real count was
+fourteen. A number that is only approximately right invites the next reader to trust
+the prose over the code.
+
+**Root-resolves:** if `dist/x/` contains child pages, `dist/x/index.html` must exist. This
+is the bug that put `/desert-safari-dubai/price/` live under a parent that 404d. It found a
+second instance the first time it ran, `/audience/`, which had eight child pages and no hub.
+That hub is now built. Note it solves the inverse of the link audit's problem — a missing
+*parent* of pages that exist, rather than a *link* to a page that does not — so neither
+replaces the other.
+
+**Link audit, added 4 Sep 2026.** Until then nothing in the build read a single `<a href>`,
+despite this file and a comment in `audit-contrast.mjs` both asserting a link audit existed.
+It never did. The asset audit is the near miss and explains the gap: it checks `<link href>`,
+`<script src>`, `<img src>`, `<source srcset>` and `og:image`, which are all static *files*,
+so an anchor pointing at a page that was never built matched none of its patterns.
+
+It walks `dist`, resolves every internal href against the built files and then against
+`dist/_redirects`, and fails on anything unresolvable — including a relative href, which is
+how a hand-pasted link in a CMS HTML field goes wrong — and on any page nothing links to.
+A link answered only by a 301 **warns** rather than fails: it works, but it costs a hop.
+It reads `dist/_redirects` rather than `astro.config.mjs`, because only the built file
+contains the hand-written slashed forms from `public/_redirects`, and those are the ones
+Google indexed. Verified on 9,073 internal links across 75 pages.
+
+The reason this matters most in `nav.ts`: a header or footer href renders on all 75 pages,
+so one typo is 75 broken links in the primary navigation, not one.
 
 **Fixes made 10 Aug 2026 that must not be undone:**
 
@@ -627,9 +655,13 @@ typo there changes what the page promises a guest.
 
 All 18 pages came out byte-identical.
 
-**Navigation stays in code, deliberately.** Header and footer links are structural: a mistyped
-href fails the link audit, which fails the build, which blocks every future deploy including
-the client's own content edits. The labels almost never change, so the risk buys nothing.
+**Navigation stays in code, deliberately.** Header and footer links are structural, and a
+mistyped href there is 75 broken links at once rather than one. The labels almost never
+change, so exposing them to editing buys nothing.
+
+That risk was unguarded until 4 Sep 2026. This paragraph used to claim the link audit
+caught a mistyped href and blocked the build; there was no link audit, so nothing caught
+it. There is one now — see §7 — and the reasoning above is finally true.
 
 **Every phase is verified by byte-comparing all 65 built pages against the previous build.**
 Phase 1 result: 59 identical, 6 changed, and the 6 are exactly the articles. Word counts and

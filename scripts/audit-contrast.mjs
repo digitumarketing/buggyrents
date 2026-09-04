@@ -674,10 +674,14 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
  * not exist, and the breadcrumb schema on the child jumped sideways to the -deals
  * URL to cover for it.
  *
- * No existing audit could see it. The link audit only checks links that are
- * written, and nothing linked to the missing parent. The orphan audit only looks
- * at pages that exist. A page that should exist and does not is invisible to both,
- * which is exactly why it survived a launch and five CMS migrations.
+ * No existing audit could see it, and when this comment was first written it
+ * explained why by describing a link audit and an orphan audit that did not exist.
+ * Both were only ever planned. audit-links.mjs finally added them on 4 Sep 2026.
+ *
+ * This check is still not redundant, because it solves the inverse problem: the
+ * link audit can only judge links that are written, and nothing linked to the
+ * missing parent. A page that should exist and does not is invisible to it.
+ * That is exactly why the bug survived a launch and five CMS migrations.
  *
  * The rule: if dist/x/ contains any page, dist/x/index.html must exist. A visitor
  * who deletes the last segment of a URL is doing the most ordinary thing on the

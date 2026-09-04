@@ -6,8 +6,10 @@
  * It was missing. /audience/ had eight child pages under it and no page of its
  * own, so deleting the last segment of any of those URLs landed on the 404. It was
  * found on 12 Aug 2026 by the root-resolves audit, added the same day after the
- * identical bug turned up on the safari pillar, and no earlier audit could see it:
- * the link audit only checks links that exist, and nothing linked here.
+ * identical bug turned up on the safari pillar. No earlier audit could see it, and
+ * there was no link audit at the time either, despite comments elsewhere in the
+ * repo saying otherwise; one exists as of 4 Sep 2026. It would not have caught this
+ * anyway: a link audit can only judge links that are written, and nothing linked here.
  *
  * The eight pages themselves were never orphaned. They are linked from the buggy
  * pillar and from each other. What was missing was the hub that groups them, which

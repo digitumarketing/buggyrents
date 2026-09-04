@@ -138,7 +138,7 @@ finishing the thought, not by announcing that you are finishing.
 
 ## STEP 5 — Hard rules. These fail the build, not just the review.
 
-The site runs fourteen audits on every deploy. A breach here means the article does not
+The site runs fifteen audits on every deploy. A breach here means the article does not
 publish and the client cannot publish anything else either until it is fixed.
 
 | Rule | Detail |
@@ -264,7 +264,7 @@ selling Google Ads services. Nine things had to change:
    safaris, which the client does not offer and does not want to add. A prompt that
    only optimises for volume will happily write that page.
 
-6. **Added Step 5, the hard rules.** These are not style preferences. Fourteen audits
+6. **Added Step 5, the hard rules.** These are not style preferences. Fifteen audits
    run on every deploy and a breach blocks the build, which also blocks the client's own
    CMS edits until someone fixes it. Insurance and em dashes are the two most likely to
    catch a writer out.

@@ -46,7 +46,8 @@ evening, ATV into quad, deluxe into private, because no separate package exists 
 of them and a page per keyword would have been a doorway set. CLAUDE.md §6b has the table.
 
 ### Verification
-- All **14 audits pass**, 74 pages.
+- All **15 audits pass**, 74 pages. (14 at the time of this session; the link audit was
+  added 4 Sep 2026.)
 - **Byte-compared all 65 pre-existing pages.** Every diff is the nav dropdown, the footer
   link and the `-deals` URL swap. The only two others are both benign and were checked:
   the ten location pages have a CSS chunk renamed from `_slug_.DlOLRAfy.css` to
@@ -312,9 +313,13 @@ make them unreadable in the editor. The price audit covers them instead.
   hand-written ids like `#cost` to derived ones like `#which-is-actually-cheaper`.
   Only the in-page contents linked to them, so nothing broke, but any external deep
   link would have.
-- Navigation stays in code deliberately. A mistyped href fails the link audit, fails
-  the build, and blocks every future deploy including the client's own content edits.
-  The labels almost never change, so the risk buys nothing.
+- Navigation stays in code deliberately. A header or footer href renders on all 75 pages,
+  so a mistyped one is 75 broken links rather than one. The labels almost never change,
+  so exposing them to editing buys nothing.
+
+  This entry originally said a mistyped href failed the link audit. No link audit existed
+  when it was written; `scripts/audit-links.mjs` added one on 4 Sep 2026, and only from
+  that date does the build actually catch it.
 
 ---
 

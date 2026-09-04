@@ -53,10 +53,14 @@ export default config({
      reached the site. In GitHub mode every save is a commit to the repo, Cloudflare
      rebuilds, and the change is live in about two minutes.
 
-     The nine build audits still apply, because they run on the built HTML rather
-     than the source. A CMS edit that breaks a rule fails the deploy and the live
-     site keeps serving the previous version. That is the safe outcome, but it is
-     silent, so see CLIENT-GUIDE.md for what each failure means. */
+     The build audits still apply, because they run on the built HTML rather than
+     the source. A CMS edit that breaks a rule fails the deploy and the live site
+     keeps serving the previous version. That is the safe outcome, but it is
+     silent, so see CLIENT-GUIDE.md for what each failure means.
+
+     There are 15 of them; CLAUDE.md §7 lists them and is the one place the count
+     is maintained. This comment said "nine" from launch until 4 Sep 2026, which
+     is the kind of number that rots quietly, so it no longer carries its own. */
   storage: {
     kind: 'github',
     repo: { owner: 'digitumarketing', name: 'buggyrents' }

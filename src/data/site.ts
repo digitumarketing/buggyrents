@@ -9,10 +9,46 @@
  * nested objects turn into collapsible panels that hide the field the client is
  * looking for. Flat in the CMS, nested in code, converted once here.
  */
-import raw from '@/content/settings.json';
+import rawJson from '@/content/settings.json';
 
 type Social = { name: string; url: string };
 type Award = { name: string; year: number };
+
+/* KEYSTATIC OMITS EMPTY FIELDS, so anything the client can clear is optional here.
+ *
+ * On 3 Sep 2026 one client save (commit f23d19c) removed four keys from
+ * settings.json in a single write, because all four held an empty string:
+ * tradeLicence, gtmId, headCode and bodyCode. Three came straight back with values.
+ * tradeLicence is meant to stay empty until the client has a real number, so it
+ * simply vanished, and `raw.tradeLicence` stopped compiling. Nothing noticed for two
+ * days: the runtime fallback made it null, which is the correct value, and no audit
+ * reads TypeScript.
+ *
+ * The type of a JSON import is inferred from the file as it stands, so it describes
+ * the CMS's last write rather than what the CMS is allowed to write next. That makes
+ * the error arrive AFTER the damage instead of preventing it. Declaring the shape,
+ * with every client-emptiable field marked optional, is what makes the fallbacks
+ * below deliberate rather than lucky.
+ *
+ * headCode and bodyCode are empty again as of 4 Sep 2026, cleared to stop GTM
+ * loading twice, so the next Site settings save will drop both. They are marked
+ * optional here in advance of that.
+ *
+ * KNOWN BOUNDARY: strictly, every text field in this file is emptiable and could
+ * therefore be dropped. Only the four the code already handles are marked optional,
+ * because marking all thirty-five would push `string | undefined` through every
+ * template that prints them and buy nothing: a required field the client blanks is a
+ * content mistake, and it surfaces as the word "undefined" in the built HTML, which
+ * the placeholder audit already fails the build on. If a field becomes genuinely
+ * optional in the CMS, add it here at the same time. */
+export type RawSettings = Omit<typeof rawJson, 'tradeLicence' | 'gtmId' | 'headCode' | 'bodyCode'> & {
+  tradeLicence?: string;
+  gtmId?: string;
+  headCode?: string;
+  bodyCode?: string;
+};
+
+const raw = rawJson as RawSettings;
 
 export const site = {
   name: raw.name,

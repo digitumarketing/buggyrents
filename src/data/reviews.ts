@@ -18,7 +18,14 @@
  * The Places API caps at 5 reviews per request. Refresh that subset with:
  *   GOOGLE_MAPS_API_KEY=xxx node scripts/fetch-google-reviews.mjs
  */
-import settings from '@/content/settings.json';
+import settingsJson from '@/content/settings.json';
+import type { RawSettings } from '@/data/site';
+
+/* Same declared shape site.ts uses, rather than the type inferred from the current
+   contents of settings.json. Keystatic drops a field the client empties, so the
+   inferred type describes the CMS's last write and not what it may write next.
+   A type-only import, so it is erased at build and adds no dependency at runtime. */
+const settings = settingsJson as RawSettings;
 
 export type Review = {
   author: string;

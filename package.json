@@ -6,7 +6,7 @@
     "dev": "ENABLE_KEYSTATIC=true astro dev",
     "build": "astro build && npm run audit",
     "preview": "astro preview",
-    "check": "astro check",
+    "typecheck": "astro check",
     "build:cms": "ENABLE_KEYSTATIC=true astro build",
     "audit": "node scripts/audit-contrast.mjs && node scripts/audit-links.mjs && node scripts/audit-contrast-dom.mjs"
   },
@@ -23,7 +23,9 @@
     "sharp": "^0.34.2"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "image-size": "^2.0.2",
-    "node-html-parser": "^7.0.1"
+    "node-html-parser": "^7.0.1",
+    "typescript": "^5.9.3"
   }
 }

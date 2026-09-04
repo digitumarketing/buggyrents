@@ -731,3 +731,93 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   }
   console.log(`Root-resolves audit passed — ${checked} directories with children, all have a page.`);
 }
+
+
+/* Each analytics property is configured exactly once.
+ *
+ * WHY THIS EXISTS
+ * Found 4 Sep 2026. GA4 property G-HKVDWC923V was being configured twice on every
+ * live page: once hardcoded in Base.astro, and once as a __googtag tag inside GTM
+ * container GTM-PP58RGD2, firing on the gtm.init trigger. Every pageview and every
+ * event inside the container was counted twice, and the client's reports had been
+ * wrong since the container went live on 3 Sep.
+ *
+ * Nothing could see it. Both snippets were valid HTML referencing files that exist,
+ * so the asset audit passed; neither is a link, so the link audit passed. It is the
+ * second duplicated-analytics bug in two days: the first was the container script
+ * itself being injected twice, from the client filling in both the GTM ID field and
+ * the pasted-code field.
+ *
+ * WHAT THIS CAN AND CANNOT SEE
+ * It reads built HTML, so it sees every property configured in the page and fails on
+ * a repeat. It CANNOT read a GTM container's contents: those live on Google's servers
+ * and are edited in the GTM UI, so a tag added there is invisible to any build-time
+ * check. That asymmetry is the reason GA4 is deliberately kept hardcoded in
+ * Base.astro rather than moved into the container. A property in the HTML is
+ * something this repo can verify on every deploy; a property in the container is not.
+ *
+ * Because of that blind spot the audit also WARNS whenever a property is configured
+ * in the HTML while a GTM container is loaded alongside it. That combination is not
+ * an error, since the container legitimately holds other pixels, but it is the exact
+ * shape of the bug above and the container needs checking by hand.
+ */
+{
+  const pages = [];
+  const walkG = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkG(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkG(DIST);
+
+  const dupes = [];
+  const containers = new Set();
+  const configured = new Set();
+
+  for (const page of pages) {
+    const html = readFileSync(page, 'utf8');
+
+    /* Two independent ways a GA4 property is established in a page: the gtag loader
+       script, and a gtag('config', ...) call. One of each is a single correct
+       install. Two of either is the property being set up twice. */
+    const count = re => {
+      const seen = {};
+      for (const m of html.matchAll(re)) seen[m[1]] = (seen[m[1]] || 0) + 1;
+      return seen;
+    };
+    const loaders = count(/googletagmanager\.com\/gtag\/js\?id=(G-[A-Z0-9]+)/g);
+    const configs = count(/gtag\(\s*['"]config['"]\s*,\s*['"](G-[A-Z0-9]+)['"]\s*\)/g);
+
+    for (const [id, n] of Object.entries(loaders)) {
+      configured.add(id);
+      if (n > 1) dupes.push(`${id} loaded ${n}x on ${page.replace(/^dist/, '')}`);
+    }
+    for (const [id, n] of Object.entries(configs)) {
+      configured.add(id);
+      if (n > 1) dupes.push(`${id} configured ${n}x on ${page.replace(/^dist/, '')}`);
+    }
+
+    for (const m of html.matchAll(/(GTM-[A-Z0-9]+)/g)) containers.add(m[1]);
+  }
+
+  if (dupes.length) {
+    console.error('Analytics property configured more than once on a page:');
+    dupes.slice(0, 10).forEach(d => console.error('  ' + d));
+    if (dupes.length > 10) console.error(`  ...and ${dupes.length - 10} more.`);
+    console.error('  Every pageview and event on that property is being counted twice.');
+    console.error('  Configure it in one place only: Base.astro, or the CMS head code, not both.');
+    process.exit(1);
+  }
+
+  if (configured.size && containers.size) {
+    console.log(`  ${[...configured].join(', ')} configured in the page while ${[...containers].join(', ')} also loads.`);
+    console.log('  This audit cannot read a container\'s tags. Confirm in the GTM UI that it does');
+    console.log('  not also configure the same property, which would double every figure.');
+  }
+
+  console.log(
+    `Analytics audit passed — ${configured.size} propert${configured.size === 1 ? 'y' : 'ies'} ` +
+    `across ${pages.length} pages, none configured twice` +
+    `${containers.size ? `, ${containers.size} GTM container(s) unverifiable (warned)` : ''}.`
+  );
+}

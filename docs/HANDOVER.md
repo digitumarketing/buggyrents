@@ -336,14 +336,33 @@ make them unreadable in the editor. The price audit covers them instead.
 2. If articles: get their prompt, and offer to save it as a reusable skill.
 3. Put the desert safari number in front of them once, then follow their call.
 4. Chase the photography list — it has been open the longest and blocks the most.
-5. **Install `@astrojs/check` and run `npx astro check`.** It was skipped on 4 Sep 2026
-   because it prompts to `npm i @astrojs/check typescript` and installing a dependency
-   mid-task was not worth it. Nothing typechecks the repo today: `astro build` transpiles
-   TypeScript with esbuild, which strips types without checking them. The 15 audits all
-   run on built HTML, so a type error that still emits valid output passes everything.
-   That gap now matters more than it did, because `src/data/nav.ts` reads a JSON file the
-   client can change: a shape change in `navigation.json` would surface as a type error,
-   and nothing is looking.
+5. **Clear the 18 typecheck errors in `Header.astro` and `ReviewsCarousel.astro`,
+   then decide whether to wire `npm run typecheck` into the build.**
+
+   `@astrojs/check` is installed as of 4 Sep 2026 and `npm run typecheck` runs it. It is
+   deliberately NOT part of `npm run build`: these 18 errors are pre-existing, so adding
+   it would block every deploy including the client's own CMS edits. Clear them first,
+   then wiring it in becomes safe and worth doing.
+
+   All 18 are the same class, inline client-side scripts with untyped DOM access, and
+   none is a runtime bug:
+   - `Header.astro` ×3: `querySelector` returns `Element`, so `.hidden` is not on the
+     type. Needs `HTMLElement`.
+   - `ReviewsCarousel.astro` ×15: the same for `.style`, plus `addEventListener` giving
+     `Event` where `.key`, `.touches` and `.changedTouches` need `KeyboardEvent` and
+     `TouchEvent`, a possibly-null `track`, and implicit `any` on `timer`, `x0`, `rt`.
+
+   There are also 52 hints, nearly all the `astro(4000)` note that
+   `<script type="application/ld+json">` is treated as `is:inline`. Cosmetic; adding the
+   directive explicitly silences them.
+
+   Worth knowing what typechecking does and does not buy here. It found one real
+   problem, `site.ts` reading `raw.tradeLicence` after a client CMS save deleted the
+   field, but it found it two days late. A JSON import's type is inferred from what the
+   file contains at that moment, so it describes the CMS's last write rather than what
+   the CMS is allowed to write next: the error appears after the damage, not instead of
+   it. Declared `Raw` types on the JSON imports are the actual preventive measure, and
+   `nav.ts`, `site.ts` and `reviews.ts` now have them.
 
 Before starting anything, run a build and confirm all 15 audits still pass. The client
 edits content through the CMS between sessions, so the tree will have moved. CLAUDE.md §7

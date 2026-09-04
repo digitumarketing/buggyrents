@@ -426,13 +426,17 @@ Was 65 before the safari cluster of 12 Aug 2026. The link and orphan claim is me
 rather than assumed as of 4 Sep 2026: 9,073 internal links, all resolving. Before that
 date it was an assertion nothing checked.
 
-**`npm run build` runs 15 audits and every one of them fails the build.** Do not remove
+**`npm run build` runs 16 audits and every one of them fails the build.** Do not remove
 the `&& npm run audit`. In `scripts/audit-contrast.mjs`: contrast on card surfaces,
 colour syntax, image reuse and alt text, image resolution, insurance claims, em dashes,
 missing referenced assets, placeholders such as `[object Object]`, a price cross-check,
-cross-page image variety, metadata, CMS tokens, and root-resolves. Then
-`scripts/audit-links.mjs` (internal links and orphans) and `scripts/audit-contrast-dom.mjs`
-(the full DOM cascade walk).
+cross-page image variety, metadata, CMS tokens, root-resolves, and analytics
+double-configuration. Then `scripts/audit-links.mjs` (internal links and orphans) and
+`scripts/audit-contrast-dom.mjs` (the full DOM cascade walk).
+
+**`npm run typecheck` is separate and deliberately not part of the build.** See
+`docs/HANDOVER.md` §8: 18 pre-existing errors in two components would otherwise block
+every deploy including the client's own CMS edits.
 
 **If you add or remove one, change the number here.** It has been wrong twice: this
 paragraph said eleven and `keystatic.config.ts` said nine, while the real count was
@@ -559,6 +563,21 @@ All five items are done and verified on the live domain:
 1. Search Console verified, `/sitemap-index.xml` submitted.
 2. GA4 `G-HKVDWC923V` in `Base.astro`, on all 65 pages. Wrapped in `import.meta.env.PROD`
    so local dev and audit runs never appear in the client's reports.
+
+   **GA4 stays hardcoded here. Do not move it into GTM.** Decided 4 Sep 2026, and the
+   reason is the build, not preference: an audit can assert a property is configured
+   exactly once in the built HTML, and cannot see inside a GTM container at all, because
+   the container lives on Google's servers and is edited in the GTM UI. Hardcoded means
+   verifiable on every deploy. GTM stays installed for every other pixel.
+
+   **OPEN — action needed in the GTM UI.** Container `GTM-PP58RGD2` holds a single
+   `__googtag` tag configuring the *same* property `G-HKVDWC923V` on the `gtm.init`
+   trigger, so GA4 is set up twice on every live page and every figure in the client's
+   reports is doubled from 3 Sep 2026, when the container went live. The fix is to delete
+   that tag from the container; nothing in this repo can do it. Until it is deleted the
+   analytics audit will pass, because only one configuration is in the HTML, and print a
+   warning that the container cannot be verified from here. **A passing audit does not
+   mean this is fixed.** Confirm in GA4 DebugView that one `page_view` fires per load.
 3. buggyrents.com verified at Resend. DKIM sits on the root domain, which is why the From
    address can be any `@buggyrents.com` mailbox. The `send` MX and TXT records are the
    bounce and SPF subdomain, **not** a sending address — `send@buggyrents.com` is a

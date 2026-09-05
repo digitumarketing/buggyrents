@@ -325,6 +325,17 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
       }).then(function (r) { return r.json(); });
     }
 
+    /* Fired once, the first time anybody touches a field. The pair of form_start and
+       generate_lead is what answers the month 3 question in docs/SEO-PLAN.md: whether a
+       page with traffic and no leads is failing to interest people, or interesting them
+       and then losing them in the form. Those two need opposite fixes. */
+    var started = false;
+    form.addEventListener('focusin', function () {
+      if (started) return;
+      started = true;
+      if (window.brLead) window.brLead('form_start', { method: 'contact_form' });
+    });
+
     /* Start request: WhatsApp opens, email is best effort behind it. */
     form.addEventListener('submit', function (e) {
       e.preventDefault();

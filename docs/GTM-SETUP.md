@@ -22,12 +22,26 @@ names, so renaming one in code without renaming it here silently stops a lead be
 
 ```js
 window.dataLayer.push({
-  event:        'whatsapp_click' | 'call_click' | 'generate_lead',
+  event:        // one of the six below
   lead_page:    '/dune-buggy-dubai/',   // location.pathname
   lead_cluster: 'buggy' | 'quad' | 'dirtbike' | 'safari' | 'other',
-  lead_method:  'link' | 'whatsapp_form' | 'email_form'
+  lead_method:  'link' | 'contact_form' | 'whatsapp_form' | 'email_form'
 });
 ```
+
+| Event | What it means | Counts as a lead |
+|---|---|---|
+| `whatsapp_click` | any `wa.me` link anywhere on the site | yes |
+| `call_click` | any `tel:` link | yes |
+| `email_click` | any `mailto:` link, including the footer on all 75 pages | yes |
+| `generate_lead` | the contact form, either button | yes |
+| `form_start` | first touch of any field in the contact form | no |
+| `directions_click` | the Google Business Profile or maps link | no |
+
+`form_start` and `directions_click` are not enquiries and must not be marked as key
+events. They exist to answer the diagnostic question, which is whether a page with
+traffic and no leads is failing to interest people or losing them inside the form. Those
+two problems need opposite fixes and without these events they look identical.
 
 `lead_cluster` is resolved at build time from `src/data/clusters.ts`, so a lead can be
 attributed to a service without maintaining a second list of URL prefixes in GTM.
@@ -76,7 +90,10 @@ exactly, all events, no filters.
 |---|---|
 | `CE - whatsapp_click` | `whatsapp_click` |
 | `CE - call_click` | `call_click` |
+| `CE - email_click` | `email_click` |
 | `CE - generate_lead` | `generate_lead` |
+| `CE - form_start` | `form_start` |
+| `CE - directions_click` | `directions_click` |
 
 ---
 
@@ -96,12 +113,12 @@ bug that doubled every figure in the client's reports from 3 to 4 September 2026
 
 ---
 
-## 4. The three lead event tags
+## 4. The event tags
 
-Tags, New, **Google Analytics: GA4 Event**, one per trigger. All three take the same shape.
+Tags, New, **Google Analytics: GA4 Event**, one per trigger. All six take the same shape.
 
 - Measurement ID: `{{CONST - GA4 Measurement ID}}`
-- Event Name: `whatsapp_click`, `call_click`, `generate_lead` respectively
+- Event Name: identical to the trigger's event name
 - Event Parameters:
 
 | Parameter name | Value |
@@ -130,9 +147,11 @@ A parameter that is not registered is collected but cannot be used in a report, 
 not backfilled: a dimension created in October shows nothing for September. Do this on the
 same day as the first publish.
 
-**Mark the key events.** Admin, Events, Key events, and mark all three of `whatsapp_click`,
-`call_click` and `generate_lead`. An event only appears here after it has fired at least
-once, so publish first, click each button on the live site, then come back.
+**Mark the key events.** Admin, Events, Key events, and mark exactly four:
+`whatsapp_click`, `call_click`, `email_click` and `generate_lead`. Do NOT mark `form_start`
+or `directions_click`; they are diagnostics and marking them would inflate every lead figure
+in the monthly report. An event only appears in this list after it has fired at least once,
+so publish first, click each button on the live site, then come back.
 
 **Leave Enhanced Measurement on**, in Admin, Data streams, the web stream, Enhanced
 measurement. It gives scrolls, outbound clicks, file downloads and site search for free.

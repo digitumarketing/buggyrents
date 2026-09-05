@@ -894,6 +894,7 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     if (!html.includes("window.brLead=lead")) missing.push(`${rel}: no lead listener`);
     if (!html.includes("'whatsapp_click'")) missing.push(`${rel}: no whatsapp_click`);
     if (!html.includes("'call_click'")) missing.push(`${rel}: no call_click`);
+    if (!html.includes("'email_click'")) missing.push(`${rel}: no email_click`);
 
     if (/^\/contact\//.test(rel) || rel === '/contact/index.html') {
       contactChecked = true;

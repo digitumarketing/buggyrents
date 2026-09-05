@@ -84,8 +84,25 @@ client's direction, reversing the decision in `CLAUDE.md` launch item 2. That fi
 what the reversal cost and the two guards that replaced it. `docs/GTM-SETUP.md` is the
 container build sheet.
 
-Still to do by hand, none of it possible from the repo: publish the container, mark the
-three events as key events in GA4, and annotate 3 to 4 Sep for the doubled window.
+**Container published 6 Sep 2026 and verified end to end**, by clicking the real links on
+the live site and reading the parameters out of the GA4 request body. All six events arrive
+with `lead_page`, `lead_cluster` and `lead_method`. The three custom dimensions are
+registered. `docs/GTM-SETUP.md` has the container detail.
+
+Two things GA4 will not let anyone do on the same day, so they are the first task of the
+next session:
+
+1. **Mark the key events**, once GA4 lists the new event names in Admin, Events, which
+   takes up to 24 hours. Exactly four: `whatsapp_click`, `call_click`, `email_click`,
+   `generate_lead`. Not `lead_form_start` and not `directions_click`.
+2. **Annotate 3 to 4 Sep** for the doubled window, and 6 Sep for the test events fired
+   while verifying this.
+
+**`lead_form_start` is deliberately not called `form_start`.** GA4's Enhanced Measurement
+emits an automatic `form_start` of its own and it is already firing on this property. Two
+sources under one event name merge silently in every report. The same trap applies to
+WhatsApp: Enhanced Measurement fires its own outbound `click`, so the monthly report must
+count `whatsapp_click` and ignore `click`, or WhatsApp reads roughly double.
 
 ### 3.2 Search Console baseline, week 1
 
@@ -99,7 +116,9 @@ Nobody has looked since launch. Pull and keep as the September baseline:
 
 ### 3.3 The entity fix, week 1 — this is the AEO and GEO foundation
 
-`Base.astro` builds a variable called `localBusiness` and gives it `@type:
+**Done 5 Sep 2026.** Kept here because the reasoning is the part worth carrying forward.
+
+`Base.astro` built a variable called `localBusiness` and gave it `@type:
 'TouristAttraction'`. That is a Place, not a LocalBusiness. It cannot legitimately carry
 `priceRange`, it is not eligible for local business rich results, and it describes the
 dunes rather than the operator. `CLAUDE.md` §6 has said `LocalBusiness` since the standard

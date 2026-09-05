@@ -3,7 +3,8 @@ import '@/styles/global.css';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import FloatingActions from '@/components/FloatingActions.astro';
-import { site } from '@/data/site';
+import { site, businessId } from '@/data/site';
+import { clusters } from '@/data/clusters';
 
 interface Props {
   title: string;
@@ -17,20 +18,58 @@ interface Props {
 const { title, description, image = '/assets/og/default.jpg', noindex = false, vehicle, duration, price } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.domain).href;
 
+/* Which cluster this page belongs to, resolved at build time and sent with every lead
+   event. Doing it here rather than in the browser means the report can group leads by
+   service without anyone maintaining a second list of path prefixes in JavaScript. */
+const leadCluster = clusters.find(c => Astro.url.pathname.startsWith(c.path))?.key ?? 'other';
+
 const localBusiness = {
   '@context': 'https://schema.org',
-  '@type': 'TouristAttraction',
+
+  /* Was 'TouristAttraction' alone until 5 Sep 2026, and the variable has been called
+     localBusiness the whole time, which is what it should always have been.
+     TouristAttraction is a subtype of Place, not of LocalBusiness: it is not eligible
+     for local business rich results, and priceRange below is not one of its
+     properties, so the site was declaring a property its own type does not have.
+     CLAUDE.md §6 has specified LocalBusiness since it was written; only the code
+     disagreed. The array keeps the attraction reading, which is fair for a riding
+     base at the edge of the dunes, and adds the type Google actually reads. */
+  '@type': ['LocalBusiness', 'TouristAttraction'],
+
+  /* Every other node describing this business points at this id. See site.ts. */
+  '@id': businessId,
+
   name: site.name,
+  legalName: site.legalName,
   description: site.tagline,
   url: site.domain,
   telephone: site.phoneRaw,
   email: site.email,
+  image: new URL('/assets/og/default.jpg', site.domain).href,
+  logo: new URL('/icon-512.png', site.domain).href,
   address: {
     '@type': 'PostalAddress',
     streetAddress: `${site.address.street}, ${site.address.district}`,
     addressLocality: site.address.city,
     addressCountry: site.address.country
   },
+
+  /* The base sits outside the city on the Dubai to Hatta road, so a search engine
+     cannot infer the location from the locality alone. Coordinates are already in
+     Site settings because the map embed uses them. */
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.geo.lat,
+    longitude: site.geo.lng
+  },
+
+  /* Dubai pickup is free and the outer emirates are quoted, so both are served and
+     only Dubai is named as the city. Nothing broader is claimed. */
+  areaServed: [
+    { '@type': 'City', name: 'Dubai' },
+    { '@type': 'Country', name: 'United Arab Emirates' }
+  ],
+
   hasMap: site.maps.link,
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
@@ -39,6 +78,25 @@ const localBusiness = {
     closes: site.hours.closes
   },
   priceRange: 'AED 75 to AED 2200',
+
+  /* What the business sells, read from src/data/clusters.ts so this is not a fifth
+     copy of the cluster list. An answer engine asked what Buggy Rents offers can
+     read this instead of inferring it from the navigation. */
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: `${site.name} desert rides and safaris`,
+    itemListElement: clusters.map(c => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: c.name,
+        description: c.description,
+        url: new URL(c.path, site.domain).href,
+        provider: { '@id': businessId }
+      }
+    }))
+  },
+
   /* sameAs is how Google links this site, the Google Business Profile and the five
      social accounts into a single entity. Leaving it out was throwing away a real
      local ranking signal for accounts the business already runs. */
@@ -81,21 +139,70 @@ const localBusiness = {
 
   <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
 
-  {/* Google Analytics 4. Wrapped in import.meta.env.PROD on purpose: without it
-      every local dev page view and every audit run would land in the client's
-      reports as real traffic, and the first month of data is the one they will
-      judge the site on. is:inline stops Astro bundling it, which is what Google
-      expects for gtag. */}
+  {/* GA4 IS NOT CONFIGURED HERE ANY MORE. Removed 5 Sep 2026 at the client's
+      direction: every tag, GA4 included, now lives in GTM container so that pixels,
+      conversions and consent are managed in one place without a deploy.
+
+      This reverses the decision recorded in CLAUDE.md launch item 2, and the reasoning
+      that decision was built on has not gone away, so read it before putting a property
+      back in this file. It was: an audit can assert a property is configured exactly
+      once in built HTML and cannot see inside a container, so hardcoding made tracking
+      verifiable on every deploy. What replaced that guarantee is narrower and worth
+      knowing. The build now checks that a container loads on every page and that no GA4
+      property is configured in the HTML alongside it, which is what caused the 3 Sep
+      double-count. It cannot check that the container still contains a GA4 tag.
+
+      The practical consequence: deleting the GA4 tag inside GTM stops all measurement
+      and nothing in this repo will notice. Confirm in GA4 Realtime after any container
+      publish. docs/GTM-SETUP.md is the container's build sheet.
+
+      DO NOT re-add a gtag loader or a gtag('config') call here. One property configured
+      in both the HTML and the container is exactly the bug that doubled every figure in
+      the client's reports from 3 to 4 Sep 2026, and the analytics audit now fails the
+      build on it rather than warning. */}
+
+  {/* Lead events. Added 5 Sep 2026, and until then this site measured nothing.
+      GA4 was configured and fired a pageview, and that was all: not one click on the
+      WhatsApp button, the call button or the contact form reached it, so every enquiry
+      the site had ever produced was invisible and no report could say whether organic
+      traffic converted at all.
+
+      ONE DELEGATED LISTENER, NOT AN onclick PER COMPONENT. WhatsApp and phone links are
+      rendered by FloatingActions, the header, the footer, six templates and any CMS rich
+      text field the client types a link into. A listener per component would have missed
+      the CMS ones entirely and would need adding again to every component built after
+      this. Delegating from the document catches all of them, including links that do not
+      exist yet.
+
+      PROD-only, for the same reason as GA4 above: dev and audit runs stay out of the
+      client's data. The audit reads the built HTML rather than executing it, so it can
+      still see this block. */}
   {import.meta.env.PROD && (
-    <>
-      <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HKVDWC923V"></script>
-      <script is:inline>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-HKVDWC923V');
-      </script>
-    </>
+    <script is:inline set:html={`(function(){
+  var cluster=${JSON.stringify(leadCluster)};
+  /* Pushed to the dataLayer rather than called on gtag, because GA4 now lives in GTM
+     and there is no gtag on the page. dataLayer is initialised here rather than assumed:
+     this block can run before the container snippet, and a push made before GTM loads is
+     replayed by GTM when it does, so an early click is not lost. */
+  window.dataLayer=window.dataLayer||[];
+  function lead(name,extra){
+    var p={event:name,lead_page:location.pathname,lead_cluster:cluster};
+    if(extra)for(var k in extra)p['lead_'+k]=extra[k];
+    window.dataLayer.push(p);
+  }
+  /* Exposed so the contact form can report itself. Its primary button opens WhatsApp
+     with window.open rather than following an href, so the delegated handler below
+     cannot see it, and that button is the single most valuable action on the site. */
+  window.brLead=lead;
+  document.addEventListener('click',function(e){
+    var t=e.target;
+    var a=t&&t.closest?t.closest('a[href]'):null;
+    if(!a)return;
+    var h=a.getAttribute('href')||'';
+    if(h.indexOf('wa.me')>-1||h.indexOf('api.whatsapp.com')>-1)lead('whatsapp_click',{method:'link'});
+    else if(h.slice(0,4)==='tel:')lead('call_click',{method:'link'});
+  },true);
+})();`} />
   )}
 
   {/* Google Tag Manager and any pasted head code, from Site settings in the CMS.

@@ -13,7 +13,37 @@ that machine, leaving a repo full of decisions nobody could reconstruct.
 |---|---|
 | `site/CLAUDE.md` | This file. The standing brief. |
 | `site/docs/HANDOVER.md` | Session history and the forward plan. Read after this. |
-| `site/docs/ARTICLE-PROMPT.md` | Master copy of the blog article prompt. |
+| `site/docs/ARTICLE-PROMPT.md` | Master copy of the blog article prompt, and the skill itself. |
+| `site/.claude/skills/buggyrents-article/SKILL.md` | **Symlink** to the file above. Do not replace with a copy. |
+| `site/docs/SEO-PLAN.md` | The 90-day SEO, AEO and GEO plan and the monthly client report format. |
+| `site/docs/GTM-SETUP.md` | The GTM container build sheet. Every tag on this site lives there. |
+| `site/.claude/skills/_upstream/` | Vendored third-party skills, their licence and the rules for touching them. |
+
+**Seven skills are vendored from `inhouseseo/superseo-skills`, Apache 2.0.** They sit in
+`.claude/skills/` alongside `buggyrents-article` and they are upstream property: do not
+edit them, and re-vendor rather than patch. `.claude/skills/_upstream/VENDORED.md` records
+the revision, which four skills were deliberately left behind, and why. Two of those four
+were rejected for the reason this section exists: they would have become a second article
+master and a second owner of the §5 keyword figures.
+
+**When a vendored skill and `buggyrents-article` disagree, `buggyrents-article` wins.** It
+is the only one that knows the hard rules in its STEP 5, and a breach of those fails the
+build rather than the review.
+
+**The article prompt is a skill as of 5 Sep 2026, by symlink rather than by copy.**
+`.claude/skills/buggyrents-article/SKILL.md` points at `docs/ARTICLE-PROMPT.md`, so it
+loads automatically in any session opened here and stays version controlled in one
+place. Git stores it as a symlink, mode `120000`, not as duplicated content.
+
+Same reasoning as `../CLAUDE.md`, and for the same demonstrated reason: before this,
+a copy of the prompt lived outside the repo and had already drifted, saying "fourteen
+audits" while the repo copy said "fifteen" and the true count was sixteen. A copy of a
+document is a second thing to maintain and the two are indistinguishable to whoever
+reads one of them next.
+
+The prompt carries YAML frontmatter (`name`, `description`) because the skill format
+requires it. Leave that block at the very top: it has to be the first bytes of the file
+or the skill will not be recognised.
 
 **`../CLAUDE.md` is a symlink to this file. Do not delete it and do not replace it with
 a copy.** Claude Code discovers `CLAUDE.md` in the working directory and its parents,
@@ -426,12 +456,12 @@ Was 65 before the safari cluster of 12 Aug 2026. The link and orphan claim is me
 rather than assumed as of 4 Sep 2026: 9,073 internal links, all resolving. Before that
 date it was an assertion nothing checked.
 
-**`npm run build` runs 16 audits and every one of them fails the build.** Do not remove
+**`npm run build` runs 17 audits and every one of them fails the build.** Do not remove
 the `&& npm run audit`. In `scripts/audit-contrast.mjs`: contrast on card surfaces,
 colour syntax, image reuse and alt text, image resolution, insurance claims, em dashes,
 missing referenced assets, placeholders such as `[object Object]`, a price cross-check,
-cross-page image variety, metadata, CMS tokens, root-resolves, and analytics
-double-configuration. Then `scripts/audit-links.mjs` (internal links and orphans) and
+cross-page image variety, metadata, CMS tokens, root-resolves, analytics
+configuration, and lead tracking. Then `scripts/audit-links.mjs` (internal links and orphans) and
 `scripts/audit-contrast-dom.mjs` (the full DOM cascade walk).
 
 **`npm run typecheck` is separate and deliberately not part of the build.** See
@@ -466,6 +496,13 @@ Google indexed. Verified on 9,073 internal links across 75 pages.
 
 The reason this matters most in `nav.ts`: a header or footer href renders on all 75 pages,
 so one typo is 75 broken links in the primary navigation, not one.
+
+**The nav URL field rejects fragment links, and that is deliberate.** The audit resolves an
+href against the built files and the redirect rules, so it can confirm `/faq/` exists but not
+that `#pricing` is an id on that page. Allowing fragments without widening the audit would
+create the one nav link that passes every guard and still lands nowhere. If the validation is
+ever widened, extend `scripts/audit-links.mjs` to check the fragment exists on the target page
+first, in the same change.
 
 **Fixes made 10 Aug 2026 that must not be undone:**
 
@@ -564,11 +601,28 @@ All five items are done and verified on the live domain:
 2. GA4 `G-HKVDWC923V` in `Base.astro`, on all 65 pages. Wrapped in `import.meta.env.PROD`
    so local dev and audit runs never appear in the client's reports.
 
-   **GA4 stays hardcoded here. Do not move it into GTM.** Decided 4 Sep 2026, and the
-   reason is the build, not preference: an audit can assert a property is configured
-   exactly once in the built HTML, and cannot see inside a GTM container at all, because
-   the container lives on Google's servers and is edited in the GTM UI. Hardcoded means
-   verifiable on every deploy. GTM stays installed for every other pixel.
+   ~~**GA4 stays hardcoded here. Do not move it into GTM.**~~ **Reversed 5 Sep 2026 at
+   the client's direction. GA4 is configured in GTM and nowhere else.** The original
+   reasoning stands and is kept rather than deleted, because it names what the reversal
+   costs: an audit can assert a property is configured exactly once in the built HTML, and
+   cannot see inside a container at all, because the container lives on Google's servers
+   and is edited in the GTM UI. Hardcoding made measurement verifiable on every deploy.
+
+   What was traded for it: one place to manage GA4, Ads conversions, Meta and consent
+   together, and no deploy needed to change any of them. Given this site is run by an
+   agency with a lead-reporting commitment, that is a defensible call, but it is a real
+   trade and not a free one.
+
+   **Two guards replaced the one that was given up, and both are new on 5 Sep 2026.** The
+   analytics audit now FAILS on any GA4 property found in the built HTML, where it used to
+   warn, because a property in the page can now only be a duplicate of the container's tag.
+   It also fails when a page carries no container at all. And `src/data/site.ts` falls back
+   to a hardcoded container id, so a client clearing the CMS field cannot ship an untracked
+   build.
+
+   **What nothing can check: whether the container still holds a GA4 tag.** Deleting that
+   tag stops all measurement silently. Confirm in GA4 Realtime after every container
+   publish. `docs/GTM-SETUP.md` is the build sheet.
 
    **CLOSED 4 Sep 2026.** Container `GTM-PP58RGD2` had held a single `__googtag` tag
    configuring the *same* property `G-HKVDWC923V` on the `gtm.init` trigger, so GA4 was
@@ -578,16 +632,23 @@ All five items are done and verified on the live domain:
    shrank from 351,825 to 331,180 bytes. The live homepage now carries exactly one gtag
    loader and one `gtag('config')` call.
 
-   **The audit still warns, and that is correct.** It cannot read a container's tags, so
-   it reports the combination of a property in the HTML alongside a loaded container as
-   unverifiable. The warning describes a permanent blind spot rather than an outstanding
-   bug: the container can gain a GA4 tag again at any time without touching this repo.
-   Re-check by hand if the reports ever look doubled again.
+   **Still open: annotate 3 to 4 Sep 2026 in GA4.** Every figure in that window is doubled,
+   so the correction will read as a traffic collapse to anyone comparing periods later. It
+   needs GA4 account access, which the client has not granted. Do this before the window
+   scrolls out of the default reporting range.
 
-   **The container is now empty of tags.** It still loads on every page, so until the
-   first real pixel goes in it is doing nothing. Not worth removing given it is there
-   deliberately for future pixels, but do not treat its presence as evidence that
-   anything is being tracked through it.
+   **That bug is now the thing the audit fails on.** From 5 Sep 2026 a GA4 property in
+   the built HTML alongside the container is an error rather than a warning, because with
+   GA4 living in the container there is no legitimate reason for one to appear in a page.
+   The two ways it can still happen are someone restoring the block removed from
+   `Base.astro`, and the client pasting a Google-supplied snippet into the head or body
+   code fields in Site settings, which is exactly what they did on 3 Sep.
+
+   **The container is no longer empty.** As of 5 Sep 2026 it holds the GA4 configuration
+   tag and the lead event tags, so its presence on a page now does mean something is being
+   tracked. What it holds is written down in `docs/GTM-SETUP.md`, which is a description of
+   the container and not a copy of it: the container itself is the source of truth and it
+   can change without touching this repo.
 3. buggyrents.com verified at Resend. DKIM sits on the root domain, which is why the From
    address can be any `@buggyrents.com` mailbox. The `send` MX and TXT records are the
    bounce and SPF subdomain, **not** a sending address — `send@buggyrents.com` is a

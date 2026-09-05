@@ -771,6 +771,7 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
   walkG(DIST);
 
   const dupes = [];
+  const noContainer = [];
   const containers = new Set();
   const configured = new Set();
 
@@ -797,7 +798,9 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
       if (n > 1) dupes.push(`${id} configured ${n}x on ${page.replace(/^dist/, '')}`);
     }
 
-    for (const m of html.matchAll(/(GTM-[A-Z0-9]+)/g)) containers.add(m[1]);
+    const onPage = [...html.matchAll(/(GTM-[A-Z0-9]+)/g)].map(m => m[1]);
+    onPage.forEach(c => containers.add(c));
+    if (!onPage.length) noContainer.push(page.replace(/^dist/, ''));
   }
 
   if (dupes.length) {
@@ -809,15 +812,110 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     process.exit(1);
   }
 
-  if (configured.size && containers.size) {
-    console.log(`  ${[...configured].join(', ')} configured in the page while ${[...containers].join(', ')} also loads.`);
-    console.log('  This audit cannot read a container\'s tags. Confirm in the GTM UI that it does');
-    console.log('  not also configure the same property, which would double every figure.');
+  /* Since 5 Sep 2026 every tag lives in GTM and NO GA4 property may be configured in
+     the HTML. This used to be a warning, because the hardcoded property was the correct
+     install and the container was the suspect half. Now it is the reverse: a property in
+     the page can only have arrived from a pasted CMS snippet or from someone restoring
+     the block removed from Base.astro, and either way it duplicates the container's GA4
+     tag and doubles every figure. That is not a hypothetical. It happened on 3 Sep 2026
+     and went unnoticed for a day. */
+  if (configured.size) {
+    console.error('GA4 property configured in the built HTML:');
+    [...configured].forEach(id => console.error('  ' + id));
+    console.error('  GA4 belongs in the GTM container only. See docs/GTM-SETUP.md.');
+    console.error('  A property in both places counts every pageview and every event twice.');
+    console.error('  Check Base.astro, and the head and body code fields in Site settings.');
+    process.exit(1);
   }
 
+  /* No container means no measurement of any kind, and nothing else would notice.
+     src/data/site.ts falls back to a hardcoded container id precisely so a client
+     clearing the CMS field cannot reach this, which leaves a code change as the only
+     way to get here. */
+  if (noContainer.length) {
+    console.error('No GTM container loads on these pages, so they measure nothing:');
+    noContainer.slice(0, 10).forEach(p => console.error('  ' + p));
+    if (noContainer.length > 10) console.error(`  ...and ${noContainer.length - 10} more.`);
+    console.error('  Every tag on this site lives in GTM, so a page without it is untracked.');
+    process.exit(1);
+  }
+
+  /* What this can still never see: whether the container actually contains a GA4 tag.
+     Container contents live on Google's servers. Confirm in GA4 Realtime after a publish. */
   console.log(
-    `Analytics audit passed — ${configured.size} propert${configured.size === 1 ? 'y' : 'ies'} ` +
-    `across ${pages.length} pages, none configured twice` +
-    `${containers.size ? `, ${containers.size} GTM container(s) unverifiable (warned)` : ''}.`
+    `Analytics audit passed — ${[...containers].join(', ')} on all ${pages.length} pages, ` +
+    `no GA4 property in the HTML. Container contents unverifiable by design.`
   );
+}
+
+
+/* Lead events exist on every page.
+ *
+ * WHY THIS EXISTS
+ * Added 5 Sep 2026 alongside the events themselves. Until that day the site measured
+ * nothing: GA4 was correctly installed and fired a pageview, and no click on the
+ * WhatsApp button, the call button or the contact form ever reached it. The whole
+ * point of the SEO work in docs/SEO-PLAN.md is a lead count, and a lead count that
+ * silently stops being collected is worse than one that was never promised, because
+ * the reports keep arriving and simply read zero.
+ *
+ * That is a quiet failure with no symptom. The pages still render, every existing
+ * audit still passes, and the gap only surfaces at the end of a month when there is
+ * nothing to report and no way to recover the data. Hence a build-time check.
+ *
+ * WHAT IT CHECKS
+ * That the delegated listener is present in every indexable page, and that the
+ * contact page additionally reports the form itself, whose primary button opens
+ * WhatsApp with window.open and so cannot be seen by the delegated handler.
+ *
+ * WHAT IT CANNOT SEE
+ * Whether the events arrive in GA4, or whether they are still marked as key events
+ * there. Both live in the GA4 UI. Confirm in DebugView after any change to this block.
+ */
+{
+  const pages = [];
+  const walkL = d => readdirSync(d).forEach(f => {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walkL(p);
+    else if (p.endsWith('.html')) pages.push(p);
+  });
+  walkL(DIST);
+
+  /* The 404 page is deliberately out of the sitemap and is not a lead surface. */
+  const indexable = pages.filter(p => !p.endsWith(join(DIST, '404.html')));
+
+  const missing = [];
+  let contactChecked = false;
+
+  for (const page of indexable) {
+    const html = readFileSync(page, 'utf8');
+    const rel = page.replace(/^dist/, '') || '/';
+
+    if (!html.includes("window.brLead=lead")) missing.push(`${rel}: no lead listener`);
+    if (!html.includes("'whatsapp_click'")) missing.push(`${rel}: no whatsapp_click`);
+    if (!html.includes("'call_click'")) missing.push(`${rel}: no call_click`);
+
+    if (/^\/contact\//.test(rel) || rel === '/contact/index.html') {
+      contactChecked = true;
+      if (!html.includes('generate_lead')) missing.push(`${rel}: form does not report generate_lead`);
+    }
+  }
+
+  if (missing.length) {
+    console.error('Lead tracking missing from built pages:');
+    missing.slice(0, 10).forEach(m => console.error('  ' + m));
+    if (missing.length > 10) console.error(`  ...and ${missing.length - 10} more.`);
+    console.error('  The site is serving pages that cannot report an enquiry.');
+    console.error('  See the lead events block in src/layouts/Base.astro.');
+    process.exit(1);
+  }
+
+  if (!contactChecked) {
+    console.error('Lead tracking audit could not find the contact page in dist.');
+    console.error('  Either it was renamed, in which case fix the path in this audit,');
+    console.error('  or it stopped building, which is a bigger problem.');
+    process.exit(1);
+  }
+
+  console.log(`Lead-tracking audit passed — ${indexable.length} pages carry the lead events, contact form reports generate_lead.`);
 }

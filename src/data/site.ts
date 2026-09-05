@@ -103,7 +103,21 @@ export const site = {
      injects these on the production build only. Empty strings mean "nothing to
      inject", which is the default and leaves the built HTML unchanged. */
   tracking: {
-    gtmId: (raw.gtmId || '').trim(),
+    /* GTM_CONTAINER is the fallback, and it exists because as of 5 Sep 2026 the
+       container is the ONLY place any tag is configured. Keystatic deletes a field the
+       client empties, and before this fallback an accidental clear of the GTM ID field
+       would have shipped a build with no tracking at all: pages fine, every audit green,
+       and no data until somebody noticed a flat report weeks later.
+
+       Failing the build instead was the other option and it is worse here. The client's
+       own CMS saves trigger the deploy, so a hard fail would block their content edits
+       over a field they may not understand. A fallback keeps the site measured and keeps
+       them unblocked.
+
+       This is not a second owner of the value. The CMS field wins whenever it is set; the
+       constant only answers when there is nothing to use. Change the container here and
+       in the CMS together, or the stale one keeps answering after the field is cleared. */
+    gtmId: (raw.gtmId || 'GTM-PP58RGD2').trim(),
     headCode: raw.headCode || '',
     bodyCode: raw.bodyCode || '',
 
@@ -124,6 +138,16 @@ export const site = {
     pastedGtm: /googletagmanager\.com/i.test(`${raw.headCode || ''}${raw.bodyCode || ''}`)
   }
 };
+
+/* The canonical schema id for the business entity.
+ *
+ * Every schema node that describes the business points at this, so Google and the AI
+ * crawlers resolve one entity rather than one per page. Before this existed,
+ * Base.astro emitted an unidentified TouristAttraction and ReviewsCarousel emitted an
+ * unidentified LocalBusiness with the same name and url, and nothing said they were
+ * the same business. A fragment id on the domain is the convention and it never 404s,
+ * because it is an identifier and not a URL anything fetches. */
+export const businessId = `${site.domain}/#business`;
 
 export function waLink(message: string): string {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;

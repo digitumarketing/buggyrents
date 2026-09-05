@@ -3,7 +3,7 @@
    Desktop 3 per view · tablet 2 · mobile 1. Auto-advances one review every 2.5s.
    Only 5-star reviews containing text are rendered. */
 import { reviews, googleMeta, fiveStarWithText } from '@/data/reviews';
-import { site } from '@/data/site';
+import { site, businessId } from '@/data/site';
 
 interface Props { interval?: number; heading?: string; kicker?: string; lede?: string; }
 const {
@@ -17,9 +17,23 @@ const list = fiveStarWithText(reviews);
 const hasReviews = list.length > 0;
 const initials = (n: string) => n.trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
 
+/* The rating and the reviews attach to the sitewide business entity rather than to a
+   business of their own.
+
+   This block used to declare a second LocalBusiness carrying the same name and url and
+   no identifier, while Base.astro declared a TouristAttraction that also had none. Any
+   page with the reviews strip therefore described two businesses and left Google to
+   work out that they were one, which is exactly the entity fragmentation that keeps a
+   site out of the local pack. Sharing the id merges them.
+
+   The rating stays here, on the component that renders it, and does not move to
+   Base.astro: an aggregateRating is only eligible on a page where the rating is
+   actually visible to the reader, and this component is what makes it visible. */
 const schema = hasReviews && googleMeta.averageRating > 0 ? {
-  '@context': 'https://schema.org', '@type': 'LocalBusiness', name: site.name, url: site.domain,
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: googleMeta.averageRating, reviewCount: googleMeta.totalReviews },
+  '@context': 'https://schema.org',
+  '@id': businessId,
+  '@type': ['LocalBusiness', 'TouristAttraction'],
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: googleMeta.averageRating, reviewCount: googleMeta.totalReviews, bestRating: 5 },
   review: list.slice(0, 10).map(r => ({
     '@type': 'Review', author: { '@type': 'Person', name: r.author },
     reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5 },

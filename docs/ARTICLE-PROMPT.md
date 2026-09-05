@@ -1,11 +1,26 @@
+---
+name: buggyrents-article
+description: Write a blog article for buggyrents.com as a ready-to-commit Markdoc file. Use when asked to write, draft, plan or outline an article, blog post or guide for BuggyRents, or when handed a target keyword for the site. Starts with a cannibalisation check against the 74 pages that already exist and stops if the keyword duplicates one of them or describes a product the client does not sell.
+---
+
 # BuggyRents — article prompt
 
-Paste everything below the line into a new session, with the INPUTS block filled in.
-Keep this file as the master copy and edit it here rather than in the chat, so the
-prompt improves over time instead of drifting.
+**This file is the master copy, and it is also the skill.**
+`.claude/skills/buggyrents-article/SKILL.md` is a symlink to this file, so invoking the
+skill and reading this document load the same bytes. Edit it here. Do not create a
+second copy anywhere, for the reason given in CLAUDE.md about `../CLAUDE.md`: two copies
+of a document agree for about a week, and then nobody can tell which one is true. This
+prompt had already drifted that way once, with an external copy saying "fourteen audits"
+while the repo copy said "fifteen" and the real number was sixteen.
 
-**What changed from the original towing/portfolio version, and why, is listed at the
-bottom of this file. Read that once before using this.**
+**Inputs.** Fill in the INPUTS block below if you have the research to hand. If it is
+missing, do not stall and do not invent volumes or difficulty scores: the only input
+that is genuinely required is the primary keyword, and everything else can be reasoned
+about or asked for. Never guess a search volume or a KD figure and present it as data.
+
+**Read the "What changed from the original prompt" section at the bottom once** before
+using this the first time. It is history rather than instruction, so skip it on later
+runs.
 
 ---
 
@@ -40,6 +55,11 @@ Leave the word count out of the inputs. It is fixed below, and it is fixed for a
 
 The site already has 74 pages. Before writing anything, confirm this article is not
 competing with a page that already exists.
+
+(74 is the indexable count, and it is the one that matters here. A build produces 75
+HTML files: the extra one is the 404 page, which is deliberately kept out of the
+sitemap. Audit output that says "75 pages" is counting files in `dist`, because a
+broken link pointing *at* the 404 page is still worth checking.)
 
 Existing commercial pages that own their keywords:
 
@@ -107,6 +127,11 @@ padded next to its siblings and bury the answer the reader came for.
 immediately, then earn the rest of the read. Never open with "In today's world", "When
 it comes to", or any variation.
 
+**Prose quality.** Read `.claude/skills/write-content/references/anti-slop-ruleset.md`
+before drafting: banned vocabulary, banned phrases, banned structural patterns. It is
+vendored and upstream-owned, so treat it as a reference underneath this file rather than
+an alternative to it. Where it and STEP 5 disagree, STEP 5 wins.
+
 **Voice.** First person plural, as the business: *we run the base*, *our guides*, *we
 do not*. Never "I". The byline is the Buggy Rents team, not an individual. Confident
 and plain. A guest reading it should feel they are being told the truth by someone who
@@ -138,8 +163,13 @@ finishing the thought, not by announcing that you are finishing.
 
 ## STEP 5 — Hard rules. These fail the build, not just the review.
 
-The site runs fifteen audits on every deploy. A breach here means the article does not
-publish and the client cannot publish anything else either until it is fixed.
+Every deploy runs the full audit suite, listed in **CLAUDE.md §7**, which is the single
+place that count is maintained. A breach here means the article does not publish and the
+client cannot publish anything else either until it is fixed.
+
+Do not restate the number here. It has gone stale in five separate files during this
+project, twice in the same day, because each copy looked authoritative to whoever read
+it next.
 
 | Rule | Detail |
 |---|---|
@@ -163,7 +193,11 @@ anchor text. Real URLs only:
 ```
 /dune-buggy-dubai/            /dune-buggy-dubai/price/       /dune-buggy-dubai/faq/
 /quad-bike-dubai/             /quad-bike-dubai/price/        /quad-bike-dubai/faq/
-/ktm-dirt-bike-dubai/         /desert-safari-dubai/          /desert-safari-dubai/price/
+/ktm-dirt-bike-dubai/         /ktm-dirt-bike-dubai/price/
+/ktm-dirt-bike-dubai/ktm-450-dirt-bike/
+/ktm-dirt-bike-dubai/dirt-bike-for-beginners/
+/ktm-dirt-bike-dubai/dirt-bike-for-advanced/
+/desert-safari-dubai/         /desert-safari-dubai/price/
 /desert-safari-dubai/faq/     /desert-safari-dubai/evening-desert-safari/
 /desert-safari-dubai/morning-desert-safari/
 /desert-safari-dubai/overnight-desert-safari/
@@ -176,6 +210,11 @@ anchor text. Real URLs only:
 
 Every article should link to the price page or the pillar it supports. That is the
 whole commercial point of the article.
+
+**There is no `/ktm-dirt-bike-dubai/faq/`.** Buggy, quad and safari each have a pillar,
+a price page and an FAQ; KTM has a pillar and a price page only. Writing the FAQ URL by
+analogy fails the link audit and blocks the deploy. If a URL is not in the list above,
+check that it is built before linking to it.
 
 ## STEP 7 — Deliver as a Markdoc file
 
@@ -264,10 +303,10 @@ selling Google Ads services. Nine things had to change:
    safaris, which the client does not offer and does not want to add. A prompt that
    only optimises for volume will happily write that page.
 
-6. **Added Step 5, the hard rules.** These are not style preferences. Fifteen audits
-   run on every deploy and a breach blocks the build, which also blocks the client's own
-   CMS edits until someone fixes it. Insurance and em dashes are the two most likely to
-   catch a writer out.
+6. **Added Step 5, the hard rules.** These are not style preferences. The audits listed
+   in CLAUDE.md §7 run on every deploy and a breach blocks the build, which also blocks
+   the client's own CMS edits until someone fixes it. Insurance and em dashes are the two
+   most likely to catch a writer out.
 
 7. **Output is a Markdoc file, not an article in chat.** The blog lives in the CMS with
    a fixed frontmatter schema. An article delivered as prose would need an hour of

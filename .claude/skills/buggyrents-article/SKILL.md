@@ -1,0 +1,1 @@
+../../../docs/ARTICLE-PROMPT.md

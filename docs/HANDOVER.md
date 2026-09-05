@@ -255,8 +255,17 @@ make them unreadable in the editor. The price audit covers them instead.
    dubai desert safari location (KD 20, 720) · overnight desert safari dubai (KD 19,
    590) · quad bike desert safari dubai (KD 21, 590) · sunrise desert safari dubai
    (KD 22, 480).
-   *Ask for the prompt before writing. Consider saving it as a skill so it does not
-   have to be pasted every time.*
+   *The prompt is `docs/ARTICLE-PROMPT.md`, which loads automatically as the
+   `buggyrents-article` skill. Do not paste one into a chat.*
+
+   **A dirt-bike-first plan was drafted on 5 Sep 2026 and rejected the same day.** It
+   ranked the silos by how empty they were — dirt bike has no articles here and none on
+   any competitor — and put ten dirt bike and vehicle-choice titles ahead of this list.
+   Emptiness is not demand, and `CLAUDE.md` §5 goes the other way: the **entire** KTM and
+   dirt bike cluster is **300 searches at KD 96**, while `dubai desert safari location`
+   alone is **720 at KD 20**. A silo can be empty because nobody is searching it. Rank by
+   the §5 volume and difficulty figures, not by gap size, and treat KTM as a conversion
+   asset rather than a traffic one, which is what §5 already says.
 
 ### The big open decision
 3. **Desert safari.** 97,220 monthly search volume, which is **83% of the entire
@@ -272,6 +281,12 @@ make them unreadable in the editor. The price audit covers them instead.
    actually indexed. The Sitemaps report showing "64 discovered" is not the same
    thing. Expect partial coverage for 2 to 6 weeks on a new domain; look for errors
    rather than for "Discovered - currently not indexed", which is normal.
+
+   Then open **Performance → Queries** and sort by position. Nothing has looked at it since
+   launch. Any query already sitting between **positions 11 and 20** outranks everything on
+   the article list in item 2, because that page is already being seen: a query in striking
+   distance usually moves on an on-page pass, which is cheaper than a new article and lands
+   sooner.
 6. Core Web Vitals have never been measured. Public pages ship about 2 KB of JS, so
    this is likely fine, but it is an assumption.
 
@@ -328,12 +343,21 @@ make them unreadable in the editor. The price audit covers them instead.
   and `Footer.astro` were not touched and all 75 pages built byte-identical. See CLAUDE.md
   for the two conversions the adapter performs, both of which matter.
 
+  What started it was the KTM 450 price page, live and indexed but absent from both the
+  header dropdown and the footer. It was linked by hand first, then navigation was migrated
+  so the client can add the next page without a deploy. Worth remembering as the failure
+  mode: a page can be built, indexed and unreachable, and until 4 Sep nothing in the build
+  read a single `<a href>` to notice.
+
 ---
 
 ## 8. Suggested order for the next session
 
 1. Ask whether they want the **client guide** first or the **articles** first.
-2. If articles: get their prompt, and offer to save it as a reusable skill.
+2. ~~If articles: get their prompt, and offer to save it as a reusable skill.~~
+   **Done 5 Sep 2026.** `docs/ARTICLE-PROMPT.md` is now the skill, reached through a
+   symlink at `.claude/skills/buggyrents-article/SKILL.md`. It loads automatically in any
+   session opened in this repo. Do not replace the symlink with a copy; see CLAUDE.md §1.
 3. Put the desert safari number in front of them once, then follow their call.
 4. Chase the photography list — it has been open the longest and blocks the most.
 5. **Clear the 18 typecheck errors in `Header.astro` and `ReviewsCarousel.astro`,
@@ -364,6 +388,12 @@ make them unreadable in the editor. The price audit covers them instead.
    it. Declared `Raw` types on the JSON imports are the actual preventive measure, and
    `nav.ts`, `site.ts` and `reviews.ts` now have them.
 
-Before starting anything, run a build and confirm all 15 audits still pass. The client
+6. **Four pages 404 that every other cluster has.** The dirt bike FAQ and the three
+   service safety pages are missing, while buggy, quad and safari all carry theirs. Nothing
+   in the build catches this: the link audit only sees links that were written, and
+   root-resolves only guards a parent whose children exist. Build them before writing
+   articles that would link to them.
+
+Before starting anything, run a build and confirm every audit still passes. The client
 edits content through the CMS between sessions, so the tree will have moved. CLAUDE.md §7
 is the one place the audit count is maintained; this line has already been wrong once.

@@ -35,11 +35,13 @@ window.dataLayer.push({
 | `call_click` | any `tel:` link | yes |
 | `email_click` | any `mailto:` link, including the footer on all 75 pages | yes |
 | `generate_lead` | the contact form, either button | yes |
-| `form_start` | first touch of any field in the contact form | no |
+| `lead_form_start` | first touch of any field in the contact form | no |
 | `directions_click` | the Google Business Profile or maps link | no |
 
-`form_start` and `directions_click` are not enquiries and must not be marked as key
-events. They exist to answer the diagnostic question, which is whether a page with
+`lead_form_start` and `directions_click` are not enquiries and must not be marked as key
+events. `lead_form_start` is deliberately NOT called `form_start`: GA4's Enhanced
+Measurement emits an automatic `form_start` of its own, and two sources under one event
+name merge silently in every report. They exist to answer the diagnostic question, which is whether a page with
 traffic and no leads is failing to interest people or losing them inside the form. Those
 two problems need opposite fixes and without these events they look identical.
 
@@ -92,7 +94,7 @@ exactly, all events, no filters.
 | `CE - call_click` | `call_click` |
 | `CE - email_click` | `email_click` |
 | `CE - generate_lead` | `generate_lead` |
-| `CE - form_start` | `form_start` |
+| `CE - lead_form_start` | `lead_form_start` |
 | `CE - directions_click` | `directions_click` |
 
 ---
@@ -148,7 +150,7 @@ not backfilled: a dimension created in October shows nothing for September. Do t
 same day as the first publish.
 
 **Mark the key events.** Admin, Events, Key events, and mark exactly four:
-`whatsapp_click`, `call_click`, `email_click` and `generate_lead`. Do NOT mark `form_start`
+`whatsapp_click`, `call_click`, `email_click` and `generate_lead`. Do NOT mark `lead_form_start`
 or `directions_click`; they are diagnostics and marking them would inflate every lead figure
 in the monthly report. An event only appears in this list after it has fired at least once,
 so publish first, click each button on the live site, then come back.

@@ -7,7 +7,15 @@ interface Props {
 }
 const {
   eyebrow = 'Multi-activity · Lahbab red dunes · Al Awir base',
-  heading = 'Experience Dubai’s Ultimate Desert Adventure: Dune Buggy, Quad Biking & Desert Safari Tours',
+  /* Was "Experience Dubai's Ultimate Desert Adventure: Dune Buggy, Quad Biking &
+     Desert Safari Tours" until 7 Sep 2026. Two problems, both measurable. It opened
+     on a phrase that says nothing a competitor could not say, which is the opener the
+     article prompt bans for exactly this reason. And it did not contain the words this
+     page actually ranks for: CLAUDE.md §6 requires the primary keyword in the h1, and
+     Search Console says the primary keyword here is the rental family, not "tours".
+     The tagline below still carries quad, dirt bike and safari, so nothing is lost by
+     letting the h1 do one job properly. */
+  heading = 'Dune Buggy Rental in Dubai, Self-Drive in the Lahbab Red Dunes',
   taglineEm = 'Self-Drive Desert Adventures',
   tagline = 'Dune Buggy Rental, Quad Biking Dubai, KTM Dirt Bike and Bedouin BBQ Safari',
   image = 'desert-adventure-dubai-hero-canam-maverick'

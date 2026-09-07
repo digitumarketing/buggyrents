@@ -21,4 +21,58 @@ Allow: /
 Disallow: /keystatic/
 Disallow: /api/
 
+# ---------------------------------------------------------------------------
+# AI crawlers, named explicitly. Added 7 Sep 2026.
+#
+# The wildcard above already allowed all of these. They are named anyway for two
+# reasons. Some crawlers only look for their own user-agent line and treat the
+# absence of one as undefined rather than as permission. And an explicit list is
+# something a human can audit in ten seconds, which the wildcard is not: "are we
+# allowing Perplexity" had no answer you could point at before this block.
+#
+# THEY ARE ALL IN ONE BLOCK ON PURPOSE. A named user-agent group REPLACES the
+# wildcard group for that crawler rather than adding to it, so giving GPTBot its
+# own block with only "Allow: /" would have quietly opened /keystatic/ and /api/
+# to it. The Disallow lines are repeated here for exactly that reason. Do not
+# split this into one block per crawler without repeating them in each.
+#
+# Grouped by what they are for:
+#   training        GPTBot, ClaudeBot, CCBot, Google-Extended, meta-externalagent,
+#                   Applebot-Extended, Bytespider, cohere-ai, Diffbot, Amazonbot
+#   answer indexing OAI-SearchBot, Claude-SearchBot, PerplexityBot, YouBot
+#   live retrieval  ChatGPT-User, Claude-User, Perplexity-User, meta-externalfetcher
+#
+# The live retrieval agents matter most for this business: they fetch a page
+# because a real person just asked about it, which is as close to a lead as a
+# crawler gets. The September 2026 baseline found assistants already sending more
+# engaged traffic here than Google organic. See docs/reports/2026-09-baseline.md.
+
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: meta-externalagent
+User-agent: meta-externalfetcher
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: cohere-ai
+User-agent: Diffbot
+User-agent: YouBot
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+Disallow: /keystatic/
+Disallow: /api/
+
+# A plain text summary of what this business sells, what it costs and on what
+# basis, generated from the site's own data on every deploy so it cannot go stale:
+# https://buggyrents.com/llms.txt
+
 Sitemap: https://buggyrents.com/sitemap-index.xml

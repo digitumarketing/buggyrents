@@ -456,12 +456,12 @@ Was 65 before the safari cluster of 12 Aug 2026. The link and orphan claim is me
 rather than assumed as of 4 Sep 2026: 9,073 internal links, all resolving. Before that
 date it was an assertion nothing checked.
 
-**`npm run build` runs 17 audits and every one of them fails the build.** Do not remove
+**`npm run build` runs 18 audits and every one of them fails the build.** Do not remove
 the `&& npm run audit`. In `scripts/audit-contrast.mjs`: contrast on card surfaces,
 colour syntax, image reuse and alt text, image resolution, insurance claims, em dashes,
 missing referenced assets, placeholders such as `[object Object]`, a price cross-check,
 cross-page image variety, metadata, CMS tokens, root-resolves, analytics
-configuration, and lead tracking. Then `scripts/audit-links.mjs` (internal links and orphans) and
+configuration, lead tracking, and llms.txt. Then `scripts/audit-links.mjs` (internal links and orphans) and
 `scripts/audit-contrast-dom.mjs` (the full DOM cascade walk).
 
 **`npm run typecheck` is separate and deliberately not part of the build.** See
@@ -585,6 +585,19 @@ commit for every CMS edit would bury the history.
 **Cloudflare injects its own block into `robots.txt`.** AI Crawl Control is on by default and
 prepends `Disallow: /` for ClaudeBot, GPTBot, CCBot, Google-Extended, Bytespider and others
 above our rules, plus `ai-train=no`. Google Search is unaffected either way.
+
+**`/llms.txt` is generated, not a file in `public/`.** `src/pages/llms.txt.ts` builds it
+from `clusters.ts`, `vehicles.ts`, `safari.ts`, `locations.ts`, `audiences.ts` and the
+posts collection, so a price change or a new machine updates it on the next deploy. A
+hand-written one would be a second copy of the price list, and an assistant quoting a price
+this business no longer charges is worse than no file at all. Its audit fails the build if
+a link in it dies or if the per-vehicle and per-person price basis statements go missing.
+
+**Nineteen AI crawlers are named explicitly in `public/robots.txt` as of 7 Sep 2026**, in a
+single shared group. They are in one group deliberately: a named user-agent block REPLACES
+the wildcard for that crawler rather than adding to it, so a per-crawler block containing
+only `Allow: /` would have opened `/keystatic/` and `/api/` to it. The Disallow lines are
+repeated inside the group for that reason.
 
 **Client decision 10 Aug 2026: AI crawlers are allowed.** `public/robots.txt` now carries
 `Content-Signal: search=yes, ai-input=yes, ai-train=yes`. That file alone is not enough —

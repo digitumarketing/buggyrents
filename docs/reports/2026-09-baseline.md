@@ -65,8 +65,49 @@ written this quarter.
 **Quad is the underperformer.** `CLAUDE.md` §5 records quad as the best
 volume-to-difficulty ratio on the site and says it should rank fastest. It does not: quad
 biking dubai sits at 60.9 on 115 impressions, quad bike rental dubai at 58.3 on 82, quad bike
-dubai at 69.3 on 70. Buggy queries rank two to three times better on comparable terms. The
-reason is not known yet and is worth an hour before any new quad content is written.
+dubai at 69.3 on 70. Buggy queries rank two to three times better on comparable terms.
+
+## Why quad is behind, diagnosed 7 Sep 2026
+
+Not weaker content, which is what the numbers above look like at first. Breaking the two
+biggest quad queries down by page settles it:
+
+| Query | Page Google shows | Impressions | Position |
+|---|---|---|---|
+| quad biking dubai | `/quad-bike-rental-dubai/` (301s away) | 99 | 65.9 |
+| quad biking dubai | `/` | 16 | 29.9 |
+| quad biking dubai | `/quad-bike-dubai/` | does not appear | |
+| quad bike rental dubai | `/quad-bike-rental-dubai/` (301s away) | 66 | 63.5 |
+| quad bike rental dubai | `/` | 9 | 28.7 |
+| quad bike rental dubai | `/quad-bike-dubai/` | 9 | 55.0 |
+
+**The quad pillar is close to invisible for its own head term.** What Google shows instead is
+the old WordPress URL, which redirects, and which URL Inspection says was last crawled on
+**5 Aug 2026**: five days before the site went live on this domain. Google has been serving a
+month-old snapshot of a page that no longer exists.
+
+Three things follow, in the order they matter.
+
+**1. This is the migration, not the content.** Quad is hit hardest because the old quad URL
+was the strongest page on the old site: 671 impressions against the old buggy URL's 257. Quad
+had the most to lose and lost it. Reindexing was requested for all six URLs, old and new, on
+7 Sep 2026.
+
+**2. The new slug dropped the keyword.** `/quad-bike-rental-dubai/` contained the exact
+phrase people search. `/quad-bike-dubai/` does not. The same happened to buggy and dirt bike.
+Do not "fix" this by migrating the slugs again: a second URL change restarts the clock that
+is already most of the problem. Put the words on the page instead.
+
+**3. The page does not speak the language of the queries.** Every high-volume quad query
+carries rental or hire: quad bike rental dubai, quad bike hire dubai, quad bike rental uae,
+atv rental dubai. The quad pillar uses "rental" four times and "hire" not once, and its title
+and h1 say "Quad Biking" and "ATV Desert Tours".
+
+**Buggy is not healthier, it is luckier.** The domain carries both words a buggy searcher
+types: buggyrents.com is a brand match for "buggy" and for "rents". Quad gets no such assist
+and never will, which is why the same on-page weakness reads as position 25 on buggy terms
+and position 65 on quad ones. The homepage was rewritten against this on 7 Sep 2026. The
+quad pillar has not been, and that is the next on-page job.
 
 ## GA4, last 28 days
 

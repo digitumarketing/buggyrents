@@ -51,7 +51,7 @@
   ],
   "flowKicker": "03 / Tour flow",
   "flowH2": "From hotel pickup to red dune riding.",
-  "flowLede": "A simple flow from pickup through safety briefing, guided ATV riding in the Lahbab red dunes, and return.",
+  "flowLede": "A simple flow from pickup through safety briefing, guided ATV tours in the Lahbab red dunes, and return.",
   "steps": [
     {
       "label": "Pickup",
@@ -86,6 +86,10 @@
     {
       "q": "How much is quad biking in Dubai?",
       "a": "Quad biking Dubai starts at AED {quadFrom} for 30 minutes on the kids quad and AED 89 for adults in the boundary area. Open-desert single seats start at AED 200, and the Yamaha Raptor 700cc starts at AED {dirtbikeFrom}. Every price is per quad."
+    },
+    {
+      "q": "Is ATV rental Dubai the same as quad bike hire?",
+      "a": "Yes. ATV stands for all-terrain vehicle and it is the same four-wheel machine, so ATV rental Dubai, ATV tours Dubai and quad bike hire all describe what is on this page. Operators use the words interchangeably. What actually changes the price is the riding area and the engine, not the label."
     },
     {
       "q": "Do I need experience to ride a quad bike?",

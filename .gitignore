@@ -6,3 +6,8 @@ dist/
 .env.production
 .DS_Store
 *.log
+
+# Session scratch: git lock files the FUSE mount will not let the VM unlink,
+# and the commit message files handed to git commit -F.
+_to_delete/
+commit-msg.log

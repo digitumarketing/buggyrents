@@ -16,6 +16,7 @@ that machine, leaving a repo full of decisions nobody could reconstruct.
 | `site/docs/ARTICLE-PROMPT.md` | Master copy of the blog article prompt, and the skill itself. |
 | `site/.claude/skills/buggyrents-article/SKILL.md` | **Symlink** to the file above. Do not replace with a copy. |
 | `site/docs/SEO-PLAN.md` | The 90-day SEO, AEO and GEO plan and the monthly client report format. |
+| `site/docs/KEYWORDS.md` | The working keyword pool, what owns each group, and the content work list. |
 | `site/docs/GTM-SETUP.md` | The GTM container build sheet. Every tag on this site lives there. |
 | `site/.claude/skills/_upstream/` | Vendored third-party skills, their licence and the rules for touching them. |
 
@@ -295,12 +296,16 @@ volume-to-difficulty ratio on the list and should rank fastest. Build quad befor
 
 KTM is negligible for search (300 volume, KD 96) — build it for conversion, not traffic.
 
-**30 quick wins at KD ≤ 25:** dubai desert safari without dune bashing (KD 2) · what to wear to
-desert safari dubai (KD 7) · dubai desert safari outfit (KD 7) · vip hummer desert safari dubai
-(KD 7) · quad biking dubai price (KD 9) · hummer desert safari dubai (KD 9) · red dune desert
-safari dubai (KD 22, 1,000 vol) · dubai desert safari location (KD 20, 720) · overnight desert
-safari dubai (KD 19, 590) · quad bike desert safari dubai (KD 21, 590) · sunrise desert safari
-dubai (KD 22, 480) · dune buggy dubai price (KD 20, 320) · desert safari dubai timings (KD 19).
+**The "30 quick wins at KD ≤ 25" list that stood here is dead and has been removed.** Checked
+against the live site on 9 Sep 2026: every keyword on it is either already owned by a page
+built after the list was written, a duplicate of a published article, or a product the
+business does not sell. `docs/KEYWORDS.md` §6 records what happened to each one.
+
+**The working keyword list is `docs/KEYWORDS.md`.** It is fresher than this table — DataForSEO,
+9 Sep 2026, against Semrush CSVs from before launch — and it is grouped by intent with the
+owning page named for each group. The table above stays here because the cluster totals are
+what the client direction was argued from. Where the two disagree on a number, `KEYWORDS.md`
+is newer.
 
 ---
 

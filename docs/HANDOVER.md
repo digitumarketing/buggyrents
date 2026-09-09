@@ -248,15 +248,21 @@ make them unreadable in the editor. The price audit covers them instead.
    breaks a rule fails the deploy silently: the live site keeps serving the previous
    version and the client gets no notification. They need to know where to look and
    what the eleven failure messages mean.
-2. **24 quick-win articles.** The client will supply a prompt to use for these. Six of
-   the thirty KD ≤ 25 keywords are written. Still open, from the named list:
-   dubai desert safari outfit (KD 7) · vip hummer desert safari dubai (KD 7) ·
-   hummer desert safari dubai (KD 9) · red dune desert safari dubai (KD 22, 1,000) ·
-   dubai desert safari location (KD 20, 720) · overnight desert safari dubai (KD 19,
-   590) · quad bike desert safari dubai (KD 21, 590) · sunrise desert safari dubai
-   (KD 22, 480).
-   *The prompt is `docs/ARTICLE-PROMPT.md`, which loads automatically as the
-   `buggyrents-article` skill. Do not paste one into a chat.*
+2. **Content work list — see `docs/KEYWORDS.md` §3.** The eight quick-win keywords that
+   stood here were checked against the live site on 9 Sep 2026 and **all eight are dead**:
+   five are already owned by pages built on 12 Aug, after this list was written; one
+   duplicates a published article; two name a Hummer the business does not own.
+   `docs/KEYWORDS.md` §6 records each verdict, and §3 is the replacement work list, built
+   on a fresh DataForSEO pull rather than on pre-launch CSVs.
+
+   Its first five items are **on-page changes to pages that already rank**, not articles,
+   because a query in striking distance moves cheaper and sooner than a new page does —
+   the same reasoning as item 5 below.
+
+   *The article prompt is `docs/ARTICLE-PROMPT.md`, which loads automatically as the
+   `buggyrents-article` skill. Do not paste one into a chat. Run its STEP 0 against the
+   live site before writing anything from any list in this repo, `KEYWORDS.md` included —
+   that check is what caught all eight of these.*
 
    **A dirt-bike-first plan was drafted on 5 Sep 2026 and rejected the same day.** It
    ranked the silos by how empty they were — dirt bike has no articles here and none on

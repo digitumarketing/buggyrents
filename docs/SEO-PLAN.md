@@ -143,11 +143,20 @@ Four pages 404 today that every other cluster has: the dirt bike FAQ, and the th
 safety pages. `docs/HANDOVER.md` §8 item 6 has the detail on why no audit catches it. These
 are commercial pages with a booking CTA, not articles, and they ship before article one.
 
-Then the low-difficulty safari long tail, in the order `CLAUDE.md` §5 puts them, working
-down the KD ≤ 25 list from the top: `dubai desert safari location`, `overnight desert safari
-dubai`, `quad bike desert safari dubai`, `sunrise desert safari dubai`, `dubai desert safari
-outfit`. This is long tail only. The head terms stay uncontested, per the standing client
-direction in §5 which is not being re-argued.
+~~Then the low-difficulty safari long tail, working down the `CLAUDE.md` §5 KD ≤ 25 list from
+the top.~~ **That list was checked against the live site on 9 Sep 2026 and every keyword on it
+is dead** — already owned by a page built on 12 Aug, a duplicate of a published article, or a
+Hummer the business does not own. `docs/KEYWORDS.md` §6 has the verdicts.
+
+**The replacement work list is `docs/KEYWORDS.md` §3**, built on a fresh DataForSEO pull. Its
+order is deliberate and different from what stood here: the first five items are **on-page
+changes to pages that already carry impressions**, not new pages, because a page at position
+23 moves cheaper and lands sooner than a page at zero. The largest single line on it is
+`buggy rental dubai` — 1,300 searches at KD 17, against 590 at KD 35 for the longer
+`dune buggy rental dubai` the site was rewritten around on 8 Sep.
+
+Safari stays long tail only. The head terms stay uncontested, per the standing client
+direction in `CLAUDE.md` §5 which is not being re-argued.
 
 Everything goes through the `buggyrents-article` skill, which loads automatically here. The
 cannibalisation check in its STEP 0 runs against the live pages and its verdict wins over
@@ -198,8 +207,26 @@ the citation rules are not the same as ranking rules.
 
 ### 4.3 Pages, October
 
-8 to 12, continuing down the KD ≤ 25 list, plus whatever September's Search Console pull put
-in striking distance. Rewrites of near-miss pages come before new articles every time.
+`docs/KEYWORDS.md` §3B, plus whatever September's Search Console pull put in striking
+distance. Rewrites of near-miss pages come before new articles every time.
+
+**Revise the "8 to 12 pages" figure down.** The 9 Sep research found exactly **one** unowned
+intent above 500 searches across all four clusters: `best desert safari dubai`, 1,300 at
+KD 19. Everything else at that level is already built — the 12 Aug safari build and the 8 Sep
+pillar rewrites covered it. Writing 8 to 12 pages from here means writing pages that compete
+with pages this site already ranks with.
+
+So October is **one page and a set of on-page passes**, not a content quota. The page is
+**"How to choose a desert safari in Dubai"**: comparison-shaped, answerable from the client's
+own operation, and the exact question an assistant fields rather than one an OTA ranks for.
+The September baseline found AI Assistant sessions engaging at 70.9% against organic's 42.6%,
+so this is where §4.1 and §4.2 are aimed. The rest of the month goes to §4.1's answer-first
+rewrites of FAQ blocks that already rank, and to whatever the September Search Console pull
+puts in striking distance.
+
+If that reads thin, it is the honest read of the pool. The next real volume decision is the
+safari head terms in `docs/KEYWORDS.md` §2, and that is a client conversation rather than a
+keyword one.
 
 ### 4.4 Authority
 

@@ -3,10 +3,10 @@
   "crumb": "Dune Buggy Dubai",
   "title": "Dune Buggy Rental Dubai | Self-Drive from AED {buggyFrom}",
   "description": "Dune buggy rental in Dubai, self-drive in the Lahbab red dunes. Eleven buggies from AED {buggyFrom} per buggy, not per person. Free Dubai pickup and guide.",
-  "eyebrow": "Self-drive dune buggy hire in Dubai",
-  "h1": "Dune Buggy Rental in Dubai",
+  "eyebrow": "Buggy rental and dune buggy tours in Dubai",
+  "h1": "Dune Buggy Rental Dubai, Self-Drive in the Lahbab Red Dunes",
   "subhead": "Self-drive dune buggy tours in the Lahbab red dunes, with Polaris and Can-Am machines for every level.",
-  "lede": "Choose a 30-minute, 1-hour, 2-hour or 4-hour guided buggy route with helmet, briefing, fuel and a lead guide included. Prices are per buggy rather than per person, so a 2-seater at AED {buggyFrom} covers both of you.",
+  "lede": "Choose a 30-minute, 1-hour, 2-hour or 4-hour guided dune buggy ride with helmet, briefing, fuel and a lead guide included. Buggy rental Dubai prices are per buggy rather than per person, so a 2-seater at AED {buggyFrom} covers both of you.",
   "stats": [],
   "fleetKicker": "01 / Buggy fleet",
   "fleetH2": "Choose your dune buggy.",
@@ -64,11 +64,15 @@
   ],
   "faqKicker": "04 / FAQ",
   "faqH2": "Answers before you book.",
-  "faqLede": "Clear answers on dune buggy Dubai price, who can drive, what is included and how pickup works.",
+  "faqLede": "Clear answers on buggy rental Dubai prices, who can drive, what is included and how pickup works.",
   "faqs": [
     {
       "q": "How much is a dune buggy in Dubai?",
       "a": "Dune buggy Dubai starts at AED {buggyFrom} for 30 minutes in a Polaris RZR 1000 2-seater. The Can-Am Maverick X3 starts at AED 600 and the Maverick R at AED 900. Every price is per buggy, not per person."
+    },
+    {
+      "q": "Is this a dune buggy tour or a buggy rental?",
+      "a": "Both words describe the same session here. You drive the buggy yourself, so it is a rental in the sense that the machine is yours for the slot, and a guided tour in the sense that a lead guide sets the route and stays with you the whole way. There is no unaccompanied dune buggy hire in Dubai, ours or anyone else's, because the red dunes are not a place to send a first-timer alone."
     },
     {
       "q": "Do I need off-road experience?",
@@ -101,10 +105,10 @@
   ],
   "lfKicker": "05 / Guide",
   "lfHeading": "Dune Buggy Dubai: self-drive routes, prices and vehicle choice in the Lahbab red dunes",
-  "lfIntro": "Everything you need before booking <strong>dune buggy Dubai</strong>: the eleven-machine fleet, what separates a Polaris from a Can-Am, current <strong>dune buggy rental Dubai</strong> prices, and how the guided red-dune route actually runs.",
+  "lfIntro": "Everything you need before booking <strong>dune buggy Dubai</strong>: the eleven-machine fleet, what separates a Polaris from a Can-Am, current <strong>buggy rental Dubai</strong> prices, and how the guided <strong>dune buggy tour</strong> through the red dunes actually runs.",
   "lfBlocks": [
     {
-      "h": "What a dune buggy ride involves",
+      "h": "What a dune buggy tour in Dubai actually involves",
       "html": "<p class=\"lf-lead\">A dune buggy here is a side-by-side you drive yourself, not a passenger ride.</p><p>You get the wheel, the pedals and a briefing, and a guide rides with the group to set the route and read the sand ahead. Every vehicle has a full roll cage, four-point harnesses and helmets included.</p><p>All sessions run from our Al Awir base at the edge of the <span class=\"pill\">Lahbab red dunes</span>, roughly 45 minutes from Downtown Dubai.</p>"
     },
     {

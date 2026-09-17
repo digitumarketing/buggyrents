@@ -650,7 +650,7 @@ All five items are done and verified on the live domain:
    shrank from 351,825 to 331,180 bytes. The live homepage now carries exactly one gtag
    loader and one `gtag('config')` call.
 
-   **Still open: annotate 3 to 4 Sep 2026 in GA4.** Every figure in that window is doubled,
+   **~~Still open: annotate 3 to 4 Sep 2026 in GA4.~~ Annotated 17 Sep 2026.** Every figure in that window is doubled,
    so the correction will read as a traffic collapse to anyone comparing periods later. It
    needs GA4 account access, which the client has not granted. Do this before the window
    scrolls out of the default reporting range.

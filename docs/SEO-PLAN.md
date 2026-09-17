@@ -89,14 +89,17 @@ the live site and reading the parameters out of the GA4 request body. All six ev
 with `lead_page`, `lead_cluster` and `lead_method`. The three custom dimensions are
 registered. `docs/GTM-SETUP.md` has the container detail.
 
-Two things GA4 will not let anyone do on the same day, so they are the first task of the
-next session:
+Two things GA4 will not let anyone do on the same day. **Both done 17 Sep 2026:**
 
-1. **Mark the key events**, once GA4 lists the new event names in Admin, Events, which
-   takes up to 24 hours. Exactly four: `whatsapp_click`, `call_click`, `email_click`,
-   `generate_lead`. Not `lead_form_start` and not `directions_click`.
-2. **Annotate 3 to 4 Sep** for the doubled window, and 6 Sep for the test events fired
-   while verifying this.
+1. ~~Mark the key events~~ **Done.** Exactly four are marked: `whatsapp_click`,
+   `call_click`, `email_click`, `generate_lead`. `lead_form_start` and `directions_click`
+   are deliberately left unmarked. GA4's own three defaults (`purchase`, `qualify_lead`,
+   `close_convert_lead`) also sit in that list carrying no data; ignore them.
+   **Key events are not backfilled.** The count starts 17 Sep, so the September report
+   covers 17 to 30 Sep for enquiries and the full month for everything else. Say so in
+   the report rather than letting the client read a part-month as a full one.
+2. ~~Annotate 3 to 4 Sep and 6 Sep~~ **Done.** Both annotations exist in Admin, Data
+   display, Annotations.
 
 **`lead_form_start` is deliberately not called `form_start`.** GA4's Enhanced Measurement
 emits an automatic `form_start` of its own and it is already firing on this property. Two
@@ -268,7 +271,7 @@ to how many of them ask.
 | Bing Webmaster Tools | H §5.4 | October, counts as GEO |
 | Five stale AED figures | H §7 | November, EEAT |
 | Core Web Vitals unmeasured | H §5.6 | November |
-| GA4 annotation for 3 to 4 Sep | C launch item 2 | Week 1 |
+| ~~GA4 annotation for 3 to 4 Sep~~ done 17 Sep | C launch item 2 | Week 1 |
 | Client guide | H §5.1 | Not SEO. After the quarter. |
 | 18 typecheck errors | H §8.5 | Not SEO. Independent of this plan. |
 | 680 contrast pairs below AA | H §7 | Leave. Client design decision. |

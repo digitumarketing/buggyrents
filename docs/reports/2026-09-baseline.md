@@ -139,3 +139,65 @@ An internal traffic rule for the agency IP `182.186.96.129`, with the Internal T
 filter switched from Testing to **Active**, so agency testing no longer pollutes the client's
 reports. That IP is a PTCL connection and may be dynamic: if agency visits start appearing in
 reports again, re-check it before assuming the filter is working.
+
+---
+
+## First re-measure, 17 Sep 2026 — nine days after the vocabulary rewrite
+
+The on-page rewrites landed 8 Sep. This is the first read with enough days behind it to mean
+anything, and it is early: treat direction as the signal and levels as noise.
+
+| | Baseline, 9 Aug – 5 Sep | Last 28 days, 19 Aug – 15 Sep | Last 7 days, 9 – 15 Sep |
+|---|---:|---:|---:|
+| Clicks | 14 | 14 | 4 |
+| Impressions | 2,412 | 3,590 | 882 |
+| CTR | 0.4% | 0.4% | 0.5% |
+| Average position | 39.5 | 31.3 | **25.3** |
+
+Impressions per day went 86 to 128. Average position improved 8 places on the like-for-like
+28-day window and 14 places on the trailing week. **Clicks did not move, and that is the
+expected reading, not a failure**: the buggy rental cluster sits at positions 22 to 30, which
+is page three. Do not let anyone read flat clicks as a flat month, and do not promise clicks
+before those terms cross into the top ten.
+
+### The migration is consolidating
+
+Old pre-launch URLs held **1,093 of 2,412 impressions (45%)** at baseline. On the last 28 days
+they hold **858 of 3,590 (24%)**: `/quad-bike-rental-dubai/` 498, `/dune-buggy-rental-dubai/`
+187, `/dirt-bike-rental-dubai/` 173. The reindex requests of 8 Sep are working.
+
+The homepage is now the strongest page on the site at **1,531 impressions and 7 clicks**, which
+it was not at baseline. It is absorbing the buggy rental queries rather than the pillar doing
+it, which follows from its title being rewritten to lead with "Dune Buggy Rental Dubai".
+
+### Query positions, 3 Aug – 15 Sep
+
+| Query | Impressions | Position |
+|---|---:|---:|
+| buggy rental dubai | 228 | 22.4 |
+| quad biking dubai | 173 | 62.1 |
+| dune buggy rental dubai | 163 | 27.5 |
+| buggy rentals dubai | 136 | 23.5 |
+| quad bike rental dubai | 136 | 55.9 |
+| buggy rental in dubai | 110 | 27.5 |
+| quad bike dubai | 105 | 69.7 |
+| atv rental dubai | 82 | 52.2 |
+| buggy rental near me | 48 | 14.9 |
+| dune buggies for rent | 51 | 26.8 |
+
+Two things to carry forward. **The whole buggy rental cluster is 22 to 30 and quad is 52 to
+70**, which is the same split the 7 Sep diagnosis predicted and is a reason to spend the next
+on-page effort on quad. And `atv rental dubai` at 82 impressions confirms the ATV vocabulary
+gap in `docs/KEYWORDS.md` §2 was real; the FAQ answering it shipped 17 Sep, so that line is
+the cleanest before-and-after available next month.
+
+### GA4, last 7 days to 16 Sep
+
+93 active users, 556 events, 0 key events (key events were only marked on 17 Sep and **are
+not backfilled**). Sessions by channel: Direct 61, **AI Assistant 29**, Organic Search 12,
+Unassigned 4, Organic Video 1. By source: `chatgpt.com / ai-assistant` 29 against
+`google / organic` 7 and `search.google.com / referral` 5.
+
+**ChatGPT is sending more than twice what Google organic is.** That was true at baseline and
+it is still true, which makes it a pattern rather than a spike, and it is the argument for the
+GEO work in `docs/SEO-PLAN.md` §4.2 being funded as more than a side bet.

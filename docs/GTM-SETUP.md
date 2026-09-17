@@ -149,11 +149,14 @@ A parameter that is not registered is collected but cannot be used in a report, 
 not backfilled: a dimension created in October shows nothing for September. Do this on the
 same day as the first publish.
 
-**Mark the key events.** Admin, Events, Key events, and mark exactly four:
-`whatsapp_click`, `call_click`, `email_click` and `generate_lead`. Do NOT mark `lead_form_start`
-or `directions_click`; they are diagnostics and marking them would inflate every lead figure
-in the monthly report. An event only appears in this list after it has fired at least once,
-so publish first, click each button on the live site, then come back.
+**Mark the key events. Done 17 Sep 2026.** Admin, Data display, Events, Recent events tab,
+star exactly four: `whatsapp_click`, `call_click`, `email_click` and `generate_lead`. Do NOT
+mark `lead_form_start` or `directions_click`; they are diagnostics and marking them would
+inflate every lead figure in the monthly report. An event only appears in this list after it
+has fired at least once, so publish first, click each button on the live site, then come back.
+
+All six of our events were confirmed present in Recent events on 17 Sep, which is the only
+proof that every one of them reaches GA4 from the live site rather than only from a test.
 
 **Leave Enhanced Measurement on**, in Admin, Data streams, the web stream, Enhanced
 measurement. It gives scrolls, outbound clicks, file downloads and site search for free.

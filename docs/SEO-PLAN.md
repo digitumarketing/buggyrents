@@ -165,10 +165,12 @@ Everything goes through the `buggyrents-article` skill, which loads automaticall
 cannibalisation check in its STEP 0 runs against the live pages and its verdict wins over
 this list.
 
-**Image supply is the hard ceiling on page volume.** The image-variety audit fails the build
-when two pages in a cluster share an image set, and `CLAUDE.md` §6b records how little
-headroom the safari sets have left. At 8 to 12 pages a month the existing library runs out
-during September, so plan each month against the images that exist.
+**Image supply is the hard ceiling on TOUR page volume, and only on tour pages.** The
+image-variety audit fails the build when two pages in a cluster share an image set, and
+`CLAUDE.md` §6b records how little headroom the safari sets have left. But that audit checks
+exactly four directories — the three vehicle clusters and the safari cluster — and never looks
+at `/blogs/`. **Articles have no image ceiling.** Corrected 17 Sep 2026, because this
+paragraph had been read as a cap on all content and it is not one.
 
 ---
 
@@ -213,23 +215,23 @@ the citation rules are not the same as ranking rules.
 `docs/KEYWORDS.md` §3B, plus whatever September's Search Console pull put in striking
 distance. Rewrites of near-miss pages come before new articles every time.
 
-**Revise the "8 to 12 pages" figure down.** The 9 Sep research found exactly **one** unowned
-intent above 500 searches across all four clusters: `best desert safari dubai`, 1,300 at
-KD 19. Everything else at that level is already built — the 12 Aug safari build and the 8 Sep
-pillar rewrites covered it. Writing 8 to 12 pages from here means writing pages that compete
-with pages this site already ranks with.
+**Pulled into September, 17 Sep 2026.** The agency decided to compress two months of work
+into one. `docs/KEYWORDS.md` §3 is the merged list. October's own scope becomes whatever
+September does not finish, plus §4.1 and §4.4.
 
-So October is **one page and a set of on-page passes**, not a content quota. The page is
-**"How to choose a desert safari in Dubai"**: comparison-shaped, answerable from the client's
-own operation, and the exact question an assistant fields rather than one an OTA ranks for.
-The September baseline found AI Assistant sessions engaging at 70.9% against organic's 42.6%,
-so this is where §4.1 and §4.2 are aimed. The rest of the month goes to §4.1's answer-first
-rewrites of FAQ blocks that already rank, and to whatever the September Search Console pull
-puts in striking distance.
+**On the "8 to 12 pages" figure.** A note here on 9 Sep revised it down to one page, on the
+grounds that only one unowned intent sat above 500 searches. That was true of the
+**commercial** pool and wrong as a statement about content: the pull behind it used a volume
+floor of 20 and a 300-row cap per seed, which deleted the question long tail before anyone saw
+it. The 17 Sep re-pull found 69 question-shaped keywords and **ten writable articles**
+(`KEYWORDS.md` §2b and §3C).
 
-If that reads thin, it is the honest read of the pool. The next real volume decision is the
-safari head terms in `docs/KEYWORDS.md` §2, and that is a client conversation rather than a
-keyword one.
+So the figure comes back up, with one condition that must survive into the client report:
+**those ten articles are worth about 500 searches between them and the largest is 140.** They
+are written for AI citation and for cluster support, not for traffic. Reporting them as a
+traffic plan sets the client up to be disappointed in November. The GEO case for them is real
+and measured — ChatGPT out-sends Google organic here by more than two to one, on two separate
+readings a month apart — but it is a different argument and has to be made as one.
 
 ### 4.4 Authority
 

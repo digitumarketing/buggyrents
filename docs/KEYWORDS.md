@@ -150,6 +150,52 @@ a comparison question rather than a product.
 
 ---
 
+## 2b. The informational pool — pulled 17 Sep 2026, and why it was missed
+
+The 9 Sep pull was seeded with product terms at a volume floor of 20 and a per-seed limit of
+300. Both settings quietly deleted the question long tail: `desert safari` alone has **1,254
+suggestions** and only the top 300 were read, and most real questions sit between 10 and 150
+searches. The conclusion drawn from that pull — "one unowned intent above 500" — was true of
+the **commercial** pool and was wrong as a statement about content.
+
+Re-pulled 17 Sep: the safari tail from rank 300 to 1,254, plus `quad biking dubai` and
+`dune buggy dubai` at a floor of 10. 2,066 unique keywords total, 935 Dubai-relevant,
+**69 question or attribute shaped**. Cost $0.17; balance left $0.47.
+
+| Question intent | Vol | KD | Owner today |
+|---|---:|---:|---|
+| what to wear desert safari dubai | 260 | 0 | `what-to-wear-desert-safari-dubai` article |
+| desert safari dubai timings | 260 | 0–10 | `desert-safari-dubai-timings` article |
+| **desert safari dubai for family** | **140** | **9** | — |
+| desert safari dubai without dune bashing | 110 | 0 | `dubai-desert-safari-without-dune-bashing` article |
+| **age limit — quad 50, buggy 40, safari 20** | **110** | — | FAQ blocks only, no page |
+| where is desert safari dubai | 70 | — | `red-dune-desert-safari` (headings fixed 17 Sep) |
+| **how to book desert safari in dubai** | **50** | — | — |
+| **what is desert safari in dubai** | **60** | — | — |
+| how much is desert safari in dubai | 40 | — | `/desert-safari-dubai/price/` |
+| **which is the best desert safari in dubai** | **20** | — | — (rolls into `best desert safari dubai`, 1,300) |
+| what to wear quad biking / dune buggy dubai | 20 | — | — |
+| where to go quad biking in dubai | 10 | — | — |
+
+**Three of the eight quick-win articles that were declared dead on 9 Sep are confirmed dead
+by this pull too** — they show up here with their owning article named. That check holds.
+
+**What this pool is worth, honestly.** Every unowned question on it adds up to roughly 500
+searches a month, and the biggest single one is 140. Nobody hits a lead target on that. Its
+real value is different and worth naming: these are the questions an assistant answers, and
+`docs/reports/2026-09-baseline.md` shows ChatGPT sending this site more than twice what Google
+organic does, twice measured a month apart. Write them for citation and for cluster support,
+and count them as GEO work rather than as traffic work. Anyone who reports them as a traffic
+plan is setting the client up to be disappointed in November.
+
+**Blog articles are not image-constrained.** `docs/SEO-PLAN.md` §3.4 says image supply is the
+hard ceiling on page volume. That is true of tour pages and false of articles: the
+image-variety audit in `scripts/audit-contrast.mjs` checks exactly four directories
+(`/dune-buggy-dubai`, `/quad-bike-dubai`, `/ktm-dirt-bike-dubai`, `/desert-safari-dubai`) and
+never looks at `/blogs/`. Article throughput has no ceiling but writing time.
+
+---
+
 ## 3. The work list, in order
 
 Ranked by expected leads per hour of work. **Almost all of it is on-page work on pages that
@@ -180,29 +226,68 @@ written as "build a page", then deleted after checking the live site. See §6.
 5. **`ATV rental Dubai` and `ATV tours Dubai` as phrases on `/quad-bike-dubai/`.** 260. The
    page mentions ATV eight times and never in those two forms.
 
-### B. The one page worth building
+### B. Quad rescue — the largest single opportunity on the site
 
-6. **"How to choose a desert safari in Dubai."** `best desert safari dubai`, 1,300 at KD 19–29,
-   and the only row in §2 with no owner. Informational and comparison-shaped, which is exactly
-   what an assistant fields rather than what an OTA ranks for. The September baseline found AI
-   Assistant sessions engaging at **70.9%** against organic's 42.6%, so this is where §4.1 and
-   §4.2 of the SEO plan are aimed. Answer it honestly — including when a shared safari beats
-   ours — or it reads like every operator's "best" page and gets cited by nothing.
+**Quad is the whole game and it is not a content problem.** `docs/reports/2026-09-baseline.md`
+(17 Sep) shows the buggy cluster at positions 22 to 30 and the quad cluster at 52 to 70, on
+4,400 + 590 + 260 searches. The reason is visible in the Pages report: for buggy, the **new**
+site took the queries — the homepage now carries them at 1,531 impressions because its title
+was rewritten to lead with "Dune Buggy Rental Dubai". For quad, the **old** URL
+`/quad-bike-rental-dubai/` still holds them at 498 impressions and position ~60, and the new
+pillar does not surface at all.
 
-### C. Parked
+Redirects were verified on 17 Sep and are genuine `301`s, all three of them, so this is not a
+technical fault. Google simply has no reason yet to prefer the new quad page. Give it one:
 
-7. `desert safari deals dubai` (1,000, KD 10) needs a real offers page, and offers are the
-   client's to set. Do not build a page that will sit empty.
-8. `evening quad biking dubai` (70) and `1 hour quad biking dubai` (90) fold into the quad
-   pillar FAQ. Not worth a page each.
+6. **Quad depth on the homepage.** It leads with buggy and mentions quad. Buggy's position
+   came from that lead. Quad needs real homepage body copy, not a nav word.
+7. **Internal anchor text.** Links to the quad pillar mostly read "Quad Bike Dubai". Change
+   the high-traffic ones to the phrases people search: *quad bike rental Dubai*,
+   *quad biking Dubai*.
+8. **An article cluster pointing at the quad pillar** — items 11, 13 and 15 below exist as
+   much for this as for their own search volume, and that is the honest reason to write them.
+9. **Re-request indexing on `/quad-bike-dubai/`** after 6 to 8 land, not before.
 
-### What this list does not contain, and why that matters
+### C. Articles — the September push
 
-No article programme. The plan assumed 8 to 12 pages a month; the research says the pool does
-not support it. Between the four clusters there is **one** unowned intent above 500 searches.
-Writing to fill a quota from here means writing pages that compete with pages we already rank
-with. If September's on-page work moves the buggy and quad clusters, the next real content
-decision is the safari head terms — which is a client conversation, not a keyword one.
+Written for citation and cluster support, not for traffic. See §2b for why that distinction
+has to survive into the client report. Ordered by what each one is worth.
+
+| # | Article | Target | Vol | Serves |
+|---|---|---|---:|---|
+| 10 | How to choose a desert safari in Dubai | best desert safari dubai | 1,300 | AEO, safari |
+| 11 | Quad bike or ATV in Dubai, and which machine you actually get | atv terms + atv vs quad bike | ~300 | **quad pillar** |
+| 12 | Desert safari in Dubai with kids and family | desert safari dubai for family | 140 | safari |
+| 13 | Where quad biking in Dubai actually happens: Lahbab, Big Red, Fossil Rock | where to go quad biking dubai | ~120 | **quad pillar** |
+| 14 | Minimum age for every desert activity in Dubai | quad / buggy / safari age limit | 110 | AEO, all four |
+| 15 | Do you need a licence to ride a quad or buggy in Dubai | licence terms | ~60 | **quad pillar**, AEO |
+| 16 | What a Dubai desert safari actually is, start to finish | what is desert safari dubai | 60 | AEO, safari |
+| 17 | How to book a desert safari in Dubai | how to book desert safari dubai | 50 | safari |
+| 18 | What to wear for quad biking and dune buggy in Dubai | what to wear quad / buggy dubai | 20 | buggy + quad |
+| 19 | Best time of year and time of day for the Dubai desert | seasonal terms | — | all four |
+
+Items 18 and 19 carry almost no volume of their own. They are on the list because they
+complete the cluster and because they answer questions an assistant asks; **do not put a
+traffic number next to them in the client report.**
+
+Every one of these goes through `docs/ARTICLE-PROMPT.md` STEP 0 against the live site first.
+That check is what caught the last dead list and the four pages this file nearly re-proposed.
+
+### D. Parked
+
+20. `desert safari deals dubai` (1,000, KD 10) needs a real offers page, and offers are the
+    client's to set. Do not build a page that will sit empty.
+21. `evening quad biking dubai` (70) and `1 hour quad biking dubai` (90) fold into the quad
+    pillar FAQ. Not worth a page each.
+
+### What none of this fixes, and it needs saying
+
+The buggy cluster sits at 22 to 30. **On-page work does not carry a five-week-old domain from
+position 25 into the top ten** — links and citations do, and there are none. `SEO-PLAN.md` §4.4
+already says citations and listings come before outreach on a domain this age. Articles and
+on-page passes are the right work and they are not the binding constraint. If the plan is to
+hit five organic enquiries a month, the authority work has to start in parallel, not in
+November, and the parts of it that do not need anything from the client should start first.
 
 ---
 

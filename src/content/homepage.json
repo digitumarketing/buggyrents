@@ -55,19 +55,20 @@
     "image": "dune-buggy-convoy-crossing-dubai-red-dunes"
   },
   "quadIntro": {
-    "eyebrow": "Quad biking",
+    "eyebrow": "Quad bike rental Dubai",
     "heading": "A quad asks more of you than a buggy.",
-    "sub": "Why the riding area matters more than the engine",
+    "sub": "Quad biking Dubai, and why the riding area matters more than the engine",
     "paragraphs": [
-      "On a quad you steer with your body as much as the bars. It is more physical, more direct, and it teaches you to read the sand faster than anything else we run.",
+      "On a quad you steer with your body as much as the bars. It is more physical, more direct, and it teaches you to read the sand faster than anything else we run. Quad bike rental Dubai starts at AED {quadFrom} for 30 minutes, and every price covers the machine rather than the rider.",
       "We split the fleet by area rather than by model. A fenced zone for children from six. A marked two-kilometre boundary for anyone who wants to try without committing. And the open red dunes for riders who already know what they are doing.",
-      "That structure exists so nobody ends up on the wrong terrain. A first-timer on an open-desert Raptor is not a good afternoon for anyone."
+      "That structure exists so nobody ends up on the wrong terrain. A first-timer on an open-desert Raptor is not a good afternoon for anyone.",
+      "ATV and quad bike are the same thing, so ATV rental Dubai and quad bike hire both describe what is on this page. What changes the price is the riding area and the engine, never the word."
     ],
     "checklist": [
       "Kids from age 6 in a fenced area",
       "Boundary area for first-timers",
       "Open red dunes for experienced riders",
-      "Single and double seat options"
+      "Single and double seats, priced per quad"
     ],
     "image": "quad-bike-group-tour-dubai-open-desert"
   },
@@ -117,6 +118,10 @@
     {
       "q": "How much does a dune buggy cost in Dubai?",
       "a": "With us, a Polaris RZR 1000cc 2-seater starts at AED 300 for 30 minutes and AED 550 for an hour. The Can-Am Maverick X3 starts at AED 400, and the Maverick R turbo at AED 500. Every price is per buggy, not per person, so a 2-seater at AED 300 covers both of you."
+    },
+    {
+      "q": "How much is quad biking in Dubai?",
+      "a": "Quad biking Dubai starts at AED {quadFrom} for a 30-minute session on the kids quad in the fenced area, and AED 89 for adults in the marked boundary area. Open-desert single seats start at AED 200 and the Yamaha Raptor 700cc at AED 500. Every quad bike rental Dubai price is per quad, and the double-seat machines carry a passenger at no extra charge, so two people ride for one price."
     },
     {
       "q": "Do I need a driving licence?",

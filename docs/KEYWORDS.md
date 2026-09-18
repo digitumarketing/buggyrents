@@ -119,13 +119,21 @@ empty — see `HANDOVER.md` §5.2.
 
 ### Desert safari — long tail only
 
-The client's standing direction is that safari is a Phase 2 expansion and buggy/quad lead.
-**That decision is not being re-argued here.** Head terms are listed so the number is on
-record, and marked out of scope.
+**Scope decided 18 Sep 2026: the safari mid-tail is open, the head terms are not.**
+
+Head terms stay closed on the numbers rather than on the old direction alone. `desert safari
+dubai` is 49,500 at KD 26 against OTAs, on a domain six weeks old with no links; that is a two
+to three quarter fight and spending September on it would buy nothing. The mid-tail is
+winnable now: VIP (1,300 at KD 14), best/top (1,300 at KD 21), deals (1,000 at KD 18),
+packages (880 at KD 18), family (140 at KD 9), booking (50). Most of it is already built and
+needs wording rather than pages, which is why §3 is short despite the scope widening.
+
+Revisit the head terms when the site holds a top-ten position on any 1,000-plus term, not
+before. Until then this table records the number so nobody has to re-derive it.
 
 | Intent | Vol | KD | Owner today | State |
 |---|---:|---:|---|---|
-| desert safari dubai (head) | 49,500 | 26 | `/desert-safari-dubai/` | **out of scope — Phase 2** |
+| desert safari dubai (head) | 49,500 | 26 | `/desert-safari-dubai/` | **out of scope — see the scope note below** |
 | desert safari in other emirates | 14,800 | 17 | — | **out of scope — we run one camp** |
 | desert safari dubai price | 1,600 | 26 | `/desert-safari-dubai/price/` | owned |
 | **best desert safari dubai** | **1,300** | **21** | — | **gap — the only real one** |

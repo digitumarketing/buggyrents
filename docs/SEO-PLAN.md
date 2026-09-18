@@ -300,6 +300,25 @@ Console or the profile. The first invented figure is the last report they trust.
 
 ---
 
+## 7b. Decisions taken 18 Sep 2026
+
+Four, all agency-side, recorded here so the next session does not re-ask them.
+
+| Question | Decision |
+|---|---|
+| Desert safari scope | **Mid-tail open, head terms closed.** Reasoning in `docs/KEYWORDS.md` §2. |
+| Who writes the ten articles | **This engagement writes all of them**, straight into the repo with the audits green. |
+| Off-site and citations | **Agency produces the audit and the priority list; the client's own team executes.** So the deliverable here is a document, not a set of listings. |
+| Order of work | **Quad rescue before articles.** 5,250 searches sitting at positions 52 to 70 outranks anything on the article list. |
+
+The off-site split is the one to watch. `§4.4` and `docs/KEYWORDS.md` §3 both say authority is
+the binding constraint on reaching the top ten, and the work now sits with a team outside this
+engagement. **That makes the handover document a dependency for the whole quarter's target,
+not a nice-to-have.** If it goes out and nothing happens for a month, the November number is
+already decided, and the monthly report should say so rather than absorb the blame.
+
+---
+
 ## 8. What would make this fail
 
 - **Tracking slips past week 1.** Then September's report has no lead section and the whole

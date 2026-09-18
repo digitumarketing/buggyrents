@@ -8,7 +8,16 @@
  * Exports are unchanged from when this was a hardcoded module, so the thirteen
  * homepage components did not need editing.
  */
-import raw from '@/content/homepage.json';
+import rawFile from '@/content/homepage.json';
+import { fillDeep } from '@/data/tokens';
+
+/* Every homepage field goes through fillDeep, not just the ones that happen to
+ * carry a token today. The homepage is CMS-owned prose: the client can type
+ * {quadFrom} into any field at any time, and a field that skipped fill() would
+ * print the brace on the live page. The token audit caught exactly that on
+ * 18 Sep 2026 when a price token was added to the quad intro and the FAQ.
+ * fillDeep on the whole object is cheap and removes the class of bug. */
+const raw = fillDeep(rawFile);
 
 export const trustStats = raw.trustStats as {
   value: string; label: string; sub: string; verified: boolean;

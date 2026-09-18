@@ -17,6 +17,7 @@ that machine, leaving a repo full of decisions nobody could reconstruct.
 | `site/.claude/skills/buggyrents-article/SKILL.md` | **Symlink** to the file above. Do not replace with a copy. |
 | `site/docs/SEO-PLAN.md` | The 90-day SEO, AEO and GEO plan and the monthly client report format. |
 | `site/docs/KEYWORDS.md` | The working keyword pool, what owns each group, and the content work list. |
+| `site/docs/OFFSITE.md` | Everything outside the domain: citations audit, priority order, and the NAP block. |
 | `site/docs/GTM-SETUP.md` | The GTM container build sheet. Every tag on this site lives there. |
 | `site/.claude/skills/_upstream/` | Vendored third-party skills, their licence and the rules for touching them. |
 

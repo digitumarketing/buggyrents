@@ -88,10 +88,25 @@ export const site = {
      placeholder that looks like a real number. See CLAUDE.md. */
   tradeLicence: (raw.tradeLicence || null) as string | null,
 
-  /* schema sameAs is built from this list. It is how Google ties the website, the
-     Google Business Profile and the five social accounts into one entity, so an
-     account added here is a real local ranking signal, not just a footer icon. */
+  /* The five accounts that render as footer icons. NOT the whole sameAs list: see
+     `sameAs` below, which is what schema actually uses. */
   social: raw.social as Social[],
+
+  /* Everything that is verifiably this business somewhere else on the web, which is
+     what schema.org sameAs is for.
+     Until 18 Sep 2026 this was `social.map(s => s.url)` and nothing else, while the
+     comment above it claimed it tied in the Google Business Profile. It did not. The
+     site was telling Google that its corroborating entities were Facebook through to
+     Pinterest, and saying nothing about the map listing carrying 41 reviews at 4.9,
+     which is the single highest-authority thing this business owns. The profile now
+     goes first.
+     Add the TripAdvisor listing here the moment its URL is produced. The site claims
+     a Travellers' Choice award and links nothing, which `docs/OFFSITE.md` §3a treats
+     as a blocker rather than a nicety. */
+  sameAs: [
+    raw.mapsPlaceId ? `https://www.google.com/maps/place/?q=place_id:${raw.mapsPlaceId}` : '',
+    ...(raw.social as Social[]).map(s => s.url)
+  ].filter(Boolean) as string[],
 
   awards: raw.awards as Award[],
 

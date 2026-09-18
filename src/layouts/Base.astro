@@ -98,9 +98,9 @@ const localBusiness = {
   },
 
   /* sameAs is how Google links this site, the Google Business Profile and the five
-     social accounts into a single entity. Leaving it out was throwing away a real
-     local ranking signal for accounts the business already runs. */
-  sameAs: site.social.map(s => s.url)
+     social accounts into a single entity. Built in site.ts rather than here, because
+     the Google Business Profile belongs in it and was missing until 18 Sep 2026. */
+  sameAs: site.sameAs
 };
 ---
 <!doctype html>

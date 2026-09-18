@@ -95,10 +95,72 @@ Ordered by effect per hour. Do not reorder to do the easy ones first.
 | # | Action | Why it is here |
 |---|---|---|
 | 1 | **Bing Webmaster Tools**: verify the domain, submit `sitemap-index.xml`, request indexing on the four cluster pages | Non-Google indexes still serve the **pre-launch** site: search results on 17 Sep showed the old homepage title and the old `/contact-us/` and `/blog/` URLs. ChatGPT's search reads Bing, and ChatGPT sends this site more than twice what Google organic does. Your biggest traffic channel is reading a site that no longer exists. |
-| 2 | **Google Business Profile**: confirm claimed and verified, then complete it | Categories, the full service list with prices, opening hours, the `buggyrents.com` link, and photos. A GBP with 41 reviews that is thin on services is the cheapest ranking asset being left on the table. |
+| 2 | **Google Business Profile**: five specific fixes, audited 18 Sep and listed in §4b | It is in better shape than expected on hours, address, phone, website, posts and photos. Two things on it are actively working against the rest of this document. |
 | 3 | **Produce the TripAdvisor URL**, or confirm there is none | Blocks §3a either way. Ten minutes for someone who knows. |
 | 4 | **GetYourGuide, Viator, Klook** | These are a booking channel as well as a citation. They need a trade licence, so timing is the client's. Do not start the application here, just record what each one needs and hand it over. |
 | 5 | **UAE directories**: Yellow Pages UAE, Connect.ae, Dubai-focused activity directories | Low individual value, real cumulative value, and cheap. Only after 1 to 3. |
+
+## 4b. The Google Business Profile, audited 18 Sep 2026
+
+Viewed publicly at the Place ID in `settings.json`. Much of it is already good: address, phone,
+website, 24-hour opening, owner posts (most recent four days old and well written), photos, and
+ten bookable products with instant confirmation. The problems are specific.
+
+### The profile is not called Buggy Rents
+
+The business name on the profile reads:
+
+> Dune Buggy Rental Dubai- ATV Quad Bike Rental Dubai-can-Am maverick Buggy Rental Dubai-Dirt Bike Dubai Raptor 700cc
+
+**This is the single most important finding in this document.** Two separate problems.
+
+It breaks Google's business name guideline, which requires the real-world name. Profiles are
+suspended for this, and a suspension takes the 41 reviews with it. The honest other side, which
+should be said rather than hidden: **stuffed names do often work in the short term**, which is
+why so many operators in this market use them, and renaming usually costs some map visibility
+for a few weeks. So this is a judgement call with a real cost either way, not a rule to recite.
+
+The second problem has no upside at all and is the reason to act. **Every other line in this
+document assumes the entity is called "Buggy Rents".** The site says Buggy Rents, `sameAs` now
+points at this profile, and §5 tells the team to use that exact name on every listing. Right now
+the highest-authority profile the business owns is telling Google the company is called
+something else entirely. Citations built against a name the map profile does not carry are
+weaker than they look, and that is the whole mechanism this document exists to strengthen.
+
+Recommended: rename to **Buggy Rents**, accept a few weeks of wobble, and let every keyword now
+crammed into the name be carried by the services list and the website, which is where Google
+actually wants to read them.
+
+### The plus code resolves to Sharjah
+
+The address line reads Dubai correctly. The plus code Google prints underneath it is
+`5J3P+82 Sharjah`. Al Awir sits near the border, so this may be nothing, but the pin is what
+local ranking uses for "in Dubai" searches and this is worth ten minutes in the dashboard to
+confirm it sits on the Dubai side.
+
+### Three smaller ones
+
+**Categories.** Primary is `ATV rental service`, which is right. Add secondaries so buggy and
+safari intent is covered, because the competitors appearing beside this profile are filed as
+tour operator, adventure sports center and sport tour agency.
+
+**Products.** Ten bookable options are listed against twenty-nine sellable things on the site.
+Also worth establishing **which reservation partner is supplying those ten**: if it is an OTA,
+that is an existing listing this audit did not find, and §2 needs correcting.
+
+**The website link is untagged, and that is costing attribution.** GA4 shows Direct as the
+largest channel on this site by a distance. Map-profile clicks land in Direct unless the link
+carries campaign tags, so a real share of what currently reads as "Direct" is almost certainly
+this profile, uncredited. Change the website field to:
+
+```
+https://buggyrents.com/?utm_source=google-maps&utm_medium=referral&utm_campaign=gbp
+```
+
+That single edit makes the profile's contribution visible in the monthly report instead of
+invisible inside Direct. It costs nothing and it is the fastest measurement win left.
+
+---
 
 ## 5. The NAP block. Copy this exactly, everywhere.
 
@@ -130,11 +192,12 @@ Rules that matter more than they look:
   adventure operator**, not a tour agency. This business owns its vehicles and runs its own
   base, and categorising it as an agency invites comparison with resellers.
 
-**One inconsistency to settle first: the email.** `settings.json` has
-`Buggyrents@gmail.com`. A free mail address on a business with 17,000 guests reads as small to
-a human and carries no domain signal to a machine. Moving to `hello@buggyrents.com` before the
-listings go out means the address is right in all of them the first time, instead of being
-corrected across a dozen platforms later.
+**Email: decided 18 Sep 2026, `Buggyrents@gmail.com` stays, everywhere.** A domain address
+was proposed and the agency ruled against changing it. That decision is fine and the reason it
+is fine is worth stating, because someone will raise it again: for citations, **consistency
+beats prestige.** One address used identically on every listing is a working NAP signal. An
+address that is `hello@buggyrents.com` on four platforms and Gmail on six is not. Use the Gmail
+address on every listing, spelled exactly as above, and do not revisit this.
 
 ## 6. What not to do
 

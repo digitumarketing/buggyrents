@@ -138,6 +138,18 @@ business owns still carries a different name from every new citation, so the ent
 assembles stays split between the two for as long as that is true. If the buggy cluster stalls
 in the low twenties despite the citation work, this is the first thing to look at again.
 
+### Who can actually edit this profile
+
+Checked 19 Sep 2026: the agency Google account `web@digitummarketing.com` is signed in to
+Business Profile Manager and shows **zero businesses**. The profile is owned or managed from a
+different account, so **every change on it depends on someone outside this engagement being at
+a keyboard.** That is a scheduling fact rather than a complaint, and it is the reason the GBP
+items in §4 sit with the client's team.
+
+If that becomes the bottleneck, the fix is one action: add `web@digitummarketing.com` as a
+manager on the profile. Manager access can edit hours, categories, services and the website
+link, and cannot remove owners or delete the listing.
+
 ### The plus code resolves to Sharjah
 
 The address line reads Dubai correctly. The plus code Google prints underneath it is

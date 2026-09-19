@@ -260,3 +260,21 @@ The honest position for the September report: **the site is producing leads, the
 real, and they are not yet coming from Google organic.** That is expected at positions 22 to
 30 and it is exactly what the position work is for, but it has to be said plainly rather than
 letting the client read WhatsApp volume as SEO results.
+
+## Indexing, 19 Sep 2026
+
+Search Console Overview: **85 indexed pages, 70 not indexed.** At baseline on 7 Sep it was
+**47 indexed and 43 not**. The site has 83 pages, so "indexed" here includes old pre-launch
+URLs that Google still holds alongside the current ones.
+
+The direction is what matters: indexed coverage has nearly doubled in twelve days, which is
+the reindex requests of 8 Sep and the new content landing. The 70 not-indexed figure is not
+alarming on a domain this age and is mostly "Discovered, currently not indexed", which
+resolves on its own as the site accumulates signals.
+
+**Request Indexing was not run on the eight new articles.** Search Console's inspection
+interface would not accept input from the browser session on 19 Sep; three approaches were
+tried and abandoned rather than forced. The articles are in `sitemap-index.xml`, linked from
+`/blogs/` and cross-linked to each other, so discovery happens without it. Request Indexing
+is a nudge that saves days rather than a requirement, and the per-URL quota is about ten a
+day, so it is two minutes of clicking whenever someone is in the console.

@@ -256,30 +256,37 @@ technical fault. Google simply has no reason yet to prefer the new quad page. Gi
    much for this as for their own search volume, and that is the honest reason to write them.
 9. **Re-request indexing on `/quad-bike-dubai/`** after 6 to 8 land, not before.
 
-### C. Articles — the September push
+### C. Articles — the September push. Complete 19 Sep 2026.
 
 Written for citation and cluster support, not for traffic. See §2b for why that distinction
-has to survive into the client report. Ordered by what each one is worth.
+has to survive into the client report.
 
 | # | Article | Target | Vol | Serves |
 |---|---|---|---:|---|
-| 10 | How to choose a desert safari in Dubai | best desert safari dubai | 1,300 | AEO, safari |
-| 11 | Quad bike or ATV in Dubai, and which machine you actually get | atv terms + atv vs quad bike | ~300 | **quad pillar** |
-| 12 | Desert safari in Dubai with kids and family | desert safari dubai for family | 140 | safari |
-| 13 | Where quad biking in Dubai actually happens: Lahbab, Big Red, Fossil Rock | where to go quad biking dubai | ~120 | **quad pillar** |
-| 14 | Minimum age for every desert activity in Dubai | quad / buggy / safari age limit | 110 | AEO, all four |
-| 15 | Do you need a licence to ride a quad or buggy in Dubai | licence terms | ~60 | **quad pillar**, AEO |
-| 16 | What a Dubai desert safari actually is, start to finish | what is desert safari dubai | 60 | AEO, safari |
-| 17 | How to book a desert safari in Dubai | how to book desert safari dubai | 50 | safari |
-| 18 | What to wear for quad biking and dune buggy in Dubai | what to wear quad / buggy dubai | 20 | buggy + quad |
-| 19 | Best time of year and time of day for the Dubai desert | seasonal terms | — | all four |
+| 10 | ~~How to choose a desert safari in Dubai~~ `best-desert-safari-dubai` | best desert safari dubai | 1,300 | AEO, safari |
+| 11 | *absorbed into 21* | atv terms | ~300 | quad pillar |
+| 12 | ~~Desert safari with kids and family~~ `desert-safari-dubai-with-kids` | desert safari dubai for family | 140 | safari |
+| 13 | ~~Where quad biking actually happens~~ `where-to-go-quad-biking-dubai` | where to go quad biking dubai | ~120 | **quad pillar** |
+| 14 + 15 | ~~Age limits~~ + ~~Licence~~ **merged** → `quad-biking-dune-buggy-age-limits-dubai` | age and licence terms | ~170 | AEO, all four |
+| 16 + 17 | ~~What a safari is~~ + ~~How to book~~ **merged** → `what-is-a-desert-safari-dubai` | what is / how to book desert safari dubai | ~110 | AEO, safari |
+| 18 | ~~What to wear, quad and buggy~~ `what-to-wear-quad-biking-dune-buggy-dubai` | what to wear quad biking dubai | 20 | buggy + quad |
+| 19 | ~~Best time of year and day~~ `best-time-of-year-dubai-desert` | seasonal terms | — | all four |
+| 21 | ~~Quad biking for the first time~~ `quad-biking-dubai-first-time` | beginner and ATV terms | ~80 | **quad pillar** |
 
-Items 18 and 19 carry almost no volume of their own. They are on the list because they
-complete the cluster and because they answer questions an assistant asks; **do not put a
-traffic number next to them in the client report.**
+**Nine planned, eight written, and the arithmetic is deliberate.** Two pairs were merged during
+writing because each pair answered one question from two sides and would have competed with
+itself: age and licence are both "am I allowed", and what-a-safari-is and how-to-book are both
+"I have never done this". Item 11 was absorbed into 21 for the same reason once the ATV answer
+went onto the quad pillar as an FAQ on 17 Sep.
 
-Every one of these goes through `docs/ARTICLE-PROMPT.md` STEP 0 against the live site first.
-That check is what caught the last dead list and the four pages this file nearly re-proposed.
+**No tenth article was invented to round the number up.** The buggy side is saturated: `4 seater
+dune buggy dubai` belongs to the model pages, `self drive dune buggy dubai` to the homepage h1,
+and the tour and ride terms are on-page work on the pillar that was done on 9 Sep. Writing a
+ninth would have meant competing with a page this site already ranks with, which is the thing
+§3 exists to prevent.
+
+The blog now holds **14 articles**. Four of the eight new ones point at the quad pillar, which
+was the point: quad sits at positions 52 to 70 while buggy sits at 22 to 30.
 
 ### D. Parked
 

@@ -73,7 +73,9 @@ Read this before quoting any figure from this file.
 ## Getting there and paying
 
 - Base: ${site.address.full}
-- Pickup: ${transfers.summary} ${transfers.outsideDubai}
+- Pickup, desert safari: ${transfers.summary}
+- Pickup, dune buggy, quad bike and dirt bike: ${transfers.vehicle}
+- Pickup, outside Dubai: ${transfers.outsideDubai}
 - Payment: ${payment.summary}
 - Cancellation: ${policy.cancellation}
 - Weather: ${policy.weather}

@@ -29,7 +29,7 @@
     },
     {
       "h": "Everything else included",
-      "p": "Helmet, safety briefing, fuel, water and a lead guide who stays with you. Free hotel pickup within Dubai."
+      "p": "Helmet, safety briefing, fuel, water and a lead guide who stays with you. Optional pickup and drop-off for AED 300."
     }
   ],
   "flowKicker": "03 / Tour flow",
@@ -38,7 +38,7 @@
   "steps": [
     {
       "label": "Pickup",
-      "h": "Free Dubai pickup",
+      "h": "Optional pickup, AED 300",
       "p": "Hotel pickup within Dubai is included, or self-drive directions to the Al Awir base."
     },
     {
@@ -91,8 +91,8 @@
       "a": "Closed boots or trainers that cover the ankle, long trousers, and clothes you do not mind getting sandy. We provide the helmet. Bring gloves if you have them."
     },
     {
-      "q": "Is hotel pickup free?",
-      "a": "Hotel pickup and drop-off within Dubai is free on every booking. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking."
+      "q": "How much is hotel pickup?",
+      "a": "Pickup and drop-off within Dubai is optional and costs AED 300, and driving yourself to the Al Awir base costs nothing. Free pickup applies to desert safari bookings only. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking."
     },
     {
       "q": "How and when do I pay?",

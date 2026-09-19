@@ -32,7 +32,7 @@
     "sub": "A four seat buggy split between four people is under AED 90 each. Most operators quote per head.",
     "points": [
       "{guests} riders since 2020, rated 4.9 on Google",
-      "Free hotel pickup anywhere inside Dubai",
+      "Free safari pickup, optional AED 300 on vehicles",
       "No deposit, and free cancellation up to 24 hours before"
     ]
   },
@@ -70,7 +70,7 @@
     "Buggy Rents started in 2020 and has taken {guests} guests into the desert since. We operate from Al Awir on the Dubai to Hatta road, with {fleet} vehicles and {guides} guides. The red dunes at Lahbab and the terrain around Al Awir are our routes, and our guides ride them daily.",
     "<strong>We are the operator.</strong> A lot of desert tour websites in Dubai are booking agencies that pass you to whoever has a machine free. We own the buggies, quads and dirt bikes, we employ the guides, and you pay us at our base. If something goes wrong there is nobody else to point at.",
     "<strong>We price per vehicle.</strong> This matters more than it sounds. A four seat buggy at AED 350 for 30 minutes is AED 350 for the buggy, so four people pay under AED 90 each. Operators quoting per person look cheaper until you multiply by the group.",
-    "<strong>We are open 24/7</strong> and hotel pickup anywhere inside Dubai is free. Sunrise and late afternoon are the sessions worth booking, and being open around the clock is what makes an early start possible."
+    "<strong>We are open 7am to 11pm, seven days a week.</strong> Hotel pickup inside Dubai is free on desert safari bookings. On a buggy, quad or dirt bike it is optional and costs AED 300, because the machine stays at the base and the transfer is a separate run. Sunrise and late afternoon are the sessions worth booking."
   ],
   "minis": [
     {
@@ -86,7 +86,7 @@
     {
       "n": "03",
       "h": "Honest pricing",
-      "p": "Per vehicle, no deposit, free Dubai pickup, and you pay at the base before you ride."
+      "p": "Per vehicle, no deposit, and you pay at the base before you ride. Pickup is optional at AED 300 on a buggy or quad, and free on a safari."
     }
   ],
   "confirmKicker": "02 / What we do",
@@ -127,7 +127,7 @@
     {
       "tag": "Pricing",
       "h": "No surprises at the base",
-      "p": "The price you were quoted is the price you pay. Free Dubai pickup is genuinely free and there is no deposit to chase."
+      "p": "The price you were quoted is the price you pay. Pickup is the one option and its cost is stated before you book, never added afterwards, and there is no deposit to chase."
     },
     {
       "tag": "Families",
@@ -150,7 +150,7 @@
         "Helmets fitted and checked before every ride",
         "A full briefing on controls, route and boundary",
         "A guide leading every ride at every duration",
-        "Free hotel pickup anywhere inside Dubai",
+        "Free safari pickup, optional AED 300 on vehicles",
         "Weather calls, made before you travel rather than at the base"
       ]
     },
@@ -181,7 +181,7 @@
     {
       "tag": "Phone",
       "value": "Call the base",
-      "note": "Open 24/7. Useful when you are already on the road.",
+      "note": "Open 7am to 11pm. Useful when you are already on the road.",
       "href": "tel:+971562095713"
     },
     {
@@ -209,7 +209,7 @@
     },
     {
       "q": "What are your opening hours?",
-      "a": "Open 24/7. In practice sunrise and late afternoon are the sessions worth booking, and being open around the clock is what makes a pre dawn start possible."
+      "a": "Open 7am to 11pm, seven days a week. In practice sunrise and late afternoon are the sessions worth booking, and opening at seven is what makes a pre dawn start possible."
     },
     {
       "q": "How many vehicles do you have?",

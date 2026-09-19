@@ -10,20 +10,24 @@ const inDubai = (l: Location) => l.emirate === 'Dubai';
 
 export function locationData(l: Location): LocationData {
   const free = inDubai(l);
+  /* Pickup stopped being one rule on 19 Sep 2026. Inside Dubai, desert safari
+     pickup is free and buggy, quad and dirt bike pickup is an optional AED 300.
+     Outside Dubai everything is quoted. These pages sell all three services, so
+     they have to say both rather than pick one. See src/data/extras.ts. */
   const transferLine = free
-    ? 'Free hotel pickup and drop-off, included in every booking.'
+    ? `Free hotel pickup on desert safari bookings. On buggy, quad and dirt bike, pickup and drop-off is optional at AED ${transfers.vehiclePrice}, and driving yourself costs nothing.`
     : `Transfer from ${l.short} is quoted with the booking, before you pay anything.`;
 
   return {
     slug: l.slug, name: l.name, short: l.short, emirate: l.emirate, drive: l.drive,
     title: pageTitle(`${l.name} | ${l.drive} to Lahbab`),
-    description: tidy(`${l.drive} from ${l.short} to the Lahbab red dunes. Buggy, quad and desert safari with ${free ? 'free' : 'quoted'} pickup. Per vehicle from AED ${fromPrice(quads[0])}.`),
+    description: tidy(`${l.drive} from ${l.short} to the Lahbab red dunes. Buggy, quad and desert safari, self-drive or ${free ? `AED ${transfers.vehiclePrice}` : 'quoted'} pickup. Per vehicle from AED ${fromPrice(quads[0])}.`),
     heroImage: 'desert-adventure-dubai-hero-canam-maverick',
     finalImage: 'dune-buggy-dubai-hero-red-dunes',
     kicker: free ? 'Dubai pickup planning' : 'Outer emirate pickup planning',
     h1Lead: 'Dune Buggy and Quad Pickup from', h1Em: l.short,
-    lede: `${l.intro} Prices are per vehicle rather than per person, and ${free ? 'pickup within Dubai costs nothing' : 'the transfer is quoted before you pay'}.`,
-    chips: [l.drive, free ? 'Free pickup' : 'Transfer quoted', 'Lahbab red dunes', 'Open 24/7'],
+    lede: `${l.intro} Prices are per vehicle rather than per person, and ${free ? `you can drive to the base for nothing or add pickup for AED ${transfers.vehiclePrice}` : 'the transfer is quoted before you pay'}.`,
+    chips: [l.drive, free ? `Pickup AED ${transfers.vehiclePrice}` : 'Transfer quoted', 'Lahbab red dunes', '7am to 11pm'],
     panel: {
       kicker: 'Pickup route',
       title: `${l.short} to Lahbab`,
@@ -82,10 +86,10 @@ export function locationData(l: Location): LocationData {
       { tag: 'Riders', h: 'Ages in the group', p: 'Minimum age varies by vehicle: 6 for the kids quad area, 14 for a buggy, the Raptor 700 or the KTM 450.' },
       { tag: 'Total', h: 'Price agreed upfront', p: `${transferLine} ${payment.summary}` }
     ],
-    faqChips: [free ? 'Free pickup' : 'Transfer quote', l.drive, 'Per vehicle pricing'],
+    faqChips: [free ? 'Optional pickup' : 'Transfer quote', l.drive, 'Per vehicle pricing'],
     faqs: [
       { q: `Is pickup available from ${l.short}?`, a: free
-          ? `Yes, and it is free. Hotel pickup and drop-off within Dubai is included in every booking. Send your ${l.short} address or a map pin when you book.`
+          ? `Yes. On a desert safari it is free. On a buggy, quad or dirt bike booking it is optional and costs AED ${transfers.vehiclePrice}, because the vehicle stays at the base and the transfer is a separate run. Driving yourself to Al Awir costs nothing and there is parking. Send your ${l.short} address or a map pin either way.`
           : `Yes. ${l.short} is outside Dubai, so the transfer is quoted with the booking rather than included. You will always see the total before paying anything.` },
       { q: `How long is the drive from ${l.short}?`, a: `Around ${l.drive} each way to our Al Awir base on the Dubai-Hatta road. Allow longer on Friday afternoons and public holidays.` },
       { q: `Which activity suits a trip from ${l.short}?`, a: l.drive.includes('9') || l.drive.includes('8') || l.emirate !== 'Dubai'
@@ -100,14 +104,14 @@ export function locationData(l: Location): LocationData {
     nearby: [],
     guideKicker: `${l.short} guide`,
     guideH2: `Booking a desert ride from ${l.short}: drive times, transfers and what to confirm`,
-    guideIntro: `Everything worth knowing before booking a <strong>dune buggy or quad bike from ${l.short}</strong>: how long the drive really takes, whether pickup is free, which activity suits the journey, and what to agree before you travel.`,
+    guideIntro: `Everything worth knowing before booking a <strong>dune buggy or quad bike from ${l.short}</strong>: how long the drive really takes, what pickup costs, which activity suits the journey, and what to agree before you travel.`,
     guideBlocks: [
       { h: `Getting from ${l.short} to the red dunes`,
-        html: `<p class="lf-lead">${l.intro}</p><p>Our base sits on the Dubai-Hatta road at Al Awir, at the edge of the <span class="pill">Lahbab red dunes</span>. From ${l.short} that is roughly <span class="pill">${l.drive}</span> each way in normal traffic.</p><p>${free ? 'Hotel pickup and drop-off within Dubai is free on every booking, whatever you spend. Send a map pin rather than just the area name so the driver stops in the right place first time.' : `${l.short} is outside Dubai, so the transfer is quoted with your booking. You see the total before paying anything, and there are no surprises at the base.`}</p>` },
+        html: `<p class="lf-lead">${l.intro}</p><p>Our base sits on the Dubai-Hatta road at Al Awir, at the edge of the <span class="pill">Lahbab red dunes</span>. From ${l.short} that is roughly <span class="pill">${l.drive}</span> each way in normal traffic.</p><p>${free ? `Most guests drive it themselves, and there is parking at the base. If you would rather be collected, pickup and drop-off is AED ${transfers.vehiclePrice} on a buggy, quad or dirt bike booking and free on a desert safari, where the 4x4 is coming for you anyway. Send a map pin rather than just the area name so the driver stops in the right place first time.` : `${l.short} is outside Dubai, so the transfer is quoted with your booking. You see the total before paying anything, and there are no surprises at the base.`}</p>` },
       { h: 'Which activity is worth the journey',
         html: `<p class="lf-lead">The drive should shape the booking, not just the budget.</p><p>If you are travelling ${l.drive}, book at least an hour. A 30-minute taster works when the base is nearby, but from ${l.short} the travel time outweighs the ride.</p><p>Our <a href="/quad-bike-dubai/">quad bike rental Dubai</a> fleet starts at AED ${fromPrice(quads[0])} and splits by riding area rather than model. The <a href="/dune-buggy-dubai/">buggies</a> start at AED ${fromPrice(buggies[0])} and carry two or four people for one price, which is usually the cheapest way to move a group.</p>` },
       { h: 'What to agree before you travel',
-        html: `<p class="lf-lead">Four things, and all of them take one WhatsApp message.</p><ul><li>The exact pickup address or map pin, not just "${l.short}".</li><li>Rider ages, because minimum age varies from 6 to 14 depending on the machine.</li><li>The vehicle and duration, so we can hold the right slot.</li><li>The total in AED, ${free ? 'which includes free Dubai pickup' : 'including the transfer from ' + l.short}.</li></ul>` },
+        html: `<p class="lf-lead">Four things, and all of them take one WhatsApp message.</p><ul><li>The exact pickup address or map pin, not just "${l.short}".</li><li>Rider ages, because minimum age varies from 6 to 14 depending on the machine.</li><li>The vehicle and duration, so we can hold the right slot.</li><li>The total in AED, ${free ? `and whether you want pickup at AED ${transfers.vehiclePrice} or will drive to the base` : 'including the transfer from ' + l.short}.</li></ul>` },
       { h: 'Timing, weather and the best slot',
         html: `<p class="lf-lead">Late afternoon is the pick from ${l.short}.</p><p>You leave after the worst of the heat, ride as the light turns, and the red dunes photograph at their best in the last hour before sunset. October to April is the most comfortable season; May to September works with early-morning slots.</p><p>${policy.weather}</p>` },
       { h: 'Payment and cancellation',

@@ -26,7 +26,7 @@ const includedBase = [
   'Helmet, safety briefing and harness check.',
   'A lead guide on the route and a sweep rider at the back.',
   'Chilled water and a photo stop at the best light.',
-  'Free hotel pickup and drop-off within Dubai.'
+  'Optional hotel pickup and drop-off for AED 300, or drive yourself to the Al Awir base at no cost.'
 ];
 const checkBase = [
   'Minimum age varies by vehicle. Bring photo ID for the booking record.',
@@ -34,17 +34,24 @@ const checkBase = [
   'Pregnant guests and anyone with back, neck, heart or recent-surgery concerns should not ride.',
   `Free cancellation up to ${policy.cancellationHours} hours before your slot.`
 ];
-const flowBase = [
+/* Pickup differs by service since 19 Sep 2026, so these two are built per page
+   rather than shared as constants. Safari keeps free Dubai pickup; buggy, quad
+   and dirt bike charge AED 300 for an optional transfer. See extras.ts. */
+const flowFor = (safari: boolean) => [
   { h: 'Send your details', p: 'Date, group size, ages and which option you want, on WhatsApp.' },
   { h: 'Get the total', p: 'We reply with availability and the full price in AED. Nothing hidden, nothing added later.' },
   { h: 'Confirm the slot', p: 'No deposit on standard bookings. Your slot is held once you confirm.' },
-  { h: 'Get collected', p: 'Free pickup within Dubai, or self-drive directions to the Al Awir base.' },
+  safari
+    ? { h: 'Get collected', p: 'Free hotel pickup within Dubai, arranged when you book.' }
+    : { h: 'Get to the base', p: `Drive yourself to Al Awir with the directions we send, or add pickup and drop-off for AED ${transfers.vehiclePrice}.` },
   { h: 'Pay at the base', p: payment.summary }
 ];
-const safetyBase = [
+const safetyFor = (safari: boolean) => [
   { label: 'Every price', h: 'Gear is included', p: 'Helmet, briefing and harness check are never charged separately.' },
   { label: 'Every price', h: 'A guide rides with you', p: 'We do not send unaccompanied vehicles into the dunes at any price point.' },
-  { label: 'Every price', h: 'Free Dubai pickup', p: transfers.summary },
+  safari
+    ? { label: 'Every price', h: 'Free Dubai pickup', p: transfers.summary }
+    : { label: 'Optional', h: `Pickup for AED ${transfers.vehiclePrice}`, p: transfers.vehicle },
   { label: 'Every price', h: 'Nothing due upfront', p: policy.deposit }
 ];
 const gal = (subject: 'buggy'|'quad'|'dirtbike'|'safari', taken: string[] = []) => {
@@ -62,12 +69,12 @@ export const buggyPrices: PriceGuideData = {
   slug: '/dune-buggy-dubai/price/',
   crumbParent: { label: 'Dune Buggy Dubai', href: '/dune-buggy-dubai/' },
   title: pageTitle(`Dune Buggy Dubai Price | From AED ${fromPrice(buggies[0])} per Buggy`),
-  description: `Dune buggy Dubai prices: 11 buggies from AED ${fromPrice(buggies[0])} for 30 minutes. Polaris RZR, Can-Am X3 and Turbo RR, plus BBQ combos. Per buggy, free Dubai pickup.`,
+  description: `Dune buggy Dubai prices: 11 buggies from AED ${fromPrice(buggies[0])} for 30 minutes. Polaris RZR, Can-Am X3 and Turbo RR, plus BBQ combos. Per buggy. Optional pickup for AED 300.`,
   heroImage: 'dune-buggy-dubai-hero-red-dunes',
   eyebrow: '11 buggies · 4 durations · price per vehicle',
   h1Lead: 'Dune Buggy Dubai', h1Em: 'Price', h1Tail: 'Guide',
-  lede: 'The full dune buggy Dubai price list, per buggy rather than per person. Polaris RZR through to Can-Am Maverick R, plus Bedouin BBQ combos. Helmet, briefing, fuel, guide and free Dubai hotel pickup are in every price.',
-  chips: [`From AED ${fromPrice(buggies[0])}`, '11 buggies', 'Free Dubai pickup', 'No deposit'],
+  lede: 'The full dune buggy Dubai price list, per buggy rather than per person. Polaris RZR through to Can-Am Maverick R, plus Bedouin BBQ combos. Helmet, briefing, fuel and a guide are in every price. Pickup and drop-off is optional at AED 300.',
+  chips: [`From AED ${fromPrice(buggies[0])}`, '11 buggies', 'Optional pickup AED 300', 'No deposit'],
   panel: { kicker: 'Starts from', title: `AED ${fromPrice(buggies[0])}`,
     sub: 'Polaris RZR 1000 2-seater / 30 minutes',
     points: ['Eleven buggies from Polaris RZR to Can-Am Maverick R.', 'Five BBQ combos pairing a buggy session with a camp dinner.', 'Prices are per buggy, not per person.'] },
@@ -76,7 +83,7 @@ export const buggyPrices: PriceGuideData = {
     { label: 'From', value: `AED ${fromPrice(buggies[0])}` },
     { label: 'Durations', value: '30 min to 4 hr' },
     { label: 'Priced', value: 'Per buggy' },
-    { label: 'Dubai pickup', value: 'Free' }
+    { label: 'Pickup', value: 'AED 300, optional' }
   ],
   tables: [
     vehicleTable(buggies, '/dune-buggy-dubai/', 'Dune buggy prices', 'Price is per buggy. A 2-seater at AED 300 covers two people, not one each.'),
@@ -84,16 +91,16 @@ export const buggyPrices: PriceGuideData = {
       columns: ['Package price'],
       rows: bbqCombos.map(c => ({ name: c.name, spec: `${c.capacity} · ${c.includes}`, cells: [c.price] })) }
   ],
-  included: includedBase, checkBefore: checkBase, flow: flowBase,
+  included: includedBase, checkBefore: checkBase, flow: flowFor(false),
   whyH2: 'What the buggy price actually buys.',
   whyLede: 'Machine, gear, guide and pickup. The difference between the cheapest and most expensive slot is power and time, not service.',
   gallery: gal('buggy', buggies.map(v => v.image)), gallerySubject: 'buggy',
-  safety: safetyBase,
+  safety: safetyFor(false),
   faqs: [
     { q: 'What is the cheapest dune buggy price in Dubai?', a: `The lowest entry point is AED ${fromPrice(buggies[0])} for 30 minutes in a Polaris RZR 1000 2-seater. That is the price for the buggy, so two people ride for AED ${fromPrice(buggies[0])} total.` },
     { q: 'Is the price per person or per buggy?', a: 'Per buggy, always. A 4-seater at AED 350 carries four people for AED 350. This is the single biggest difference between our pricing and per-head safari pricing.' },
     { q: 'Why do Can-Am buggies cost more than Polaris?', a: 'More power, more suspension travel and a stiffer setup. The Polaris RZR is the balanced choice for first-time drivers; the Can-Am X3 and Maverick R are for drivers who already know what they are doing.' },
-    { q: 'Is hotel pickup included in the price?', a: transfers.summary + ' ' + transfers.outsideDubai },
+    { q: 'Is hotel pickup included in the price?', a: transfers.vehicle + ' ' + transfers.outsideDubai },
     { q: 'How do I pay?', a: payment.detail },
     { q: 'Do I pay a deposit to book?', a: policy.deposit },
     { q: 'Can I cancel and get a refund?', a: policy.cancellation },
@@ -114,7 +121,7 @@ export const buggyPrices: PriceGuideData = {
     { h: 'Per buggy, not per person', html: `<p class="lf-lead">This is the detail that changes the maths most, and it is the one people miss.</p><p>Every price on this page is for the vehicle. A 2-seater Polaris at <span class="pill">AED 300</span> for 30 minutes is AED 300 total, so two riders pay AED 150 each. A 4-seater at AED 350 works out at under AED 90 per person for four.</p><p>Compare that with per-head desert safari pricing, where a group of four pays four times the headline number. For families and groups, the 4-seater buggies are consistently the cheapest way into the dunes.</p>` },
     { h: 'Polaris or Can-Am?', html: `<p class="lf-lead">The price ladder tracks power and suspension, not service quality.</p><p>The <a href="/dune-buggy-dubai/polaris-rzr-1000-2-seater/">Polaris RZR 1000</a> starts at AED 300 and is the balanced first-time choice: stable, forgiving, easy to place on a dune face. The <a href="/dune-buggy-dubai/can-am-maverick-x3-2-seater/">Can-Am Maverick X3</a> at AED 600 is a serious step up in acceleration and travel.</p><p>Above that, the Turbo RR and <a href="/dune-buggy-dubai/can-am-maverick-r-turbo/">Maverick R</a> are for drivers with real off-road experience. Paying more does not make the ride easier; it makes it faster and less forgiving.</p>` },
     { h: 'Which duration is worth paying for', html: `<p class="lf-lead">Thirty minutes is a taster. An hour is where most people should land.</p><p>The jump from 30 minutes to an hour roughly doubles the price but more than doubles the experience, because the briefing and warm-up eat into a short slot. On a 30-minute booking you are only properly riding for about 20 minutes.</p><p>Two hours and four hours suit experienced drivers and groups pairing the ride with a camp stop. If you are travelling in from outside Dubai, book at least an hour.</p>` },
-    { h: 'What is genuinely free', html: `<p class="lf-lead">Three things people expect to pay for, and do not.</p><ul><li><strong>Hotel pickup within Dubai</strong> is free on every booking, whatever you spend.</li><li><strong>All safety gear</strong>: helmet, briefing, harness check, fuel and water.</li><li><strong>Sandboarding</strong> is included on safari packages at no charge.</li></ul><p>The only genuine extras are transfers from outside Dubai, and the camel ride add-on at AED 100.</p>` },
+    { h: 'What is genuinely free', html: `<p class="lf-lead">Three things people expect to pay for, and do not.</p><ul><li><strong>Driving yourself to the base</strong>, with directions sent after confirmation. Pickup and drop-off is optional at AED 300.</li><li><strong>All safety gear</strong>: helmet, briefing, harness check, fuel and water.</li><li><strong>Sandboarding</strong> is included on safari packages at no charge.</li></ul><p>The genuine extras are the optional AED 300 pickup, transfers from outside Dubai, and the camel ride add-on at AED 100.</p>` },
     { h: 'When you actually pay', html: `<p class="lf-lead">Nothing is taken when you book.</p><p>${payment.detail} There is no deposit on a standard slot and no online payment step, which also means no card details are stored anywhere.</p><p>${policy.cancellation}</p>` },
     { h: 'Buggy plus BBQ combos', html: `<p class="lf-lead">Five combos pair a 30-minute buggy session with a Bedouin camp dinner.</p><p>They run from AED 450 for a 2-seater Polaris to AED 1,000 for the Can-Am Maverick R. The buggy session is 30 minutes on all of them, so you are paying for the camp evening on top rather than a longer drive.</p><p>If the buggy is the main event, book a longer standalone slot instead. If the evening is the main event, the combo is better value than booking both separately.</p>` }
   ]
@@ -125,12 +132,12 @@ export const quadPrices: PriceGuideData = {
   slug: '/quad-bike-dubai/price/',
   crumbParent: { label: 'Quad Bike Dubai', href: '/quad-bike-dubai/' },
   title: pageTitle(`Quad Biking Dubai Price | From AED ${fromPrice(quads[0])}`),
-  description: `Quad biking Dubai prices: six ATVs from AED ${fromPrice(quads[0])} for 30 minutes. Kids from age 6, boundary area, open desert and the Raptor 700cc. Per quad, free Dubai pickup.`,
+  description: `Quad biking Dubai prices: six ATVs from AED ${fromPrice(quads[0])} for 30 minutes. Kids from age 6, boundary area, open desert and the Raptor 700cc. Per quad, optional pickup.`,
   heroImage: 'quad-biking-dubai-hero-red-dunes',
   eyebrow: '6 quads · 5 durations · price per quad',
   h1Lead: 'Quad Biking Dubai', h1Em: 'Price', h1Tail: 'Guide',
   lede: `The full quad biking Dubai price list, from AED ${fromPrice(quads[0])} for a 30-minute kids session to four hours on a Yamaha Raptor 700cc. Sorted by riding area rather than model, because that is what actually decides which quad you can take.`,
-  chips: [`From AED ${fromPrice(quads[0])}`, '6 quads', 'Age 6 and up', 'Free Dubai pickup'],
+  chips: [`From AED ${fromPrice(quads[0])}`, '6 quads', 'Age 6 and up', 'Optional pickup AED 300'],
   panel: { kicker: 'Starts from', title: `AED ${fromPrice(quads[0])}`,
     sub: 'Kids quad, fenced area / 30 minutes',
     points: ['Six quads split by riding area, from age 6 to the Raptor 700.', 'Five durations on every machine, 30 minutes to 4 hours.', 'Prices are per quad. Double seats carry a passenger free.'] },
@@ -139,7 +146,7 @@ export const quadPrices: PriceGuideData = {
     { label: 'From', value: `AED ${fromPrice(quads[0])}` },
     { label: 'Durations', value: '30 min to 4 hr' },
     { label: 'Youngest rider', value: 'Age 6' },
-    { label: 'Dubai pickup', value: 'Free' }
+    { label: 'Pickup', value: 'AED 300, optional' }
   ],
   tables: [
     vehicleTable(quads, '/quad-bike-dubai/', 'Quad bike prices', 'Price is per quad. Double-seat machines carry a passenger at no extra cost.'),
@@ -147,21 +154,21 @@ export const quadPrices: PriceGuideData = {
       columns: ['Price per person'],
       rows: quadSafariCombos.map(c => ({ name: c.name, spec: c.includes, cells: [c.price] })) }
   ],
-  included: includedBase, checkBefore: checkBase, flow: flowBase,
+  included: includedBase, checkBefore: checkBase, flow: flowFor(false),
   whyH2: 'What the quad price actually buys.',
   whyLede: 'The riding area matters more than the engine, and it is what the price ladder really tracks.',
   gallery: gal('quad', quads.map(v => v.image)), gallerySubject: 'quad',
-  safety: safetyBase,
+  safety: safetyFor(false),
   faqs: [
     { q: 'What is the cheapest quad biking price in Dubai?', a: `AED ${fromPrice(quads[0])} for a 30-minute session on the 70–90cc kids quad in the fenced area. For adults, the boundary-area quad starts at AED 89 for 30 minutes.` },
     { q: 'Is the price per person or per quad?', a: 'Per quad. The double-seat machines carry a rider and a passenger for one price, which makes them the cheapest option for two people.' },
     { q: 'Why does the open desert cost more than the boundary area?', a: 'Open-desert routes need a guide with recovery gear, a bigger machine and a longer route. The boundary area is a marked 2 km square on smaller engines, which is why it starts at AED 89.' },
     { q: 'What can a child ride, and from what age?', a: 'From age 6 on a 70–90cc quad in a fenced area away from the main dunes, at AED 75 for 30 minutes. From 12 in the boundary area, from 14 in open desert, and 14 for the Raptor 700cc.' },
-    { q: 'Is hotel pickup included?', a: transfers.summary + ' ' + transfers.outsideDubai },
+    { q: 'Is hotel pickup included?', a: transfers.vehicle + ' ' + transfers.outsideDubai },
     { q: 'How do I pay?', a: payment.detail },
     { q: 'Can I cancel and get a refund?', a: policy.cancellation },
     { q: 'What does the safari combo include?', a: 'An evening desert safari with dune bashing and a camp dinner, plus a quad session. AED 200 with a 30-minute quad, AED 300 with a full hour.' },
-    { q: 'Are there hidden charges?', a: 'No. Helmet, briefing, fuel and guide are in the price, sandboarding is free, and Dubai pickup costs nothing. Only outer-emirate transfers are extra.' }
+    { q: 'Are there hidden charges?', a: 'No. Helmet, briefing, fuel and a guide are in the price. Pickup and drop-off is the one genuine option: it costs AED 300 if you want it, and nothing if you drive to the base yourself. Outer-emirate transfers are quoted separately.' }
   ],
   related: [
     { tag: 'Buggy prices', title: 'Dune Buggy Dubai Price', desc: '11 buggies from Polaris RZR to Can-Am Maverick R.', from: `From AED ${fromPrice(buggies[0])}`, href: '/dune-buggy-dubai/price/', img: buggies[0].image },
@@ -177,7 +184,7 @@ export const quadPrices: PriceGuideData = {
     { h: 'Single seat or double seat', html: `<p class="lf-lead">A double-seat quad carries a passenger at no extra cost, which changes the per-person maths.</p><p>A double-seat boundary quad at AED 150 for 30 minutes works out at AED 75 each for two riders, cheaper per head than the single seat at AED 89. If two of you are riding and only one wants to drive, the double seat is always the better deal.</p>` },
     { h: 'The Raptor 700 is a different thing', html: `<p class="lf-lead">At AED 500 for 30 minutes, the <a href="/quad-bike-dubai/yamaha-raptor-700cc/">Yamaha Raptor 700cc</a> is more than double any other quad.</p><p>It is a sport quad: light, fast and demanding, restricted to riders 14 and over with real experience. If you have never ridden a quad in sand, this is not where to start, whatever your budget.</p>` },
     { h: 'Which duration to pay for', html: `<p class="lf-lead">Quads run on five durations, more than the buggies.</p><p>Thirty minutes suits children and anyone testing whether they enjoy it. An hour is the sweet spot for most adults. Two hours and beyond are genuinely tiring on a quad, because you steer with your body far more than in a buggy, and they suit riders who already know that.</p>` },
-    { h: 'What is included at every price', html: `<p class="lf-lead">Helmet, safety briefing, fuel, water and a lead guide, on the AED 75 kids slot and the AED 2,200 Raptor slot alike.</p><p>${transfers.summary} Sandboarding is free on safari packages, and the camel ride add-on is AED 100.</p><p>${payment.detail}</p>` },
+    { h: 'What is included at every price', html: `<p class="lf-lead">Helmet, safety briefing, fuel, water and a lead guide, on the AED 75 kids slot and the AED 2,200 Raptor slot alike.</p><p>${transfers.vehicle} Sandboarding is free on safari packages, and the camel ride add-on is AED 100.</p><p>${payment.detail}</p>` },
     { h: 'Combining a quad with a safari', html: `<p class="lf-lead">Two combo tiers pair an evening desert safari with a quad session.</p><p>AED 200 per person includes a 30-minute quad, AED 300 includes a full hour. Both include dune bashing in a 4x4, a sunset stop, camp dinner and entertainment, so the difference is purely quad time.</p><p>${policy.cancellation}</p>` }
   ]
 };
@@ -228,11 +235,11 @@ export const safariPrices: PriceGuideData = {
     'Dune bashing is not suitable for pregnant guests or anyone with back or neck concerns. Ask about the no-dune-bashing option.',
     `Free cancellation up to ${policy.cancellationHours} hours before your slot.`
   ],
-  flow: flowBase,
+  flow: flowFor(true),
   whyH2: 'What the safari price actually buys.',
   whyLede: 'Transfer, driver, camp entry, dinner and entertainment. The difference between packages is vehicle, timing and how private it is.',
   gallery: gal('safari'), gallerySubject: 'safari',
-  safety: safetyBase,
+  safety: safetyFor(true),
   faqs: [
     { q: 'What is the cheapest desert safari price in Dubai?', a: `AED ${safariFromPrice} per person for the classic Evening Desert Safari, including free Dubai hotel pickup, dune bashing, camel ride, sandboarding and a BBQ camp dinner.` },
     { q: 'Is the safari price per person or per vehicle?', a: 'Shared safaris are per person. Private safaris are per vehicle, so a private Land Cruiser at AED 650 covers your whole group up to its capacity.' },
@@ -269,12 +276,12 @@ export const dirtbikePrices: PriceGuideData = {
   slug: '/ktm-dirt-bike-dubai/price/',
   crumbParent: { label: 'KTM Dirt Bike Dubai', href: '/ktm-dirt-bike-dubai/' },
   title: pageTitle(`KTM Dirt Bike Dubai Price | From AED ${fromPrice(dirtbikes[0])}`),
-  description: `KTM dirt bike Dubai prices: 450cc enduro from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 2,000 for four hours. One machine, five durations, riders 14+. Free Dubai pickup.`,
+  description: `KTM dirt bike Dubai prices: 450cc enduro from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 2,000 for four hours. One machine, five durations, riders 14+. Optional pickup.`,
   heroImage: 'ktm-dirt-bike-dubai-hero-sunrise-dunes',
   eyebrow: 'KTM 450 · 5 durations · price per bike',
   h1Lead: 'KTM Dirt Bike Dubai', h1Em: 'Price', h1Tail: 'Guide',
   lede: `The full KTM dirt bike Dubai price list on the 450cc desert enduro, from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 2,000 for a four-hour session. One machine, priced purely by how long you ride, for people who can already handle a clutch, gears and throttle in sand.`,
-  chips: [`From AED ${fromPrice(dirtbikes[0])}`, 'KTM 450', 'Age 14 and up', 'Free Dubai pickup'],
+  chips: [`From AED ${fromPrice(dirtbikes[0])}`, 'KTM 450', 'Age 14 and up', 'Optional pickup AED 300'],
   panel: { kicker: 'Starts from', title: `AED ${fromPrice(dirtbikes[0])}`,
     sub: 'KTM 450, 30 minutes',
     points: ['One machine, the 450cc KTM desert enduro.', 'Five durations, 30 minutes to 4 hours.', 'Price is per bike. Experienced riders only, from age 14.'] },
@@ -283,25 +290,25 @@ export const dirtbikePrices: PriceGuideData = {
     { label: 'From', value: `AED ${fromPrice(dirtbikes[0])}` },
     { label: 'Durations', value: '30 min to 4 hr' },
     { label: 'Minimum age', value: 'Age 14' },
-    { label: 'Dubai pickup', value: 'Free' }
+    { label: 'Pickup', value: 'AED 300, optional' }
   ],
   tables: [
     vehicleTable(dirtbikes, '/ktm-dirt-bike-dubai/', 'KTM dirt bike prices', 'Price is per bike, one rider. You must be comfortable with clutch, gears and throttle before you ride.')
   ],
-  included: includedBase, checkBefore: checkBase, flow: flowBase,
+  included: includedBase, checkBefore: checkBase, flow: flowFor(false),
   whyH2: 'What the dirt bike price actually buys.',
   whyLede: 'There is one machine and one variable, time. The price ladder is simply how long you are out in the dunes.',
   gallery: gal('dirtbike', dirtbikes.map(v => v.image)), gallerySubject: 'dirtbike',
-  safety: safetyBase,
+  safety: safetyFor(false),
   faqs: [
     { q: 'What is the cheapest KTM dirt bike price in Dubai?', a: `AED ${fromPrice(dirtbikes[0])} for a 30-minute session on the KTM 450. That is the entry ride, enough to learn the controls and cross a few dune faces.` },
     { q: 'Is the price per person or per bike?', a: 'Per bike. A dirt bike carries one rider, so the price is for you and the machine, with a lead guide on the route.' },
     { q: 'Why does a dirt bike cost more than a buggy or quad?', a: 'It is a single-rider machine that needs a dedicated guide, and it is harder to ride, so the sessions run smaller and more supervised. That is what the higher starting price reflects, not a bigger engine alone.' },
     { q: 'What experience and age do I need?', a: 'Riders must be 14 or over and already comfortable with a clutch, gears and throttle. This is not a beginner machine and we do not run learner sessions on it. If you have never ridden a geared bike, start on a quad.' },
-    { q: 'Is hotel pickup included?', a: transfers.summary + ' ' + transfers.outsideDubai },
+    { q: 'Is hotel pickup included?', a: transfers.vehicle + ' ' + transfers.outsideDubai },
     { q: 'How do I pay?', a: payment.detail },
     { q: 'Can I cancel and get a refund?', a: policy.cancellation },
-    { q: 'Are there hidden charges?', a: 'No. Helmet, briefing, fuel and a guide are in the price, and Dubai pickup costs nothing. Only outer-emirate transfers are extra.' }
+    { q: 'Are there hidden charges?', a: 'No. Helmet, briefing, fuel and a guide are in the price. Pickup and drop-off is optional at AED 300, and free if you drive to the Al Awir base yourself. Outer-emirate transfers are quoted separately.' }
   ],
   related: [
     { tag: 'Buggy prices', title: 'Dune Buggy Dubai Price', desc: '11 buggies from Polaris RZR to Can-Am Maverick R.', from: `From AED ${fromPrice(buggies[0])}`, href: '/dune-buggy-dubai/price/', img: buggies[0].image },
@@ -316,7 +323,7 @@ export const dirtbikePrices: PriceGuideData = {
     { h: 'One machine, priced by time', html: `<p class="lf-lead">There is no fleet to choose from here, only the <a href="/ktm-dirt-bike-dubai/ktm-450-dirt-bike/">KTM 450</a>, so the price is set purely by how long you ride.</p><p>It runs from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 700 for an hour, AED 1,200 for two hours, AED 1,500 for three and AED 2,000 for the full four-hour session. No seat options, no engine tiers, just time in the dunes.</p>` },
     { h: 'It is not a beginner machine', html: `<p class="lf-lead">This is the one place on the site where price is not the thing that should decide your booking.</p><p>The KTM 450 is a geared enduro bike for riders 14 and over who can already work a clutch, gears and throttle. If you have never ridden a manual bike in sand, the AED ${fromPrice(dirtbikes[0])} entry ride is not a shortcut into it, a <a href="/quad-bike-dubai/price/">quad</a> is where to start.</p>` },
     { h: 'Which duration to pay for', html: `<p class="lf-lead">The 30-minute slot is a control-check, not a real ride.</p><p>At AED ${fromPrice(dirtbikes[0])} it is enough to learn the bike and cross a few faces. Most riders want the AED 700 hour, which is the balanced session. Two hours and beyond, AED 1,200 to AED 2,000, are for riders who are already fit and confident on a bike, because a dirt bike is far more physical than a buggy or a quad.</p>` },
-    { h: 'What is included at every price', html: `<p class="lf-lead">Helmet, safety briefing, fuel, water and a lead guide are in the price, on the AED ${fromPrice(dirtbikes[0])} slot and the AED 2,000 slot alike.</p><p>${transfers.summary}</p><p>${payment.detail}</p>` },
+    { h: 'What is included at every price', html: `<p class="lf-lead">Helmet, safety briefing, fuel, water and a lead guide are in the price, on the AED ${fromPrice(dirtbikes[0])} slot and the AED 2,000 slot alike.</p><p>${transfers.vehicle}</p><p>${payment.detail}</p>` },
     { h: 'How it compares to a buggy or quad', html: `<p class="lf-lead">The dirt bike starts higher than either of the other two, and the reason is the ride, not the engine.</p><p>A single-rider machine needs its own guide and runs in smaller, more supervised sessions, so the AED ${fromPrice(dirtbikes[0])} start sits above the buggy and quad. If you want two people on one price or a first time in the dunes, a <a href="/dune-buggy-dubai/price/">buggy</a> or <a href="/quad-bike-dubai/price/">quad</a> is both cheaper and easier. ${policy.cancellation}</p>` }
   ]
 };

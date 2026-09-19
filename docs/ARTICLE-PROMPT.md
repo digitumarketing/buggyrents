@@ -181,7 +181,8 @@ it next.
 | **Prices per vehicle** | Buggies, quads and dirt bikes are priced per vehicle, never per person. Shared safaris are per person, private safaris per vehicle, and if you mention a safari price you must say which. |
 | **Prices must be real** | Every AED figure is cross-checked against the live price data. Take numbers from the price pages, never from memory. Buggy from AED 300, quad from AED 75, KTM from AED 500, safari from AED 99. |
 | **Minimum age is 14** | All buggies, the Yamaha Raptor 700 and the KTM 450. Quads are 6 for the fenced kids area, 12 boundary, 14 open desert, 16 double-seat open desert. Age is a floor, not the whole test: guides screen riders at the base. |
-| **Dubai pickup is free** | Never "quoted" for a Dubai pickup. Outer emirates are quoted. |
+| **Pickup depends on the service** | **Desert safari: free inside Dubai.** **Buggy, quad, dirt bike: optional, AED 300**, and self-drive is free. Outer emirates quoted on both. Changed 19 Sep 2026. Never write "free pickup" on a vehicle page. |
+| **Open 7am to 11pm** | Not 24/7. Changed 19 Sep 2026. |
 | **Images must exist and match** | Image keys come from `src/data/images.ts` and carry a subject. A quad article cannot use a buggy photo; the build throws. |
 | **No image twice on one page** | Hero, card image and closing image must all differ. |
 

@@ -18,7 +18,8 @@
  *   if an injured guest later says they believed they were covered. Do not remove it.
  * - No trade licence number, and no placeholder that looks like one.
  * - No DTCM. No em dashes.
- * - Hotel pickup inside Dubai is free. Never write "quoted" for a Dubai pickup.
+ * - Pickup: FREE inside Dubai on desert safari only. On buggy, quad and dirt bike
+ *   it is optional and costs AED 300. Changed 19 Sep 2026. See extras.ts.
  */
 import type { SupportData } from '@/components/templates/Support.astro';
 import { fillDeep } from '@/data/tokens';

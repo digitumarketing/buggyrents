@@ -9,7 +9,7 @@
   ],
   "short": "FAQ",
   "title": "Quad Biking Dubai FAQ | Prices, Age Limits and Pickup",
-  "description": "The questions people ask before booking quad biking in Dubai: prices from AED {quadFrom} per quad, kids from age 6, free pickup, timings and what to wear.",
+  "description": "The questions people ask before booking quad biking in Dubai: prices from AED {quadFrom} per quad, kids from age 6, pickup costs, timings and what to wear.",
   "heroImage": "quad-biking-dubai-hero-red-dunes",
   "finalImage": "quad-bike-rental-dubai-rider-red-quad",
   "heroSubject": "quad",
@@ -20,7 +20,7 @@
   "chips": [
     "From AED {quadFrom} per quad",
     "Kids from age 6",
-    "Free Dubai pickup",
+    "Optional pickup AED 300",
     "Six quads"
   ],
   "ctaPrimary": {
@@ -155,7 +155,7 @@
         "Helmet, fitted and checked before you move",
         "Briefing on the controls, the route and the boundary",
         "A guide on every ride, including the 30 minute slots",
-        "Fuel, water and free pickup anywhere inside Dubai",
+        "Fuel, water, and optional pickup for AED 300",
         "Sandboarding at no extra cost if you want to try it"
       ]
     },
@@ -186,7 +186,7 @@
     {
       "tag": "Phone",
       "value": "Call the base",
-      "note": "Open 24/7. Useful when you are already on the road.",
+      "note": "Open 7am to 11pm. Useful when you are already on the road.",
       "href": "tel:+971562095713"
     },
     {
@@ -226,7 +226,7 @@
     },
     {
       "q": "Do you pick up from hotels?",
-      "a": "Yes, free anywhere inside Dubai. {pickup} Outside Dubai we quote the transfer before you commit."
+      "a": "Yes, as an option. {pickupVehicle} Free pickup applies to desert safari bookings only. Outside Dubai we quote the transfer before you commit."
     },
     {
       "q": "What should I wear for quad biking?",

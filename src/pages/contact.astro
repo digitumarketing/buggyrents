@@ -16,14 +16,14 @@ import { buggies, quads, dirtbikes, fromPrice } from '@/data/vehicles';
 import { sharedSafaris, privateSafaris } from '@/data/safari';
 
 const title = 'Contact Buggy Rents | Book a Desert Ride in Dubai';
-const description = `Message the team that runs the base, not a call centre. WhatsApp, call any time, or send the form. Free Dubai pickup, no deposit, free cancellation.`;
+const description = `Message the team that runs the base, not a call centre. WhatsApp, call any time, or send the form. No deposit, free cancellation.`;
 
 const h = hero('desert-adventure-dubai-hero-canam-maverick');
 const fin = img('couple-dune-buggy-ride-dubai-desert-tour', 'buggy');
 
 const channels = [
   { tag: 'WhatsApp', value: site.phone, note: 'The fastest route, and the one most guests use. Send your date, group size and ages and we will come back with options.', href: `https://wa.me/${site.whatsapp}` },
-  { tag: 'Phone', value: 'Call the base', note: 'Open 24/7. Useful when you are already on the road or the pickup point is hard to describe.', href: `tel:${site.phoneRaw}` },
+  { tag: 'Phone', value: 'Call the base', note: 'Open 7am to 11pm. Useful when you are already on the road or the pickup point is hard to describe.', href: `tel:${site.phoneRaw}` },
   { tag: 'Email', value: site.email, note: 'Better for corporate bookings, large groups and anything that needs a written quote.', href: `mailto:${site.email}` }
 ];
 
@@ -44,7 +44,7 @@ const templates = [
 ];
 
 const faqs = [
-  { q: 'How fast do you reply?', a: 'WhatsApp is usually within minutes during the day. We are open 24/7, so late night messages get picked up too, though a reply may take a little longer.' },
+  { q: 'How fast do you reply?', a: 'WhatsApp is usually within minutes during the day. We are open 7am to 11pm, so evening messages still get picked up, though a reply may take a little longer.' },
   { q: 'Do I have to pay to reserve a slot?', a: `No deposit on standard bookings. ${payment.summary} Nothing is due when you message us.` },
   { q: 'Can you collect from my hotel?', a: `${transfers.summary} Outside Dubai we quote the transfer before you commit, so there is no surprise on the day.` },
   { q: 'What should I include in my first message?', a: 'Date, how many people are riding, and their ages. Ages decide which machines are even an option, so it saves a round of questions.' },
@@ -92,7 +92,7 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
           <h1 id="ct-hero-h">Talk to the people who <em>actually run the base</em></h1>
           <p class="ct__hero-lede">Not a call centre and not a booking agency. WhatsApp reaches the team at Al Awir who will be handing you a helmet.</p>
           <div class="ct__status">
-            <p class="ct__status-item">Open 24/7, and hotel pickup anywhere inside Dubai is free</p>
+            <p class="ct__status-item">Open 7am to 11pm. Safari pickup inside Dubai is free, buggy and quad pickup is AED 300</p>
             <p class="ct__status-item">No deposit. You pay at the base before you ride</p>
             <p class="ct__status-item">Free cancellation up to 24 hours before your slot</p>
           </div>
@@ -197,7 +197,7 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
               {site.address.full}
             </a>
           </dd>
-          <dt>Hours</dt><dd>Open 24 hours, 7 days a week</dd>
+          <dt>Hours</dt><dd>7am to 11pm, seven days a week</dd>
           <dt>Pickup</dt><dd>{transfers.summary} Outer emirates are quoted before you commit.</dd>
         </dl>
         <div class="ct__map-frame">

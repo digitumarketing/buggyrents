@@ -53,8 +53,14 @@ export const tokens: Record<string, string> = {
   deposit:      policy.deposit,
   payment:      payment.summary,
   paymentFull:  payment.detail,
-  pickup:       transfers.summary,
-  pickupOuter:  transfers.outsideDubai
+  /* {pickup} is the SAFARI line. Vehicle pages must use {pickupVehicle}, which
+     is the optional AED 300 transfer. Split 19 Sep 2026: before that there was
+     one pickup token and every buggy and quad page inherited the safari
+     promise of a free transfer. See src/data/extras.ts. */
+  pickup:        transfers.summary,
+  pickupVehicle: transfers.vehicle,
+  pickupPrice:   `AED ${transfers.vehiclePrice}`,
+  pickupOuter:   transfers.outsideDubai
 };
 
 const TOKEN = /\{([a-zA-Z][a-zA-Z0-9]*)\}/g;

@@ -2,7 +2,7 @@
   "category": "quad",
   "crumb": "Quad Bike Dubai",
   "title": "Quad Bike Rental Dubai | ATV Hire from AED {quadFrom}",
-  "description": "Quad bike rental and ATV hire in Dubai. Six quads from a fenced kids area to the Yamaha Raptor 700cc, priced per quad from AED {quadFrom}. Free Dubai pickup.",
+  "description": "Quad bike rental and ATV hire in Dubai. Six quads from a fenced kids area to the Yamaha Raptor 700cc, priced per quad from AED {quadFrom}. Optional pickup, AED 300.",
   "eyebrow": "Quad bike and ATV hire in Dubai",
   "h1": "Quad Bike Rental Dubai, Quad Biking in the Lahbab Red Dunes",
   "subhead": "Guided quad bike rental in the Lahbab red dunes, from a fenced kids area to open-desert Raptor runs.",
@@ -56,7 +56,7 @@
     {
       "label": "Pickup",
       "h": "Dubai hotel pickup",
-      "p": "Free hotel pickup within Dubai, or self-drive directions to the Al Awir base after confirmation."
+      "p": "Self-drive directions to the Al Awir base after confirmation, or optional pickup and drop-off for AED 300."
     },
     {
       "label": "Briefing",
@@ -117,7 +117,7 @@
     },
     {
       "q": "Is hotel pickup available?",
-      "a": "Yes, and hotel pickup within Dubai is free. Send your hotel or area when you book. Outer-emirate transfers such as Sharjah, Ajman or Abu Dhabi are quoted with the booking."
+      "a": "Yes, as an option. Pickup and drop-off within Dubai is AED 300 on a quad booking, and driving yourself costs nothing. Free pickup applies to desert safari bookings only. Send your hotel or area when you book. Outer-emirate transfers such as Sharjah, Ajman or Abu Dhabi are quoted with the booking."
     },
     {
       "q": "How do I pay?",

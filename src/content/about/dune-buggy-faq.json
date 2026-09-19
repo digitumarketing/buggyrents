@@ -9,7 +9,7 @@
   ],
   "short": "FAQ",
   "title": "Dune Buggy Dubai FAQ | Prices, Ages, Pickup and Timings",
-  "description": "The questions people actually ask before booking a dune buggy in Dubai: prices from AED {buggyFrom} per buggy, age limits, free pickup, timings and what to wear.",
+  "description": "The questions people actually ask before booking a dune buggy in Dubai: prices from AED {buggyFrom} per buggy, age limits, pickup costs, timings and what to wear.",
   "heroImage": "dune-buggy-dubai-hero-red-dunes",
   "finalImage": "dune-buggy-convoy-crossing-dubai-red-dunes",
   "heroSubject": "buggy",
@@ -19,7 +19,7 @@
   "lede": "Everything people ask us on WhatsApp before booking, collected in one place. Prices are per buggy, and they start at AED {buggyFrom} for 30 minutes.",
   "chips": [
     "From AED {buggyFrom} per buggy",
-    "Free Dubai pickup",
+    "Optional pickup AED 300",
     "No deposit",
     "11 buggies"
   ],
@@ -74,7 +74,7 @@
   "introBody": [
     "<strong>Prices are per buggy, not per person.</strong> This is the single biggest source of confusion, and it works in your favour. A two seater at AED {buggyFrom} for 30 minutes is AED {buggyFrom} for the buggy. Two people riding together pay AED 150 each. A four seater at AED 350 split four ways is under AED 90 a head, which is why groups almost always take the bigger machine.",
     "<strong>Duration matters more than the model.</strong> We run 30 minutes, 1 hour, 2 hours and 4 hours. Thirty minutes is a genuine taste of the dunes and it suits people fitting it around other plans. An hour is the sweet spot for most first timers. Two hours and above is for people who already know they like this.",
-    "<strong>Pickup is free inside Dubai.</strong> {pickup} That is a real saving compared with quoting it separately, and it means the price you see is close to the price you pay. Outside Dubai we quote the transfer before you commit.",
+    "<strong>Pickup is optional, not included.</strong> {pickupVehicle} Free pickup applies to desert safari bookings, where the 4x4 is collecting you anyway. It means the price you see is close to the price you pay. Outside Dubai we quote the transfer before you commit.",
     "Everything else, model choice, seat count, time of day, is preference rather than cost. Ask us on WhatsApp and we will narrow it down in a couple of messages."
   ],
   "minis": [
@@ -90,7 +90,7 @@
     },
     {
       "n": "03",
-      "h": "Free Dubai pickup",
+      "h": "Optional pickup AED 300",
       "p": "Hotel, tower or villa anywhere inside Dubai, at no extra cost."
     }
   ],
@@ -155,7 +155,7 @@
         "Helmet, fitted and checked before you move",
         "Full briefing on the controls and the route",
         "A guide leading every ride, at every duration",
-        "Fuel, water and free pickup anywhere inside Dubai",
+        "Fuel, water, and optional pickup for AED 300",
         "Sandboarding at no extra cost if you want to try it"
       ]
     },
@@ -186,7 +186,7 @@
     {
       "tag": "Phone",
       "value": "Call the base",
-      "note": "Open 24/7. Useful when you are already on the road.",
+      "note": "Open 7am to 11pm. Useful when you are already on the road.",
       "href": "tel:+971562095713"
     },
     {
@@ -222,7 +222,7 @@
     },
     {
       "q": "Do you pick up from hotels?",
-      "a": "Yes, and it is free anywhere inside Dubai. {pickup} Outside Dubai we quote the transfer before you commit."
+      "a": "Yes, as an option. {pickupVehicle} Free pickup applies to desert safari bookings only. Outside Dubai we quote the transfer before you commit."
     },
     {
       "q": "When is the best time to go?",

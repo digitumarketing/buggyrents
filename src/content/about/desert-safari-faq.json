@@ -34,7 +34,7 @@
     { "tag": "Rating", "value": "{rating}", "note": "From {reviewCount} Google reviews." },
     { "tag": "Guests", "value": "{guests}", "note": "Taken to the desert since {founded}." },
     { "tag": "Pickup", "value": "Free", "note": "Anywhere inside Dubai." },
-    { "tag": "Open", "value": "24/7", "note": "Message any hour and we answer." }
+    { "tag": "Open", "value": "7am to 11pm", "note": "Message any time and we answer." }
   ],
   "introKicker": "01 / Start here",
   "introH2": "Time of day and price basis decide everything",
@@ -105,7 +105,7 @@
   "askLede": "Send the date and how many of you there are and we will put the shared and private totals side by side. No pressure to book.",
   "askCards": [
     { "tag": "WhatsApp", "value": "{phone}", "note": "Fastest route. Send the date, group size and ages.", "href": "https://wa.me/971562095713" },
-    { "tag": "Phone", "value": "Call the base", "note": "Open 24/7, useful if your date is tomorrow.", "href": "tel:+971562095713" },
+    { "tag": "Phone", "value": "Call the base", "note": "Open 7am to 11pm, useful if your date is tomorrow.", "href": "tel:+971562095713" },
     { "tag": "Email", "value": "{email}", "note": "Best for group and corporate bookings.", "href": "mailto:Buggyrents@gmail.com" }
   ],
   "faqKicker": "06 / Full FAQ",

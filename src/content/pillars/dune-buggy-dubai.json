@@ -2,7 +2,7 @@
   "category": "buggy",
   "crumb": "Dune Buggy Dubai",
   "title": "Dune Buggy Rental Dubai | Self-Drive from AED {buggyFrom}",
-  "description": "Dune buggy rental in Dubai, self-drive in the Lahbab red dunes. Eleven buggies from AED {buggyFrom} per buggy, not per person. Free Dubai pickup and guide.",
+  "description": "Dune buggy rental in Dubai, self-drive in the Lahbab red dunes. Eleven buggies from AED {buggyFrom} per buggy, not per person. Guide included, optional pickup.",
   "eyebrow": "Buggy rental and dune buggy tours in Dubai",
   "h1": "Dune Buggy Rental Dubai, Self-Drive in the Lahbab Red Dunes",
   "subhead": "Self-drive dune buggy tours in the Lahbab red dunes, with Polaris and Can-Am machines for every level.",
@@ -29,7 +29,7 @@
     },
     {
       "h": "Everything included",
-      "p": "Helmet, safety briefing, harness check, fuel, water and a lead guide. Free hotel pickup within Dubai. No fuel surcharge or gear fee."
+      "p": "Helmet, safety briefing, harness check, fuel, water and a lead guide. Optional pickup and drop-off for AED 300. No fuel surcharge or gear fee."
     }
   ],
   "flowKicker": "03 / Tour flow",
@@ -38,7 +38,7 @@
   "steps": [
     {
       "label": "Pickup",
-      "h": "Free Dubai pickup",
+      "h": "Optional pickup, AED 300",
       "p": "Hotel pickup within Dubai is included, or self-drive directions to the Al Awir base."
     },
     {
@@ -91,8 +91,8 @@
       "a": "Seats and price. A 4-seater carries four people for one price, so it is usually cheaper per head. The chassis and route are the same."
     },
     {
-      "q": "Is hotel pickup free?",
-      "a": "Hotel pickup and drop-off within Dubai is free on every booking. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking."
+      "q": "How much is hotel pickup?",
+      "a": "Pickup and drop-off within Dubai is optional and costs AED 300. Most guests drive to the Al Awir base instead, which costs nothing and has parking. Free pickup applies to desert safari bookings only. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking."
     },
     {
       "q": "How and when do I pay?",

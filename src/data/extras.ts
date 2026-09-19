@@ -10,8 +10,15 @@
  * happened to remember.
  *
  * Two rules the client cannot see in the CMS but the build enforces:
- * - Hotel pickup inside Dubai is FREE. Never write "quoted" for a Dubai pickup.
  * - No insurance claim, and no mention of its absence either. See CLAUDE.md.
+ * - PICKUP IS NOT ONE RULE ANY MORE. Changed 19 Sep 2026 on client instruction.
+ *   Desert safari: hotel pickup and drop-off inside Dubai is FREE, as before.
+ *   Buggy, quad and dirt bike: pickup is OPTIONAL and costs AED 300. Self-drive
+ *   to the base is free. Never write "free pickup" on a vehicle page again.
+ *   Outer emirates stay quoted on both. `transfers.summary` is the SAFARI line
+ *   and `transfers.vehicle` is the vehicle line: picking the wrong one is the
+ *   easiest mistake to make here, because the old code used one string
+ *   everywhere and every vehicle page inherited the safari promise.
  */
 import raw from '@/content/policies.json';
 
@@ -40,8 +47,12 @@ export const addOns = raw.addOns as {
 }[];
 
 export const transfers = {
+  /* Safari only. Kept as `dubaiFree` rather than renamed so nothing silently
+     changes meaning in a template that was not reviewed. */
   dubaiFree: true,
   summary: raw.transfersSummary,
+  vehicle: raw.transfersVehicle,
+  vehiclePrice: 300,
   outsideDubai: raw.transfersOutsideDubai
 };
 

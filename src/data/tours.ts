@@ -70,7 +70,7 @@ const includedFor = (v: Vehicle) => [
   `${v.name} prepared for your selected duration.`,
   'Helmet, safety briefing, harness check, fuel and chilled water.',
   'Lead guide on the route, warm-up check and Lahbab red-dune line control.',
-  'Free hotel pickup within Dubai, or self-drive directions to the Al Awir base.'
+  'Self-drive directions to the Al Awir base, or optional pickup and drop-off for AED 300.'
 ];
 const checkForFor = (v: Vehicle) => [
   `Minimum age for this ${NOUN[v.category]} is ${v.minAge}. Bring photo ID for the booking record.`,
@@ -79,7 +79,7 @@ const checkForFor = (v: Vehicle) => [
   'Sessions may be moved if wind or heat make the route unsafe. We will contact you first.'
 ];
 const flowFor = (v: Vehicle) => [
-  { h: 'Pickup or arrival', p: 'Free hotel pickup within Dubai, or self-drive directions sent after confirmation.' },
+  { h: 'Pickup or arrival', p: 'Self-drive directions sent after confirmation, or add pickup and drop-off for AED 300.' },
   { h: 'Safety briefing', p: `Helmet fitting, controls, guide signals and stopping rules for the ${NOUN[v.category]}.` },
   { h: 'Warm-up check', p: 'The guide checks your control on flat sand before moving to bigger faces.' },
   { h: 'Guided route', p: 'A lead guide sets the pace and a sweep stays at the back so the group never splits.' },
@@ -101,11 +101,11 @@ const faqsFor = (v: Vehicle): { q: string; a: string }[] => {
         : `It depends on the rider. The briefing and warm-up check come first, and the guide will hold the pace back if anyone needs it. If it is your very first time, tell us when booking and we will recommend the right starting point.` },
     { q: 'What is the minimum age?', a: `Riders must be ${v.minAge} or over for the ${v.shortName}. Bring photo ID for the booking record.` },
     { q: 'Do I need a driving licence?', a: 'No licence is required on guided routes. Photo ID is enough.' },
-    { q: 'Is hotel pickup available?', a: 'Yes, and hotel pickup within Dubai is free. Send your hotel or area when you book. Outer-emirate transfers are quoted with the booking.' },
+    { q: 'Is hotel pickup available?', a: 'Yes, as an option. Pickup and drop-off within Dubai costs AED 300 on buggy, quad and dirt bike bookings. Most guests drive to the Al Awir base instead, which costs nothing and there is parking on site. Outer-emirate transfers are quoted with the booking.' },
     { q: 'What should I wear?', a: 'Closed shoes, clothes you do not mind getting sandy, and sunglasses. We provide the helmet.' },
     { q: 'How do I book?', a: `Message us on WhatsApp with your date, group size and the duration you want. We reply with availability and the total in AED, usually within a few minutes.` },
     { q: 'How do I pay, and when?', a: 'Cash, card and bank transfer are all accepted. Nothing is due when you book: you pay on the spot at the Al Awir base before you ride. No deposit is taken to hold a standard slot.' },
-    { q: 'Is hotel pickup free?', a: 'Hotel pickup and drop-off within Dubai is free on every booking. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.' },
+    { q: 'How much is pickup and drop-off?', a: 'AED 300 within Dubai, and it is optional rather than built into the price. Driving yourself is free. Free hotel pickup applies to desert safari bookings, not to buggy, quad or dirt bike sessions. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.' },
     { q: 'Can I cancel or reschedule?', a: 'Cancel more than 24 hours before your slot and you get a full refund. Inside 24 hours we will always try to move you to another date rather than charge you. If weather makes the route unsafe we reschedule at no cost.' },
     { q: 'How long should I book?', a: `${cheapest.label} is a taster. For most riders an hour is the sweet spot. Longer routes suit riders who already know what they are doing.` }
   ];
@@ -162,8 +162,8 @@ ${v.durations.length > 2 ? `<p>Longer routes suit riders who already know what t
 <p>From there the guide leads and a sweep rider stays at the back, so the group never splits. The route builds gradually: flat ground, then rolling sections, then the steeper bowls once the guide is satisfied everyone can place the vehicle where they intend to.</p>` },
 
     { h: 'Pickup, transfers and planning your day',
-      html: `<p class="lf-lead">Hotel pickup within Dubai is free, and it is arranged when you book rather than sorted out at the base.</p>
-<p>Most guests self-drive to Al Awir, and there is parking on site. If you would rather be collected, hotel pickup within Dubai is included at no extra cost: send your hotel name or a pinned location when you book.</p>
+      html: `<p class="lf-lead">Most guests drive themselves to Al Awir, and that is the option we would pick too.</p>
+<p>There is parking on site and we send directions once the booking is confirmed, so getting there costs nothing. If you would rather be collected, pickup and drop-off within Dubai is <strong>AED 300</strong> and it is arranged when you book rather than sorted out on the day: send your hotel name or a pinned location. Free hotel pickup applies to <a href="/desert-safari-dubai/">desert safari</a> bookings, where the 4x4 is collecting you anyway.</p>
 <p>Drive times vary more than people expect. Downtown and Deira are around 35 minutes, Dubai Marina and Palm Jumeirah closer to an hour. Outer-emirate pickups from Sharjah, Ajman, Abu Dhabi or Ras Al Khaimah take longer and are quoted separately. See the <a href="/locations/dune-buggy-near-downtown-dubai/">Downtown</a>, <a href="/locations/dune-buggy-near-dubai-marina/">Marina</a>, <a href="/locations/dune-buggy-from-sharjah/">Sharjah</a> and <a href="/locations/dune-buggy-from-abu-dhabi/">Abu Dhabi</a> pages for what to confirm before leaving.</p>
 <p>If the ride is part of a bigger day, the late-afternoon slot pairs naturally with a <a href="/desert-safari-dubai/">desert safari</a> and BBQ camp stop, rather than booking the two as separate trips on separate days.</p>` },
 

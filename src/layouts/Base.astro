@@ -63,8 +63,9 @@ const localBusiness = {
     longitude: site.geo.lng
   },
 
-  /* Dubai pickup is free and the outer emirates are quoted, so both are served and
-     only Dubai is named as the city. Nothing broader is claimed. */
+  /* Dubai is the served city and the outer emirates are quoted, so both are
+     listed and nothing broader is claimed. Pickup pricing differs by service
+     since 19 Sep 2026 and is not a schema concern. See src/data/extras.ts. */
   areaServed: [
     { '@type': 'City', name: 'Dubai' },
     { '@type': 'Country', name: 'United Arab Emirates' }

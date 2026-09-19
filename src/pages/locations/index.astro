@@ -1,6 +1,6 @@
 ---
 /* Locations hub. A simple index over the 10 location pages, grouped by emirate,
-   which is the distinction that actually matters: Dubai pickups are free, and
+   which is the distinction that actually matters: inside Dubai safari pickup is free and vehicle pickup is AED 300, and
    everything outside Dubai is quoted. */
 import '@/styles/pillar.css';
 import Base from '@/layouts/Base.astro';
@@ -14,7 +14,7 @@ import { pageTitle } from '@/data/seo';
 const buggyFrom = Math.min(...buggies.map(fromPrice));
 
 const title = pageTitle('Dune Buggy Pickup Locations in Dubai and the UAE');
-const description = `We collect from ${locations.length} areas across Dubai and the northern emirates. Hotel pickup anywhere inside Dubai is free; outer emirates are quoted before you book.`;
+const description = `We collect from ${locations.length} areas across Dubai and the northern emirates. Safari pickup free, buggy and quad AED 300; outer emirates are quoted before you book.`;
 
 const h = hero('dune-buggy-dubai-hero-red-dunes');
 /* A different photo from the hero. Reusing the hero here would put the same image
@@ -32,7 +32,7 @@ const listSchema = { '@context':'https://schema.org', '@type':'ItemList',
     url: `${site.domain}/locations/${l.slug}/` })) };
 
 const groups = [
-  { key: 'dubai', h: 'Inside Dubai, pickup is free', lede: `${transfers.summary} Give us the hotel, tower or villa and we handle the rest.`, list: inDubai },
+  { key: 'dubai', h: 'Inside Dubai', lede: `${transfers.summary} ${transfers.vehicle} Give us the hotel, tower or villa and we handle the rest.`, list: inDubai },
   { key: 'outside', h: 'Outside Dubai, transfers are quoted', lede: 'We still collect you. The transfer is priced before you book so there is no surprise on the day.', list: outside }
 ];
 ---
@@ -52,7 +52,7 @@ const groups = [
       <div class="pl__hero-copy">
         <p class="pl__eyebrow">Pickup locations</p>
         <h1>Where we <em>collect you from</em></h1>
-        <p class="pl__hero-subhead">Free hotel pickup anywhere inside Dubai. Outer emirates quoted before you book.</p>
+        <p class="pl__hero-subhead">Free hotel pickup on desert safari bookings. Optional AED 300 pickup on buggy, quad and dirt bike. Outer emirates quoted before you book.</p>
         <p class="pl__hero-lede">
           Every ride starts at our Al Awir base on the Dubai to Hatta road, next to the Lahbab red dunes.
           These {locations.length} pages cover the areas we collect from most often, with drive times and what to expect.

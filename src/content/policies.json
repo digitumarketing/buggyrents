@@ -79,7 +79,7 @@
       "note": "Message on WhatsApp with group size and date"
     }
   ],
-  "transfersSummary": "Hotel pickup and drop-off within Dubai is free on every booking.",
+  "transfersSummary": "Hotel pickup and drop-off within Dubai is free on every desert safari booking.",
   "transfersOutsideDubai": "Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.",
   "paymentMethods": [
     "Cash",
@@ -91,5 +91,6 @@
   "cancellationHours": 24,
   "cancellation": "Cancel more than 24 hours before your slot and you get a full refund. Inside 24 hours we will always try to move you to another date rather than charge you.",
   "weather": "If wind, heat or visibility make the route unsafe we contact you before you travel and reschedule at no cost. If no alternative date works, you get a full refund.",
-  "deposit": "No deposit is taken to hold a standard slot. Multi-vehicle and corporate bookings are confirmed separately."
+  "deposit": "No deposit is taken to hold a standard slot. Multi-vehicle and corporate bookings are confirmed separately.",
+  "transfersVehicle": "Pickup and drop-off is optional on buggy, quad bike and dirt bike bookings and costs AED 300. Driving yourself to the Al Awir base costs nothing."
 }

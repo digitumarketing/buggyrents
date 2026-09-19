@@ -246,8 +246,19 @@ derived from `minAge` but not all of it.
 is 30 min on all), 2 quad+safari combos (200 for 30 min quad, 300 for 1 hr), sandboarding free,
 camel ride 100, group bookings custom.
 
-**Hotel pickup within Dubai is FREE.** Outer emirates quoted. Never write "quoted with booking"
-for a Dubai pickup. Free cancellation up to 24 hours before. No deposit on standard slots.
+**PICKUP IS TWO RULES, NOT ONE. Changed 19 Sep 2026 on client instruction.**
+
+| Service | Pickup inside Dubai |
+|---|---|
+| Desert safari | **Free**, as it always was. The 4x4 is collecting you anyway. |
+| Dune buggy, quad bike, KTM dirt bike | **Optional, AED 300.** Self-drive to the base is free. |
+
+Outer emirates are quoted on both. Before this date there was one rule and one string, so
+every vehicle page inherited the safari promise. `transfers.summary` is now the safari line
+and `transfers.vehicle` the vehicle line; in CMS copy the tokens are `{pickup}` and
+`{pickupVehicle}`. **Never write "free pickup" on a buggy, quad or dirt bike surface again.**
+
+Free cancellation up to 24 hours before. No deposit on standard slots.
 
 **Payment:** cash, card and bank transfer all accepted, paid on the spot at the base before riding.
 Nothing due at booking time.
@@ -270,9 +281,11 @@ injured guest later claims they believed they were covered. Do not remove it fro
 
 Marketing surfaces (hero panels, trust strips, cards) carry hooks instead: 17K+ guests since 2020,
 4.9 Google rating, TripAdvisor Travellers' Choice, no deposit, free 24-hour cancellation,
-free Dubai pickup, per-vehicle pricing, kids from age 6.
+per-vehicle pricing, kids from age 6. **"Free Dubai pickup" was one of these hooks and is no
+longer usable outside safari surfaces.**
 
-**Business:** open 24/7 · lat/long 25.153303, 55.635006 · 50+ guides · 70+ vehicles.
+**Business:** open **7am to 11pm daily** (was 24/7 until 19 Sep 2026) · lat/long 25.153303,
+55.635006 · 50+ guides · 70+ vehicles.
 
 ---
 
@@ -744,7 +757,7 @@ price changes, and the page then contradicts the table below it. So the client w
 Available tokens: `buggyFrom` `quadFrom` `dirtbikeFrom` `safariFrom` · `buggyCount`
 `quadCount` `dirtbikeCount` · `rating` `reviewCount` · `phone` `email` `address` `guests`
 `fleet` `guides` `founded` · `cancellation` `weather` `deposit` `payment` `paymentFull`
-`pickup` `pickupOuter`.
+`pickup` (safari) `pickupVehicle` (buggy, quad, dirt bike) `pickupPrice` `pickupOuter`.
 
 A misspelled token throws at build time in `fill()`, and a **token audit** also scans the
 built HTML, because a field added to a schema and forgotten in its adapter would print the
@@ -793,8 +806,8 @@ The ten location pages are one page with a different place name in it, so the sh
 sentences stay in `locationPages.ts` and are built from those values. Putting them in each
 file would turn one correction into ten edits with nine chances to miss one, and after a
 year the pages would read like ten different companies. **`emirate` is the field to watch:**
-anything other than `Dubai` flips the page from "free pickup" to "transfer quoted", so a
-typo there changes what the page promises a guest.
+anything other than `Dubai` flips the page from the Dubai pickup wording to "transfer quoted",
+so a typo there changes what the page promises a guest.
 
 All 18 pages came out byte-identical.
 

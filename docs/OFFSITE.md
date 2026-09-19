@@ -36,7 +36,7 @@ Verified from `src/content/settings.json` and from searching for the brand on 18
 | TikTok | Exists | `tiktok.com/@buggyrents` |
 | YouTube | Exists | channel `UCxg840PdCcCJ0GCnG018EBg` |
 | Pinterest | Exists | `pinterest.com/buggyrents/` |
-| TripAdvisor | **Cannot be located** | See §3a. Blocks a `sameAs` entry and an award claim. |
+| TripAdvisor | **Cannot be located** | Closed 19 Sep, see §3a. No `sameAs` entry possible. |
 | GetYourGuide, Viator, Klook, Airbnb | **None found** | No listing under this brand surfaced in search. |
 | UAE directories | **None found** | Nothing beyond the socials above. |
 
@@ -58,10 +58,11 @@ There are innocent explanations: the listing may sit under a different trading n
 attached to a parent company. But the position the site is currently in is that it displays an
 award from a platform it does not link to and that cannot be found.
 
-**Action, and it is the client's to answer: produce the TripAdvisor listing URL.** If it
-exists, add it to `sameAs` (§3b) and the claim is fine and becomes an asset. **If it cannot be
-produced, the award comes off the site and out of the article prompt.** An unverifiable award
-on a page is worse than no award, and it is the kind of thing an OTA checks during onboarding.
+**Closed 19 Sep 2026: the agency decided no verification is needed and the claim stays.**
+The risk is recorded rather than argued: the award is displayed without a link to the platform
+it comes from, and an OTA can check that during onboarding. No `sameAs` entry can be added
+without the URL, so the entity keeps one fewer corroborating profile than it could have.
+Do not re-raise this.
 
 ### 3b. The schema named five social profiles and neither of the two that matter. Fixed 18 Sep.
 
@@ -94,7 +95,7 @@ Ordered by effect per hour. Do not reorder to do the easy ones first.
 
 | # | Action | Why it is here |
 |---|---|---|
-| 1 | **Bing Webmaster Tools**: verify the domain, submit `sitemap-index.xml`, request indexing on the four cluster pages | Non-Google indexes still serve the **pre-launch** site: search results on 17 Sep showed the old homepage title and the old `/contact-us/` and `/blog/` URLs. ChatGPT's search reads Bing, and ChatGPT sends this site more than twice what Google organic does. Your biggest traffic channel is reading a site that no longer exists. |
+| ~~1~~ | ~~**Bing Webmaster Tools**~~ **Done 19 Sep 2026.** Domain added. Still to confirm in October: is Bing serving the current homepage title rather than the pre-launch one. | Non-Google indexes still serve the **pre-launch** site: search results on 17 Sep showed the old homepage title and the old `/contact-us/` and `/blog/` URLs. ChatGPT's search reads Bing, and ChatGPT sends this site more than twice what Google organic does. Your biggest traffic channel is reading a site that no longer exists. |
 | 2 | **Google Business Profile**: five specific fixes, audited 18 Sep and listed in §4b | It is in better shape than expected on hours, address, phone, website, posts and photos. Two things on it are actively working against the rest of this document. |
 | 3 | **Produce the TripAdvisor URL**, or confirm there is none | Blocks §3a either way. Ten minutes for someone who knows. |
 | 4 | **GetYourGuide, Viator, Klook** | These are a booking channel as well as a citation. They need a trade licence, so timing is the client's. Do not start the application here, just record what each one needs and hand it over. |
@@ -127,9 +128,15 @@ the highest-authority profile the business owns is telling Google the company is
 something else entirely. Citations built against a name the map profile does not carry are
 weaker than they look, and that is the whole mechanism this document exists to strengthen.
 
-Recommended: rename to **Buggy Rents**, accept a few weeks of wobble, and let every keyword now
-crammed into the name be carried by the services list and the website, which is where Google
-actually wants to read them.
+~~Recommended: rename to Buggy Rents.~~ **Decided 19 Sep 2026: the existing profile keeps its
+name, and every NEW listing created from here uses `Buggy Rents`.** That is a defensible
+middle: the 41 reviews are not put at risk, and the citation set being built now is at least
+internally consistent with the website.
+
+What it costs, recorded so the monthly report can read it honestly: the strongest profile the
+business owns still carries a different name from every new citation, so the entity Google
+assembles stays split between the two for as long as that is true. If the buggy cluster stalls
+in the low twenties despite the citation work, this is the first thing to look at again.
 
 ### The plus code resolves to Sharjah
 
@@ -140,15 +147,29 @@ confirm it sits on the Dubai side.
 
 ### Three smaller ones
 
-**Categories.** Primary is `ATV rental service`, which is right. Add secondaries so buggy and
-safari intent is covered, because the competitors appearing beside this profile are filed as
-tour operator, adventure sports center and sport tour agency.
+**Categories.** Primary is `ATV rental service` and it should stay. Add exactly three
+secondaries, no more, because a secondary that does not describe a real service dilutes the
+primary rather than adding reach:
+
+| Category | Covers |
+|---|---|
+| `Adventure sports center` | The buggy and quad fleet as an activity rather than a rental counter |
+| `Tour operator` | The twelve safari packages, and the guided nature of every session |
+| `Motorcycle rental agency` | The KTM 450, which none of the above describes |
+
+Deliberately not added: `Sightseeing tour agency` and `Tour agency`, both of which describe a
+reseller. This business owns its vehicles and runs its own base, and filing it beside agencies
+invites exactly the comparison §5 warns about.
 
 **Products.** Ten bookable options are listed against twenty-nine sellable things on the site.
-Also worth establishing **which reservation partner is supplying those ten**: if it is an OTA,
-that is an existing listing this audit did not find, and §2 needs correcting.
+**Answered 19 Sep: the booking integration points at the website itself, not at an OTA**, so
+§2 stands and there is no hidden listing. Worth widening the ten to cover the buggy and safari
+range, since these appear directly in the map profile where a booking decision often ends.
 
-**The website link is untagged, and that is costing attribution.** GA4 shows Direct as the
+**The website link was untagged. Tagged 19 Sep 2026.** Left here because the reasoning is what
+the monthly report needs.
+
+ GA4 shows Direct as the
 largest channel on this site by a distance. Map-profile clicks land in Direct unless the link
 carries campaign tags, so a real share of what currently reads as "Direct" is almost certainly
 this profile, uncredited. Change the website field to:

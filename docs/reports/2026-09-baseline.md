@@ -201,3 +201,62 @@ Unassigned 4, Organic Video 1. By source: `chatgpt.com / ai-assistant` 29 agains
 **ChatGPT is sending more than twice what Google organic is.** That was true at baseline and
 it is still true, which makes it a pattern rather than a spike, and it is the argument for the
 GEO work in `docs/SEO-PLAN.md` §4.2 being funded as more than a side bet.
+
+---
+
+## Lead events, first real read, 19 Sep 2026
+
+Prompted by the client reporting three or four WhatsApp enquiries. Checked in GA4 Reports,
+Events, because the raw events have fired since 7 Sep even though key-event marking only
+started on 17 Sep and does not backfill.
+
+| Event | 28 days, 22 Aug – 18 Sep | 7 days, 12 – 18 Sep |
+|---|---|---|
+| `whatsapp_click` | 45 events, **28 users** | 19 events, **13 users** |
+| `call_click` | 8 events, **1 user** | none |
+| `email_click` | 7 events, **1 user** | none |
+| `generate_lead` | 7 events, **1 user** | none |
+
+**The client's three or four enquiries are confirmed and consistent.** 13 people opened
+WhatsApp in the last seven days. Three or four of those turning into a real conversation is a
+normal share of taps, and it is the first independent confirmation that the tracking built on
+5 to 7 Sep reports something true.
+
+**Read `whatsapp_click` as intent, never as an enquiry.** It fires when the link is tapped,
+not when a message is sent. The monthly report must say so, or the client will compare 45 to
+the number of people who actually messaged him and conclude the tracking is broken.
+
+### The other three events are our own test clicks, not traffic
+
+`call_click`, `email_click` and `generate_lead` each show seven or eight events from exactly
+**one user**, all on 6 Sep, and nothing since. That is the annotated test session. Corrected
+for it, **every real lead on this site in 28 days came through WhatsApp and none came through
+the phone number, the email link or the contact form.**
+
+That is worth acting on rather than noting. The contact form is the only lead path that
+captures a name and a request in writing, and it has produced nothing in a month.
+
+### Which channels produce the leads, and it is not organic yet
+
+`Lead acquisition` by first user channel, 12 to 18 Sep. User key event rate:
+
+| Channel | User key event rate |
+|---|---|
+| **AI Assistant** | **10.53%** |
+| Direct | 3.08% |
+| All users | 4.76% |
+| Organic Search | does not appear |
+
+**Organic Search has produced no key events yet.** Two caveats before anyone reports that:
+key events were marked on 17 Sep and are not backfilled, so this is effectively two days of
+data, and Organic Search is a small share of sessions to begin with. Directional, not
+conclusive.
+
+What is not ambiguous is the ratio. **AI Assistant converts at more than three times Direct**,
+which is the third separate measurement pointing the same way after the two channel readings
+in this file. The GEO work in `docs/SEO-PLAN.md` §4.2 is not a side bet on this site.
+
+The honest position for the September report: **the site is producing leads, the leads are
+real, and they are not yet coming from Google organic.** That is expected at positions 22 to
+30 and it is exactly what the position work is for, but it has to be said plainly rather than
+letting the client read WhatsApp volume as SEO results.

@@ -394,15 +394,26 @@ is newer.
     `canam-maverick-x3-4-seater-hero-dubai-dunes` → `canam-maverick-x3-hero-dubai-dunes`,
     `canam-maverick-r-4-seater-hero-blue-dubai-desert` → `canam-maverick-r-hero-blue-dubai-desert`.
     Both show two-seaters. Their alt text claimed four seats too, and was corrected.
-  - **Still uncovered, client action needed: there is no photo of the Maverick R 4-seater
-    anywhere in the library.** Every Maverick R shot — blue, yellow turbo, both yard
-    shots — is a two-seater. That page currently runs an X3 four-seater as an interim
-    hero with honest alt text. It is the right seat count and the wrong model, and it
-    stays wrong until a real photo arrives.
-  - The Can-Am four-seat pool is **four photos**, three of which are already card images
-    on any given four-seater page, so those galleries fall through to the seat-filtered
-    pool and pick up a Polaris or an untagged shot. Correct, but generic. Four-seater
-    photos are the highest-value image request after the 2000px landscapes above.
+- **Five photos added 23 Sep 2026, and they closed the Maverick R gap.** The client sent
+  them the same afternoon the complaint was raised. Two are genuine **Can-Am Maverick R
+  X RS MAX four-seaters**, verified by reading the door badge rather than trusting the
+  filename, and the blue one is 1600px so it became the Maverick R 4-Seater hero. That
+  page now runs its own machine in both the hero and the card for the first time. The
+  other three are X3 four-seaters, which took the Can-Am four-seat pool from four photos
+  to seven and ended the fallback-to-generic behaviour on those galleries.
+  - All eleven buggy pages were then checked page by page against their seat count:
+    **zero conflicts**, heroes and galleries both.
+  - Two of the five are 720px and 700px, so they warn on the resolution audit, same as
+    the other 16 soft images. Usable, not ideal.
+  - **The remaining thin pool is POLARIS four-seat: four photos, two of them already
+    card images.** So `/dune-buggy-dubai/polaris-rzr-1000-4-seater/` still fills its
+    gallery with Can-Am four-seaters. Right seat count, wrong brand, and the fix is
+    photographs rather than code. **Polaris four-seater shots at 2000px+ are now the
+    highest-value image request on the list.**
+  - `make` distinguishes Polaris from Can-Am but not X3 from Maverick R, deliberately:
+    the pools are far too thin for model-level purity, and forcing it would either
+    repeat photos across pages or fail the variety audit. The Maverick R gallery
+    therefore shows X3 four-seaters. Accurate on seats and brand, which is the bar.
 - **All the audits run on every build** — `"build": "astro build && npm run audit"`.
   Before 8 Aug 2026 the build script was `astro build` alone, so none of the audits ever ran
   on Cloudflare. Do not remove the `&& npm run audit`. The current count is in §7; do not

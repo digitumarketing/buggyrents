@@ -5,7 +5,7 @@
   "seats": 4,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "can-am-maverick-x3-turbo-dune-buggy-dubai",
+  "image": "canam-maverick-r-4-seater-teal-dune-buggy-dubai",
   "blurb": "Maverick R power carrying four. The top of the fleet for group bookings.",
   "durations": [
     {
@@ -25,5 +25,5 @@
   ],
   "featured": false,
   "order": 11,
-  "heroImage": "canam-maverick-4-seater-hero-black-red-dubai"
+  "heroImage": "canam-maverick-r-4-seater-hero-blue-dubai-dunes"
 }

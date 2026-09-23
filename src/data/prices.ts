@@ -167,7 +167,7 @@ export const quadPrices: PriceGuideData = {
     { q: 'Is hotel pickup included?', a: transfers.vehicle + ' ' + transfers.outsideDubai },
     { q: 'How do I pay?', a: payment.detail },
     { q: 'Can I cancel and get a refund?', a: policy.cancellation },
-    { q: 'What does the safari combo include?', a: 'An evening desert safari with dune bashing and a camp dinner, plus a quad session. AED 200 with a 30-minute quad, AED 300 with a full hour.' },
+    { q: 'What does the safari combo include?', a: 'An evening desert safari with dune bashing and a camp dinner, plus a quad session. AED 199 with a 30-minute quad, AED 300 with a full hour.' },
     { q: 'Are there hidden charges?', a: 'No. Helmet, briefing, fuel and a guide are in the price. Pickup and drop-off is the one genuine option: it costs AED 300 if you want it, and nothing if you drive to the base yourself. Outer-emirate transfers are quoted separately.' }
   ],
   related: [
@@ -185,7 +185,7 @@ export const quadPrices: PriceGuideData = {
     { h: 'The Raptor 700 is a different thing', html: `<p class="lf-lead">At AED 500 for 30 minutes, the <a href="/quad-bike-dubai/yamaha-raptor-700cc/">Yamaha Raptor 700cc</a> is more than double any other quad.</p><p>It is a sport quad: light, fast and demanding, restricted to riders 14 and over with real experience. If you have never ridden a quad in sand, this is not where to start, whatever your budget.</p>` },
     { h: 'Which duration to pay for', html: `<p class="lf-lead">Quads run on five durations, more than the buggies.</p><p>Thirty minutes suits children and anyone testing whether they enjoy it. An hour is the sweet spot for most adults. Two hours and beyond are genuinely tiring on a quad, because you steer with your body far more than in a buggy, and they suit riders who already know that.</p>` },
     { h: 'What is included at every price', html: `<p class="lf-lead">Helmet, safety briefing, fuel, water and a lead guide, on the AED 75 kids slot and the AED 2,200 Raptor slot alike.</p><p>${transfers.vehicle} Sandboarding is free on safari packages, and the camel ride add-on is AED 100.</p><p>${payment.detail}</p>` },
-    { h: 'Combining a quad with a safari', html: `<p class="lf-lead">Two combo tiers pair an evening desert safari with a quad session.</p><p>AED 200 per person includes a 30-minute quad, AED 300 includes a full hour. Both include dune bashing in a 4x4, a sunset stop, camp dinner and entertainment, so the difference is purely quad time.</p><p>${policy.cancellation}</p>` }
+    { h: 'Combining a quad with a safari', html: `<p class="lf-lead">Two combo tiers pair an evening desert safari with a quad session.</p><p>AED 199 per person includes a 30-minute quad, AED 300 includes a full hour. Both include dune bashing in a 4x4, a sunset stop, camp dinner and entertainment, so the difference is purely quad time.</p><p>${policy.cancellation}</p>` }
   ]
 };
 

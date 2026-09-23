@@ -7,7 +7,7 @@
  * someone choose us over the result above.
  *
  * The brand suffix was most of the problem. " | Buggy Rents" costs 14 characters,
- * and on a page called "Can-Am X3 Turbo RR - 4 Seater Dubai | From AED 1,299" those
+ * and on a page called "Can-Am X3 Turbo RR - 4 Seater Dubai | From AED 700" those
  * 14 characters were the difference between the price showing and not showing.
  * Google appends the site name to the tab and often to the result anyway, so
  * spending a quarter of the budget stating it twice is a bad trade.

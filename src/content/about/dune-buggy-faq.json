@@ -73,7 +73,7 @@
   "introLede": "Almost every question we get comes back to one of these. Settle them and the rest is easy.",
   "introBody": [
     "<strong>Prices are per buggy, not per person.</strong> This is the single biggest source of confusion, and it works in your favour. A two seater at AED {buggyFrom} for 30 minutes is AED {buggyFrom} for the buggy. Two people riding together pay AED 150 each. A four seater at AED 350 split four ways is under AED 90 a head, which is why groups almost always take the bigger machine.",
-    "<strong>Duration matters more than the model.</strong> We run 30 minutes, 1 hour, 2 hours and 4 hours. Thirty minutes is a genuine taste of the dunes and it suits people fitting it around other plans. An hour is the sweet spot for most first timers. Two hours and above is for people who already know they like this.",
+    "<strong>Duration matters more than the model.</strong> We run 30 minutes, 1 hour and 2 hours. Thirty minutes is a genuine taste of the dunes and it suits people fitting it around other plans. An hour is the sweet spot for most first timers. Two hours is for people who already know they like this.",
     "<strong>Pickup is optional, not included.</strong> {pickupVehicle} Free pickup applies to desert safari bookings, where the 4x4 is collecting you anyway. It means the price you see is close to the price you pay. Outside Dubai we quote the transfer before you commit.",
     "Everything else, model choice, seat count, time of day, is preference rather than cost. Ask us on WhatsApp and we will narrow it down in a couple of messages."
   ],
@@ -86,7 +86,7 @@
     {
       "n": "02",
       "h": "Four durations",
-      "p": "30 minutes, 1 hour, 2 hours and 4 hours. An hour suits most first timers."
+      "p": "30 minutes, 1 hour and 2 hours. An hour suits most first timers."
     },
     {
       "n": "03",
@@ -126,7 +126,7 @@
     {
       "tag": "Most asked",
       "h": "How much does a dune buggy cost in Dubai?",
-      "p": "From AED {buggyFrom} for 30 minutes in a Polaris RZR 1000 two seater, up to AED 2299 for four hours in a four seat Turbo. All eleven buggies and every duration are on the price page.",
+      "p": "From AED {buggyFrom} for 30 minutes in a Polaris RZR 1000 two seater, up to AED 2350 for two hours in a four seat Can-Am Maverick R. All eleven buggies and every duration are on the price page.",
       "feature": true
     },
     {
@@ -202,7 +202,7 @@
   "faqs": [
     {
       "q": "How much is a dune buggy in Dubai?",
-      "a": "From AED {buggyFrom} for 30 minutes in a Polaris RZR 1000 two seater. Prices are per buggy, so two people riding together pay AED 150 each. The full range runs to AED 2299 for four hours in a four seat Polaris Turbo."
+      "a": "From AED {buggyFrom} for 30 minutes in a Polaris RZR 1000 two seater. Prices are per buggy, so two people riding together pay AED 150 each. The full range runs to AED 2350 for two hours in a four seat Can-Am Maverick R."
     },
     {
       "q": "Is the price per person or per buggy?",

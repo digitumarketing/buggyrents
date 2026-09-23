@@ -68,7 +68,7 @@
   "faqs": [
     {
       "q": "How much is a dune buggy in Dubai?",
-      "a": "Dune buggy Dubai starts at AED {buggyFrom} for 30 minutes in a Polaris RZR 1000 2-seater. The Can-Am Maverick X3 starts at AED 600 and the Maverick R at AED 900. Every price is per buggy, not per person."
+      "a": "Dune buggy Dubai starts at AED {buggyFrom} for 30 minutes in a Polaris RZR 1000 2-seater. The Can-Am Maverick X3 starts at AED 550 and the Maverick R at AED 800. Every price is per buggy, not per person."
     },
     {
       "q": "Is this a dune buggy tour or a buggy rental?",
@@ -113,7 +113,7 @@
     },
     {
       "h": "Polaris, Can-Am or Maverick R",
-      "html": "<p class=\"lf-lead\">Three tiers, and the difference is power rather than service.</p><p>The <a href=\"/dune-buggy-dubai/polaris-rzr-1000-2-seater/\">Polaris RZR 1000</a> from AED {buggyFrom} is the balanced starting point. The <a href=\"/dune-buggy-dubai/can-am-maverick-x3-2-seater/\">Can-Am Maverick X3</a> from AED 600 is a serious step up. The <a href=\"/dune-buggy-dubai/can-am-maverick-r-turbo/\">Maverick R</a> from AED 900 is the fastest thing we run, and it is not a beginner machine.</p><p>Turbo and Turbo RR variants sit between them for drivers who want more without going to the top of the range.</p>"
+      "html": "<p class=\"lf-lead\">Three tiers, and the difference is power rather than service.</p><p>The <a href=\"/dune-buggy-dubai/polaris-rzr-1000-2-seater/\">Polaris RZR 1000</a> from AED {buggyFrom} is the balanced starting point. The <a href=\"/dune-buggy-dubai/can-am-maverick-x3-2-seater/\">Can-Am Maverick X3</a> from AED 550 is a serious step up. The <a href=\"/dune-buggy-dubai/can-am-maverick-r-turbo/\">Maverick R</a> from AED 800 is the fastest thing we run, and it is not a beginner machine.</p><p>Turbo and Turbo RR variants sit between them for drivers who want more without going to the top of the range.</p>"
     },
     {
       "h": "Per buggy, never per person",
@@ -121,7 +121,7 @@
     },
     {
       "h": "Which duration to book",
-      "html": "<p class=\"lf-lead\">Thirty minutes is a taster. An hour is where most first-timers should land.</p><p>The briefing and warm-up eat into a short slot, so on a 30-minute booking you are properly riding for about 20 minutes. Two hours and four hours suit experienced drivers, or groups pairing the ride with a camp stop.</p>"
+      "html": "<p class=\"lf-lead\">Thirty minutes is a taster. An hour is where most first-timers should land.</p><p>The briefing and warm-up eat into a short slot, so on a 30-minute booking you are properly riding for about 20 minutes. The two-hour slot, which is the longest we run on a buggy, suits experienced drivers or groups pairing the ride with a camp stop.</p>"
     },
     {
       "h": "Safety and what is included",

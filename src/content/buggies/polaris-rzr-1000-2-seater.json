@@ -28,13 +28,6 @@
       "price": 999,
       "badge": "Longer route",
       "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Polaris RZR 2-Seater."
-    },
-    {
-      "label": "4 hours",
-      "minutes": 240,
-      "price": 2199,
-      "badge": "Full session",
-      "blurb": "The longest route we run on the Polaris RZR 2-Seater. For experienced riders who want maximum time in the dunes."
     }
   ],
   "featured": true,

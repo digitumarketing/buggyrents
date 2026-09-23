@@ -23,6 +23,8 @@ export type Duration = {
   badge?: string; blurb?: string;
 };
 
+import { traitsOf } from '@/data/images';
+
 export type Vehicle = {
   slug: string;
   category: 'buggy' | 'quad' | 'dirtbike';
@@ -93,6 +95,27 @@ for (const [label, list] of [['buggies', buggies], ['quads', quads], ['dirtbikes
     throw new Error(
       `No ${label} found in src/content/${label}/. Either the CMS files are missing ` +
       `or the collection path in keystatic.config.ts no longer matches this glob.`
+    );
+  }
+}
+
+/* A vehicle's own card photo must not contradict its seat count.
+
+   Added 23 Sep 2026. `img()` already refuses a quad photo on a buggy, and
+   `galleryFor()` now filters the gallery by seat count, but the CARD image is
+   chosen by hand in the CMS and had nothing checking it: the Polaris RZR Turbo
+   2-Seater card was showing a four-seat XP4, on every page that card appears.
+
+   Only a tagged photo can fail. An untagged one — a convoy, a group at a photo
+   stop — is allowed anywhere, so the client is never blocked from picking a
+   general shot for a machine we have no portrait of. */
+for (const v of [...buggies, ...quads, ...dirtbikes]) {
+  const shown = traitsOf(v.image)?.seats;
+  if (shown && v.seats && shown !== v.seats) {
+    throw new Error(
+      `Card image mismatch on ${v.slug}: "${v.image}" shows a ${shown}-seater but the ` +
+      `vehicle has ${v.seats} seats. Pick a different photo in the CMS, or correct the ` +
+      `seat tag in src/data/images.ts if the photo is tagged wrongly.`
     );
   }
 }

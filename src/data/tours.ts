@@ -1,6 +1,6 @@
 import type { ClusterData } from '@/components/templates/Cluster.astro';
 import { allVehicles, byCategory, fromPrice, type Vehicle } from '@/data/vehicles';
-import { bySubject } from '@/data/images';
+import { bySubject, traitsOf } from '@/data/images';
 import { pageTitle, tidy } from '@/data/seo';
 
 const NOUN = { buggy: 'buggy', quad: 'quad', dirtbike: 'dirt bike' } as const;
@@ -51,13 +51,58 @@ const DURATION_BLURB = (v: Vehicle, minutes: number) => ({
    the set as a whole is spread across the library instead of clustered at index 0.
    audit-contrast.mjs now fails the build if two tour pages ever share an identical
    gallery again, so this cannot quietly regress. */
+/* SEAT AND MAKE FILTERING, added 23 Sep 2026 after a client complaint.
+
+   The offset above fixed repetition. It did not fix correctness: the pool was
+   filtered by SUBJECT only, so a four-seat Can-Am page could and did open with a
+   two-seat Polaris photo, directly beneath a caption reading "4-seat profile" and
+   a sentence stating "4 seats". Two of the eleven buggy pages were wrong this way
+   and a third, Maverick R 4-Seater, was wrong in its hero as well.
+
+   Seat count is a HARD filter: a photo tagged with a different seat count than the
+   vehicle is removed from the pool outright. Photos with no seat tag stay in — a
+   distant convoy contradicts nothing.
+
+   Make is a SOFT preference: same-make photos are moved to the front of the pool
+   so a Can-Am page opens with a Can-Am, but nothing is excluded on make alone,
+   because a brand-pure pool would be too small to keep the eleven galleries
+   distinct and the image-variety audit would then fail.
+
+   The fallback chain matters. If the seat-filtered pool cannot fill three slots we
+   widen rather than repeat: seat-filtered, then subject-only minus what is already
+   on the page, then subject-only minus the vehicle's own card. A too-narrow filter
+   that silently repeats a photo would trade a visible bug for one the audit catches
+   at deploy time, which is worse for the client than a slightly generic third card. */
 function galleryFor(v: Vehicle, taken: string[]) {
-  const pool = bySubject(v.category).filter(n => !taken.includes(n));
-  const fallback = bySubject(v.category).filter(n => n !== v.image);
-  const src = pool.length >= 3 ? pool : fallback;
+  const seatsOk = (n: string) => {
+    const t = traitsOf(n);
+    return !t?.seats || !v.seats || t.seats === v.seats;
+  };
+  const wantMake = v.name.toLowerCase().includes('can-am') ? 'canam'
+    : v.name.toLowerCase().includes('polaris') ? 'polaris' : undefined;
+  const makeOk = (n: string) => !wantMake || traitsOf(n)?.make === wantMake;
+
+  const subject = bySubject(v.category);
+  const onPage = subject.filter(n => !taken.includes(n));
+
+  /* Narrowest pool that can still fill three slots, widening only when it cannot.
+     Sorting one pool and then indexing into it does NOT work: the per-vehicle
+     offset jumps straight past the preferred entries and lands in the tail, which
+     is how the first attempt at this put three Polaris photos on a Can-Am page
+     even though the Can-Am ones had been moved to the front. */
+  const src = [
+    onPage.filter(n => seatsOk(n) && makeOk(n)),
+    onPage.filter(seatsOk),
+    onPage,
+    subject.filter(n => n !== v.image)
+  ].find(p => p.length >= 3) ?? subject;
+
+  /* Stride of ONE, not three. The window still moves per vehicle so no two pages
+     carry the same set, but consecutive windows overlap instead of consuming three
+     entries each, which is what keeps a narrow pool — a five-photo Can-Am
+     four-seater pool, say — from wrapping onto itself and repeating a page. */
   const seat = Math.max(0, byCategory[v.category].findIndex(x => x.slug === v.slug));
-  const offset = seat * 3;
-  const pick = (i: number) => src[(offset + i) % src.length];
+  const pick = (i: number) => src[(seat + i) % src.length];
   return [
     { image: pick(0), kicker: `${v.seats}-seat profile`, title: `Open cockpit, roll cage and red-dune stance.`,
       body: `The ${v.shortName} is set up for the Lahbab route: ${v.engine}, ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'}, and a ride height that copes with soft sand.` },

@@ -18,7 +18,7 @@ export const homeLongForm: { heading: string; intro: string; blocks: LfBlock[] }
 
     { h: 'Dune buggy Dubai price: what you actually pay',
       html: `<p class="lf-lead">Every price on this site is <strong>per vehicle, not per person</strong>. A 2-seater Polaris RZR at AED 300 covers two people for 30 minutes, not AED 300 each.</p>
-<p>Our <a href="/dune-buggy-dubai/price/">dune buggy Dubai price</a> list starts at <span class="pill">AED 300</span> for a Polaris RZR 1000cc 2-seater and runs to AED 950 for an hour on the Can-Am Maverick R turbo. The 4-seater Polaris is AED 350 for 30 minutes, which makes it the cheapest way to get four people into the dunes at once.</p>
+<p>Our <a href="/dune-buggy-dubai/price/">dune buggy Dubai price</a> list starts at <span class="pill">AED 300</span> for a Polaris RZR 1000cc 2-seater and runs to AED 1,799 for an hour on the Can-Am X3 Turbo RR 4-seater. The 4-seater Polaris is AED 350 for 30 minutes, which makes it the cheapest way to get four people into the dunes at once.</p>
 <p><a href="/quad-bike-dubai/price/">Quad biking Dubai prices</a> start at AED 75 for the fenced kids area and reach AED 2,200 for four hours on a Yamaha Raptor 700cc. There is no fuel surcharge, no gear rental fee and no per-head add-on.</p>` },
 
     { h: 'Where you ride: the Lahbab red dunes',

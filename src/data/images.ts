@@ -1,27 +1,52 @@
 /* Image library — every photo on the site.
    Each entry carries its SUBJECT so a quad page can never show a buggy photo.
-   `img()` validates the subject at build time and returns the path + alt. */
+   `img()` validates the subject at build time and returns the path + alt.
+
+   BUGGY PHOTOS ALSO CARRY `seats` AND `make`, added 23 Sep 2026.
+
+   THE BUG THIS FIXES, reported by the client 23 Sep 2026: the Can-Am X3 4-Seater
+   and X3 Turbo RR 4-Seater pages were showing two-seater photos. Subject tagging
+   stopped a quad photo reaching a buggy page but said nothing about seat count,
+   so `galleryFor()` was free to drop a two-seater Polaris onto a four-seat Can-Am
+   page directly under a caption reading "4-seat profile … 4 seats".
+
+   `seats` is only set where the machine is actually countable in the frame. A
+   distant convoy or a group posing shot stays undefined, which means "usable
+   anywhere" rather than "unknown, therefore excluded" — the pool is small enough
+   that excluding the ambiguous ones would starve it.
+
+   `make` is soft: it orders the pool so a Can-Am page opens with a Can-Am, but it
+   never excludes, because several vehicles have only one or two photos of their
+   own and a brand-pure gallery would repeat across pages. Seat count is hard.
+
+   Two files were found MISNAMED during that audit: a hero called
+   `canam-maverick-x3-4-seater-hero-…` and one called `canam-maverick-r-4-seater-hero-…`
+   both show two-seaters. Both were renamed to drop the false seat claim, and
+   `assertNameMatchesSeats()` below now fails the build on that class of mistake
+   rather than leaving it to be spotted by a customer. */
 
 export type Subject = 'buggy' | 'quad' | 'dirtbike' | 'safari';
+export type Seats = 2 | 4;
+export type Make = 'polaris' | 'canam';
 
-export const library: Record<string, { subject: Subject; alt: string }> = {
-  'can-am-maverick-dune-buggy-dust-action-dubai': { subject: 'buggy', alt: 'Can-Am dune buggy throwing up dust during a Dubai desert ride' },
-  'can-am-maverick-x3-4-seater-couple-buggy-dubai': { subject: 'buggy', alt: 'Couple in a Can-Am Maverick X3 4-seater dune buggy in the Dubai desert' },
-  'can-am-maverick-x3-4-seater-desert-tour-dubai': { subject: 'buggy', alt: 'Can-Am Maverick X3 4-seater dune buggy on a guided Dubai desert tour' },
-  'can-am-maverick-x3-4-seater-family-buggy-ride-dubai': { subject: 'buggy', alt: 'Family riding a Can-Am Maverick X3 4-seater dune buggy in Dubai' },
-  'can-am-maverick-x3-black-2-seater-red-dune-dubai': { subject: 'buggy', alt: 'Black Can-Am Maverick X3 2-seater dune buggy on a Dubai red dune' },
-  'can-am-maverick-x3-rs-2-seater-dune-buggy-dubai': { subject: 'buggy', alt: 'Blue Can-Am Maverick X3 RS 2-seater dune buggy in the Dubai desert' },
-  'can-am-maverick-x3-turbo-dune-buggy-dubai': { subject: 'buggy', alt: 'Can-Am Maverick X3 Turbo dune buggy ready for a Dubai desert route' },
-  'can-am-maverick-x3-yellow-turbo-dune-buggy-dubai': { subject: 'buggy', alt: 'Yellow Can-Am Maverick X3 turbo dune buggy driving across Dubai sand' },
-  'couple-dune-buggy-ride-dubai-desert-tour': { subject: 'buggy', alt: 'Couple sitting on a dune buggy during a Dubai desert tour' },
+export const library: Record<string, { subject: Subject; alt: string; seats?: Seats; make?: Make }> = {
+  'can-am-maverick-dune-buggy-dust-action-dubai': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Can-Am dune buggy throwing up dust during a Dubai desert ride' },
+  'can-am-maverick-x3-4-seater-couple-buggy-dubai': { subject: 'buggy', seats: 4, make: 'canam', alt: 'Couple in a Can-Am Maverick X3 4-seater dune buggy in the Dubai desert' },
+  'can-am-maverick-x3-4-seater-desert-tour-dubai': { subject: 'buggy', seats: 4, make: 'canam', alt: 'Can-Am Maverick X3 4-seater dune buggy on a guided Dubai desert tour' },
+  'can-am-maverick-x3-4-seater-family-buggy-ride-dubai': { subject: 'buggy', seats: 4, make: 'canam', alt: 'Family riding a Can-Am Maverick X3 4-seater dune buggy in Dubai' },
+  'can-am-maverick-x3-black-2-seater-red-dune-dubai': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Black Can-Am Maverick X3 2-seater dune buggy on a Dubai red dune' },
+  'can-am-maverick-x3-rs-2-seater-dune-buggy-dubai': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Blue Can-Am Maverick X3 RS 2-seater dune buggy in the Dubai desert' },
+  'can-am-maverick-x3-turbo-dune-buggy-dubai': { subject: 'buggy', seats: 4, make: 'canam', alt: 'Can-Am Maverick X3 Turbo dune buggy ready for a Dubai desert route' },
+  'can-am-maverick-x3-yellow-turbo-dune-buggy-dubai': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Yellow Can-Am Maverick X3 turbo dune buggy driving across Dubai sand' },
+  'couple-dune-buggy-ride-dubai-desert-tour': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Couple sitting on a dune buggy during a Dubai desert tour' },
   'dune-buggy-climbing-red-dune-convoy-dubai': { subject: 'buggy', alt: 'Dune buggy climbing a red dune in convoy during a Dubai desert tour' },
   'dune-buggy-convoy-crossing-dubai-red-dunes': { subject: 'buggy', alt: 'Convoy of dune buggies crossing the red dunes on a Dubai desert tour' },
-  'dune-buggy-sunrise-desert-tour-dubai': { subject: 'buggy', alt: 'Dune buggy on the sand at sunrise before a guided Dubai desert tour' },
-  'dune-buggy-sunset-ride-lahbab-red-dunes-dubai': { subject: 'buggy', alt: 'Dune buggy on a red dune at sunset during a Lahbab desert ride in Dubai' },
+  'dune-buggy-sunrise-desert-tour-dubai': { subject: 'buggy', seats: 4, make: 'polaris', alt: 'Dune buggy on the sand at sunrise before a guided Dubai desert tour' },
+  'dune-buggy-sunset-ride-lahbab-red-dunes-dubai': { subject: 'buggy', seats: 4, make: 'polaris', alt: 'Dune buggy on a red dune at sunset during a Lahbab desert ride in Dubai' },
   'group-dune-buggy-tour-dubai-photo-stop': { subject: 'buggy', alt: 'Group of guests with a Polaris dune buggy on a Dubai desert photo stop' },
-  'polaris-rzr-1000-2-seater-dune-buggy-dubai': { subject: 'buggy', alt: 'Polaris RZR 1000 2-seater dune buggy with riders in the Dubai desert' },
-  'polaris-rzr-4-seater-dune-buggy-parked-dubai-base': { subject: 'buggy', alt: 'Polaris RZR 4-seater dune buggy parked at the Buggy Rents Dubai base' },
-  'polaris-rzr-pro-white-dune-buggy-dubai': { subject: 'buggy', alt: 'White Polaris RZR Pro dune buggy on Dubai desert sand' },
+  'polaris-rzr-1000-2-seater-dune-buggy-dubai': { subject: 'buggy', seats: 2, make: 'polaris', alt: 'Polaris RZR 1000 2-seater dune buggy with riders in the Dubai desert' },
+  'polaris-rzr-4-seater-dune-buggy-parked-dubai-base': { subject: 'buggy', seats: 4, make: 'polaris', alt: 'Polaris RZR 4-seater dune buggy parked at the Buggy Rents Dubai base' },
+  'polaris-rzr-pro-white-dune-buggy-dubai': { subject: 'buggy', seats: 2, make: 'polaris', alt: 'White Polaris RZR Pro dune buggy on Dubai desert sand' },
   'dirt-bike-desert-motocross-action-dubai': { subject: 'dirtbike', alt: 'Motocross rider powering a dirt bike through soft sand in the Dubai desert' },
   'dirt-bike-group-tour-dubai-desert': { subject: 'dirtbike', alt: 'Group of dirt bike riders lined up before a guided Dubai desert tour' },
   'dirt-bike-sunset-ride-dubai-desert': { subject: 'dirtbike', alt: 'Dirt bike rider silhouetted against the sunset in the Dubai desert' },
@@ -58,44 +83,44 @@ export const library: Record<string, { subject: Subject; alt: string }> = {
   'dirt-bike-riders-desert-break-dubai': { subject: 'dirtbike', alt: 'Dirt bike riders taking a break on the sand during a Dubai desert tour' },
   'husqvarna-dirt-bike-rider-dubai-desert': { subject: 'dirtbike', alt: 'Rider in full gear beside a Husqvarna dirt bike in the Dubai desert' },
   'ktm-dirt-bike-rider-red-dune-dubai': { subject: 'dirtbike', alt: 'KTM dirt bike rider standing on a red dune in the Dubai desert' },
-  'canam-maverick-r-blue-two-seater-dubai-dunes': { subject: 'buggy', alt: 'Blue Can-Am Maverick R two seater dune buggy on a Dubai red dune' },
-  'canam-maverick-r-yellow-base-yard-sunrise': { subject: 'buggy', alt: 'Yellow Can-Am Maverick R dune buggy at the Al Awir base yard at sunrise' },
-  'canam-maverick-r-yellow-parked-al-awir-base': { subject: 'buggy', alt: 'Yellow Can-Am Maverick R dune buggy parked at the Buggy Rents base in Al Awir' },
-  'canam-maverick-r-yellow-under-canopy-al-awir': { subject: 'buggy', alt: 'Yellow Can-Am Maverick R dune buggy under the shade canopy at the Al Awir base' },
-  'canam-maverick-x3-black-red-dubai-red-dunes': { subject: 'buggy', alt: 'Black and red Can-Am Maverick X3 dune buggy on the Dubai red dunes' },
-  'canam-x3-blue-rider-dubai-desert-dune': { subject: 'buggy', alt: 'Driver in a blue Can-Am Maverick X3 dune buggy beside a Dubai desert dune' },
+  'canam-maverick-r-blue-two-seater-dubai-dunes': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Blue Can-Am Maverick R two seater dune buggy on a Dubai red dune' },
+  'canam-maverick-r-yellow-base-yard-sunrise': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Yellow Can-Am Maverick R dune buggy at the Al Awir base yard at sunrise' },
+  'canam-maverick-r-yellow-parked-al-awir-base': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Yellow Can-Am Maverick R dune buggy parked at the Buggy Rents base in Al Awir' },
+  'canam-maverick-r-yellow-under-canopy-al-awir': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Yellow Can-Am Maverick R dune buggy under the shade canopy at the Al Awir base' },
   'children-beside-dune-buggy-dubai-desert': { subject: 'buggy', alt: 'Two children sitting on the front of a dune buggy in the Dubai desert' },
-  'couple-beside-polaris-rzr-dubai-desert': { subject: 'buggy', alt: 'Couple standing beside a Polaris RZR dune buggy in the Dubai desert' },
-  'couple-on-canam-buggy-dubai-desert-photo-stop': { subject: 'buggy', alt: 'Couple sitting on a Can-Am dune buggy at a photo stop in the Dubai desert' },
-  'polaris-rzr-1000-couple-riding-dubai-desert': { subject: 'buggy', alt: 'Couple driving a blue Polaris RZR 1000 dune buggy through the Dubai desert' },
-  'polaris-rzr-1000-solo-driver-dubai-red-dunes': { subject: 'buggy', alt: 'Solo driver in a Polaris RZR 1000 dune buggy on the Dubai red dunes' },
-  'polaris-rzr-1000-two-guests-dubai-desert-ride': { subject: 'buggy', alt: 'Two guests in a Polaris RZR 1000 dune buggy during a Dubai desert ride' },
-  'polaris-rzr-4-seater-side-profile-dubai-desert': { subject: 'buggy', alt: 'Side profile of a Polaris RZR four seater dune buggy in the Dubai desert' },
-  'polaris-rzr-rs-black-two-seater-dubai-dunes': { subject: 'buggy', alt: 'Black Polaris RZR RS two seater dune buggy on the Dubai red dunes' },
-  'polaris-rzr-xp-guests-waving-dubai-red-dunes': { subject: 'buggy', alt: 'Guests waving from a Polaris RZR XP 1000 dune buggy on the Dubai red dunes' },
+  'couple-beside-polaris-rzr-dubai-desert': { subject: 'buggy', seats: 2, make: 'polaris', alt: 'Couple standing beside a Polaris RZR dune buggy in the Dubai desert' },
+  'couple-on-canam-buggy-dubai-desert-photo-stop': { subject: 'buggy', seats: 2, make: 'canam', alt: 'Couple sitting on a Can-Am dune buggy at a photo stop in the Dubai desert' },
+  'polaris-rzr-1000-couple-riding-dubai-desert': { subject: 'buggy', seats: 2, make: 'polaris', alt: 'Couple driving a blue Polaris RZR 1000 dune buggy through the Dubai desert' },
+  'polaris-rzr-1000-solo-driver-dubai-red-dunes': { subject: 'buggy', seats: 2, make: 'polaris', alt: 'Solo driver in a Polaris RZR 1000 dune buggy on the Dubai red dunes' },
+  'polaris-rzr-1000-two-guests-dubai-desert-ride': { subject: 'buggy', seats: 2, make: 'polaris', alt: 'Two guests in a Polaris RZR 1000 dune buggy during a Dubai desert ride' },
+  'polaris-rzr-4-seater-side-profile-dubai-desert': { subject: 'buggy', seats: 4, make: 'polaris', alt: 'Side profile of a Polaris RZR four seater dune buggy in the Dubai desert' },
+  'polaris-rzr-rs-black-two-seater-dubai-dunes': { subject: 'buggy', seats: 2, make: 'polaris', alt: 'Black Polaris RZR RS two seater dune buggy on the Dubai red dunes' },
+  'polaris-rzr-xp-guests-waving-dubai-red-dunes': { subject: 'buggy', seats: 2, make: 'polaris', alt: 'Guests waving from a Polaris RZR XP 1000 dune buggy on the Dubai red dunes' },
   'yamaha-raptor-quads-parked-al-awir-base': { subject: 'quad', alt: 'Two Yamaha Raptor quad bikes parked at the Buggy Rents base in Al Awir, Dubai' },
 };
 
 /* Hero backgrounds. Kept at native resolution (up to 2560px) so they stay sharp
    across a wide viewport. `focal` positions the subject clear of the left-aligned heading. */
-export const heroes: Record<string, { subject: Subject; focal: 'left'|'center'|'right'; w: number; h: number; alt: string }> = {
-  'dune-buggy-dubai-hero-red-dunes': { subject: 'buggy', focal: 'right', w: 2560, h: 1707, alt: 'Polaris dune buggy driving across the Lahbab red dunes in Dubai' },
-  'desert-adventure-dubai-hero-canam-maverick': { subject: 'buggy', focal: 'right', w: 2560, h: 1656, alt: 'Can-Am Maverick R turbo dune buggy powering across the Dubai desert' },
+export const heroes: Record<string, { subject: Subject; focal: 'left'|'center'|'right'; w: number; h: number; alt: string; seats?: Seats; make?: Make }> = {
+  'dune-buggy-dubai-hero-red-dunes': { subject: 'buggy', seats: 2, make: 'polaris', focal: 'right', w: 2560, h: 1707, alt: 'Polaris dune buggy driving across the Lahbab red dunes in Dubai' },
+  'desert-adventure-dubai-hero-canam-maverick': { subject: 'buggy', seats: 2, make: 'canam', focal: 'right', w: 2560, h: 1656, alt: 'Can-Am Maverick R turbo dune buggy powering across the Dubai desert' },
   'ktm-dirt-bike-dubai-hero-sunrise-dunes': { subject: 'dirtbike', focal: 'right', w: 1920, h: 1440, alt: 'KTM dirt bike riders climbing a dune at sunrise in the Dubai desert' },
   'quad-biking-dubai-hero-red-dunes': { subject: 'quad', focal: 'right', w: 1920, h: 1280, alt: 'Rider on a single seat quad bike in the Lahbab red dunes, Dubai' },
   'desert-safari-dubai-hero-dune-bashing': { subject: 'safari', focal: 'left', w: 2560, h: 1707, alt: 'Land Cruiser dune bashing through the red dunes on a Dubai desert safari' },
-  'canam-maverick-r-4-seater-hero-blue-dubai-desert': { subject: 'buggy', focal: 'right', w: 1600, h: 1066, alt: 'Blue Can-Am Maverick R dune buggy parked on Dubai desert sand' },
-  'canam-maverick-r-yellow-turbo-hero-dubai-dunes': { subject: 'buggy', focal: 'right', w: 1600, h: 1066, alt: 'Yellow Can-Am Maverick R turbo dune buggy on the red dunes at Lahbab, Dubai' },
-  'canam-maverick-x3-2-seater-hero-lahbab-dunes': { subject: 'buggy', focal: 'right', w: 1600, h: 1200, alt: 'Two guests in a Can-Am Maverick X3 two seater below a Lahbab red dune in Dubai' },
-  'canam-maverick-x3-4-seater-hero-dubai-dunes': { subject: 'buggy', focal: 'right', w: 1600, h: 1200, alt: 'Guests riding a Can-Am Maverick X3 four seater dune buggy in the Dubai desert' },
-  'canam-x3-turbo-rr-2-seater-hero-dubai-desert': { subject: 'buggy', focal: 'right', w: 1600, h: 1066, alt: 'Red and white Can-Am Maverick X3 X RS turbo two seater on Dubai desert sand' },
-  'canam-x3-turbo-rr-4-seater-hero-red-dunes': { subject: 'buggy', focal: 'right', w: 1600, h: 1066, alt: 'Red Can-Am Maverick X3 X RS turbo four seater dune buggy on the Dubai red dunes' },
+  'canam-maverick-r-hero-blue-dubai-desert': { subject: 'buggy', seats: 2, make: 'canam', focal: 'right', w: 1600, h: 1066, alt: 'Blue Can-Am Maverick two seater dune buggy parked on Dubai desert sand' },
+  'canam-maverick-r-yellow-turbo-hero-dubai-dunes': { subject: 'buggy', seats: 2, make: 'canam', focal: 'right', w: 1600, h: 1066, alt: 'Yellow Can-Am Maverick R turbo dune buggy on the red dunes at Lahbab, Dubai' },
+  'canam-maverick-x3-2-seater-hero-lahbab-dunes': { subject: 'buggy', seats: 2, make: 'canam', focal: 'right', w: 1600, h: 1200, alt: 'Two guests in a Can-Am Maverick X3 two seater below a Lahbab red dune in Dubai' },
+  'canam-maverick-x3-hero-dubai-dunes': { subject: 'buggy', seats: 2, make: 'canam', focal: 'right', w: 1600, h: 1200, alt: 'Guest driving a grey Can-Am Maverick X3 two seater dune buggy in the Dubai desert' },
+  'canam-x3-turbo-rr-2-seater-hero-dubai-desert': { subject: 'buggy', seats: 2, make: 'canam', focal: 'right', w: 1600, h: 1066, alt: 'Red and white Can-Am Maverick X3 X RS turbo two seater on Dubai desert sand' },
+  'canam-maverick-x3-4-seater-hero-blue-rs-dubai': { subject: 'buggy', seats: 4, make: 'canam', focal: 'right', w: 1600, h: 1200, alt: 'Blue Can-Am Maverick X3 RS four seater dune buggy on a Dubai desert dune' },
+  'canam-maverick-4-seater-hero-black-red-dubai': { subject: 'buggy', seats: 4, make: 'canam', focal: 'right', w: 1600, h: 1066, alt: 'Black and red Can-Am Maverick X3 four seater dune buggy on the Dubai red dunes' },
+  'canam-x3-turbo-rr-4-seater-hero-red-dunes': { subject: 'buggy', seats: 4, make: 'canam', focal: 'right', w: 1600, h: 1066, alt: 'Red Can-Am Maverick X3 X RS turbo four seater dune buggy on the Dubai red dunes' },
   'double-seat-quad-bike-hero-dubai-sunset': { subject: 'quad', focal: 'right', w: 1600, h: 1200, alt: 'Two guests on a double seat quad bike at sunset in the Dubai desert' },
-  'polaris-rzr-1000-2-seater-hero-dubai-red-dunes': { subject: 'buggy', focal: 'right', w: 1600, h: 1199, alt: 'Two riders in a blue Polaris RZR 1000 two seater on the Lahbab red dunes in Dubai' },
-  'polaris-rzr-4-seater-hero-dubai-dune-ridge': { subject: 'buggy', focal: 'right', w: 1600, h: 1200, alt: 'Polaris RZR four seater dune buggy parked on a red dune ridge in Dubai' },
-  'polaris-rzr-pro-hero-blue-dubai-red-dune': { subject: 'buggy', focal: 'right', w: 1600, h: 1066, alt: 'Blue Polaris RZR Pro dune buggy on a red dune at the Lahbab desert in Dubai' },
-  'polaris-rzr-turbo-2-seater-hero-dubai-desert': { subject: 'buggy', focal: 'right', w: 1600, h: 1200, alt: 'Guests driving a Polaris RZR XP 1000 turbo two seater through the Dubai desert' },
-  'polaris-rzr-turbo-4-seater-hero-red-dunes-dubai': { subject: 'buggy', focal: 'right', w: 1600, h: 1066, alt: 'Black Polaris RZR turbo four seater dune buggy on the Dubai red dunes' },
+  'polaris-rzr-1000-2-seater-hero-dubai-red-dunes': { subject: 'buggy', seats: 2, make: 'polaris', focal: 'right', w: 1600, h: 1199, alt: 'Two riders in a blue Polaris RZR 1000 two seater on the Lahbab red dunes in Dubai' },
+  'polaris-rzr-4-seater-hero-dubai-dune-ridge': { subject: 'buggy', seats: 4, make: 'polaris', focal: 'right', w: 1600, h: 1200, alt: 'Polaris RZR four seater dune buggy parked on a red dune ridge in Dubai' },
+  'polaris-rzr-pro-hero-blue-dubai-red-dune': { subject: 'buggy', seats: 2, make: 'polaris', focal: 'right', w: 1600, h: 1066, alt: 'Blue Polaris RZR Pro dune buggy on a red dune at the Lahbab desert in Dubai' },
+  'polaris-rzr-turbo-2-seater-hero-dubai-desert': { subject: 'buggy', seats: 2, make: 'polaris', focal: 'right', w: 1600, h: 1200, alt: 'Guests driving a Polaris RZR XP 1000 turbo two seater through the Dubai desert' },
+  'polaris-rzr-turbo-4-seater-hero-red-dunes-dubai': { subject: 'buggy', seats: 4, make: 'polaris', focal: 'right', w: 1600, h: 1066, alt: 'Black Polaris RZR turbo four seater dune buggy on the Dubai red dunes' },
   'quad-bike-open-desert-hero-dubai-red-dunes': { subject: 'quad', focal: 'right', w: 1600, h: 1366, alt: 'Rider on a red quad bike in the open desert at Lahbab, Dubai' },
   'single-seat-quad-bike-hero-dubai-red-dunes': { subject: 'quad', focal: 'right', w: 1600, h: 1066, alt: 'White single seat quad bike ready to ride on the Lahbab red dunes in Dubai' },
   'yamaha-raptor-700-hero-dubai-desert-rider': { subject: 'quad', focal: 'right', w: 1600, h: 1350, alt: 'Rider on a Yamaha Raptor 700 sport quad in the Dubai desert' },
@@ -123,6 +148,36 @@ function assertNameMatchesSubject(name: string, subject: Subject) {
   }
 }
 
+/* A filename must never claim a seat count the photo does not show.
+
+   This is the guard that would have caught the 23 Sep 2026 client complaint on the
+   day the file was exported rather than six weeks later: two heroes named
+   "...-4-seater-hero-..." were two-seater photos, and nothing read the name. The
+   subject guard above is the same idea one level up — it stops a quad photo being
+   tagged buggy; this stops a two-seater being filed as a four-seater.
+
+   It only fires where BOTH the name makes a claim and the entry carries a `seats`
+   value, so an untagged photo or a name with no seat count in it is untouched. */
+function assertNameMatchesSeats(name: string, seats?: Seats) {
+  if (!seats) return;
+  /* Match on the hyphenated name, NOT a flattened copy of it. Stripping the
+     hyphens first turns "x3-4-seater" into "x34seater", where the 4 sits against
+     the model number and any digit-boundary guard stops seeing it — which is
+     exactly how the first version of this function failed to catch the file it
+     was written for. */
+  const claims: Array<[RegExp, Seats]> = [
+    [/(^|-)(4|four)-?seat/, 4],
+    [/(^|-)(2|two)-?seat/, 2]
+  ];
+  for (const [pattern, claimed] of claims) {
+    if (pattern.test(name) && claimed !== seats) {
+      throw new Error(
+        `Image name/seat conflict: "${name}" is tagged as a ${seats}-seater but its filename claims ${claimed} seats. Rename the file or correct the tag — do not ship it.`
+      );
+    }
+  }
+}
+
 export function hero(name: string, expect?: Subject) {
   const h = heroes[name];
   if (!h) throw new Error(`Unknown hero image: ${name}`);
@@ -130,6 +185,7 @@ export function hero(name: string, expect?: Subject) {
     throw new Error(`Wrong hero subject for ${name}: it is ${h.subject}, expected ${expect}.`);
   }
   assertNameMatchesSubject(name, h.subject);
+  assertNameMatchesSeats(name, h.seats);
   if (h.w < HERO_MIN_WIDTH) {
     console.warn(`[hero] ${name} is only ${h.w}px wide; may soften on large screens. Needs a wider source photo.`);
   }
@@ -145,12 +201,20 @@ export function img(name: string, expect?: Subject) {
   if (expect && entry.subject !== expect) {
     throw new Error(`Wrong subject for ${name}: it is a ${entry.subject} photo but a ${expect} photo was required.`);
   }
+  assertNameMatchesSeats(name, entry.seats);
   return { src: `/assets/images/lib/${name}.webp`, alt: entry.alt, subject: entry.subject };
 }
 
 /** Names available for a subject, in catalogue order. */
 export function bySubject(s: Subject): string[] {
   return Object.entries(library).filter(([, v]) => v.subject === s).map(([k]) => k);
+}
+
+/** What a library photo shows, for callers that need to match a machine rather
+    than only a subject. Returns undefined for anything not in the library. */
+export function traitsOf(name: string): { seats?: Seats; make?: Make } | undefined {
+  const entry = library[name];
+  return entry && { seats: entry.seats, make: entry.make };
 }
 
 export function markUsed(name: string) {

@@ -372,6 +372,37 @@ is newer.
   `ktm-450-dirt-bike-rider-dubai-desert` (569) · `ktm-dirt-bike-fleet-lined-up-dubai-desert` (700) ·
   `dirt-bike-desert-motocross-action-dubai` (720) · `dirt-bike-group-tour-dubai-desert` (700).
   **Landscape shots at 2000px+ are the single highest-value asset request.**
+- **Buggy photos also carry `seats` and `make`, added 23 Sep 2026 after a client complaint.**
+  Subject tagging stopped a quad photo reaching a buggy page and said nothing about which
+  buggy. The Can-Am X3 4-Seater and X3 Turbo RR 4-Seater pages were showing two-seater
+  photos under a caption reading "4-seat profile … 4 seats", and the Maverick R 4-Seater
+  hero was a two-seater as well — that third one the client had not even spotted.
+  - `seats` is a **hard** filter in `galleryFor()`: a photo tagged with a different seat
+    count than the vehicle is dropped from the pool. `make` is a **soft** preference that
+    reorders it, never excludes, because a brand-pure pool is too small to keep eleven
+    galleries distinct and the variety audit would then fail.
+  - **Only tag what is countable in the frame.** A distant convoy or a group posing shot
+    stays untagged, which means "usable anywhere". Untagged is not "unknown, exclude it".
+  - **Two guards now fail the build**, and both were tested by deliberately breaking them
+    rather than assumed to work: `assertNameMatchesSeats()` in `images.ts` catches a file
+    named `...-4-seater-...` tagged as a two-seater, and a loop in `vehicles.ts` catches a
+    CMS card image whose seat count contradicts the vehicle. Match on the **hyphenated**
+    name, never a flattened copy — `x3-4-seater` flattens to `x34seater` and the claim
+    disappears against the model number. That is how the first version of the guard
+    silently passed the very file it was written for.
+  - **Two files were misnamed and were renamed** rather than left to be caught by eye:
+    `canam-maverick-x3-4-seater-hero-dubai-dunes` → `canam-maverick-x3-hero-dubai-dunes`,
+    `canam-maverick-r-4-seater-hero-blue-dubai-desert` → `canam-maverick-r-hero-blue-dubai-desert`.
+    Both show two-seaters. Their alt text claimed four seats too, and was corrected.
+  - **Still uncovered, client action needed: there is no photo of the Maverick R 4-seater
+    anywhere in the library.** Every Maverick R shot — blue, yellow turbo, both yard
+    shots — is a two-seater. That page currently runs an X3 four-seater as an interim
+    hero with honest alt text. It is the right seat count and the wrong model, and it
+    stays wrong until a real photo arrives.
+  - The Can-Am four-seat pool is **four photos**, three of which are already card images
+    on any given four-seater page, so those galleries fall through to the seat-filtered
+    pool and pick up a Polaris or an untagged shot. Correct, but generic. Four-seater
+    photos are the highest-value image request after the 2000px landscapes above.
 - **All the audits run on every build** — `"build": "astro build && npm run audit"`.
   Before 8 Aug 2026 the build script was `astro build` alone, so none of the audits ever ran
   on Cloudflare. Do not remove the `&& npm run audit`. The current count is in §7; do not

@@ -1,5 +1,55 @@
 import { config, collection, singleton, fields } from '@keystatic/core';
 
+import libPhotos from './src/content/images.json';
+import heroPhotos from './src/content/hero-images.json';
+
+/* PHOTO PICKERS, 23 Sep 2026.
+
+   Every image field on this page used to be a free-text box holding a key into
+   src/data/images.ts. A typo failed the build at best and showed the wrong photo
+   at worst, and the client could not add a photo at all without a developer.
+
+   The two photo libraries in the singletons below now hold the files themselves,
+   with an upload button and a preview on each one. These pickers read that list,
+   so the options are always exactly the photos that exist, and the subject filter
+   means a quad page only ever offers quad photos.
+
+   ONE THING TO KNOW: a photo added in the CMS shows up in these dropdowns after
+   the next deploy, not immediately, because the options are baked when the admin
+   UI is built. Upload it in the photo library, save, wait for the site to rebuild,
+   then assign it. That is a Keystatic limitation, not a setting. */
+type PhotoRow = { name: string; subject: string };
+
+const photoPicker = (
+  photos: PhotoRow[],
+  label: string,
+  opts: { subject?: string; description?: string; optional?: boolean } = {}
+) => {
+  const list = photos
+    .filter(p => !opts.subject || p.subject === opts.subject)
+    .map(p => ({ label: p.name, value: p.name }));
+  const options = opts.optional
+    ? [{ label: '— none, use the category default —', value: '' }, ...list]
+    : list;
+  return fields.select({
+    label,
+    description: opts.description,
+    options,
+    defaultValue: options[0]?.value ?? ''
+  });
+};
+
+type PickerOpts = { subject?: string; description?: string; optional?: boolean };
+const libPhoto  = (label: string, o: PickerOpts = {}) => photoPicker(libPhotos.photos as PhotoRow[], label, o);
+const heroPhoto = (label: string, o: PickerOpts = {}) => photoPicker(heroPhotos.photos as PhotoRow[], label, o);
+
+const subjectOptions = [
+  { label: 'Dune buggy', value: 'buggy' },
+  { label: 'Quad bike', value: 'quad' },
+  { label: 'Dirt bike', value: 'dirtbike' },
+  { label: 'Desert safari', value: 'safari' }
+];
+
 /* Badge and blurb used to be looked up in code from a hardcoded table keyed by the
    duration label ("30 minutes", "1 hour", …). That worked for the durations we
    shipped and failed the moment the client added one: a new "2 Hour" row matched
@@ -30,14 +80,14 @@ const vehicle = (label: string, path: string) =>
       seats:     fields.integer({ label: 'Seats', defaultValue: 2 }),
       minAge:    fields.integer({ label: 'Minimum age', defaultValue: 18 }),
       area:      fields.text({ label: 'Riding area' }),
-      image:     fields.text({ label: 'Image path' }),
+      image:     libPhoto('Card photo'),
       /* Optional. Left blank, the page falls back to the shared hero for its
          category, which is why all eleven buggy pages currently open with the same
          photo. There is exactly one buggy hero in the library at a usable size, so
          this cannot be fixed in code: it needs landscape photography at 2000px or
          wider, one per machine. The field is here so that the day those arrive the
          client can assign them without a developer. */
-      heroImage: fields.text({ label: 'Hero image path (optional)', description: 'Leave blank to use the category hero. Needs to be at least 1600px wide.', defaultValue: '' }),
+      heroImage: heroPhoto('Hero photo', { optional: true, description: 'Leave on "none" to use the category hero. Needs to be at least 1600px wide.' }),
       blurb:     fields.text({ label: 'Short description', multiline: true }),
       durations: durationField,
       featured:  fields.checkbox({ label: 'Show on homepage', defaultValue: false }),
@@ -96,7 +146,7 @@ export default config({
         }),
         price:    fields.integer({ label: 'Price (AED)', defaultValue: 0 }),
         was:      fields.integer({ label: 'Former price (AED), optional' }),
-        image:    fields.text({ label: 'Image key' }),
+        image:    libPhoto('Card photo', { subject: 'safari' }),
         blurb:    fields.text({ label: 'Short description', multiline: true }),
         includes: fields.array(fields.text({ label: 'Item' }), {
           label: 'What is included', itemLabel: p => p.value
@@ -150,9 +200,9 @@ export default config({
           ],
           defaultValue: 'buggy'
         }),
-        heroImage:  fields.text({ label: 'Hero image key' }),
-        image:      fields.text({ label: 'Card and article image key' }),
-        finalImage: fields.text({ label: 'Closing CTA image key' }),
+        heroImage:  heroPhoto('Hero photo'),
+        image:      libPhoto('Card and article photo'),
+        finalImage: libPhoto('Closing CTA photo'),
         keyword:    fields.text({ label: 'Target keyword', description: 'Never shown on the page. It is here so you can see what this article is meant to rank for before rewriting the title.' }),
         intro:      fields.text({ label: 'Opening paragraph', description: 'Sits above Key takeaways.', multiline: true }),
         takeaways:  fields.array(fields.text({ label: 'Takeaway' }), {
@@ -300,7 +350,7 @@ export default config({
             title: fields.text({ label: 'Title' }),
             desc:  fields.text({ label: 'Description', multiline: true }),
             href:  fields.text({ label: 'Link' }),
-            img:   fields.text({ label: 'Image key' })
+            img:   libPhoto('Photo')
           }),
           { label: 'Cross-sell cards', itemLabel: p => p.fields.title.value }
         )
@@ -452,6 +502,153 @@ export default config({
     })
   },
   singletons: {
+    /* THE PHOTO LIBRARIES, added 23 Sep 2026.
+
+       Two lists, because the site keeps two pools with different jobs. Library
+       photos are the cards and galleries at /assets/images/lib. Hero photos are
+       the full-width backgrounds at /assets/images/hero, kept at native resolution
+       and carrying a focal point so the machine sits clear of the heading.
+
+       WHY SINGLETONS AND NOT COLLECTIONS, which is the obvious choice for a list
+       of things: Keystatic puts a collection's uploads in a folder named after the
+       entry, so a photo added that way would land at
+       /assets/images/lib/<entry>/<file>.webp. Two of the build audits match the
+       flat /assets/images/lib/<name>.webp shape, so a client-uploaded photo would
+       quietly stop being resolution-checked, which is the one photo that most needs
+       it. A singleton has no entry slug, so uploads stay flat.
+
+       THE NAME MUST MATCH THE FILE. Every guard in src/data/images.ts reads the
+       name, not the picture: that a photo does not claim a seat count or a subject
+       it does not show is checked against the name. So the name is the thing that
+       has to be true, and the build fails if the two drift apart. Upload
+       "polaris-rzr-4-seater-side-profile-dubai-desert.webp" and type the same
+       thing, without ".webp", as the name.
+
+       ORDER IS THE LIST ORDER. Galleries are picked in this order, so dragging a
+       photo up moves it forward in every gallery it qualifies for. */
+    photoLibrary: singleton({
+      label: 'Photo library',
+      path: 'src/content/images',
+      format: { data: 'json' },
+      schema: {
+        photos: fields.array(
+          fields.object({
+            name: fields.text({
+              label: 'Name',
+              description: 'The uploaded file name without ".webp". The build checks the photo against this name, so they have to match.'
+            }),
+            file: fields.image({
+              label: 'Photo',
+              directory: 'public/assets/images/lib',
+              publicPath: '/assets/images/lib',
+              validation: { isRequired: true }
+            }),
+            alt: fields.text({
+              label: 'Alt text',
+              description: 'What the photo shows, in one sentence. Read aloud by screen readers and used by Google.',
+              multiline: true
+            }),
+            subject: fields.select({
+              label: 'Subject',
+              description: 'Which pages may use it. The build fails if a quad page is given a buggy photo.',
+              options: subjectOptions,
+              defaultValue: 'buggy'
+            }),
+            /* Blank is a real answer, not a missing one: it means the machine is
+               not countable in this frame, which makes the photo usable anywhere.
+               Setting a seat count here EXCLUDES the photo from pages with the
+               other count, which is the guard that fixed the 23 Sep complaint. */
+            seats: fields.select({
+              label: 'Seats visible',
+              description: 'Leave on "not countable" for a distant convoy or a group shot. A seat count keeps the photo off pages for the other size.',
+              options: [
+                { label: 'Not countable in this frame', value: '' },
+                { label: '2 seats', value: '2' },
+                { label: '4 seats', value: '4' }
+              ],
+              defaultValue: ''
+            }),
+            make: fields.select({
+              label: 'Make',
+              description: 'Soft preference. It puts a Can-Am first on a Can-Am page but never blocks a photo.',
+              options: [
+                { label: 'Not specific', value: '' },
+                { label: 'Polaris', value: 'polaris' },
+                { label: 'Can-Am', value: 'canam' }
+              ],
+              defaultValue: ''
+            })
+          }),
+          { label: 'Photos', itemLabel: p => p.fields.name.value }
+        )
+      }
+    }),
+
+    heroLibrary: singleton({
+      label: 'Hero photo library',
+      path: 'src/content/hero-images',
+      format: { data: 'json' },
+      schema: {
+        photos: fields.array(
+          fields.object({
+            name: fields.text({
+              label: 'Name',
+              description: 'The uploaded file name without ".webp". The build checks the photo against this name, so they have to match.'
+            }),
+            file: fields.image({
+              label: 'Photo',
+              directory: 'public/assets/images/hero',
+              publicPath: '/assets/images/hero',
+              validation: { isRequired: true }
+            }),
+            alt: fields.text({ label: 'Alt text', multiline: true }),
+            subject: fields.select({
+              label: 'Subject',
+              options: subjectOptions,
+              defaultValue: 'buggy'
+            }),
+            /* The heading sits on the left, so the machine has to sit away from it
+               or the two collide on a wide screen. */
+            focal: fields.select({
+              label: 'Focal point',
+              description: 'Which side of the photo to keep in frame as it crops. The heading sits on the left, so "right" suits most photos.',
+              options: [
+                { label: 'Right', value: 'right' },
+                { label: 'Centre', value: 'center' },
+                { label: 'Left', value: 'left' }
+              ],
+              defaultValue: 'right'
+            }),
+            /* Typed rather than measured, because the site is rendered on a
+               Cloudflare Worker that cannot open the file. The resolution audit
+               checks these two numbers against the real photo and fails the build
+               if they are wrong, so a guess cannot ship. */
+            width: fields.integer({ label: 'Width in pixels', description: 'As exported. 1600 or wider, or it softens on a large screen.', defaultValue: 1600 }),
+            height: fields.integer({ label: 'Height in pixels', defaultValue: 1066 }),
+            seats: fields.select({
+              label: 'Seats visible',
+              options: [
+                { label: 'Not countable in this frame', value: '' },
+                { label: '2 seats', value: '2' },
+                { label: '4 seats', value: '4' }
+              ],
+              defaultValue: ''
+            }),
+            make: fields.select({
+              label: 'Make',
+              options: [
+                { label: 'Not specific', value: '' },
+                { label: 'Polaris', value: 'polaris' },
+                { label: 'Can-Am', value: 'canam' }
+              ],
+              defaultValue: ''
+            })
+          }),
+          { label: 'Hero photos', itemLabel: p => p.fields.name.value }
+        )
+      }
+    }),
+
     /* Header and footer menus.
 
        Navigation was held in code until 4 Sep 2026 on the grounds that a mistyped
@@ -618,7 +815,7 @@ export default config({
           sub:        fields.text({ label: 'Sub-heading' }),
           paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Paragraphs', itemLabel: p => p.value.slice(0, 60) }),
           checklist:  fields.array(fields.text({ label: 'Point' }), { label: 'Checklist', itemLabel: p => p.value }),
-          image:      fields.text({ label: 'Image key' })
+          image:      libPhoto('Section photo')
         }, { label: 'Dune buggy section' }),
 
         quadIntro: fields.object({
@@ -627,7 +824,7 @@ export default config({
           sub:        fields.text({ label: 'Sub-heading' }),
           paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Paragraphs', itemLabel: p => p.value.slice(0, 60) }),
           checklist:  fields.array(fields.text({ label: 'Point' }), { label: 'Checklist', itemLabel: p => p.value }),
-          image:      fields.text({ label: 'Image key' })
+          image:      libPhoto('Section photo')
         }, { label: 'Quad bike section' }),
 
         tourStyles: fields.array(
@@ -795,8 +992,8 @@ function supportSchema() {
       { label: 'Breadcrumb trail', description: 'Between Home and this page.', itemLabel: p => p.fields.name.value }
     ),
 
-    heroImage:   fields.text({ label: 'Hero image key' }),
-    finalImage:  fields.text({ label: 'Final CTA image key' }),
+    heroImage:   heroPhoto('Hero photo'),
+    finalImage:  libPhoto('Final CTA photo'),
     heroSubject: fields.text({ label: 'Hero image subject', description: 'buggy, quad, dirtbike or safari. The build fails if the image does not match.' }),
 
     kicker: fields.text({ label: 'Hero kicker' }),

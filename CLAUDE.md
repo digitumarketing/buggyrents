@@ -332,6 +332,22 @@ is newer.
 - **Filenames are keyword-descriptive**; alt text describes the actual photo, not the page title.
 - **Every image carries a `subject`** (`buggy` `quad` `dirtbike` `safari`) in `src/data/images.ts`.
   `img(key, subject)` throws at build time on a mismatch, so a KTM page can never show a buggy.
+- **The library lives in the CMS as of 23 Sep 2026.** `src/content/images.json` and
+  `src/content/hero-images.json` hold the photos; `src/data/images.ts` is an adapter over
+  them and its exports, types and guards are unchanged. In Keystatic they are the **Photo
+  library** and **Hero photo library** singletons, each photo a real file field with an
+  upload button and a preview, and every image field elsewhere in the config is a dropdown
+  built from those lists rather than a text box. Three things worth knowing:
+  - **Singletons, not collections, on purpose.** Keystatic puts a collection's uploads in a
+    folder named after the entry, so a photo added that way would land at
+    `/assets/images/lib/<entry>/<file>.webp`. The resolution and image-variety audits match
+    the flat `/assets/images/lib/<name>.webp` shape, so a client-uploaded photo would quietly
+    stop being resolution-checked. A singleton has no slug, so uploads stay flat.
+  - **The entry name must equal the uploaded filename** without `.webp`. Every guard reads
+    the name, not the picture, so `assertFileMatchesSlug()` fails the build when they drift.
+  - **A newly uploaded photo appears in the dropdowns after the next deploy**, not
+    immediately, because the options are baked when the admin UI is built. Upload, save,
+    wait about two minutes, then assign it. Keystatic limitation, not a setting.
 - **No image may appear twice on the same page** — enforced by `scripts/audit-contrast.mjs`.
 - **Hero backgrounds:** must match the page subject, be **at least 1600px wide** (2560 preferred)
   so they do not pixelate, and carry a `focal` value so the subject sits clear of the
@@ -517,13 +533,20 @@ Was 65 before the safari cluster of 12 Aug 2026. The link and orphan claim is me
 rather than assumed as of 4 Sep 2026: 9,073 internal links, all resolving. Before that
 date it was an assertion nothing checked.
 
-**`npm run build` runs 18 audits and every one of them fails the build.** Do not remove
+**`npm run build` runs 19 audits and every one of them fails the build.** Do not remove
 the `&& npm run audit`. In `scripts/audit-contrast.mjs`: contrast on card surfaces,
-colour syntax, image reuse and alt text, image resolution, insurance claims, em dashes,
-missing referenced assets, placeholders such as `[object Object]`, a price cross-check,
-cross-page image variety, metadata, CMS tokens, root-resolves, analytics
-configuration, lead tracking, and llms.txt. Then `scripts/audit-links.mjs` (internal links and orphans) and
-`scripts/audit-contrast-dom.mjs` (the full DOM cascade walk).
+colour syntax, image reuse and alt text, image resolution, hero dimensions, insurance
+claims, em dashes, missing referenced assets, placeholders such as `[object Object]`,
+a price cross-check, cross-page image variety, metadata, CMS tokens, root-resolves,
+analytics configuration, lead tracking, and llms.txt. Then `scripts/audit-links.mjs`
+(internal links and orphans) and `scripts/audit-contrast-dom.mjs` (the full DOM cascade walk).
+
+The hero dimension audit was added 23 Sep 2026 with the CMS photo libraries. Hero width
+and height are typed in Keystatic rather than measured, because the site renders on a
+Cloudflare Worker that cannot open the file; they go straight into the `<img>`, so a wrong
+pair reserves the wrong box and the page jumps as the photo loads. Nothing else catches it,
+because the page looks correct once loaded. The audit compares every stated size against
+the real file on disk.
 
 **`npm run typecheck` is separate and deliberately not part of the build.** See
 `docs/HANDOVER.md` §8: 18 pre-existing errors in two components would otherwise block

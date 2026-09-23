@@ -234,6 +234,34 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     }
     soft.forEach(s => console.warn(`  Soft image (under ${SOFT_MIN}px wide): ${s}`));
     console.log(`Resolution audit passed — ${used.size} images, none under ${HARD_MIN}px${soft.length ? `, ${soft.length} below ${SOFT_MIN}px` : ''}.`);
+
+    /* Hero dimensions are TYPED in the CMS, not measured, because the site renders
+       on a Cloudflare Worker that cannot open the file to ask. They go straight into
+       the <img> width and height, so a wrong pair reserves the wrong box and the page
+       jumps as the photo loads. Nothing else would catch it: the page looks right once
+       loaded. Checked here, where the real file is on disk, so a typed guess cannot
+       ship and a client who swaps a hero for a differently shaped photo is told. */
+    const heroLib = JSON.parse(readFileSync('src/content/hero-images.json', 'utf8'));
+    const HERO_DIR = join(DIST, 'assets/images/hero');
+    const wrong = [];
+    for (const photo of heroLib.photos ?? []) {
+      const file = join(HERO_DIR, `${photo.name}.webp`);
+      if (!existsSync(file)) {
+        wrong.push(`${photo.name} — no file at assets/images/hero/${photo.name}.webp`);
+        continue;
+      }
+      const { width, height } = imageSize(readFileSync(file));
+      if (width !== photo.width || height !== photo.height) {
+        wrong.push(`${photo.name} — CMS says ${photo.width}x${photo.height}, the file is ${width}x${height}`);
+      }
+    }
+    if (wrong.length) {
+      console.error('Hero photo dimensions do not match the file:');
+      wrong.forEach(w => console.error('  ' + w));
+      console.error('  Fix the width and height on that photo in the Hero photo library, or re-upload the right file.');
+      process.exit(1);
+    }
+    console.log(`Hero dimension audit passed — ${(heroLib.photos ?? []).length} hero photos, every stated size matches the file.`);
   }
 }
 

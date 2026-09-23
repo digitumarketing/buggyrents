@@ -44,5 +44,10 @@
       "blurb": "The longest route we run on the Double Seat Open Desert. For experienced riders who want maximum time in the dunes."
     }
   ],
-  "order": 5
+  "order": 5,
+  "heroPhoto": {
+    "file": null,
+    "alt": "",
+    "focal": "right"
+  }
 }

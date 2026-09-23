@@ -31,5 +31,9 @@
     }
   ],
   "order": 4,
-  "heroImage": "polaris-rzr-turbo-4-seater-hero-red-dunes-dubai"
+  "heroPhoto": {
+    "file": "/assets/images/hero/polaris-rzr-turbo-4-seater-hero-red-dunes-dubai.webp",
+    "alt": "Black Polaris RZR turbo four seater dune buggy on the Dubai red dunes",
+    "focal": "right"
+  }
 }

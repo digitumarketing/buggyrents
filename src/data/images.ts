@@ -142,7 +142,7 @@ function assertNameMatchesSubject(name: string, subject: Subject) {
 
    It only fires where BOTH the name makes a claim and the entry carries a `seats`
    value, so an untagged photo or a name with no seat count in it is untouched. */
-function assertNameMatchesSeats(name: string, seats?: Seats) {
+export function assertNameMatchesSeats(name: string, seats?: Seats) {
   if (!seats) return;
   /* Match on the hyphenated name, NOT a flattened copy of it. Stripping the
      hyphens first turns "x3-4-seater" into "x34seater", where the 4 sits against

@@ -332,6 +332,19 @@ is newer.
 - **Filenames are keyword-descriptive**; alt text describes the actual photo, not the page title.
 - **Every image carries a `subject`** (`buggy` `quad` `dirtbike` `safari`) in `src/data/images.ts`.
   `img(key, subject)` throws at build time on a mismatch, so a KTM page can never show a buggy.
+- **A tour's hero is an upload on the tour itself, as of 24 Sep 2026.** Every vehicle
+  carries `heroPhoto` — a real file field with a preview, plus alt text and a focal
+  point — so the client sees the photo they are replacing and drops a new file straight
+  in. Left empty, the page falls back to the shared category hero exactly as before.
+  `tours.ts heroFor()` resolves the two and checks the uploaded filename against the
+  vehicle's **own** seat count, which is stronger than the library tag it replaced: a
+  file named `...-2-seater-...` uploaded onto the four-seat page fails the build. An
+  uploaded photo with empty alt text fails the build too. The tour hero `<img>` carries
+  no width/height, deliberately — it is `position:absolute; inset:0; object-fit:cover`
+  inside a sized section, so CSS always decided the box and the CMS cannot know the
+  pixel size of a file the client just uploaded. Card and gallery photos still come from
+  the shared library below, because they are pooled and the image-variety audit depends
+  on that pool.
 - **The library lives in the CMS as of 23 Sep 2026.** `src/content/images.json` and
   `src/content/hero-images.json` hold the photos; `src/data/images.ts` is an adapter over
   them and its exports, types and guards are unchanged. In Keystatic they are the **Photo

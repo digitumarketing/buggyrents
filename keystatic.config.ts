@@ -81,13 +81,35 @@ const vehicle = (label: string, path: string) =>
       minAge:    fields.integer({ label: 'Minimum age', defaultValue: 18 }),
       area:      fields.text({ label: 'Riding area' }),
       image:     libPhoto('Card photo'),
-      /* Optional. Left blank, the page falls back to the shared hero for its
-         category, which is why all eleven buggy pages currently open with the same
-         photo. There is exactly one buggy hero in the library at a usable size, so
-         this cannot be fixed in code: it needs landscape photography at 2000px or
-         wider, one per machine. The field is here so that the day those arrive the
-         client can assign them without a developer. */
-      heroImage: heroPhoto('Hero photo', { optional: true, description: 'Leave on "none" to use the category hero. Needs to be at least 1600px wide.' }),
+      /* AN UPLOAD, NOT A PICKER, and the difference is the whole point. A dropdown
+         of names tells the client nothing about what the photo looks like, and
+         still needs a developer to get a new photo into the list. This field shows
+         the current hero and takes a new file straight from the client's desktop.
+
+         Left empty the page falls back to the shared hero for its category, which
+         is what all eleven buggy pages do today. Landscape, 1600px wide or more;
+         the build warns below that. */
+      heroPhoto: fields.object({
+        file:  fields.image({
+          label: 'Hero photo',
+          description: 'Landscape, at least 1600px wide. Leave empty to use the shared photo for this category.',
+          directory: 'public/assets/images/hero',
+          publicPath: '/assets/images/hero'
+        }),
+        alt:   fields.text({ label: 'Alt text', description: 'What the photo shows. Only needed when a photo is uploaded.', multiline: true, defaultValue: '' }),
+        /* The h1 sits on the left, so the machine has to sit away from it or the
+           two collide on a wide screen. */
+        focal: fields.select({
+          label: 'Keep in frame',
+          description: 'Which side to hold as the photo crops. The heading is on the left, so "right" suits most photos.',
+          options: [
+            { label: 'Right', value: 'right' },
+            { label: 'Centre', value: 'center' },
+            { label: 'Left', value: 'left' }
+          ],
+          defaultValue: 'right'
+        })
+      }, { label: 'Hero photo (optional)' }),
       blurb:     fields.text({ label: 'Short description', multiline: true }),
       durations: durationField,
       featured:  fields.checkbox({ label: 'Show on homepage', defaultValue: false }),

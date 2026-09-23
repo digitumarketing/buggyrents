@@ -46,5 +46,9 @@
   ],
   "featured": true,
   "order": 4,
-  "heroImage": "quad-bike-open-desert-hero-dubai-red-dunes"
+  "heroPhoto": {
+    "file": "/assets/images/hero/quad-bike-open-desert-hero-dubai-red-dunes.webp",
+    "alt": "Rider on a red quad bike in the open desert at Lahbab, Dubai",
+    "focal": "right"
+  }
 }

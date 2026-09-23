@@ -45,5 +45,10 @@
     }
   ],
   "featured": true,
-  "order": 1
+  "order": 1,
+  "heroPhoto": {
+    "file": null,
+    "alt": "",
+    "focal": "right"
+  }
 }

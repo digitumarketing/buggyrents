@@ -1,6 +1,6 @@
 import type { ClusterData } from '@/components/templates/Cluster.astro';
 import { allVehicles, byCategory, fromPrice, type Vehicle } from '@/data/vehicles';
-import { bySubject, traitsOf } from '@/data/images';
+import { bySubject, traitsOf, hero, assertNameMatchesSeats } from '@/data/images';
 import { pageTitle, tidy } from '@/data/seo';
 
 const NOUN = { buggy: 'buggy', quad: 'quad', dirtbike: 'dirt bike' } as const;
@@ -15,6 +15,36 @@ const HERO = {
   dirtbike: 'ktm-dirt-bike-dubai-hero-sunrise-dunes'
 } as const;
 const base = (c: Vehicle['category']) => PARENT[c].href;
+
+/* The tour hero, resolved from the two places it can come from.
+
+   A photo uploaded onto the tour itself wins. Nothing uploaded falls back to the
+   shared hero for the category, which is what the pages without their own
+   photography do. Both come out in the same shape so the template does not have to
+   know which happened.
+
+   The uploaded path is checked against the vehicle's OWN seat count rather than a
+   library tag, because the tour already knows what it is: a file named
+   "...-2-seater-..." on the four-seat page is the 23 Sep complaint exactly, and
+   this is the one place it can still be introduced now that the client uploads
+   directly. An empty alt is also a build failure — an uploaded photo with no alt
+   text ships an image nobody using a screen reader can identify, and the image
+   audit would only catch it after it reached the built HTML. */
+function heroFor(v: Vehicle) {
+  const own = v.heroPhoto;
+  if (own?.file) {
+    const name = own.file.split('/').pop()!.replace(/\.webp$/, '');
+    assertNameMatchesSeats(name, v.seats === 2 || v.seats === 4 ? v.seats : undefined);
+    if (!own.alt.trim()) {
+      throw new Error(
+        `The ${v.name} hero photo has no alt text. Add one sentence describing the photo in the CMS, on the tour itself.`
+      );
+    }
+    return { src: own.file, alt: own.alt.trim(), focal: own.focal ?? 'right' };
+  }
+  const shared = hero(HERO[v.category]);
+  return { src: shared.src, alt: shared.alt, focal: shared.focal };
+}
 
 /* These tables are the FALLBACK for duration cards. Anything the client types into
    the badge and description fields in the CMS wins over them.
@@ -247,7 +277,7 @@ export function tourData(v: Vehicle): ClusterData {
     crumbParent: PARENT[v.category],
     title: pageTitle(`${v.name} Dubai | From AED ${from.toLocaleString('en-US')}`),
     description: `Book the ${v.name} in Dubai from AED ${from.toLocaleString('en-US')}. ${v.engine}, ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'}, age ${v.minAge}+, guided ${v.area.toLowerCase()} route. WhatsApp +971 56 209 5713.`,
-    heroImage: v.heroImage?.trim() || HERO[v.category],
+    heroImage: heroFor(v),
     eyebrow: `${v.engine} · ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'} · age ${v.minAge}+`,
     h1Lead: v.shortName.split(' ')[0], h1Em: v.shortName.split(' ').slice(1).join(' '), h1Tail: 'Dubai',
     lede: `${v.blurb} Guided on the ${v.area.toLowerCase()}, with helmet, briefing, fuel and a lead guide included. Price is per ${n}, not per person.`,

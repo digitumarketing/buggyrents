@@ -32,5 +32,9 @@
   ],
   "featured": true,
   "order": 2,
-  "heroImage": "polaris-rzr-4-seater-hero-dubai-dune-ridge"
+  "heroPhoto": {
+    "file": "/assets/images/hero/polaris-rzr-4-seater-hero-dubai-dune-ridge.webp",
+    "alt": "Polaris RZR four seater dune buggy parked on a red dune ridge in Dubai",
+    "focal": "right"
+  }
 }

@@ -32,5 +32,9 @@
   ],
   "featured": true,
   "order": 6,
-  "heroImage": "canam-maverick-x3-2-seater-hero-lahbab-dunes"
+  "heroPhoto": {
+    "file": "/assets/images/hero/canam-maverick-x3-2-seater-hero-lahbab-dunes.webp",
+    "alt": "Two guests in a Can-Am Maverick X3 two seater below a Lahbab red dune in Dubai",
+    "focal": "right"
+  }
 }

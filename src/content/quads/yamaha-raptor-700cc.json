@@ -46,5 +46,9 @@
   ],
   "featured": true,
   "order": 6,
-  "heroImage": "yamaha-raptor-700-hero-dubai-desert-rider"
+  "heroPhoto": {
+    "file": "/assets/images/hero/yamaha-raptor-700-hero-dubai-desert-rider.webp",
+    "alt": "Rider on a Yamaha Raptor 700 sport quad in the Dubai desert",
+    "focal": "right"
+  }
 }

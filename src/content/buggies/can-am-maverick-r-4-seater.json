@@ -32,5 +32,9 @@
   ],
   "featured": false,
   "order": 11,
-  "heroImage": "canam-maverick-r-4-seater-hero-blue-dubai-dunes"
+  "heroPhoto": {
+    "file": "/assets/images/hero/canam-maverick-r-4-seater-hero-blue-dubai-dunes.webp",
+    "alt": "Guests riding a blue Can-Am Maverick R X RS four seater dune buggy up a Dubai dune",
+    "focal": "right"
+  }
 }

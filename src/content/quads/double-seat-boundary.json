@@ -45,5 +45,9 @@
     }
   ],
   "order": 3,
-  "heroImage": "double-seat-quad-bike-hero-dubai-sunset"
+  "heroPhoto": {
+    "file": "/assets/images/hero/double-seat-quad-bike-hero-dubai-sunset.webp",
+    "alt": "Two guests on a double seat quad bike at sunset in the Dubai desert",
+    "focal": "right"
+  }
 }

@@ -35,7 +35,11 @@ export type Vehicle = {
   minAge: number;
   area: string;
   image: string;       // key into src/data/images.ts
-  heroImage?: string;  // optional per-vehicle hero, falls back to the category hero
+  /* The tour's own hero, uploaded in the CMS rather than picked from a list, so the
+     client sees the photo they are replacing and can drop a new file straight in.
+     `file` is null when nothing has been uploaded, and the page falls back to the
+     shared hero for the category. See tours.ts, which resolves the two. */
+  heroPhoto?: { file: string | null; alt: string; focal: 'left' | 'center' | 'right' };
   blurb: string;
   durations: Duration[];
   featured?: boolean;

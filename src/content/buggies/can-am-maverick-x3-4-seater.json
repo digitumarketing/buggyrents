@@ -32,5 +32,9 @@
   ],
   "featured": true,
   "order": 7,
-  "heroImage": "canam-maverick-x3-4-seater-hero-blue-rs-dubai"
+  "heroPhoto": {
+    "file": "/assets/images/hero/canam-maverick-x3-4-seater-hero-blue-rs-dubai.webp",
+    "alt": "Blue Can-Am Maverick X3 RS four seater dune buggy on a Dubai desert dune",
+    "focal": "right"
+  }
 }

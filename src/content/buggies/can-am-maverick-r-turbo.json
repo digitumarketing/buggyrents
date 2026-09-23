@@ -32,5 +32,9 @@
   ],
   "featured": true,
   "order": 10,
-  "heroImage": "canam-maverick-r-yellow-turbo-hero-dubai-dunes"
+  "heroPhoto": {
+    "file": "/assets/images/hero/canam-maverick-r-yellow-turbo-hero-dubai-dunes.webp",
+    "alt": "Yellow Can-Am Maverick R turbo dune buggy on the red dunes at Lahbab, Dubai",
+    "focal": "right"
+  }
 }

@@ -46,5 +46,9 @@
   ],
   "featured": true,
   "order": 2,
-  "heroImage": "single-seat-quad-bike-hero-dubai-red-dunes"
+  "heroPhoto": {
+    "file": "/assets/images/hero/single-seat-quad-bike-hero-dubai-red-dunes.webp",
+    "alt": "White single seat quad bike ready to ride on the Lahbab red dunes in Dubai",
+    "focal": "right"
+  }
 }

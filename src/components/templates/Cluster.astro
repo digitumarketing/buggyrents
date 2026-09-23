@@ -14,7 +14,16 @@ export type ClusterData = {
   vehicle: Vehicle;
   crumbParent: { label: string; href: string };
   title: string; description: string;
-  heroImage: string; eyebrow: string; h1Lead: string; h1Em: string; h1Tail: string; lede: string;
+  /* Resolved by tours.ts rather than looked up here, because a tour's hero can now
+     be a file the client uploaded onto the tour itself as well as a shared category
+     photo, and the template should not have to know which.
+
+     The hero <img> carries no width/height, deliberately. It is position:absolute,
+     inset:0, object-fit:cover inside a sized hero section, so CSS decides the box
+     and the attributes never affected layout. Keeping them would have meant the CMS
+     holding the pixel size of a photo the client uploads, which it cannot know. */
+  heroImage: { src: string; alt: string; focal: 'left' | 'center' | 'right' };
+  eyebrow: string; h1Lead: string; h1Em: string; h1Tail: string; lede: string;
   specs: { label: string; value: string }[];
   durationCopy: Record<string, { badge: string; blurb: string }>;
   included: string[]; checkBefore: string[];
@@ -53,9 +62,9 @@ const faqSchema = { '@context':'https://schema.org','@type':'FAQPage',
 
   <!-- 1 hero -->
   <section class="cl__hero">
-    <img class="cl__hero-media" src={hero(d.heroImage).src} alt={hero(d.heroImage).alt}
-         style={`object-position:${hero(d.heroImage).focal} center`}
-         width={hero(d.heroImage).w} height={hero(d.heroImage).h} fetchpriority="high" decoding="async" />
+    <img class="cl__hero-media" src={d.heroImage.src} alt={d.heroImage.alt}
+         style={`object-position:${d.heroImage.focal} center`}
+         fetchpriority="high" decoding="async" />
     <div class="cl__hero-scrim"></div>
     <div class="cl__shell cl__hero-inner">
       <nav class="cl__crumbs" aria-label="Breadcrumb">

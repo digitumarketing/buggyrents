@@ -67,28 +67,6 @@
       "make": "canam"
     },
     {
-      "name": "canam-maverick-r-yellow-turbo-hero-dubai-dunes",
-      "file": "/assets/images/hero/canam-maverick-r-yellow-turbo-hero-dubai-dunes.webp",
-      "alt": "Yellow Can-Am Maverick R turbo dune buggy on the red dunes at Lahbab, Dubai",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1066,
-      "seats": "2",
-      "make": "canam"
-    },
-    {
-      "name": "canam-maverick-x3-2-seater-hero-lahbab-dunes",
-      "file": "/assets/images/hero/canam-maverick-x3-2-seater-hero-lahbab-dunes.webp",
-      "alt": "Two guests in a Can-Am Maverick X3 two seater below a Lahbab red dune in Dubai",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1200,
-      "seats": "2",
-      "make": "canam"
-    },
-    {
       "name": "canam-maverick-x3-hero-dubai-dunes",
       "file": "/assets/images/hero/canam-maverick-x3-hero-dubai-dunes.webp",
       "alt": "Guest driving a grey Can-Am Maverick X3 two seater dune buggy in the Dubai desert",
@@ -97,50 +75,6 @@
       "width": 1600,
       "height": 1200,
       "seats": "2",
-      "make": "canam"
-    },
-    {
-      "name": "canam-x3-turbo-rr-2-seater-hero-dubai-desert",
-      "file": "/assets/images/hero/canam-x3-turbo-rr-2-seater-hero-dubai-desert.webp",
-      "alt": "Red and white Can-Am Maverick X3 X RS turbo two seater on Dubai desert sand",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1066,
-      "seats": "2",
-      "make": "canam"
-    },
-    {
-      "name": "canam-maverick-r-4-seater-hero-blue-dubai-dunes",
-      "file": "/assets/images/hero/canam-maverick-r-4-seater-hero-blue-dubai-dunes.webp",
-      "alt": "Guests riding a blue Can-Am Maverick R X RS four seater dune buggy up a Dubai dune",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1067,
-      "seats": "4",
-      "make": "canam"
-    },
-    {
-      "name": "canam-maverick-x3-4-seater-hero-blue-rs-dubai",
-      "file": "/assets/images/hero/canam-maverick-x3-4-seater-hero-blue-rs-dubai.webp",
-      "alt": "Blue Can-Am Maverick X3 RS four seater dune buggy on a Dubai desert dune",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1200,
-      "seats": "4",
-      "make": "canam"
-    },
-    {
-      "name": "canam-x3-turbo-rr-4-seater-hero-red-dunes",
-      "file": "/assets/images/hero/canam-x3-turbo-rr-4-seater-hero-red-dunes.webp",
-      "alt": "Red Can-Am Maverick X3 X RS turbo four seater dune buggy on the Dubai red dunes",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1066,
-      "seats": "4",
       "make": "canam"
     },
     {
@@ -153,61 +87,6 @@
       "height": 1200,
       "seats": "",
       "make": ""
-    },
-    {
-      "name": "polaris-rzr-1000-2-seater-hero-dubai-red-dunes",
-      "file": "/assets/images/hero/polaris-rzr-1000-2-seater-hero-dubai-red-dunes.webp",
-      "alt": "Two riders in a blue Polaris RZR 1000 two seater on the Lahbab red dunes in Dubai",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1199,
-      "seats": "2",
-      "make": "polaris"
-    },
-    {
-      "name": "polaris-rzr-4-seater-hero-dubai-dune-ridge",
-      "file": "/assets/images/hero/polaris-rzr-4-seater-hero-dubai-dune-ridge.webp",
-      "alt": "Polaris RZR four seater dune buggy parked on a red dune ridge in Dubai",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1200,
-      "seats": "4",
-      "make": "polaris"
-    },
-    {
-      "name": "polaris-rzr-pro-hero-blue-dubai-red-dune",
-      "file": "/assets/images/hero/polaris-rzr-pro-hero-blue-dubai-red-dune.webp",
-      "alt": "Blue Polaris RZR Pro dune buggy on a red dune at the Lahbab desert in Dubai",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1066,
-      "seats": "2",
-      "make": "polaris"
-    },
-    {
-      "name": "polaris-rzr-turbo-2-seater-hero-dubai-desert",
-      "file": "/assets/images/hero/polaris-rzr-turbo-2-seater-hero-dubai-desert.webp",
-      "alt": "Guests driving a Polaris RZR XP 1000 turbo two seater through the Dubai desert",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1200,
-      "seats": "2",
-      "make": "polaris"
-    },
-    {
-      "name": "polaris-rzr-turbo-4-seater-hero-red-dunes-dubai",
-      "file": "/assets/images/hero/polaris-rzr-turbo-4-seater-hero-red-dunes-dubai.webp",
-      "alt": "Black Polaris RZR turbo four seater dune buggy on the Dubai red dunes",
-      "subject": "buggy",
-      "focal": "right",
-      "width": 1600,
-      "height": 1066,
-      "seats": "4",
-      "make": "polaris"
     },
     {
       "name": "quad-bike-open-desert-hero-dubai-red-dunes",
@@ -228,17 +107,6 @@
       "focal": "right",
       "width": 1600,
       "height": 1066,
-      "seats": "",
-      "make": ""
-    },
-    {
-      "name": "yamaha-raptor-700-hero-dubai-desert-rider",
-      "file": "/assets/images/hero/yamaha-raptor-700-hero-dubai-desert-rider.webp",
-      "alt": "Rider on a Yamaha Raptor 700 sport quad in the Dubai desert",
-      "subject": "quad",
-      "focal": "right",
-      "width": 1600,
-      "height": 1350,
       "seats": "",
       "make": ""
     }

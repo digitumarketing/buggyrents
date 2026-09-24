@@ -262,6 +262,37 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
       process.exit(1);
     }
     console.log(`Hero dimension audit passed — ${(heroLib.photos ?? []).length} hero photos, every stated size matches the file.`);
+
+    /* Tour heroes the client uploads are the one class of photo nothing else sizes.
+       They are outside the lib pool the resolution audit walks and outside the hero
+       library the check above walks, and the upload field will accept a phone
+       screenshot as happily as a 2560px export. Full-bleed at the top of the page is
+       the worst place for a soft image, so this fails rather than warns under 900px. */
+    const tourHeroes = [];
+    for (const dir of ['buggies', 'quads', 'dirtbikes']) {
+      const base = join('src/content', dir);
+      if (!existsSync(base)) continue;
+      for (const entry of readdirSync(base).filter(f => f.endsWith('.json'))) {
+        const v = JSON.parse(readFileSync(join(base, entry), 'utf8'));
+        if (v.heroPhoto?.file) tourHeroes.push({ tour: entry.replace(/\.json$/, ''), file: v.heroPhoto.file });
+      }
+    }
+    const badTourHero = [], softTourHero = [];
+    for (const { tour, file } of tourHeroes) {
+      const onDisk = join(DIST, file.replace(/^\//, ''));
+      if (!existsSync(onDisk)) { badTourHero.push(`${tour} — no file at ${file}`); continue; }
+      const { width, height } = imageSize(readFileSync(onDisk));
+      if (width < SOFT_MIN) badTourHero.push(`${tour} — ${width}x${height}, too small for a full-width hero`);
+      else if (width < 1600) softTourHero.push(`${tour} — ${width}x${height}`);
+    }
+    if (badTourHero.length) {
+      console.error('Tour hero photo cannot ship:');
+      badTourHero.forEach(b => console.error('  ' + b));
+      console.error(`  A hero runs the full width of the page. Upload a landscape photo at least ${SOFT_MIN}px wide, 1600px or more preferred.`);
+      process.exit(1);
+    }
+    softTourHero.forEach(s => console.warn(`  Tour hero under 1600px, may soften on a large screen: ${s}`));
+    console.log(`Tour hero audit passed — ${tourHeroes.length} uploaded tour heroes, none under ${SOFT_MIN}px${softTourHero.length ? `, ${softTourHero.length} below 1600px` : ''}.`);
   }
 }
 

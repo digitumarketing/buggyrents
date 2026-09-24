@@ -339,7 +339,20 @@ is newer.
   `tours.ts heroFor()` resolves the two and checks the uploaded filename against the
   vehicle's **own** seat count, which is stronger than the library tag it replaced: a
   file named `...-2-seater-...` uploaded onto the four-seat page fails the build. An
-  uploaded photo with empty alt text fails the build too. The tour hero `<img>` carries
+  uploaded photo with empty alt text fails the build too.
+  - **The stored path MUST carry the tour's slug**, as
+    `/assets/images/tours/<tour>/<file>.webp`. Keystatic files a collection's uploads
+    under the entry slug and strips exactly that prefix back off when working out which
+    file to replace. A path without it gets the client
+    `[GraphQL] A path was requested for deletion which does not exist as of commit oid …`
+    the first time they upload a replacement, and the commit is rejected. This was the
+    24 Sep bug: the migration wrote flat `/assets/images/hero/<file>.webp` paths.
+  - **Tour heroes live outside both photo libraries**, in `public/assets/images/tours/`,
+    because they belong to one page rather than a pool. Twelve moved there from the hero
+    library; the three quad heroes that blog posts also use were copied and remain in the
+    library as well. Nothing else measures them, so the tour hero audit fails the build
+    under 900px and warns under 1600px — the upload field will take a phone screenshot
+    otherwise, full-bleed at the top of the page. The tour hero `<img>` carries
   no width/height, deliberately — it is `position:absolute; inset:0; object-fit:cover`
   inside a sized section, so CSS always decided the box and the CMS cannot know the
   pixel size of a file the client just uploaded. Card and gallery photos still come from
@@ -546,9 +559,9 @@ Was 65 before the safari cluster of 12 Aug 2026. The link and orphan claim is me
 rather than assumed as of 4 Sep 2026: 9,073 internal links, all resolving. Before that
 date it was an assertion nothing checked.
 
-**`npm run build` runs 19 audits and every one of them fails the build.** Do not remove
+**`npm run build` runs 20 audits and every one of them fails the build.** Do not remove
 the `&& npm run audit`. In `scripts/audit-contrast.mjs`: contrast on card surfaces,
-colour syntax, image reuse and alt text, image resolution, hero dimensions, insurance
+colour syntax, image reuse and alt text, image resolution, hero dimensions, tour heroes, insurance
 claims, em dashes, missing referenced assets, placeholders such as `[object Object]`,
 a price cross-check, cross-page image variety, metadata, CMS tokens, root-resolves,
 analytics configuration, lead tracking, and llms.txt. Then `scripts/audit-links.mjs`

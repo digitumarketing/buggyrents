@@ -93,8 +93,14 @@ const vehicle = (label: string, path: string) =>
         file:  fields.image({
           label: 'Hero photo',
           description: 'Landscape, at least 1600px wide. Leave empty to use the shared photo for this category.',
-          directory: 'public/assets/images/hero',
-          publicPath: '/assets/images/hero'
+          /* Keystatic files a collection's uploads under the entry's own slug, so
+             this lands at /assets/images/tours/<tour>/<file>.webp and the photo
+             belongs to the tour rather than the shared pool. The stored path MUST
+             carry that slug segment: without it Keystatic looks for the previous
+             file in the wrong place on save and GitHub rejects the commit with
+             "a path was requested for deletion which does not exist". */
+          directory: 'public/assets/images/tours',
+          publicPath: '/assets/images/tours'
         }),
         alt:   fields.text({ label: 'Alt text', description: 'What the photo shows. Only needed when a photo is uploaded.', multiline: true, defaultValue: '' }),
         /* The h1 sits on the left, so the machine has to sit away from it or the

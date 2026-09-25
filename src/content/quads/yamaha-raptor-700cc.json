@@ -5,7 +5,11 @@
   "seats": 1,
   "minAge": 14,
   "area": "Open desert, red dunes",
-  "image": "yamaha-raptor-700cc-quad-bike-lahbab-red-dunes",
+  "cardPhoto": "/assets/images/tours/yamaha-raptor-700cc/yamaha-raptor-700cc-quad-bike-lahbab-red-dunes.webp",
+  "cardPhotoAlt": "Rider on a Yamaha Raptor 700cc sport quad in the Lahbab red dunes, Dubai",
+  "heroPhoto": "/assets/images/tours/yamaha-raptor-700cc/heroPhoto.webp",
+  "heroPhotoAlt": "Rider on a Yamaha Raptor 700 sport quad in the Dubai desert",
+  "heroFocal": "right",
   "blurb": "The sport quad. Fast, light and demanding - for riders who already know what they are doing.",
   "durations": [
     {
@@ -45,10 +49,5 @@
     }
   ],
   "featured": true,
-  "order": 6,
-  "heroPhoto": {
-    "file": "/assets/images/tours/yamaha-raptor-700cc/yamaha-raptor-700-hero-dubai-desert-rider.webp",
-    "alt": "Rider on a Yamaha Raptor 700 sport quad in the Dubai desert",
-    "focal": "right"
-  }
+  "order": 6
 }

@@ -5,7 +5,11 @@
   "seats": 4,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "polaris-rzr-4-seater-dune-buggy-parked-dubai-base",
+  "cardPhoto": "/assets/images/tours/polaris-rzr-1000-4-seater/polaris-rzr-4-seater-dune-buggy-parked-dubai-base.webp",
+  "cardPhotoAlt": "Polaris RZR 4-seater dune buggy parked at the Buggy Rents Dubai base",
+  "heroPhoto": "/assets/images/tours/polaris-rzr-1000-4-seater/heroPhoto.webp",
+  "heroPhotoAlt": "Polaris RZR four seater dune buggy parked on a red dune ridge in Dubai",
+  "heroFocal": "right",
   "blurb": "One buggy for the whole family. Same chassis as the 2-seater with a second row behind.",
   "durations": [
     {
@@ -31,10 +35,5 @@
     }
   ],
   "featured": true,
-  "order": 2,
-  "heroPhoto": {
-    "file": "/assets/images/tours/polaris-rzr-1000-4-seater/polaris-rzr-4-seater-hero-dubai-dune-ridge.webp",
-    "alt": "Polaris RZR four seater dune buggy parked on a red dune ridge in Dubai",
-    "focal": "right"
-  }
+  "order": 2
 }

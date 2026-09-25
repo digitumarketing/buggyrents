@@ -5,7 +5,11 @@
   "seats": 2,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "polaris-rzr-pro-white-dune-buggy-dubai",
+  "cardPhoto": "/assets/images/tours/polaris-rzr-pro/polaris-rzr-pro-white-dune-buggy-dubai.webp",
+  "cardPhotoAlt": "White Polaris RZR Pro dune buggy on Dubai desert sand",
+  "heroPhoto": "/assets/images/tours/polaris-rzr-pro/heroPhoto.webp",
+  "heroPhotoAlt": "Blue Polaris RZR Pro dune buggy on a red dune at the Lahbab desert in Dubai",
+  "heroFocal": "right",
   "blurb": "The Pro chassis with longer travel suspension, aimed at drivers who already know the route.",
   "durations": [
     {
@@ -30,10 +34,5 @@
       "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Polaris RZR Pro."
     }
   ],
-  "order": 5,
-  "heroPhoto": {
-    "file": "/assets/images/tours/polaris-rzr-pro/polaris-rzr-pro-hero-blue-dubai-red-dune.webp",
-    "alt": "Blue Polaris RZR Pro dune buggy on a red dune at the Lahbab desert in Dubai",
-    "focal": "right"
-  }
+  "order": 5
 }

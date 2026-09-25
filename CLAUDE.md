@@ -332,6 +332,29 @@ is newer.
 - **Filenames are keyword-descriptive**; alt text describes the actual photo, not the page title.
 - **Every image carries a `subject`** (`buggy` `quad` `dirtbike` `safari`) in `src/data/images.ts`.
   `img(key, subject)` throws at build time on a mismatch, so a KTM page can never show a buggy.
+- **A tour's card photo is an upload too, as of 25 Sep 2026.** `cardPhoto` and
+  `cardPhotoAlt` sit on every vehicle beside the hero fields, so the photo used on every
+  listing, cross-sell card and Google result is changed by looking at it and dropping in
+  a new file. It is required: a tour with no card photo has nothing to show anywhere it
+  is listed. Four things this pulled in:
+  - **`img()` now takes a path as readily as a library key.** That was the seam that
+    kept the change small: every card, cross-sell and schema image on the site already
+    went through `img()`, so nothing else had to change. `src/data/images.ts` reads the
+    vehicle JSON directly to build the tour-photo map — never `vehicles.ts`, which would
+    be a cycle — and takes the subject from the folder and the seat count from the
+    machine, so a tour photo is checked against the vehicle it belongs to.
+  - **Fields are flat (`cardPhoto` + `cardPhotoAlt`), not an object.** Keystatic names an
+    uploaded file after the field path, so an image nested in an object lands at
+    `<tour>/cardPhoto/file.webp`, a folder per field. The original filename is always
+    discarded, which is why the tour folder carries the descriptive part of the name.
+  - **Migrated copies kept their descriptive filenames on purpose.** `libraryTwin()`
+    finds the library photo a tour copy came from by filename, and gallery selection
+    excludes that twin so the same picture cannot appear as both a card and a gallery
+    shot. A photo the client uploads has no twin, which is correct — it is a new photo.
+  - **The duplicate-picture audit is the backstop**, added with this change. Since a
+    picture can now exist at two paths, the reuse audit's src-string comparison is no
+    longer sufficient, so this one hashes every referenced file and fails the build if
+    one page shows the same bytes twice.
 - **A tour's hero is an upload on the tour itself, as of 24 Sep 2026.** Every vehicle
   carries `heroPhoto` — a real file field with a preview, plus alt text and a focal
   point — so the client sees the photo they are replacing and drops a new file straight
@@ -559,9 +582,9 @@ Was 65 before the safari cluster of 12 Aug 2026. The link and orphan claim is me
 rather than assumed as of 4 Sep 2026: 9,073 internal links, all resolving. Before that
 date it was an assertion nothing checked.
 
-**`npm run build` runs 20 audits and every one of them fails the build.** Do not remove
+**`npm run build` runs 21 audits and every one of them fails the build.** Do not remove
 the `&& npm run audit`. In `scripts/audit-contrast.mjs`: contrast on card surfaces,
-colour syntax, image reuse and alt text, image resolution, hero dimensions, tour heroes, insurance
+colour syntax, image reuse and alt text, image resolution, hero dimensions, tour heroes, duplicate pictures, insurance
 claims, em dashes, missing referenced assets, placeholders such as `[object Object]`,
 a price cross-check, cross-page image variety, metadata, CMS tokens, root-resolves,
 analytics configuration, lead tracking, and llms.txt. Then `scripts/audit-links.mjs`

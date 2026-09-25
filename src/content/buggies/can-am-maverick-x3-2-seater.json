@@ -5,7 +5,11 @@
   "seats": 2,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "can-am-maverick-x3-black-2-seater-red-dune-dubai",
+  "cardPhoto": "/assets/images/tours/can-am-maverick-x3-2-seater/can-am-maverick-x3-black-2-seater-red-dune-dubai.webp",
+  "cardPhotoAlt": "Black Can-Am Maverick X3 2-seater dune buggy on a Dubai red dune",
+  "heroPhoto": "/assets/images/tours/can-am-maverick-x3-2-seater/heroPhoto.webp",
+  "heroPhotoAlt": "Two guests in a Can-Am Maverick X3 two seater below a Lahbab red dune in Dubai",
+  "heroFocal": "right",
   "blurb": "A serious step up in power and suspension travel. For riders who have driven a buggy before.",
   "durations": [
     {
@@ -31,10 +35,5 @@
     }
   ],
   "featured": true,
-  "order": 6,
-  "heroPhoto": {
-    "file": "/assets/images/tours/can-am-maverick-x3-2-seater/canam-maverick-x3-2-seater-hero-lahbab-dunes.webp",
-    "alt": "Two guests in a Can-Am Maverick X3 two seater below a Lahbab red dune in Dubai",
-    "focal": "right"
-  }
+  "order": 6
 }

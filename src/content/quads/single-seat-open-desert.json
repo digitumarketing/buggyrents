@@ -5,7 +5,11 @@
   "seats": 1,
   "minAge": 14,
   "area": "Open desert, red dunes",
-  "image": "quad-biking-dubai-open-desert-three-riders",
+  "cardPhoto": "/assets/images/tours/single-seat-open-desert/quad-biking-dubai-open-desert-three-riders.webp",
+  "cardPhotoAlt": "Three riders on single seat quad bikes climbing a red dune in the Dubai open desert",
+  "heroPhoto": "/assets/images/tours/single-seat-open-desert/heroPhoto.webp",
+  "heroPhotoAlt": "Rider on a red quad bike in the open desert at Lahbab, Dubai",
+  "heroFocal": "right",
   "blurb": "Out of the boundary and into the red dunes with a guide. The real thing.",
   "durations": [
     {
@@ -45,10 +49,5 @@
     }
   ],
   "featured": true,
-  "order": 4,
-  "heroPhoto": {
-    "file": "/assets/images/tours/single-seat-open-desert/quad-bike-open-desert-hero-dubai-red-dunes.webp",
-    "alt": "Rider on a red quad bike in the open desert at Lahbab, Dubai",
-    "focal": "right"
-  }
+  "order": 4
 }

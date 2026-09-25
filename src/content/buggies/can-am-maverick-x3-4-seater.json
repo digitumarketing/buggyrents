@@ -5,7 +5,11 @@
   "seats": 4,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "can-am-maverick-x3-4-seater-family-buggy-ride-dubai",
+  "cardPhoto": "/assets/images/tours/can-am-maverick-x3-4-seater/can-am-maverick-x3-4-seater-family-buggy-ride-dubai.webp",
+  "cardPhotoAlt": "Family riding a Can-Am Maverick X3 4-seater dune buggy in Dubai",
+  "heroPhoto": "/assets/images/tours/can-am-maverick-x3-4-seater/heroPhoto.webp",
+  "heroPhotoAlt": "Blue Can-Am Maverick X3 RS four seater dune buggy on a Dubai desert dune",
+  "heroFocal": "right",
   "blurb": "Turbo performance with four seats. The pick for groups that do not want to split up.",
   "durations": [
     {
@@ -31,10 +35,5 @@
     }
   ],
   "featured": true,
-  "order": 7,
-  "heroPhoto": {
-    "file": "/assets/images/tours/can-am-maverick-x3-4-seater/canam-maverick-x3-4-seater-hero-blue-rs-dubai.webp",
-    "alt": "Blue Can-Am Maverick X3 RS four seater dune buggy on a Dubai desert dune",
-    "focal": "right"
-  }
+  "order": 7
 }

@@ -34,18 +34,26 @@ export type Vehicle = {
   seats: number;
   minAge: number;
   area: string;
-  image: string;       // key into src/data/images.ts
+  /* Both photos are uploaded on the tour itself rather than picked from a list.
+     `image` is the card photo's path, kept under that name because every card,
+     cross-sell and schema image on the site reaches it through img(), which takes a
+     path as readily as a library key. */
+  cardPhoto: string;
+  cardPhotoAlt: string;
+  image: string;       // = cardPhoto, for the img() call sites
   /* The tour's own hero, uploaded in the CMS rather than picked from a list, so the
      client sees the photo they are replacing and can drop a new file straight in.
      `file` is null when nothing has been uploaded, and the page falls back to the
      shared hero for the category. See tours.ts, which resolves the two. */
-  heroPhoto?: { file: string | null; alt: string; focal: 'left' | 'center' | 'right' };
+  heroPhoto?: string | null;
+  heroPhotoAlt?: string;
+  heroFocal?: 'left' | 'center' | 'right';
   blurb: string;
   durations: Duration[];
   featured?: boolean;
 };
 
-type Raw = Omit<Vehicle, 'slug' | 'category'> & { order?: number };
+type Raw = Omit<Vehicle, 'slug' | 'category' | 'image'> & { order?: number };
 
 /* The duration label is free text in the CMS, and it is printed straight onto the
    card, the price table, the schema Offer and the WhatsApp booking message. A
@@ -72,7 +80,17 @@ const load = (
         .replace(/\.json$/, '')
         .split('/')
         .pop()!;
-      return { ...data, slug, category, durations: (data.durations ?? []).map(tidyDuration) };
+      if (!data.cardPhoto) {
+        throw new Error(
+          `${category}/${slug} has no card photo. Upload one on the tour in the CMS — it is the photo ` +
+          `every listing, cross-sell card and search result for this machine uses.`
+        );
+      }
+      return {
+        ...data, slug, category,
+        image: data.cardPhoto,
+        durations: (data.durations ?? []).map(tidyDuration)
+      };
     })
     .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
     .map(({ order, ...v }) => v as Vehicle);

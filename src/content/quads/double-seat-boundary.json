@@ -5,7 +5,11 @@
   "seats": 2,
   "minAge": 14,
   "area": "2 km boundary area",
-  "image": "double-seat-quad-biking-dubai-red-dunes",
+  "cardPhoto": "/assets/images/tours/double-seat-boundary/double-seat-quad-biking-dubai-red-dunes.webp",
+  "cardPhotoAlt": "Double seat quad bike ready for a red dune ride in Dubai",
+  "heroPhoto": "/assets/images/tours/double-seat-boundary/heroPhoto.webp",
+  "heroPhotoAlt": "Two guests on a double seat quad bike at sunset in the Dubai desert",
+  "heroFocal": "right",
   "blurb": "Take a passenger. Same marked boundary area, a larger engine to carry two.",
   "durations": [
     {
@@ -44,10 +48,5 @@
       "blurb": "The longest route we run on the Double Seat Boundary. For experienced riders who want maximum time in the dunes."
     }
   ],
-  "order": 3,
-  "heroPhoto": {
-    "file": "/assets/images/tours/double-seat-boundary/double-seat-quad-bike-hero-dubai-sunset.webp",
-    "alt": "Two guests on a double seat quad bike at sunset in the Dubai desert",
-    "focal": "right"
-  }
+  "order": 3
 }

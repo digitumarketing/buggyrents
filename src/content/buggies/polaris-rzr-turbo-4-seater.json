@@ -5,7 +5,11 @@
   "seats": 4,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "polaris-rzr-4-seater-side-profile-dubai-desert",
+  "cardPhoto": "/assets/images/tours/polaris-rzr-turbo-4-seater/polaris-rzr-4-seater-side-profile-dubai-desert.webp",
+  "cardPhotoAlt": "Side profile of a Polaris RZR four seater dune buggy in the Dubai desert",
+  "heroPhoto": "/assets/images/tours/polaris-rzr-turbo-4-seater/heroPhoto.webp",
+  "heroPhotoAlt": "Black Polaris RZR turbo four seater dune buggy on the Dubai red dunes",
+  "heroFocal": "right",
   "blurb": "Turbo power with four seats, for groups that want the quicker machine without splitting up.",
   "durations": [
     {
@@ -30,10 +34,5 @@
       "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Polaris RZR Turbo 4-Seater."
     }
   ],
-  "order": 4,
-  "heroPhoto": {
-    "file": "/assets/images/tours/polaris-rzr-turbo-4-seater/polaris-rzr-turbo-4-seater-hero-red-dunes-dubai.webp",
-    "alt": "Black Polaris RZR turbo four seater dune buggy on the Dubai red dunes",
-    "focal": "right"
-  }
+  "order": 4
 }

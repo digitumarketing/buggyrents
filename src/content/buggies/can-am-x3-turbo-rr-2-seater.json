@@ -5,7 +5,11 @@
   "seats": 2,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "can-am-maverick-x3-rs-2-seater-dune-buggy-dubai",
+  "cardPhoto": "/assets/images/tours/can-am-x3-turbo-rr-2-seater/can-am-maverick-x3-rs-2-seater-dune-buggy-dubai.webp",
+  "cardPhotoAlt": "Blue Can-Am Maverick X3 RS 2-seater dune buggy in the Dubai desert",
+  "heroPhoto": "/assets/images/tours/can-am-x3-turbo-rr-2-seater/heroPhoto.webp",
+  "heroPhotoAlt": "Red and white Can-Am Maverick X3 X RS turbo two seater on Dubai desert sand",
+  "heroFocal": "right",
   "blurb": "The RR badge means more boost and stiffer damping. Experienced drivers only.",
   "durations": [
     {
@@ -30,10 +34,5 @@
       "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Can-Am X3 Turbo RR 2-Seater."
     }
   ],
-  "order": 8,
-  "heroPhoto": {
-    "file": "/assets/images/tours/can-am-x3-turbo-rr-2-seater/canam-x3-turbo-rr-2-seater-hero-dubai-desert.webp",
-    "alt": "Red and white Can-Am Maverick X3 X RS turbo two seater on Dubai desert sand",
-    "focal": "right"
-  }
+  "order": 8
 }

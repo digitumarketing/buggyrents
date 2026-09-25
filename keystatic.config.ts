@@ -80,7 +80,27 @@ const vehicle = (label: string, path: string) =>
       seats:     fields.integer({ label: 'Seats', defaultValue: 2 }),
       minAge:    fields.integer({ label: 'Minimum age', defaultValue: 18 }),
       area:      fields.text({ label: 'Riding area' }),
-      image:     libPhoto('Card photo'),
+      /* THE CARD PHOTO, an upload like the hero since 25 Sep 2026. This is the
+         photo every listing page, cross-sell card and Google result uses for this
+         machine, so it is the one the client is most likely to want to change, and
+         a dropdown of filenames never showed them what they were changing.
+
+         FLAT FIELDS, NOT AN OBJECT, and that is not a style choice. Keystatic names
+         an uploaded file after the field's path, so an image nested inside an object
+         lands at <tour>/cardPhoto/file.webp — a folder per field. Flat, it lands at
+         <tour>/cardPhoto.webp. The original filename is discarded either way, which
+         is why the tour folder carries the descriptive part of the name.
+
+         Required: a tour with no card photo has nothing to show anywhere it is
+         listed, so the build refuses rather than rendering a gap. */
+      cardPhoto: fields.image({
+        label: 'Card photo',
+        description: 'Landscape. Used on every listing and cross-sell card for this ride.',
+        directory: 'public/assets/images/tours',
+        publicPath: '/assets/images/tours',
+        validation: { isRequired: true }
+      }),
+      cardPhotoAlt: fields.text({ label: 'Card photo alt text', description: 'What the photo shows, in one sentence. Read aloud by screen readers and used by Google.', multiline: true, defaultValue: '' }),
       /* AN UPLOAD, NOT A PICKER, and the difference is the whole point. A dropdown
          of names tells the client nothing about what the photo looks like, and
          still needs a developer to get a new photo into the list. This field shows
@@ -89,33 +109,31 @@ const vehicle = (label: string, path: string) =>
          Left empty the page falls back to the shared hero for its category, which
          is what all eleven buggy pages do today. Landscape, 1600px wide or more;
          the build warns below that. */
-      heroPhoto: fields.object({
-        file:  fields.image({
-          label: 'Hero photo',
-          description: 'Landscape, at least 1600px wide. Leave empty to use the shared photo for this category.',
-          /* Keystatic files a collection's uploads under the entry's own slug, so
-             this lands at /assets/images/tours/<tour>/<file>.webp and the photo
-             belongs to the tour rather than the shared pool. The stored path MUST
-             carry that slug segment: without it Keystatic looks for the previous
-             file in the wrong place on save and GitHub rejects the commit with
-             "a path was requested for deletion which does not exist". */
-          directory: 'public/assets/images/tours',
-          publicPath: '/assets/images/tours'
-        }),
-        alt:   fields.text({ label: 'Alt text', description: 'What the photo shows. Only needed when a photo is uploaded.', multiline: true, defaultValue: '' }),
-        /* The h1 sits on the left, so the machine has to sit away from it or the
-           two collide on a wide screen. */
-        focal: fields.select({
-          label: 'Keep in frame',
-          description: 'Which side to hold as the photo crops. The heading is on the left, so "right" suits most photos.',
-          options: [
-            { label: 'Right', value: 'right' },
-            { label: 'Centre', value: 'center' },
-            { label: 'Left', value: 'left' }
-          ],
-          defaultValue: 'right'
-        })
-      }, { label: 'Hero photo (optional)' }),
+      heroPhoto: fields.image({
+        label: 'Hero photo (optional)',
+        description: 'The full-width photo at the top of the page. Landscape, at least 1600px wide. Leave empty to use the shared photo for this category.',
+        /* Keystatic files a collection's uploads under the entry's own slug, so this
+           lands at /assets/images/tours/<tour>/heroPhoto.webp and the photo belongs
+           to the tour rather than the shared pool. The stored path MUST carry that
+           slug segment: without it Keystatic looks for the previous file in the
+           wrong place on save and GitHub rejects the commit with "a path was
+           requested for deletion which does not exist". */
+        directory: 'public/assets/images/tours',
+        publicPath: '/assets/images/tours'
+      }),
+      heroPhotoAlt: fields.text({ label: 'Hero photo alt text', description: 'What the photo shows. Only needed when a hero photo is uploaded.', multiline: true, defaultValue: '' }),
+      /* The h1 sits on the left, so the machine has to sit away from it or the two
+         collide on a wide screen. */
+      heroFocal: fields.select({
+        label: 'Hero: keep in frame',
+        description: 'Which side to hold as the photo crops. The heading is on the left, so "right" suits most photos.',
+        options: [
+          { label: 'Right', value: 'right' },
+          { label: 'Centre', value: 'center' },
+          { label: 'Left', value: 'left' }
+        ],
+        defaultValue: 'right'
+      }),
       blurb:     fields.text({ label: 'Short description', multiline: true }),
       durations: durationField,
       featured:  fields.checkbox({ label: 'Show on homepage', defaultValue: false }),

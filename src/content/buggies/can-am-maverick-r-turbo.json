@@ -5,7 +5,11 @@
   "seats": 2,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "can-am-maverick-x3-yellow-turbo-dune-buggy-dubai",
+  "cardPhoto": "/assets/images/tours/can-am-maverick-r-turbo/can-am-maverick-x3-yellow-turbo-dune-buggy-dubai.webp",
+  "cardPhotoAlt": "Yellow Can-Am Maverick X3 turbo dune buggy driving across Dubai sand",
+  "heroPhoto": "/assets/images/tours/can-am-maverick-r-turbo/heroPhoto.webp",
+  "heroPhotoAlt": "Yellow Can-Am Maverick R turbo dune buggy on the red dunes at Lahbab, Dubai",
+  "heroFocal": "right",
   "blurb": "The fastest two-seat machine in the fleet. Experienced drivers only.",
   "durations": [
     {
@@ -31,10 +35,5 @@
     }
   ],
   "featured": true,
-  "order": 10,
-  "heroPhoto": {
-    "file": "/assets/images/tours/can-am-maverick-r-turbo/canam-maverick-r-yellow-turbo-hero-dubai-dunes.webp",
-    "alt": "Yellow Can-Am Maverick R turbo dune buggy on the red dunes at Lahbab, Dubai",
-    "focal": "right"
-  }
+  "order": 10
 }

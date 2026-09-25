@@ -5,7 +5,11 @@
   "seats": 1,
   "minAge": 14,
   "area": "Open desert, red dunes",
-  "image": "ktm-450-dirt-bike-rider-dubai-desert",
+  "cardPhoto": "/assets/images/tours/ktm-450-dirt-bike/ktm-450-dirt-bike-rider-dubai-desert.webp",
+  "cardPhotoAlt": "Rider standing with a KTM 450 dirt bike on a Dubai desert dune",
+  "heroPhoto": null,
+  "heroPhotoAlt": "",
+  "heroFocal": "right",
   "blurb": "Desert enduro on a proper 450. Riders must be comfortable with clutch, gears and throttle.",
   "durations": [
     {
@@ -45,10 +49,5 @@
     }
   ],
   "featured": true,
-  "order": 1,
-  "heroPhoto": {
-    "file": null,
-    "alt": "",
-    "focal": "right"
-  }
+  "order": 1
 }

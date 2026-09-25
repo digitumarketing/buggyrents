@@ -5,7 +5,11 @@
   "seats": 2,
   "minAge": 16,
   "area": "Open desert, red dunes",
-  "image": "double-seat-quad-bike-dubai-friends-photo-stop",
+  "cardPhoto": "/assets/images/tours/double-seat-open-desert/double-seat-quad-bike-dubai-friends-photo-stop.webp",
+  "cardPhotoAlt": "Two friends beside a double seat quad bike on a Dubai desert photo stop",
+  "heroPhoto": null,
+  "heroPhotoAlt": "",
+  "heroFocal": "right",
   "blurb": "Two up across the open red dunes. The biggest engine we put a passenger on.",
   "durations": [
     {
@@ -44,10 +48,5 @@
       "blurb": "The longest route we run on the Double Seat Open Desert. For experienced riders who want maximum time in the dunes."
     }
   ],
-  "order": 5,
-  "heroPhoto": {
-    "file": null,
-    "alt": "",
-    "focal": "right"
-  }
+  "order": 5
 }

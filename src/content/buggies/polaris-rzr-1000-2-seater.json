@@ -5,7 +5,11 @@
   "seats": 2,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "polaris-rzr-1000-2-seater-dune-buggy-dubai",
+  "cardPhoto": "/assets/images/tours/polaris-rzr-1000-2-seater/polaris-rzr-1000-2-seater-dune-buggy-dubai.webp",
+  "cardPhotoAlt": "Polaris RZR 1000 2-seater dune buggy with riders in the Dubai desert",
+  "heroPhoto": "/assets/images/tours/polaris-rzr-1000-2-seater/heroPhoto.webp",
+  "heroPhotoAlt": "Two riders in a blue Polaris RZR 1000 two seater on the Lahbab red dunes in Dubai",
+  "heroFocal": "right",
   "blurb": "The balanced starting point. Enough power for the big dunes, forgiving enough for a first self-drive.",
   "durations": [
     {
@@ -31,10 +35,5 @@
     }
   ],
   "featured": true,
-  "order": 1,
-  "heroPhoto": {
-    "file": "/assets/images/tours/polaris-rzr-1000-2-seater/polaris-rzr-1000-2-seater-hero-dubai-red-dunes.webp",
-    "alt": "Two riders in a blue Polaris RZR 1000 two seater on the Lahbab red dunes in Dubai",
-    "focal": "right"
-  }
+  "order": 1
 }

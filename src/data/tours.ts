@@ -1,6 +1,6 @@
 import type { ClusterData } from '@/components/templates/Cluster.astro';
 import { allVehicles, byCategory, fromPrice, type Vehicle } from '@/data/vehicles';
-import { bySubject, traitsOf, hero, assertNameMatchesSeats } from '@/data/images';
+import { bySubject, traitsOf, hero, libraryTwin } from '@/data/images';
 import { pageTitle, tidy } from '@/data/seo';
 
 const NOUN = { buggy: 'buggy', quad: 'quad', dirtbike: 'dirt bike' } as const;
@@ -23,24 +23,24 @@ const base = (c: Vehicle['category']) => PARENT[c].href;
    photography do. Both come out in the same shape so the template does not have to
    know which happened.
 
-   The uploaded path is checked against the vehicle's OWN seat count rather than a
-   library tag, because the tour already knows what it is: a file named
-   "...-2-seater-..." on the four-seat page is the 23 Sep complaint exactly, and
-   this is the one place it can still be introduced now that the client uploads
-   directly. An empty alt is also a build failure — an uploaded photo with no alt
-   text ships an image nobody using a screen reader can identify, and the image
-   audit would only catch it after it reached the built HTML. */
+   An empty alt is a build failure: an uploaded photo with no alt text ships an image
+   nobody using a screen reader can identify, and the image audit would only catch it
+   after it reached the built HTML.
+
+   There is deliberately no filename check here. Keystatic renames every upload after
+   the field, so an uploaded hero is always <tour>/heroPhoto.webp and the name can no
+   longer claim a seat count to be wrong about. The photo belongs to one machine, so
+   the seat count it should show is the machine's, and that cannot disagree with
+   itself. The filename guards still matter in the shared library, where a photo has
+   to be matched to a page it was not shot for. */
 function heroFor(v: Vehicle) {
-  const own = v.heroPhoto;
-  if (own?.file) {
-    const name = own.file.split('/').pop()!.replace(/\.webp$/, '');
-    assertNameMatchesSeats(name, v.seats === 2 || v.seats === 4 ? v.seats : undefined);
-    if (!own.alt.trim()) {
+  if (v.heroPhoto) {
+    if (!(v.heroPhotoAlt ?? '').trim()) {
       throw new Error(
         `The ${v.name} hero photo has no alt text. Add one sentence describing the photo in the CMS, on the tour itself.`
       );
     }
-    return { src: own.file, alt: own.alt.trim(), focal: own.focal ?? 'right' };
+    return { src: v.heroPhoto, alt: v.heroPhotoAlt!.trim(), focal: v.heroFocal ?? 'right' };
   }
   const shared = hero(HERO[v.category]);
   return { src: shared.src, alt: shared.alt, focal: shared.focal };
@@ -124,7 +124,7 @@ function galleryFor(v: Vehicle, taken: string[]) {
     onPage.filter(n => seatsOk(n) && makeOk(n)),
     onPage.filter(seatsOk),
     onPage,
-    subject.filter(n => n !== v.image)
+    subject.filter(n => n !== libraryTwin(v.image))
   ].find(p => p.length >= 3) ?? subject;
 
   /* Stride of ONE, not three. The window still moves per vehicle so no two pages
@@ -293,7 +293,12 @@ export function tourData(v: Vehicle): ClusterData {
     flow: flowFor(v),
     whyH2: `Why the ${v.shortName} is worth the slot.`,
     whyLede: `${v.engine}, ${v.seats} ${v.seats === 1 ? 'seat' : 'seats'}, and a setup built for the ${v.area.toLowerCase()}.`,
-    gallery: galleryFor(v, [v.image, ...related.map(r => r.img)]),
+    /* The gallery pool excludes the LIBRARY TWIN of every photo already on the page,
+       not the path. A tour photo is a copy of a library photo under a different URL,
+       so filtering by path would let the same picture appear twice, once as a card
+       and once in the gallery, and the reuse audit compares src strings so it would
+       not see it. */
+    gallery: galleryFor(v, [v.image, ...related.map(r => r.img)].map(libraryTwin).filter((n): n is string => !!n)),
     safety: safetyFor(v),
     faqs: faqsFor(v),
     related,

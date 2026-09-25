@@ -5,7 +5,11 @@
   "seats": 4,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "canam-maverick-r-4-seater-teal-dune-buggy-dubai",
+  "cardPhoto": "/assets/images/tours/can-am-maverick-r-4-seater/canam-maverick-r-4-seater-teal-dune-buggy-dubai.webp",
+  "cardPhotoAlt": "Teal Can-Am Maverick R X RS four seater dune buggy on Dubai desert sand",
+  "heroPhoto": "/assets/images/tours/can-am-maverick-r-4-seater/heroPhoto.webp",
+  "heroPhotoAlt": "Guests riding a blue Can-Am Maverick R X RS four seater dune buggy up a Dubai dune",
+  "heroFocal": "right",
   "blurb": "Maverick R power carrying four. The top of the fleet for group bookings.",
   "durations": [
     {
@@ -31,10 +35,5 @@
     }
   ],
   "featured": false,
-  "order": 11,
-  "heroPhoto": {
-    "file": "/assets/images/tours/can-am-maverick-r-4-seater/canam-maverick-r-4-seater-hero-blue-dubai-dunes.webp",
-    "alt": "Guests riding a blue Can-Am Maverick R X RS four seater dune buggy up a Dubai dune",
-    "focal": "right"
-  }
+  "order": 11
 }

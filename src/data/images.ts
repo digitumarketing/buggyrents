@@ -110,6 +110,66 @@ export const heroes: Record<string, HeroEntry> = index(
   'hero'
 );
 
+/* TOUR-OWNED PHOTOS, 25 Sep 2026.
+
+   A tour's card photo is now uploaded on the tour itself rather than picked from
+   the library, so the client sees the photo they are replacing. That photo belongs
+   to one page, so it lives at /assets/images/tours/<tour>/<file>.webp and has no
+   library entry — but it still has to come out of img() with alt text and a subject,
+   because every card, cross-sell and schema image on the site goes through img().
+
+   So img() takes EITHER a library key or one of these paths. Reading the vehicle
+   files directly, rather than importing vehicles.ts, keeps this one-directional:
+   vehicles.ts imports this file, never the other way round.
+
+   The subject comes from which folder the vehicle is in and the seat count from the
+   vehicle itself, so a tour photo is checked against the machine it belongs to
+   rather than a tag somebody typed. */
+type RawVehicle = {
+  seats?: number;
+  cardPhoto?: string | null;  cardPhotoAlt?: string;
+  heroPhoto?: string | null;  heroPhotoAlt?: string;
+};
+
+const VEHICLE_SUBJECT: Record<string, Subject> = {
+  buggies: 'buggy', quads: 'quad', dirtbikes: 'dirtbike'
+};
+
+type TourPhoto = { alt: string; subject: Subject; seats?: Seats; tour: string };
+
+const tourPhotos: Record<string, TourPhoto> = (() => {
+  const files = import.meta.glob('/src/content/{buggies,quads,dirtbikes}/*.json', {
+    eager: true, import: 'default'
+  }) as Record<string, RawVehicle>;
+  const out: Record<string, TourPhoto> = {};
+  for (const [path, v] of Object.entries(files)) {
+    const folder = path.split('/')[3];
+    const subject = VEHICLE_SUBJECT[folder];
+    if (!subject) continue;
+    const tour = path.split('/').pop()!.replace(/\.json$/, '');
+    const seats = v.seats === 2 ? 2 : v.seats === 4 ? 4 : undefined;
+    for (const [file, alt] of [[v.cardPhoto, v.cardPhotoAlt], [v.heroPhoto, v.heroPhotoAlt]] as const) {
+      if (!file) continue;
+      out[file] = { alt: (alt ?? '').trim(), subject, seats, tour };
+    }
+  }
+  return out;
+})();
+
+const isPath = (s: string) => s.startsWith('/');
+
+/* A tour photo copied out of the library keeps its filename, so the library entry
+   it was copied from can be found again. That matters for gallery selection: the
+   pool has to exclude the twin of a photo already on the page, or the same picture
+   appears twice under two different URLs and the reuse audit, which compares src
+   strings, sees two different images. Returns the key unchanged when given one, and
+   undefined for a photo the client uploaded that has no twin. */
+export function libraryTwin(nameOrPath: string): string | undefined {
+  if (!isPath(nameOrPath)) return nameOrPath;
+  const stem = nameOrPath.split('/').pop()!.replace(/\.webp$/, '');
+  return library[stem] ? stem : undefined;
+}
+
 const HERO_MIN_WIDTH = 1600;
 
 const SUBJECT_WORDS: Record<string, Subject> = {
@@ -202,6 +262,27 @@ const used = new Set<string>();
 
 /** Resolve an image, asserting its subject matches and that it has not been used already. */
 export function img(name: string, expect?: Subject) {
+  /* A tour-owned photo, uploaded on the tour rather than picked from the library.
+     Same checks, read off the machine it belongs to instead of a library tag. */
+  if (isPath(name)) {
+    const photo = tourPhotos[name];
+    if (!photo) {
+      throw new Error(
+        `Unknown tour photo: ${name}. Nothing in src/content/{buggies,quads,dirtbikes} points at it — ` +
+        `it was probably renamed or removed in the CMS.`
+      );
+    }
+    if (expect && photo.subject !== expect) {
+      throw new Error(`Wrong subject for ${name}: it belongs to a ${photo.subject} tour but a ${expect} photo was required.`);
+    }
+    if (!photo.alt) {
+      throw new Error(
+        `The ${photo.tour} card photo has no alt text. Add one sentence describing the photo in the CMS, on the tour itself.`
+      );
+    }
+    assertNameMatchesSeats(name.split('/').pop()!.replace(/\.webp$/, ''), photo.seats);
+    return { src: name, alt: photo.alt, subject: photo.subject };
+  }
   const entry = library[name];
   if (!entry) throw new Error(`Unknown image: ${name}`);
   if (expect && entry.subject !== expect) {
@@ -220,6 +301,13 @@ export function bySubject(s: Subject): string[] {
 /** What a library photo shows, for callers that need to match a machine rather
     than only a subject. Returns undefined for anything not in the library. */
 export function traitsOf(name: string): { seats?: Seats; make?: Make } | undefined {
+  if (isPath(name)) {
+    /* A tour photo's seat count comes from the machine it belongs to, so it can
+       never disagree with it. `make` is a library-pool ordering hint and means
+       nothing for a photo that is not in the pool. */
+    const photo = tourPhotos[name];
+    return photo && { seats: photo.seats, make: undefined };
+  }
   const entry = library[name];
   return entry && { seats: entry.seats, make: entry.make };
 }

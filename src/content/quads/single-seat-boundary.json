@@ -5,7 +5,11 @@
   "seats": 1,
   "minAge": 12,
   "area": "2 km boundary area",
-  "image": "single-seat-quad-bike-rider-dubai-desert",
+  "cardPhoto": "/assets/images/tours/single-seat-boundary/single-seat-quad-bike-rider-dubai-desert.webp",
+  "cardPhotoAlt": "Rider on a single seat quad bike crossing Dubai desert sand",
+  "heroPhoto": "/assets/images/tours/single-seat-boundary/heroPhoto.webp",
+  "heroPhotoAlt": "White single seat quad bike ready to ride on the Lahbab red dunes in Dubai",
+  "heroFocal": "right",
   "blurb": "Ride inside a marked 2 km square. The easiest way to try a quad without committing to open desert.",
   "durations": [
     {
@@ -45,10 +49,5 @@
     }
   ],
   "featured": true,
-  "order": 2,
-  "heroPhoto": {
-    "file": "/assets/images/tours/single-seat-boundary/single-seat-quad-bike-hero-dubai-red-dunes.webp",
-    "alt": "White single seat quad bike ready to ride on the Lahbab red dunes in Dubai",
-    "focal": "right"
-  }
+  "order": 2
 }

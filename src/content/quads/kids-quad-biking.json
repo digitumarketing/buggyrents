@@ -5,7 +5,11 @@
   "seats": 1,
   "minAge": 6,
   "area": "Kids special area",
-  "image": "kids-quad-bike-dubai-fenced-riding-area",
+  "cardPhoto": "/assets/images/tours/kids-quad-biking/kids-quad-bike-dubai-fenced-riding-area.webp",
+  "cardPhotoAlt": "Child riding a small kids quad bike in the fenced area at the Dubai base",
+  "heroPhoto": null,
+  "heroPhotoAlt": "",
+  "heroFocal": "right",
   "blurb": "A fenced, flat area away from the main dunes so younger riders get their own space.",
   "durations": [
     {
@@ -45,10 +49,5 @@
     }
   ],
   "featured": true,
-  "order": 1,
-  "heroPhoto": {
-    "file": null,
-    "alt": "",
-    "focal": "right"
-  }
+  "order": 1
 }

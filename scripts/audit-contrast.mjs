@@ -274,7 +274,7 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
       if (!existsSync(base)) continue;
       for (const entry of readdirSync(base).filter(f => f.endsWith('.json'))) {
         const v = JSON.parse(readFileSync(join(base, entry), 'utf8'));
-        if (v.heroPhoto?.file) tourHeroes.push({ tour: entry.replace(/\.json$/, ''), file: v.heroPhoto.file });
+        if (v.heroPhoto) tourHeroes.push({ tour: entry.replace(/\.json$/, ''), file: v.heroPhoto });
       }
     }
     const badTourHero = [], softTourHero = [];
@@ -293,6 +293,51 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     }
     softTourHero.forEach(s => console.warn(`  Tour hero under 1600px, may soften on a large screen: ${s}`));
     console.log(`Tour hero audit passed — ${tourHeroes.length} uploaded tour heroes, none under ${SOFT_MIN}px${softTourHero.length ? `, ${softTourHero.length} below 1600px` : ''}.`);
+
+    /* THE SAME PICTURE TWICE ON ONE PAGE, under two different URLs.
+
+       The image-reuse audit compares src strings, which was enough while every photo
+       had exactly one path. Since 25 Sep 2026 a tour owns copies of its card and hero
+       photos, so the identical picture can exist at /assets/images/lib/x.webp and
+       /assets/images/tours/<tour>/x.webp. Gallery selection excludes the library twin
+       of anything already on the page, but it finds that twin by filename, and a photo
+       the client uploads is named after its field instead. So the guarantee has to
+       rest on the bytes rather than the path.
+
+       Hashing the files is what makes this airtight: two paths, same content, same
+       page is a duplicate however either one got its name. */
+    const { createHash } = await import('node:crypto');
+    const hashOf = new Map();
+    const hashFile = p => {
+      if (!hashOf.has(p)) hashOf.set(p, createHash('sha256').update(readFileSync(p)).digest('hex'));
+      return hashOf.get(p);
+    };
+    const dupes = [];
+    const walkDup = d => readdirSync(d).forEach(f => {
+      const p = join(d, f);
+      if (statSync(p).isDirectory()) return walkDup(p);
+      if (!p.endsWith('.html')) return;
+      const seen = new Map();   // hash -> first path that used it
+      for (const m of readFileSync(p, 'utf8').matchAll(/\/assets\/images\/[^"' )]+\.(?:webp|png|jpe?g)/g)) {
+        const onDisk = join(DIST, m[0].replace(/^\//, ''));
+        if (!existsSync(onDisk)) continue;
+        const h = hashFile(onDisk);
+        const first = seen.get(h);
+        if (first && first !== m[0]) {
+          dupes.push(`${p.replace(DIST, '')} — ${first} and ${m[0]} are the same picture`);
+        } else if (!first) {
+          seen.set(h, m[0]);
+        }
+      }
+    });
+    walkDup(DIST);
+    if (dupes.length) {
+      console.error('The same picture appears twice on a page under two different paths:');
+      [...new Set(dupes)].forEach(d => console.error('  ' + d));
+      console.error('  Pick a different photo for one of the two slots in the CMS.');
+      process.exit(1);
+    }
+    console.log('Duplicate-picture audit passed — no page shows the same photo under two paths.');
   }
 }
 
@@ -586,8 +631,18 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
       try { html = readFileSync(file, 'utf8'); } catch { continue; }
       if (name === 'price' || name === 'faq') continue;
 
-      const imgs = [...html.matchAll(/\/assets\/images\/lib\/([a-z0-9-]+)\.webp/g)]
-        .map(m => m[1]);
+      /* Both pools, deliberately. Card and cross-sell photos moved out of
+         /assets/images/lib into /assets/images/tours on 25 Sep 2026 when they became
+         per-tour uploads. Matching only the lib path after that would have quietly
+         narrowed this audit to the gallery alone, which is a different and much
+         stricter rule than the one it was written for: two pages carrying the same
+         three gallery photos but different cards do not look identical to a visitor.
+         A tour photo is keyed by its folder, since every upload is named after its
+         field and <tour>/cardPhoto.webp is only distinctive with the tour in it. */
+      const imgs = [
+        ...[...html.matchAll(/\/assets\/images\/lib\/([a-z0-9-]+)\.webp/g)].map(m => m[1]),
+        ...[...html.matchAll(/\/assets\/images\/tours\/([a-z0-9-]+\/[a-zA-Z0-9-]+)\.(?:webp|png|jpe?g)/g)].map(m => m[1])
+      ];
       if (!imgs.length) continue;
       checked++;
 

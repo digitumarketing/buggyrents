@@ -5,7 +5,11 @@
   "seats": 2,
   "minAge": 14,
   "area": "Lahbab red dunes",
-  "image": "polaris-rzr-rs-black-two-seater-dubai-dunes",
+  "cardPhoto": "/assets/images/tours/polaris-rzr-turbo-2-seater/polaris-rzr-rs-black-two-seater-dubai-dunes.webp",
+  "cardPhotoAlt": "Black Polaris RZR RS two seater dune buggy on the Dubai red dunes",
+  "heroPhoto": "/assets/images/tours/polaris-rzr-turbo-2-seater/heroPhoto.webp",
+  "heroPhotoAlt": "Guests driving a Polaris RZR XP 1000 turbo two seater through the Dubai desert",
+  "heroFocal": "right",
   "blurb": "Turbocharged Polaris for drivers who want more acceleration out of the bowls.",
   "durations": [
     {
@@ -30,10 +34,5 @@
       "blurb": "A longer route with more varied terrain and photo stops, for riders already comfortable on the Polaris RZR Turbo 2-Seater."
     }
   ],
-  "order": 3,
-  "heroPhoto": {
-    "file": "/assets/images/tours/polaris-rzr-turbo-2-seater/polaris-rzr-turbo-2-seater-hero-dubai-desert.webp",
-    "alt": "Guests driving a Polaris RZR XP 1000 turbo two seater through the Dubai desert",
-    "focal": "right"
-  }
+  "order": 3
 }

@@ -318,7 +318,14 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
       if (statSync(p).isDirectory()) return walkDup(p);
       if (!p.endsWith('.html')) return;
       const seen = new Map();   // hash -> first path that used it
-      for (const m of readFileSync(p, 'utf8').matchAll(/\/assets\/images\/[^"' )]+\.(?:webp|png|jpe?g)/g)) {
+      /* <img> only. The first version of this read every image URL in the file and
+         immediately failed a deploy because a tour's schema.org "image" pointed at the
+         same photo as its hero — which is correct and invisible. Structured data, og:
+         tags and preload hints all name a photo without showing one, and this audit is
+         about the same picture being VISIBLE twice on one page. */
+      const imgTags = readFileSync(p, 'utf8').matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g);
+      for (const m of [...imgTags].map(t => [t[1]])) {
+        if (!m[0].startsWith('/assets/images/')) continue;
         const onDisk = join(DIST, m[0].replace(/^\//, ''));
         if (!existsSync(onDisk)) continue;
         const h = hashFile(onDisk);

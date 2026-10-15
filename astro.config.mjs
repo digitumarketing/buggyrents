@@ -17,7 +17,7 @@ const withKeystatic = process.env.DISABLE_KEYSTATIC !== 'true';
 export default defineConfig({
   site: 'https://buggyrents.com',
   output: 'static',
-  ...(withKeystatic ? { adapter: cloudflare({ imageService: 'compile' }) } : {}),
+  ...(withKeystatic ? { adapter: cloudflare({ imageService: 'compile', workerEntryPoint: { path: 'src/worker.ts' } }) } : {}),
   /* robots.txt has always pointed at /sitemap-index.xml, but nothing generated it,
      so the file 404d and Google had no list of the 65 pages to crawl. */
   integrations: [

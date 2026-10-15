@@ -6,3 +6,6 @@
 # be served from the assets bucket.
 _worker.js
 _routes.json
+
+# Debug list of the 410 paths written by scripts/build-redirects.mjs. Not content.
+_gone.txt

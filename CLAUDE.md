@@ -105,6 +105,12 @@ forms. Add new redirects there, not in code. The legacy page redirects above sta
 win over any CMS row that repeats them. A CMS row that cannot be applied safely (From is a
 live page, To is not a page, a loop) is skipped with a warning instead of failing the deploy,
 so a client typo never blocks their other edits; chains are flattened to the final page.
+**410 Content Deleted** is a type in the same section, for pages removed for good. `_redirects`
+cannot answer 410, so `src/worker.ts` (a custom adapter entry, otherwise identical to the default)
+answers those paths with status 410 and the 404 page as the body. A deleted path has no file, so
+the asset router would 404 it before the Worker runs; on Cloudflare's build only (`WORKERS_CI`),
+`build-redirects.mjs` appends the 410 paths to `run_worker_first` in `wrangler.toml` so they reach
+the Worker. A local build never edits `wrangler.toml`. If that step fails the paths simply 404.
 The Keystatic sidebar is grouped (Content / Site / SEO) via `ui.navigation`: a new collection or
 singleton must be added to a group there or it will not show in the admin.
 The first ten rows are old WordPress blog posts found 404ing in Search Console on 15 Oct 2026.

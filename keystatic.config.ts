@@ -571,7 +571,9 @@ export default config({
        a loop) is skipped with a warning rather than failing the deploy, so one typo
        never blocks the client's other edits.
 
-       No 410 type: Cloudflare's _redirects only answers 301, 302, 303, 307 and 308. */
+       410 Content Deleted is not a redirect at all. Cloudflare's _redirects cannot
+       answer 410, so those entries are served by the Worker instead: see
+       src/worker.ts and the run_worker_first step in scripts/build-redirects.mjs. */
     redirects: collection({
       label: 'Redirections',
       slugField: 'from',
@@ -599,23 +601,23 @@ export default config({
         }),
         to: fields.text({
           label: 'Destination URL (to)',
-          description: 'The live page visitors should land on, e.g. /dune-buggy-dubai/. Pick the closest page on the same topic, not the homepage.',
+          description: 'The live page visitors should land on, e.g. /dune-buggy-dubai/. Pick the closest page on the same topic, not the homepage. Leave empty for 410 Content Deleted.',
           validation: {
-            isRequired: true,
             pattern: {
-              regex: /^(?:\/(?:[A-Za-z0-9._~%-]+\/)*|https:\/\/[^\s]+)$/,
+              regex: /^(?:|\/(?:[A-Za-z0-9._~%-]+\/)*|https:\/\/[^\s]+)$/,
               message: 'Needs a slash at the start and the end, like /dune-buggy-dubai/. Or a full https:// address.'
             }
           }
         }),
         type: fields.select({
           label: 'Redirection type',
-          description: 'Use 301 unless the move is genuinely temporary.',
+          description: 'Use 301 unless the move is genuinely temporary. Use 410 for a page deleted for good with nothing to replace it; it needs no destination.',
           options: [
             { label: '301 Permanent Move', value: '301' },
             { label: '302 Temporary Move', value: '302' },
             { label: '307 Temporary Redirect', value: '307' },
-            { label: '308 Permanent Redirect', value: '308' }
+            { label: '308 Permanent Redirect', value: '308' },
+            { label: '410 Content Deleted', value: '410' }
           ],
           defaultValue: '301'
         }),

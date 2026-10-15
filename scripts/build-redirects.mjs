@@ -91,6 +91,8 @@ const finalOf = to => {
 
 const out = [];
 const warn = [];
+const gone = [];
+const goneKeys = new Set();
 for (const r of rows) {
   const from = toPath(r?.from);
   let to = String(r?.to ?? '').trim().replace(/^https?:\/\/(www\.)?buggyrents\.com/i, '');
@@ -98,11 +100,16 @@ for (const r of rows) {
 
   if (!from.startsWith('/') || from === '/' || /\s/.test(from)) { warn.push(`${label}: "From" must be a path like /old-page/`); continue; }
   if (from.startsWith('/keystatic') || from.startsWith('/api/') || from.startsWith('/_')) { warn.push(`${label}: that path belongs to the site itself`); continue; }
-  if (!to) { warn.push(`${label}: "To" is empty`); continue; }
-  if (!to.startsWith('/') && !/^https:\/\//.test(to)) { warn.push(`${label}: "To" must be /a-page/ or a full https:// address`); continue; }
   if (pageExists(from) || pageExists(withSlash(from))) { warn.push(`${label}: ${from} is a live page, a redirect would hide it`); continue; }
   if (existing.has(key(from))) { warn.push(`${label}: already redirected in code to ${existing.get(key(from))}, that rule wins`); continue; }
-  if (accepted.has(key(from))) { warn.push(`${label}: listed twice, the first entry is used`); continue; }
+  if (accepted.has(key(from)) || goneKeys.has(key(from))) { warn.push(`${label}: listed twice, the first entry is used`); continue; }
+
+  /* 410 is not a redirect: nothing goes into _redirects. The path is handed to the
+     Worker instead (see the run_worker_first step below and src/worker.ts). */
+  if (String(r?.type) === '410') { goneKeys.add(key(from)); gone.push(from); continue; }
+
+  if (!to) { warn.push(`${label}: "To" is empty`); continue; }
+  if (!to.startsWith('/') && !/^https:\/\//.test(to)) { warn.push(`${label}: "To" must be /a-page/ or a full https:// address`); continue; }
 
   if (to.startsWith('/')) {
     to = to.replace(/[?#].*$/, '');
@@ -125,5 +132,29 @@ if (out.length) {
     '\n# ---- From the CMS (Keystatic > SEO > Redirections), added by scripts/build-redirects.mjs ----\n' +
     out.join('\n') + '\n');
 }
+/* 410 ROUTING. A deleted page has no file in dist, so Cloudflare's asset router
+   would answer it with the 404 page before the Worker ever runs. Adding the path to
+   run_worker_first in wrangler.toml sends it to the Worker, which answers 410.
+
+   Only on Cloudflare's build (WORKERS_CI is set there), where the checkout is
+   thrown away after deploy. A local `npm run build` never touches wrangler.toml,
+   so the committed file stays clean. If this step ever does not run, the 410
+   paths fall back to an ordinary 404, which is harmless. */
+if (gone.length) {
+  const paths = [...new Set(gone.flatMap(p => [noSlash(p), withSlash(p)]))];
+  writeFileSync(join(DIST, '_gone.txt'), paths.join('\n') + '\n');
+  if (process.env.WORKERS_CI) {
+    const toml = readFileSync('wrangler.toml', 'utf8');
+    const re = /^run_worker_first\s*=\s*\[([^\]]*)\]/m;
+    const m = toml.match(re);
+    if (!m) { console.error('CMS redirects: run_worker_first not found in wrangler.toml, 410s will answer 404.'); }
+    else {
+      const base = m[1].split(',').map(x => x.trim()).filter(Boolean);
+      const all = [...base, ...paths.map(p => JSON.stringify(p))];
+      writeFileSync('wrangler.toml', toml.replace(re, `run_worker_first = [${all.join(', ')}]`));
+      console.log(`CMS redirects: ${gone.length} path(s) routed to the Worker for 410.`);
+    }
+  }
+}
 for (const w of warn) console.warn(`  SKIPPED ${w}`);
-console.log(`CMS redirects: ${accepted.size} applied${inactive ? `, ${inactive} switched off` : ''}${warn.length ? `, ${warn.length} skipped (see above)` : ''}.`);
+console.log(`CMS redirects: ${accepted.size} applied${gone.length ? `, ${gone.length} marked 410 Gone` : ''}${inactive ? `, ${inactive} switched off` : ''}${warn.length ? `, ${warn.length} skipped (see above)` : ''}.`);

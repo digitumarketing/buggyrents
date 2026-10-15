@@ -1,8 +1,9 @@
 /* CMS REDIRECTS -> dist/_redirects. Added 15 Oct 2026.
  *
- * Runs after `astro build` and before the audits. Reads the Redirects list the
- * client edits in Keystatic (src/content/redirects.json) and appends each entry to
- * dist/_redirects as a 301, which is the file Cloudflare actually serves.
+ * Runs after `astro build` and before the audits. Reads the Redirections the
+ * client edits in Keystatic (SEO > Redirections, one file per entry in
+ * src/content/redirects/) and appends every active one to dist/_redirects with its
+ * chosen status code. That is the file Cloudflare actually serves.
  *
  * WHY A SCRIPT AND NOT astro.config.mjs `redirects`
  * Astro strips the trailing slash from every key it writes, and old WordPress URLs
@@ -27,18 +28,27 @@
  * Chains are flattened rather than skipped: if "To" is itself redirected, the rule
  * is written straight to the final page, so the visitor and Googlebot take one hop.
  */
-import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const DIST = 'dist';
-const SRC = 'src/content/redirects.json';
+const SRC = 'src/content/redirects';
 const OUT = join(DIST, '_redirects');
 
-if (!existsSync(SRC)) { console.log('CMS redirects: no list yet, nothing to add.'); process.exit(0); }
+if (!existsSync(SRC)) { console.log('CMS redirects: none yet, nothing to add.'); process.exit(0); }
 if (!existsSync(OUT)) { console.error('CMS redirects: dist/_redirects missing, run astro build first.'); process.exit(1); }
 
-const raw = JSON.parse(readFileSync(SRC, 'utf8'));
-const rows = Array.isArray(raw.rules) ? raw.rules : [];
+/* Sorted by file name so the output is stable between builds. Inactive entries
+   are kept in the CMS but never written. */
+const CODES = new Set(['301', '302', '303', '307', '308']);
+let inactive = 0;
+const rows = readdirSync(SRC).filter(f => f.endsWith('.json')).sort().flatMap(f => {
+  try {
+    const r = JSON.parse(readFileSync(join(SRC, f), 'utf8'));
+    if (r.active === false) { inactive++; return []; }
+    return [r];
+  } catch { console.warn(`  SKIPPED ${f}: not valid JSON`); return []; }
+});
 
 const noSlash = p => p.replace(/\/+$/, '') || '/';
 const withSlash = p => (p.endsWith('/') ? p : p + '/');
@@ -104,15 +114,16 @@ for (const r of rows) {
     if (key(to) === key(from)) { warn.push(`${label}: points at itself`); continue; }
   }
 
+  const code = CODES.has(String(r?.type)) ? String(r.type) : '301';
   accepted.set(key(from), to);
-  out.push(`${withSlash(from).padEnd(60)} ${to.padEnd(50)} 301`);
-  if (noSlash(from) !== withSlash(from)) out.push(`${noSlash(from).padEnd(60)} ${to.padEnd(50)} 301`);
+  out.push(`${withSlash(from).padEnd(60)} ${to.padEnd(50)} ${code}`);
+  if (noSlash(from) !== withSlash(from)) out.push(`${noSlash(from).padEnd(60)} ${to.padEnd(50)} ${code}`);
 }
 
 if (out.length) {
   writeFileSync(OUT, base.replace(/\n*$/, '\n') +
-    '\n# ---- From the CMS (Keystatic > Redirects), added by scripts/build-redirects.mjs ----\n' +
+    '\n# ---- From the CMS (Keystatic > SEO > Redirections), added by scripts/build-redirects.mjs ----\n' +
     out.join('\n') + '\n');
 }
 for (const w of warn) console.warn(`  SKIPPED ${w}`);
-console.log(`CMS redirects: ${accepted.size} applied${warn.length ? `, ${warn.length} skipped (see above)` : ''}.`);
+console.log(`CMS redirects: ${accepted.size} applied${inactive ? `, ${inactive} switched off` : ''}${warn.length ? `, ${warn.length} skipped (see above)` : ''}.`);

@@ -161,7 +161,16 @@ export default config({
     kind: 'github',
     repo: { owner: 'digitumarketing', name: 'buggyrents' }
   },
-  ui: { brand: { name: 'Buggy Rents' } },
+  ui: {
+    brand: { name: 'Buggy Rents' },
+    /* Sidebar groups. Every collection and singleton must be listed here or it
+       disappears from the admin, so add new ones to a group when you create them. */
+    navigation: {
+      'Content': ['buggies', 'quads', 'dirtbikes', 'safari', 'posts', 'faqs', 'pillars', 'support', 'about', 'locations', 'audiences', 'reviews'],
+      'Site': ['photoLibrary', 'heroLibrary', 'navigation', 'settings', 'homepage', 'policies'],
+      'SEO': ['redirects']
+    }
+  },
   collections: {
     buggies:   vehicle('Dune buggies', 'buggies'),
     quads:     vehicle('Quad bikes', 'quads'),
@@ -545,7 +554,83 @@ export default config({
         text:   fields.text({ label: 'Review text', multiline: true }),
         order:  fields.integer({ label: 'Display order', defaultValue: 99 })
       }
-    })
+    }),
+
+    /* REDIRECTIONS, added 15 Oct 2026. Modelled on Rank Math's Redirections screen.
+
+       One entry per redirect, so the list view is a table of From / To / Type that
+       can be searched, and a redirect can be switched off without being deleted.
+       scripts/build-redirects.mjs turns every active entry into a rule in
+       dist/_redirects on each build, in both the slash and no-slash form.
+
+       The legacy WordPress page redirects in public/_redirects and astro.config.mjs
+       are NOT here on purpose: they carry the site's ranking pages and stay in code
+       where a stray click cannot delete them. An entry that repeats one is ignored.
+
+       An entry the build cannot apply safely (From is a live page, To is not a page,
+       a loop) is skipped with a warning rather than failing the deploy, so one typo
+       never blocks the client's other edits.
+
+       No 410 type: Cloudflare's _redirects only answers 301, 302, 303, 307 and 308. */
+    redirects: collection({
+      label: 'Redirections',
+      slugField: 'from',
+      path: 'src/content/redirects/*',
+      format: { data: 'json' },
+      columns: ['from', 'to', 'type', 'active'],
+      schema: {
+        from: fields.slug({
+          name: {
+            label: 'Source URL (from)',
+            description: 'The old path that no longer exists, starting with a slash, e.g. /old-blog-post/. Copy it from the Search Console 404 report and leave the domain off.',
+            validation: {
+              isRequired: true,
+              pattern: {
+                regex: /^\/[A-Za-z0-9._~%\/-]+$/,
+                message: 'Start with a slash and leave the domain off, e.g. /old-blog-post/. No spaces, ? or #.'
+              }
+            }
+          },
+          slug: {
+            label: 'File name',
+            description: 'Filled in automatically. No need to change it.',
+            generate: name => name.replace(/^\/+|\/+$/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'redirect'
+          }
+        }),
+        to: fields.text({
+          label: 'Destination URL (to)',
+          description: 'The live page visitors should land on, e.g. /dune-buggy-dubai/. Pick the closest page on the same topic, not the homepage.',
+          validation: {
+            isRequired: true,
+            pattern: {
+              regex: /^(?:\/(?:[A-Za-z0-9._~%-]+\/)*|https:\/\/[^\s]+)$/,
+              message: 'Needs a slash at the start and the end, like /dune-buggy-dubai/. Or a full https:// address.'
+            }
+          }
+        }),
+        type: fields.select({
+          label: 'Redirection type',
+          description: 'Use 301 unless the move is genuinely temporary.',
+          options: [
+            { label: '301 Permanent Move', value: '301' },
+            { label: '302 Temporary Move', value: '302' },
+            { label: '307 Temporary Redirect', value: '307' },
+            { label: '308 Permanent Redirect', value: '308' }
+          ],
+          defaultValue: '301'
+        }),
+        active: fields.checkbox({
+          label: 'Active',
+          description: 'Untick to switch this redirect off without deleting it.',
+          defaultValue: true
+        }),
+        note: fields.text({
+          label: 'Note (optional)',
+          description: 'Why this redirect exists. Not shown on the site.',
+          multiline: true
+        })
+      }
+    }),
   },
   singletons: {
     /* THE PHOTO LIBRARIES, added 23 Sep 2026.
@@ -754,63 +839,6 @@ export default config({
             label: 'Footer columns',
             description: 'Drag to reorder the columns, or the links inside one. The contact details, social links and the copyright line are not here: they come from Site settings so they stay the same everywhere.',
             itemLabel: p => p.fields.heading.value || 'Untitled column'
-          }
-        )
-      }
-    }),
-
-    /* REDIRECTS, added 15 Oct 2026.
-
-       Lets the client and the SEO team send an old or deleted URL to a live page
-       without touching code. scripts/build-redirects.mjs turns this list into 301s
-       in dist/_redirects on every build, in both the slash and no-slash form.
-
-       The legacy WordPress page redirects in public/_redirects and astro.config.mjs
-       are NOT in this list on purpose: they carry the site's ranking pages and stay
-       in code where a stray click cannot delete them. A row here that repeats one of
-       them is ignored.
-
-       A row the build cannot apply safely (a From that is a live page, a To that is
-       not a page) is skipped with a warning rather than failing the deploy, so one
-       typo never blocks the client's other edits. */
-    redirects: singleton({
-      label: 'Redirects (301)',
-      path: 'src/content/redirects',
-      format: { data: 'json' },
-      schema: {
-        rules: fields.array(
-          fields.object({
-            from: fields.text({
-              label: 'Old URL (from)',
-              description: 'The path that no longer exists, starting with a slash, e.g. /old-blog-post/. Copy it from the Search Console 404 report. Leave the domain off.',
-              validation: {
-                isRequired: true,
-                pattern: {
-                  regex: /^\/[A-Za-z0-9._~%\/-]+$/,
-                  message: 'Start with a slash and leave the domain off, e.g. /old-blog-post/. No spaces, ? or #.'
-                }
-              }
-            }),
-            to: fields.text({
-              label: 'New URL (to)',
-              description: 'The live page visitors should land on, e.g. /dune-buggy-dubai/. Pick the closest page on the same topic, not the homepage.',
-              validation: {
-                isRequired: true,
-                pattern: {
-                  regex: /^(?:\/(?:[A-Za-z0-9._~%-]+\/)*|https:\/\/[^\s]+)$/,
-                  message: 'Needs a slash at the start and the end, like /dune-buggy-dubai/. Or a full https:// address.'
-                }
-              }
-            }),
-            note: fields.text({
-              label: 'Note (optional)',
-              description: 'Why this redirect exists. Not shown on the site.'
-            })
-          }),
-          {
-            label: 'Redirects',
-            description: 'Every row becomes a permanent 301 on the next deploy, about 2 minutes after saving. Do not add a live page as the Old URL: the build will skip it so the page is not hidden.',
-            itemLabel: p => `${p.fields.from.value || '/…'}  →  ${p.fields.to.value || '/…'}`
           }
         )
       }

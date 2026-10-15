@@ -1,0 +1,7 @@
+{
+  "from": "/things-to-do-in-dubai/",
+  "type": {
+    "discriminant": "410"
+  },
+  "active": true
+}

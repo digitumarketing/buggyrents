@@ -105,6 +105,10 @@ forms. Add new redirects there, not in code. The legacy page redirects above sta
 win over any CMS row that repeats them. A CMS row that cannot be applied safely (From is a
 live page, To is not a page, a loop) is skipped with a warning instead of failing the deploy,
 so a client typo never blocks their other edits; chains are flattened to the final page.
+Each entry stores its type as a Keystatic conditional, `"type": { "discriminant": "301", "value": "/to/" }`,
+so the Destination box appears only once a redirect type is picked and is hidden for 410. That is
+also why the list view has no Type or Destination column: Keystatic prints a conditional as
+`[object Object]`.
 **410 Content Deleted** is a type in the same section, for pages removed for good. `_redirects`
 cannot answer 410, so `src/worker.ts` (a custom adapter entry, otherwise identical to the default)
 answers those paths with status 410 and the 404 page as the body. A deleted path has no file, so

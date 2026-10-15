@@ -579,7 +579,7 @@ export default config({
       slugField: 'from',
       path: 'src/content/redirects/*',
       format: { data: 'json' },
-      columns: ['from', 'to', 'type', 'active'],
+      columns: ['from', 'active'],
       schema: {
         from: fields.slug({
           name: {
@@ -599,28 +599,30 @@ export default config({
             generate: name => name.replace(/^\/+|\/+$/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'redirect'
           }
         }),
-        to: fields.text({
-          label: 'Destination URL (to)',
-          description: 'The live page visitors should land on, e.g. /dune-buggy-dubai/. Pick the closest page on the same topic, not the homepage. Leave empty for 410 Content Deleted.',
-          validation: {
-            pattern: {
-              regex: /^(?:|\/(?:[A-Za-z0-9._~%-]+\/)*|https:\/\/[^\s]+)$/,
-              message: 'Needs a slash at the start and the end, like /dune-buggy-dubai/. Or a full https:// address.'
-            }
+        /* Conditional, so the destination box only appears after a type that needs
+           one is picked, and disappears for 410. Stored as
+           { "type": { "discriminant": "301", "value": "/page/" } }. */
+        type: fields.conditional(
+          fields.select({
+            label: 'Redirection type',
+            description: 'Use 301 unless the move is genuinely temporary. Use 410 for a page deleted for good with nothing to replace it.',
+            options: [
+              { label: '301 Permanent Move', value: '301' },
+              { label: '302 Temporary Move', value: '302' },
+              { label: '307 Temporary Redirect', value: '307' },
+              { label: '308 Permanent Redirect', value: '308' },
+              { label: '410 Content Deleted', value: '410' }
+            ],
+            defaultValue: '301'
+          }),
+          {
+            '301': redirectDestination(),
+            '302': redirectDestination(),
+            '307': redirectDestination(),
+            '308': redirectDestination(),
+            '410': fields.empty()
           }
-        }),
-        type: fields.select({
-          label: 'Redirection type',
-          description: 'Use 301 unless the move is genuinely temporary. Use 410 for a page deleted for good with nothing to replace it; it needs no destination.',
-          options: [
-            { label: '301 Permanent Move', value: '301' },
-            { label: '302 Temporary Move', value: '302' },
-            { label: '307 Temporary Redirect', value: '307' },
-            { label: '308 Permanent Redirect', value: '308' },
-            { label: '410 Content Deleted', value: '410' }
-          ],
-          defaultValue: '301'
-        }),
+        ),
         active: fields.checkbox({
           label: 'Active',
           description: 'Untick to switch this redirect off without deleting it.',
@@ -1238,4 +1240,21 @@ function supportSchema() {
     finalH2:     fields.text({ label: 'Final CTA heading' }),
     finalLede:   fields.text({ label: 'Final CTA text', multiline: true })
   };
+}
+
+/* The Destination URL box of SEO > Redirections, shared by every redirect type that
+   needs one. 410 Content Deleted has none, which is why this is a function handed to
+   the conditional rather than a field of its own. */
+function redirectDestination() {
+  return fields.text({
+    label: 'Destination URL (to)',
+    description: 'The live page visitors should land on, e.g. /dune-buggy-dubai/. Pick the closest page on the same topic, not the homepage.',
+    validation: {
+      isRequired: true,
+      pattern: {
+        regex: /^(?:\/(?:[A-Za-z0-9._~%-]+\/)*|https:\/\/[^\s]+)$/,
+        message: 'Needs a slash at the start and the end, like /dune-buggy-dubai/. Or a full https:// address.'
+      }
+    }
+  });
 }

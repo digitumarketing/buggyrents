@@ -1,7 +1,9 @@
 {
   "from": "/how-to-dress-like-a-local-in-dubai/",
-  "to": "/blogs/what-to-wear-quad-biking-dune-buggy-dubai/",
-  "type": "301",
+  "type": {
+    "discriminant": "301",
+    "value": "/blogs/what-to-wear-quad-biking-dune-buggy-dubai/"
+  },
   "active": true,
   "note": "Old WordPress blog post, 404 found in Search Console 15 Oct 2026"
 }

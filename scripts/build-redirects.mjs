@@ -46,6 +46,9 @@ const rows = readdirSync(SRC).filter(f => f.endsWith('.json')).sort().flatMap(f 
   try {
     const r = JSON.parse(readFileSync(join(SRC, f), 'utf8'));
     if (r.active === false) { inactive++; return []; }
+    /* Keystatic stores type as a conditional: { discriminant: '301', value: '/to/' }.
+       The flat { type, to } shape is still read so a hand-written file works too. */
+    if (r.type && typeof r.type === 'object') return [{ ...r, to: r.type.value ?? '', type: r.type.discriminant }];
     return [r];
   } catch { console.warn(`  SKIPPED ${f}: not valid JSON`); return []; }
 });

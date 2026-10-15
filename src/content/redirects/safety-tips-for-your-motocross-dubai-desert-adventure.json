@@ -1,7 +1,9 @@
 {
   "from": "/safety-tips-for-your-motocross-dubai-desert-adventure/",
-  "to": "/ktm-dirt-bike-dubai/dirt-bike-for-beginners/",
-  "type": "301",
+  "type": {
+    "discriminant": "301",
+    "value": "/ktm-dirt-bike-dubai/dirt-bike-for-beginners/"
+  },
   "active": true,
   "note": "Old WordPress blog post, 404 found in Search Console 15 Oct 2026"
 }

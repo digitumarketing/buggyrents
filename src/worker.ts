@@ -20,7 +20,9 @@ import type { SSRManifest } from 'astro';
 import { App } from 'astro/app';
 import { handle } from '@astrojs/cloudflare/handler';
 
-type Entry = { from?: string; type?: string; active?: boolean };
+type Entry = { from?: string; type?: string | { discriminant?: string }; active?: boolean };
+
+const typeOf = (e: Entry) => String(typeof e.type === 'object' && e.type ? e.type.discriminant : e.type);
 
 const files = import.meta.glob<Entry>('/src/content/redirects/*.json', { eager: true, import: 'default' });
 
@@ -28,7 +30,7 @@ const norm = (p: string) => (p.replace(/\/+$/, '') || '/').toLowerCase();
 
 const GONE = new Set(
   Object.values(files)
-    .filter(e => e && e.active !== false && String(e.type) === '410' && typeof e.from === 'string')
+    .filter(e => e && e.active !== false && typeOf(e) === '410' && typeof e.from === 'string')
     .map(e => norm(e.from!.trim().replace(/^https?:\/\/(www\.)?buggyrents\.com/i, '').replace(/[?#].*$/, '')))
     .filter(p => p.startsWith('/') && p !== '/' && !p.startsWith('/keystatic') && !p.startsWith('/api/'))
 );

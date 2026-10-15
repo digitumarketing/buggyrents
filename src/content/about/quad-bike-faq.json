@@ -72,7 +72,7 @@
   "introH2": "Age and route decide almost everything",
   "introLede": "Unlike buggies, quads are sorted primarily by who is riding rather than by budget.",
   "introBody": [
-    "<strong>Age sets the machine.</strong> Kids quads at 70cc to 90cc start at age six, in a fenced riding area with a guide. Single seat boundary quads at 150cc to 250cc start at twelve. Open desert quads start at fourteen or sixteen depending on the engine, and the Yamaha Raptor 700cc is eighteen and over. Guides confirm ages at the base, so bring ID if a rider is close to a limit.",
+    "<strong>Age sets the machine.</strong> Kids quads at 70cc to 90cc start at age six, in a fenced riding area with a guide. Single seat boundary quads at 150cc to 250cc start at twelve. Open desert quads start at fourteen or sixteen depending on the engine, and the Yamaha Raptor 700cc is fourteen and over, with rider screening at the base. Guides confirm ages at the base, so bring ID if a rider is close to a limit.",
     "<strong>Boundary or open desert.</strong> Boundary routes are fenced and controlled, which is the right place for a first ride or a nervous rider. Open desert routes go out into the red dunes with a guide leading. That is the real thing, and it is why the minimum age is higher.",
     "<strong>Prices are per quad.</strong> A double seat quad carries two people, so AED 150 for 30 minutes on a boundary double is AED {quadFrom} each. That is often the cheapest way for a couple or a parent and child to ride together.",
     "Quads are more physical than buggies. You steer with your body as much as the handlebars, and an hour is real work. That is exactly why people who ride quads keep riding quads."
@@ -81,7 +81,7 @@
     {
       "n": "01",
       "h": "Age first",
-      "p": "From six on kids machines, twelve on boundary singles, eighteen on the Raptor 700."
+      "p": "From six on kids machines, twelve on boundary singles, fourteen on the Raptor 700."
     },
     {
       "n": "02",
@@ -206,7 +206,7 @@
     },
     {
       "q": "What is the minimum age for quad biking?",
-      "a": "Six on the 70cc to 90cc kids quads in a fenced area. Twelve on single seat boundary quads, fourteen on double seat boundary and single seat open desert, sixteen on double seat open desert, and eighteen on the Raptor 700cc."
+      "a": "Six on the 70cc to 90cc kids quads in a fenced area. Twelve on single seat boundary quads, fourteen on double seat boundary and single seat open desert, sixteen on double seat open desert, and fourteen on the Raptor 700cc, where the guide also checks throttle control before the open desert."
     },
     {
       "q": "Can children ride their own quad?",

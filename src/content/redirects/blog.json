@@ -1,0 +1,8 @@
+{
+  "from": "/blog/",
+  "type": {
+    "discriminant": "301",
+    "value": "https://buggyrents.com/blogs/"
+  },
+  "active": true
+}

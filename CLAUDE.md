@@ -97,6 +97,15 @@ generated rules. Do not "tidy up" the duplication, and do not add slashed keys t
 `astro.config.mjs` instead — Astro answers those with a duplicate rule and a stray
 meta-refresh HTML page rather than a 301.
 
+**Every other redirect lives in the CMS (Keystatic > Redirects (301)), added 15 Oct 2026.**
+`src/content/redirects.json` is turned into 301s by `scripts/build-redirects.mjs`, which runs
+between `astro build` and the audits and appends each row to `dist/_redirects` in both slash
+forms. Add new redirects there, not in code. The legacy page redirects above stay in code and
+win over any CMS row that repeats them. A CMS row that cannot be applied safely (From is a
+live page, To is not a page, a loop) is skipped with a warning instead of failing the deploy,
+so a client typo never blocks their other edits; chains are flattened to the final page.
+The first ten rows are old WordPress blog posts found 404ing in Search Console on 15 Oct 2026.
+
 **`run_worker_first` in `wrangler.toml` is load-bearing.** With `not_found_handling = "404-page"`
 Cloudflare's asset router answers anything with no file behind it and never reaches the Worker.
 That is right for typos and wrong for `/keystatic`, `/keystatic/*` and `/api/*`, which exist only

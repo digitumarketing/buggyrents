@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "ENABLE_KEYSTATIC=true astro dev",
-    "build": "astro build && npm run audit",
+    "build": "astro build && node scripts/build-redirects.mjs && npm run audit",
     "preview": "astro preview",
     "typecheck": "astro check",
     "build:cms": "ENABLE_KEYSTATIC=true astro build",

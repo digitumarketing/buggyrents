@@ -759,6 +759,63 @@ export default config({
       }
     }),
 
+    /* REDIRECTS, added 15 Oct 2026.
+
+       Lets the client and the SEO team send an old or deleted URL to a live page
+       without touching code. scripts/build-redirects.mjs turns this list into 301s
+       in dist/_redirects on every build, in both the slash and no-slash form.
+
+       The legacy WordPress page redirects in public/_redirects and astro.config.mjs
+       are NOT in this list on purpose: they carry the site's ranking pages and stay
+       in code where a stray click cannot delete them. A row here that repeats one of
+       them is ignored.
+
+       A row the build cannot apply safely (a From that is a live page, a To that is
+       not a page) is skipped with a warning rather than failing the deploy, so one
+       typo never blocks the client's other edits. */
+    redirects: singleton({
+      label: 'Redirects (301)',
+      path: 'src/content/redirects',
+      format: { data: 'json' },
+      schema: {
+        rules: fields.array(
+          fields.object({
+            from: fields.text({
+              label: 'Old URL (from)',
+              description: 'The path that no longer exists, starting with a slash, e.g. /old-blog-post/. Copy it from the Search Console 404 report. Leave the domain off.',
+              validation: {
+                isRequired: true,
+                pattern: {
+                  regex: /^\/[A-Za-z0-9._~%\/-]+$/,
+                  message: 'Start with a slash and leave the domain off, e.g. /old-blog-post/. No spaces, ? or #.'
+                }
+              }
+            }),
+            to: fields.text({
+              label: 'New URL (to)',
+              description: 'The live page visitors should land on, e.g. /dune-buggy-dubai/. Pick the closest page on the same topic, not the homepage.',
+              validation: {
+                isRequired: true,
+                pattern: {
+                  regex: /^(?:\/(?:[A-Za-z0-9._~%-]+\/)*|https:\/\/[^\s]+)$/,
+                  message: 'Needs a slash at the start and the end, like /dune-buggy-dubai/. Or a full https:// address.'
+                }
+              }
+            }),
+            note: fields.text({
+              label: 'Note (optional)',
+              description: 'Why this redirect exists. Not shown on the site.'
+            })
+          }),
+          {
+            label: 'Redirects',
+            description: 'Every row becomes a permanent 301 on the next deploy, about 2 minutes after saving. Do not add a live page as the Old URL: the build will skip it so the page is not hidden.',
+            itemLabel: p => `${p.fields.from.value || '/…'}  →  ${p.fields.to.value || '/…'}`
+          }
+        )
+      }
+    }),
+
     /* Flat on purpose. Keystatic renders a flat object as a plain list of labelled
        inputs; nested objects become collapsible panels that hide the one field the
        client came here to change. site.ts rebuilds the nested shape in code. */

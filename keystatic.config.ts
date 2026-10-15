@@ -579,7 +579,7 @@ export default config({
       slugField: 'from',
       path: 'src/content/redirects/*',
       format: { data: 'json' },
-      columns: ['from', 'active'],
+      columns: ['from', 'type', 'active'],
       schema: {
         from: fields.slug({
           name: {

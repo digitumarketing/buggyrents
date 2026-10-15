@@ -7,6 +7,7 @@
     "build": "astro build && node scripts/build-redirects.mjs && npm run audit",
     "preview": "astro preview",
     "typecheck": "astro check",
+    "postinstall": "node scripts/patch-keystatic.mjs",
     "build:cms": "ENABLE_KEYSTATIC=true astro build",
     "audit": "node scripts/audit-contrast.mjs && node scripts/audit-links.mjs && node scripts/audit-contrast-dom.mjs"
   },

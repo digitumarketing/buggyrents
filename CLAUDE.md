@@ -107,8 +107,10 @@ live page, To is not a page, a loop) is skipped with a warning instead of failin
 so a client typo never blocks their other edits; chains are flattened to the final page.
 Each entry stores its type as a Keystatic conditional, `"type": { "discriminant": "301", "value": "/to/" }`,
 so the Destination box appears only once a redirect type is picked and is hidden for 410. That is
-also why the list view has no Type or Destination column: Keystatic prints a conditional as
-`[object Object]`.
+Keystatic prints a conditional in a list column as `[object Object]`, so
+`scripts/patch-keystatic.mjs` (run by `postinstall`) changes that one line in Keystatic's UI to
+print the discriminant, which is what makes the Type column read 301 / 410. After a Keystatic
+upgrade, check it still applies; if not it warns and the column falls back, nothing else breaks.
 **410 Content Deleted** is a type in the same section, for pages removed for good. `_redirects`
 cannot answer 410, so `src/worker.ts` (a custom adapter entry, otherwise identical to the default)
 answers those paths with status 410 and the 404 page as the body. A deleted path has no file, so

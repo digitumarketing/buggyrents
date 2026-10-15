@@ -20,3 +20,27 @@
 # Safari pillar moved from /desert-safari-dubai-deals/ to /desert-safari-dubai/
 # on 12 Aug 2026. Indexed and carrying 248 internal links, so it must 301.
 /desert-safari-dubai-deals/ /desert-safari-dubai/    301
+
+# Old WordPress blog posts that were never migrated. Found 404ing on 15 Oct 2026
+# while still holding Search Console impressions. Each points at the closest
+# live page on the same topic, not the homepage, so the relevance carries over.
+/how-to-dress-like-a-local-in-dubai/                       /blogs/what-to-wear-quad-biking-dune-buggy-dubai/  301
+/top-5-preferred-motorcycle-tour-companies-in-dubai/       /ktm-dirt-bike-dubai/                              301
+/5-basic-skills-every-atv-rider-should-master/              /blogs/quad-biking-dubai-first-time/               301
+/7-things-to-look-for-when-you-rent-a-motorbike-in-dubai/  /ktm-dirt-bike-dubai/                              301
+/everything-you-need-to-know-about-quad-biking/            /blogs/quad-biking-dubai-first-time/               301
+/how-to-choose-the-right-dirt-bike/                        /ktm-dirt-bike-dubai/dirt-bike-for-beginners/      301
+/quad-racing-in-the-desert/                                /quad-bike-dubai/                                  301
+/red-sand-desert-dubai/                                    /desert-safari-dubai/red-dune-desert-safari/       301
+/safety-tips-for-your-motocross-dubai-desert-adventure/    /ktm-dirt-bike-dubai/dirt-bike-for-beginners/      301
+/top-5-motorcycle-enthusiast-movies/                       /blogs/                                            301
+/how-to-dress-like-a-local-in-dubai                        /blogs/what-to-wear-quad-biking-dune-buggy-dubai/  301
+/top-5-preferred-motorcycle-tour-companies-in-dubai        /ktm-dirt-bike-dubai/                              301
+/5-basic-skills-every-atv-rider-should-master               /blogs/quad-biking-dubai-first-time/               301
+/7-things-to-look-for-when-you-rent-a-motorbike-in-dubai   /ktm-dirt-bike-dubai/                              301
+/everything-you-need-to-know-about-quad-biking             /blogs/quad-biking-dubai-first-time/               301
+/how-to-choose-the-right-dirt-bike                         /ktm-dirt-bike-dubai/dirt-bike-for-beginners/      301
+/quad-racing-in-the-desert                                 /quad-bike-dubai/                                  301
+/red-sand-desert-dubai                                     /desert-safari-dubai/red-dune-desert-safari/       301
+/safety-tips-for-your-motocross-dubai-desert-adventure     /ktm-dirt-bike-dubai/dirt-bike-for-beginners/      301
+/top-5-motorcycle-enthusiast-movies                        /blogs/                                            301

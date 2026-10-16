@@ -1,0 +1,22 @@
+---
+/* IN-ARTICLE PHOTO, added 16 Oct 2026 at the client's request: articles were text
+   only, which reads badly against the rest of the site.
+
+   Rendered from the Markdoc tag {% figure image="<library name>" caption="…" /%},
+   which the client inserts from the editor as a "Photo" block (keystatic.config.ts).
+   The image is a library NAME, not a path, so it goes through img() like every other
+   photo on the site: an unknown name fails the build, and the alt text comes from
+   the library rather than being typed again. No subject check on purpose: a safari
+   article comparing the 4x4 with a self-drive buggy should be able to show the buggy.
+   The image-reuse and duplicate-picture audits still stop the same photo appearing
+   twice on one page. */
+import { img } from '@/data/images';
+
+interface Props { image: string; caption?: string }
+const { image, caption } = Astro.props;
+const photo = img(image);
+---
+<figure class="ar__figure">
+  <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

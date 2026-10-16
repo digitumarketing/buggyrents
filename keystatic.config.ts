@@ -1,4 +1,5 @@
 import { config, collection, singleton, fields } from '@keystatic/core';
+import { block } from '@keystatic/core/content-components';
 
 import libPhotos from './src/content/images.json';
 import heroPhotos from './src/content/hero-images.json';
@@ -263,7 +264,21 @@ export default config({
         takeaways:  fields.array(fields.text({ label: 'Takeaway' }), {
           label: 'Key takeaways', itemLabel: p => p.value
         }),
-        body: fields.markdoc({ label: 'Article body' }),
+        /* "Photo" block, added 16 Oct 2026: a library photo inside the article body,
+           written as {% figure image="…" caption="…" /%} and rendered by
+           src/components/ArticleFigure.astro. Two or three per article. */
+        body: fields.markdoc({
+          label: 'Article body',
+          components: {
+            figure: block({
+              label: 'Photo',
+              schema: {
+                image: libPhoto('Photo', { description: 'From the Photo library. Do not repeat a photo already used on this article.' }),
+                caption: fields.text({ label: 'Caption', description: 'Optional. One short line under the photo.' })
+              }
+            })
+          }
+        }),
         faqs: fields.array(
           fields.object({
             q: fields.text({ label: 'Question' }),

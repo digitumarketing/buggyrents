@@ -1,4 +1,4 @@
-import { defineMarkdocConfig, nodes } from '@astrojs/markdoc/config';
+import { defineMarkdocConfig, nodes, component } from '@astrojs/markdoc/config';
 
 /* Headings need stable ids because the article page builds its table of contents
    from them, and every "In this guide" link is an anchor to one. Markdoc does not
@@ -17,6 +17,19 @@ const text = children =>
     .join('');
 
 export default defineMarkdocConfig({
+  /* {% figure image="<library name>" caption="…" /%}: a photo inside the article
+     body, picked from the photo library. Declared in keystatic.config.ts as the
+     "Photo" block so the client can insert one from the editor. */
+  tags: {
+    figure: {
+      render: component('./src/components/ArticleFigure.astro'),
+      selfClosing: true,
+      attributes: {
+        image: { type: String, required: true },
+        caption: { type: String }
+      }
+    }
+  },
   nodes: {
     heading: {
       ...nodes.heading,

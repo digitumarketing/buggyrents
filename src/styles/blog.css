@@ -205,6 +205,12 @@
 .ar__body li { margin-top: .5rem; font-size: var(--fs-base); color: var(--c-ink-muted); line-height: 1.75; }
 .ar__body a { color: var(--c-orange-text); font-weight: 600; }
 .ar__body strong { color: var(--c-navy); }
+/* In-article photos ({% figure %}, ArticleFigure.astro). Fixed 3:2 box so the
+   page does not jump while a lazy photo loads, whatever size the file is. */
+.ar__figure { margin: 1.6rem 0 0; }
+.ar__figure img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2;
+  object-fit: cover; border-radius: 14px; background: var(--c-sand-soft); }
+.ar__figure figcaption { margin-top: .55rem; font-size: var(--fs-sm); color: var(--c-ink-soft); line-height: 1.5; }
 .ar__body table { width: 100%; border-collapse: collapse; margin-top: 1.3rem;
   font-size: var(--fs-sm); border: 1px solid var(--c-line); border-radius: 14px; overflow: hidden; }
 .ar__body th, .ar__body td { padding: .75rem 1rem; text-align: left; border-bottom: 1px solid var(--c-line); }

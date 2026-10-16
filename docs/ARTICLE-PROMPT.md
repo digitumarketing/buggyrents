@@ -272,6 +272,31 @@ Then the body in Markdoc: `##` for sections, `###` where a section splits, norma
 markdown for bold, links, lists and tables. Heading ids are generated automatically and
 the table of contents is built from them, so do not add anchors by hand.
 
+**Photos inside the body: two or three per article, always.** Client instruction,
+16 Oct 2026: a text-only article reads badly next to the rest of the site. Insert them
+with the Photo block, which in the file is
+
+```
+{% figure image="<library name>" caption="One short line about what the photo shows." /%}
+```
+
+Rules for picking them:
+
+- **Look at the photo before using it.** Open the file and check it shows what the
+  section is about. A filename or alt text is not enough: the 16 Oct dune bashing
+  article first shipped with a camp buffet photo as its main image.
+- **`image` in the frontmatter is the main photo**, shown at the top of the article,
+  on every guide card and in the Article schema. It must show the article's subject.
+  `heroImage` and `finalImage` are not rendered by the blog template today.
+- **No photo twice on one page, including under a different filename.** Several
+  library files are the same picture at two sizes (the dune bashing Land Cruiser is
+  `desert-safari-dubai-dune-bashing-land-cruiser`, `private-desert-safari-4x4-dubai-red-dunes`
+  and the safari hero). The audits compare bytes, so they cannot catch this; you must.
+- Place each one after the paragraph it illustrates, never two in a row, and not
+  directly under a heading.
+- A photo from another subject is fine where the section is about that subject (a
+  buggy photo in a "dune bashing vs a buggy" section).
+
 **Title under 60 characters and excerpt under 160.** Both are audited. The brand suffix
 is appended automatically when it fits, so do not type "| Buggy Rents".
 
@@ -288,7 +313,8 @@ Answer honestly, and fix anything that fails rather than shipping it:
 | Does every section answer a question someone actually types? | |
 | Are all AED figures real and taken from the price data? | |
 | Zero em dashes, zero insurance mentions in either direction? | |
-| Three different images, all matching the subject? | |
+| Main `image` opened and checked: does it show the article's subject? | |
+| Two or three in-body photos, none repeating the main image or each other, even under another filename? | |
 | Title under 60, excerpt under 160? | |
 | Would a guest finish this and message us instead of going back to Google? | |
 

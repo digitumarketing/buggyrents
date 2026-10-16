@@ -82,6 +82,23 @@ single page would have ranked, and the other wastes crawl budget. The right answ
 that case is a new section inside the existing page, and you should propose that
 instead.
 
+**If the keyword has commercial intent, stop and say so. A blog post never targets it.**
+Client instruction, 16 Oct 2026, after `can am buggy rental dubai` was published as an
+article and had to be retargeted the next day. A keyword is commercial when the searcher
+is ready to book: it contains *rental*, *rent*, *hire*, *book*, *booking*, *deal*,
+*near me*, or a service name plus a place ("can am dubai", "quad bike dubai"), or asks
+for the price of something we sell. Google ranks booking and service pages for those
+queries, so an article either never reaches the top three or lands a ready-to-book
+visitor one click away from the booking button. Commercial keywords belong to the
+pillar, a package page, a price page or a location page: propose a section there
+instead. Articles take informational and comparison keywords only (*what*, *how*,
+*why*, *which*, *vs*, *best time*, *what to wear*, *age limit*). When a keyword mixes the
+two, the commercial half wins and the keyword goes to a commercial page.
+
+The two existing price articles predate this rule and are a judgement call rather than a
+precedent: they answer "how much" questions in long form beside a price page that owns the
+booking. Do not write another one.
+
 **If the keyword describes a product Buggy Rents does not sell, stop and say so.** The
 fleet is eleven dune buggies, six quads, one KTM 450, and twelve desert safari packages
 in shared Land Cruisers, private Land Cruisers and one private mini bus. There is no
@@ -265,6 +282,7 @@ Answer honestly, and fix anything that fails rather than shipping it:
 | Check | |
 |---|---|
 | Does it pass the cannibalisation check in Step 0? | |
+| Is the keyword informational or comparison, never rental, hire, book or price intent? | |
 | Could it rank without the domain doing the work? | |
 | Is there at least one thing here that only an operator could say? | |
 | Does every section answer a question someone actually types? | |

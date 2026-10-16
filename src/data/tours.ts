@@ -220,7 +220,7 @@ const guideBlocksFor = (v: Vehicle) => {
     { h: `Who the ${v.shortName} suits`,
       html: `<p class="lf-lead">The ${v.name} is a ${v.engine} ${n} carrying ${seatWord}, run on the ${v.area.toLowerCase()} from our Al Awir base.</p>
 <p>${v.blurb} The minimum age is <span class="pill">${v.minAge}+</span>, and that limit is not negotiable: it reflects the weight of the machine, the speed it reaches in soft sand, and how much physical control the rider needs when a dune face steepens unexpectedly.</p>
-<p>If you have never been off-road before, say so when you book. The guide holds the group pace to the least confident rider, and the warm-up on flat sand exists precisely so nobody is learning the controls halfway up a dune. Riders who already have experience usually find the first ten minutes slow, then the route opens up.</p>
+${v.name.startsWith('Can-Am') ? `<p>Choosing between the Can-Am models? Our <a href="/blogs/can-am-x3-vs-maverick-r-dubai/">Can-Am X3 vs Maverick R comparison</a> sets out who each one suits, how far apart the prices are, and when a Polaris is the better first booking.</p>\n` : ''}<p>If you have never been off-road before, say so when you book. The guide holds the group pace to the least confident rider, and the warm-up on flat sand exists precisely so nobody is learning the controls halfway up a dune. Riders who already have experience usually find the first ten minutes slow, then the route opens up.</p>
 <p>Group size matters as much as machine choice. A ${n} of this size sits naturally in a convoy of four to eight vehicles. Larger bookings get staged in waves so the guide can keep every rider in sight rather than stretching the line across two dune bowls.</p>` },
 
     { h: 'Which duration to book',
@@ -256,7 +256,7 @@ ${v.durations.length > 2 ? `<p>Longer routes suit riders who already know what t
 
     { h: 'How to book',
       html: `<p class="lf-lead">Message us on WhatsApp with your date, group size, rider ages and the duration you want.</p>
-<p>We reply with availability, the total in AED and a pickup plan, usually within a few minutes. No deposit is needed to hold a standard slot.</p><p>Payment is on the spot at the Al Awir base before you ride: cash, card or bank transfer, whichever suits you. Nothing is taken when you book. Hotel pickup within Dubai is free, and free cancellation applies up to 24 hours before your slot.</p>
+<p>We reply with availability, the total in AED and a pickup plan, usually within a few minutes. No deposit is needed to hold a standard slot.</p><p>Payment is on the spot at the Al Awir base before you ride: cash, card or bank transfer, whichever suits you. Nothing is taken when you book. Driving yourself to the base is free, pickup and drop-off within Dubai is optional at AED 300, and free cancellation applies up to 24 hours before your slot.</p>
 <p>Weekend and public-holiday afternoons fill first, particularly between October and April. If your dates are fixed, message earlier rather than later. If your dates are flexible, tell us and we will suggest the quieter slots, which usually means a better ride as well as easier availability.</p>` }
   ];
 };

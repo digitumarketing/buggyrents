@@ -1,7 +1,9 @@
 {
   "from": "/desert-safari-without-dune-bashing/",
   "type": {
-    "discriminant": "410"
+    "discriminant": "301",
+    "value": "/blogs/dubai-desert-safari-without-dune-bashing/"
   },
-  "active": true
+  "active": true,
+  "note": "Was 410; the matching article is live, 16 Oct 2026"
 }

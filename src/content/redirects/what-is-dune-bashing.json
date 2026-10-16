@@ -1,7 +1,9 @@
 {
   "from": "/what-is-dune-bashing/",
   "type": {
-    "discriminant": "410"
+    "discriminant": "301",
+    "value": "/blogs/what-is-dune-bashing-dubai/"
   },
-  "active": true
+  "active": true,
+  "note": "Was 410; new article written for this topic, 16 Oct 2026"
 }

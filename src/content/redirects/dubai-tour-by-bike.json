@@ -1,0 +1,8 @@
+{
+  "from": "/dubai-tour-by-bike/",
+  "type": {
+    "discriminant": "301",
+    "value": "https://buggyrents.com/ktm-dirt-bike-dubai/"
+  },
+  "active": true
+}

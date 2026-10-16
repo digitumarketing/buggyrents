@@ -18,8 +18,12 @@ Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
 # The CMS. No public content, and no reason for anything to crawl it.
+# /feed/ and /*/feed/ are WordPress RSS feeds left over from the old site. Added
+# 16 Oct 2026: they all 404 and only cost crawl budget. Repeated in the AI group below.
 Disallow: /keystatic/
 Disallow: /api/
+Disallow: /feed/
+Disallow: /*/feed/
 
 # ---------------------------------------------------------------------------
 # AI crawlers, named explicitly. Added 7 Sep 2026.
@@ -70,6 +74,8 @@ Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /keystatic/
 Disallow: /api/
+Disallow: /feed/
+Disallow: /*/feed/
 
 # A plain text summary of what this business sells, what it costs and on what
 # basis, generated from the site's own data on every deploy so it cannot go stale:

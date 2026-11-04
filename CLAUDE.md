@@ -237,12 +237,12 @@ Message:
 
 Lives in `site/src/data/vehicles.ts`.
 
-**Dune buggy** — 11 packages, durations 30 min / 1 hr / 2 hr / 4 hr (no 3 hr, client removed it).
-Polaris RZR 1000 2-str 300/550/999/2199 · 4-str 350/550/1099/2299 · Polaris Turbo 2-str 800/1099/1999 ·
-Turbo 4-str 750/999/2299 · Polaris Pro 700/1100/1300 · Can-Am X3 2-str 600/999/1299 ·
-X3 4-str 700/999/1499 · X3 Turbo RR 2-str 1000/1299 · Turbo RR 4-str 1299/1799 ·
-Maverick R 2-str 900/1299/1999 · Maverick R 4-str 999/1299.
-**Client confirmed the Turbo 4-seater really is cheaper than the 2-seater. Do not "fix" it.**
+**Dune buggy** — 11 packages, durations **30 min / 1 hr / 2 hr only**. There is no 4-hour and no
+3-hour buggy slot. The per-buggy price list that stood here drifted from the CMS (it still listed
+4-hour prices and a Polaris Turbo at AED 800 when the CMS said 450), and that stale copy is how a
+"4-hour buggy ride" reached the pillar lede and the dune buggy FAQ. Removed 4 Nov 2026. **The
+prices live in `src/content/buggies/*.json`; read them there, or in the built `/llms.txt`, which
+prints every ladder from the same data.** Do not retype them into this file.
 
 **Quad** (30 min / 1 / 2 / 3 / 4 hr): Kids 70–90cc age 6+ 75/140/250/350/450 · Single seat boundary
 150–250cc age 12+ 89/150/300/400/500 · Double seat boundary 250–350cc age 14+ 150/250/400/500/600 ·

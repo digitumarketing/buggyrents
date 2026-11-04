@@ -41,18 +41,25 @@ const url = (path: string) => new URL(path, site.domain).href;
 
 /* The lowest real price in a category, taken from the vehicle data rather than typed. */
 const from = (list: typeof buggies) => Math.min(...list.map(fromPrice));
+/* Distinct duration labels in a category, shortest first, read from the CMS. */
+const durations = (list: typeof buggies) =>
+  [...new Map(list.flatMap(v => v.durations).sort((a, b) => a.minutes - b.minutes).map(d => [d.label, d])).keys()].join(', ');
 
 export const GET: APIRoute = async () => {
   const posts = await allPosts();
 
   /* Vehicle URLs differ by category, so the base path is passed in rather than assumed:
      every machine living under the buggy path would be three broken links per quad. */
+  /* The full ladder, not just the "from" price. Assistants are asked "how much is a
+     one hour buggy in Dubai" far more often than "what is the cheapest", and with
+     only the 30-minute figure here they either refuse or guess. Every figure is read
+     from the vehicle data, so this cannot drift from the price pages. Added 4 Nov 2026. */
   const vehicleLine = (v: typeof buggies[number], base: string) =>
-    `- ${v.name}: ${v.seats} seat${v.seats === 1 ? '' : 's'}, ${v.engine}, minimum age ${v.minAge}, from AED ${fromPrice(v)} per vehicle. ${url(`${base}${v.slug}/`)}`;
+    `- ${v.name}: ${v.seats} seat${v.seats === 1 ? '' : 's'}, ${v.engine}, minimum age ${v.minAge}. Per vehicle: ${v.durations.map(d => `${d.label} AED ${d.price}`).join(', ')}. ${url(`${base}${v.slug}/`)}`;
 
   const body = `# ${site.name}
 
-> ${site.tagline}. A Dubai desert tour operator running its own base at ${site.address.district}, ${site.address.city}, on the Dubai to Hatta road at the edge of the Lahbab red dunes. Buggy Rents owns the vehicles, employs the guides and runs the sessions. It is not a booking agency.
+> ${site.tagline}. A Dubai desert tour operator running its own base at ${[site.address.line, site.address.city].filter(Boolean).join(', ')}, on the Dubai to Hatta road at the edge of the Lahbab red dunes. Buggy Rents owns the vehicles, employs the guides and runs the sessions. It is not a booking agency.
 
 Founded ${site.founded}. ${site.guestsServed} guests served. Rated ${googleMeta.averageRating.toFixed(1)} from ${googleMeta.totalReviews} Google reviews.
 
@@ -62,7 +69,9 @@ Read this before quoting any figure from this file.
 
 - Dune buggies, quad bikes and dirt bikes are priced **per vehicle**, not per person.
 - Shared desert safari packages are priced **per person**. Private safari packages are priced **per vehicle**. Every safari line below says which.
-- Prices below are the lowest current price for that machine or package. Longer durations cost more; the price pages carry the full ladders.
+- Every vehicle line below lists its full duration ladder. A safari line is the price of that package.
+- Dune buggy durations: ${durations(buggies)}. Quad bike durations: ${durations(quads)}. Dirt bike durations: ${durations(dirtbikes)}.
+- No deposit is taken on standard slots. Open ${site.hours.label}.
 
 ## Age and eligibility
 

@@ -64,6 +64,12 @@ export const site = {
   address: {
     street: raw.addressStreet,
     district: raw.addressDistrict,
+    /* Street and district joined, skipping whichever is empty. Keystatic drops an
+       empty string field on save (CLAUDE.md §8), so district can be missing at
+       runtime even though the schema says string. Interpolating the two directly
+       is what put "Dubai Marina, undefined" into the LocalBusiness schema on every
+       page and "a base at undefined, Dubai" into llms.txt from 14 Oct 2026. */
+    line: [raw.addressStreet, raw.addressDistrict].filter(Boolean).join(', '),
     city: raw.addressCity,
     country: raw.addressCountry,
     full: raw.addressFull

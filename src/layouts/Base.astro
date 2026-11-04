@@ -49,7 +49,7 @@ const localBusiness = {
   logo: new URL('/icon-512.png', site.domain).href,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: `${site.address.street}, ${site.address.district}`,
+    streetAddress: site.address.line,
     addressLocality: site.address.city,
     addressCountry: site.address.country
   },

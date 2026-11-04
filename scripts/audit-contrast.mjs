@@ -474,7 +474,21 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
     const html = readFileSync(page, 'utf8');
     const meta = [...html.matchAll(/<meta[^>]*content="([^"]*)"/g)].map(m => m[1]).join(' ');
     const title = (html.match(/<title[^>]*>([\s\S]*?)<\/title>/) || [])[1] || '';
-    const ld = [...html.matchAll(/<script[^>]*ld\+json[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]).join(' ');
+    /* Schema is checked by its string VALUES, not its raw text. In raw JSON every
+       value sits inside quotes, and the undefined pattern above deliberately skips
+       an "undefined" followed by a quote (that is how script code reads), so
+       "streetAddress":"Dubai Marina, undefined" passed this audit on every page
+       from 14 Oct to 4 Nov 2026. Walking the parsed values removes the quotes. */
+    const ldValues = [];
+    const collect = v => {
+      if (typeof v === 'string') ldValues.push(v);
+      else if (Array.isArray(v)) v.forEach(collect);
+      else if (v && typeof v === 'object') Object.values(v).forEach(collect);
+    };
+    for (const m of html.matchAll(/<script[^>]*ld\+json[^>]*>([\s\S]*?)<\/script>/g)) {
+      try { collect(JSON.parse(m[1])); } catch { ldValues.push(m[1]); }
+    }
+    const ld = ldValues.join(' | ');
     const visible = html
       .replace(/<script[\s\S]*?<\/script>/g, ' ')
       .replace(/<style[\s\S]*?<\/style>/g, ' ')
@@ -492,6 +506,21 @@ console.log('Contrast audit passed — no low-contrast text on card surfaces.');
       }
     }
   }
+  /* llms.txt is what AI assistants read about this business, so a placeholder there
+     is a wrong answer given to a guest. It is plain text, so it is checked whole. */
+  const llms = join(DIST, 'llms.txt');
+  if (existsSync(llms)) {
+    const text = readFileSync(llms, 'utf8');
+    for (const re of banned) {
+      const m = text.match(re);
+      if (m) {
+        const i = text.indexOf(m[0]);
+        hits.push(`${llms}: ...${text.slice(Math.max(0, i - 40), i + 50).replace(/\s+/g, ' ').trim()}...`);
+        break;
+      }
+    }
+  }
+
   if (hits.length) {
     console.error('Placeholder or stringified object reached the page:');
     hits.slice(0, 10).forEach(h => console.error('  ' + h));

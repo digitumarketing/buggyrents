@@ -6,6 +6,10 @@ import { bySubject } from '@/data/images';
 import { pageTitle } from '@/data/seo';
 
 const DUR = ['30 minutes', '1 hour', '2 hours', '3 hours', '4 hours'];
+/* Counts what the CMS actually holds. The buggy eyebrow said "4 durations" as a
+   literal while no buggy has carried a 4-hour slot, and ChatGPT sends readers to
+   this page, so a hand-typed count is a wrong answer an assistant can repeat. */
+const durCount = (list: Vehicle[]) => DUR.filter(d => list.some(v => v.durations.some(x => x.label === d))).length;
 const shortDur = (l: string) => l.replace(' minutes', ' min').replace(' hours', ' hr').replace(' hour', ' hr');
 
 function vehicleTable(list: Vehicle[], base: string, title: string, note: string): PriceTable {
@@ -71,7 +75,7 @@ export const buggyPrices: PriceGuideData = {
   title: pageTitle(`Dune Buggy Dubai Price | From AED ${fromPrice(buggies[0])} per Buggy`),
   description: `Dune buggy Dubai prices: 11 buggies from AED ${fromPrice(buggies[0])} for 30 minutes. Polaris RZR, Can-Am X3 and Turbo RR, plus BBQ combos. Per buggy. Optional pickup for AED 300.`,
   heroImage: 'dune-buggy-dubai-hero-red-dunes',
-  eyebrow: '11 buggies · 4 durations · price per vehicle',
+  eyebrow: `${buggies.length} buggies · ${durCount(buggies)} durations · price per vehicle`,
   h1Lead: 'Dune Buggy Dubai', h1Em: 'Price', h1Tail: 'Guide',
   lede: 'The full dune buggy Dubai price list, per buggy rather than per person. Polaris RZR through to Can-Am Maverick R, plus Bedouin BBQ combos. Helmet, briefing, fuel and a guide are in every price. Pickup and drop-off is optional at AED 300.',
   chips: [`From AED ${fromPrice(buggies[0])}`, '11 buggies', 'Optional pickup AED 300', 'No deposit'],
@@ -134,7 +138,7 @@ export const quadPrices: PriceGuideData = {
   title: pageTitle(`Quad Biking Dubai Price | From AED ${fromPrice(quads[0])}`),
   description: `Quad biking Dubai prices: six ATVs from AED ${fromPrice(quads[0])} for 30 minutes. Kids from age 6, boundary area, open desert and the Raptor 700cc. Per quad, optional pickup.`,
   heroImage: 'quad-biking-dubai-hero-red-dunes',
-  eyebrow: '6 quads · 5 durations · price per quad',
+  eyebrow: `${quads.length} quads · ${durCount(quads)} durations · price per quad`,
   h1Lead: 'Quad Biking Dubai', h1Em: 'Price', h1Tail: 'Guide',
   lede: `The full quad biking Dubai price list, from AED ${fromPrice(quads[0])} for a 30-minute kids session to four hours on a Yamaha Raptor 700cc. Sorted by riding area rather than model, because that is what actually decides which quad you can take.`,
   chips: [`From AED ${fromPrice(quads[0])}`, '6 quads', 'Age 6 and up', 'Optional pickup AED 300'],
@@ -278,7 +282,7 @@ export const dirtbikePrices: PriceGuideData = {
   title: pageTitle(`KTM Dirt Bike Dubai Price | From AED ${fromPrice(dirtbikes[0])}`),
   description: `KTM dirt bike Dubai prices: 450cc enduro from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 2,000 for four hours. One machine, five durations, riders 14+. Optional pickup.`,
   heroImage: 'ktm-dirt-bike-dubai-hero-sunrise-dunes',
-  eyebrow: 'KTM 450 · 5 durations · price per bike',
+  eyebrow: `KTM 450 · ${durCount(dirtbikes)} durations · price per bike`,
   h1Lead: 'KTM Dirt Bike Dubai', h1Em: 'Price', h1Tail: 'Guide',
   lede: `The full KTM dirt bike Dubai price list on the 450cc desert enduro, from AED ${fromPrice(dirtbikes[0])} for 30 minutes to AED 2,000 for a four-hour session. One machine, priced purely by how long you ride, for people who can already handle a clutch, gears and throttle in sand.`,
   chips: [`From AED ${fromPrice(dirtbikes[0])}`, 'KTM 450', 'Age 14 and up', 'Optional pickup AED 300'],

@@ -32,6 +32,7 @@ import { buggies, quads, dirtbikes, fromPrice } from '@/data/vehicles';
 import { sharedSafaris, privateSafaris } from '@/data/safari';
 import { safariPages, SAFARI_BASE } from '@/data/safariPages';
 import { locations } from '@/data/locations';
+import { pickupZones } from '@/data/pickupAreas';
 import { audiences } from '@/data/audiences';
 import { allPosts } from '@/data/posts';
 import { transfers, payment, policy } from '@/data/extras';
@@ -59,7 +60,7 @@ export const GET: APIRoute = async () => {
 
   const body = `# ${site.name}
 
-> ${site.tagline}. A Dubai desert tour operator running its own base at ${[site.address.line, site.address.city].filter(Boolean).join(', ')}, on the Dubai to Hatta road at the edge of the Lahbab red dunes. Buggy Rents owns the vehicles, employs the guides and runs the sessions. It is not a booking agency.
+> ${site.tagline}. A Dubai desert tour operator. Every ride starts from its own desert base at Al Awir, on the Dubai to Hatta road at the edge of the Lahbab red dunes; the registered business address is ${site.address.full}. Buggy Rents owns the vehicles, employs the guides and runs the sessions. It is not a booking agency.
 
 Founded ${site.founded}. ${site.guestsServed} guests served. Rated ${googleMeta.averageRating.toFixed(1)} from ${googleMeta.totalReviews} Google reviews.
 
@@ -81,7 +82,9 @@ Read this before quoting any figure from this file.
 
 ## Getting there and paying
 
-- Base: ${site.address.full}
+- Riding base: Al Awir, on the Dubai to Hatta road at the edge of the Lahbab red dunes. Every buggy, quad and dirt bike session starts and ends here.
+- Business address (Google Business Profile): ${site.address.full}. This is not where rides start.
+- Hotel pickup: from any hotel, tower or villa in Dubai and Sharjah. The pickup areas list below names the districts.
 - Pickup, desert safari: ${transfers.summary}
 - Pickup, dune buggy, quad bike and dirt bike: ${transfers.vehicle}
 - Pickup, outside Dubai: ${transfers.outsideDubai}
@@ -133,6 +136,10 @@ ${safariPages.map(p => `- [${[p.h1Lead, p.h1Em, p.h1Tail].filter(Boolean).join('
 ## Pickup areas
 
 ${locations.map(l => `- [${l.name}](${url(`/locations/${l.slug}/`)})`).join('\n')}
+
+Every area we collect from, by zone. Typical drive to the Al Awir base in brackets; Dubai pickup is free on safari and AED ${transfers.vehiclePrice} on buggy, quad and dirt bike; Sharjah is quoted.
+
+${pickupZones.map(z => `- ${z.name}, ${z.emirate} (${z.drive}): ${z.areas.join(', ')}.`).join('\n')}
 
 ## Who rides with us
 

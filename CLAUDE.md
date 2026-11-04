@@ -63,8 +63,10 @@ a symlink, the two drift apart within a week and nobody knows which one is true.
 | Domain | buggyrents.com |
 | Phone + WhatsApp | +971 56 209 5713 → `wa.me/971562095713` |
 | Email | Buggyrents@gmail.com |
-| Address | Dubai-Hatta Rd, Al Awir Second, Dubai, UAE |
-| Google Place ID | ChIJo88Daad39T4RnM7myjfeJdQ |
+| Address (GBP) | Dubai Marina, Dubai, UAE — **changed 14 Oct 2026** when the client moved the Google Business Profile. Lives in Keystatic Site settings and feeds the schema, footer and contact page. |
+| Riding base | Al Awir, on the Dubai-Hatta road at the Lahbab red dunes. **Unchanged.** Every ride starts here, so page copy keeps saying "the Al Awir base". The GBP address is not where guests ride; llms.txt states both and says which is which. |
+| Google Place ID | ChIJYQfY7fNvXz4RrYzNVSpet4s (was ChIJo88Daad39T4RnM7myjfeJdQ until 14 Oct 2026) |
+| Pickup | Any hotel, tower or villa in Dubai and Sharjah, client confirmed 5 Nov 2026. The area list is Keystatic > Content > Pickup areas, shown on `/locations/`. **Do not build a page per area** — see the comment on `pickupAreas` in `keystatic.config.ts`. |
 | Social | **5 live accounts** — facebook/buggyrents · instagram/buggyrents · tiktok/@buggyrents · youtube channel UCxg840PdCcCJ0GCnG018EBg · pinterest/buggyrents. Recorded as "none" until 10 Aug 2026, which was wrong. In footer and in schema `sameAs`. |
 | Live chat | Deferred; leave room in the floating action bar |
 | Award | TripAdvisor Travellers' Choice (real, use it) |
@@ -308,8 +310,8 @@ Marketing surfaces (hero panels, trust strips, cards) carry hooks instead: 17K+ 
 per-vehicle pricing, kids from age 6. **"Free Dubai pickup" was one of these hooks and is no
 longer usable outside safari surfaces.**
 
-**Business:** open **7am to 11pm daily** (was 24/7 until 19 Sep 2026) · lat/long 25.153303,
-55.635006 · 50+ guides · 70+ vehicles.
+**Business:** open **7am to 11pm daily** (was 24/7 until 19 Sep 2026) · schema lat/long follows the
+GBP (Dubai Marina since 14 Oct 2026); the riding base at Al Awir is 25.153303, 55.635006 · 50+ guides · 70+ vehicles.
 
 ---
 

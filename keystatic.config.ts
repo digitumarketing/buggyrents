@@ -167,7 +167,7 @@ export default config({
     /* Sidebar groups. Every collection and singleton must be listed here or it
        disappears from the admin, so add new ones to a group when you create them. */
     navigation: {
-      'Content': ['buggies', 'quads', 'dirtbikes', 'safari', 'posts', 'faqs', 'pillars', 'support', 'about', 'locations', 'audiences', 'reviews'],
+      'Content': ['buggies', 'quads', 'dirtbikes', 'safari', 'posts', 'faqs', 'pillars', 'support', 'about', 'locations', 'pickupAreas', 'audiences', 'reviews'],
       'Site': ['photoLibrary', 'heroLibrary', 'navigation', 'settings', 'homepage', 'policies'],
       'SEO': ['redirects']
     }
@@ -1010,6 +1010,28 @@ export default config({
     /* One line changed here appears in a dozen places across the support pages, the
        location pages, the tour pages and the FAQ answers. That is the point: the
        cancellation window is written once, not remembered on eleven pages. */
+    /* Every area and hotel zone we collect from, shown on /locations/ and in llms.txt.
+       A list on one page rather than a page per area, on purpose: pickup is
+       "anywhere in Dubai and Sharjah", and twenty near-identical area pages would be
+       a doorway set. Search Console showed no searches for area-level pages before
+       this was built (Aug to Nov 2026). Added 5 Nov 2026. */
+    pickupAreas: singleton({
+      label: 'Pickup areas',
+      path: 'src/content/pickup-areas',
+      format: { data: 'json' },
+      schema: {
+        zones: fields.array(
+          fields.object({
+            name:      fields.text({ label: 'Zone name', validation: { length: { min: 1 } } }),
+            emirate:   fields.select({ label: 'Emirate', options: [{ label: 'Dubai', value: 'Dubai' }, { label: 'Sharjah', value: 'Sharjah' }], defaultValue: 'Dubai' }),
+            drive:     fields.text({ label: 'Typical drive to the base', description: 'For example 30–45 min' }),
+            areas:     fields.array(fields.text({ label: 'Area' }), { label: 'Areas and districts', itemLabel: p => p.value }),
+            landmarks: fields.text({ label: 'Well-known hotels and landmarks', description: 'One line, comma separated' })
+          }),
+          { label: 'Pickup zones', itemLabel: p => `${p.fields.name.value} (${p.fields.emirate.value})` }
+        )
+      }
+    }),
     policies: singleton({
       label: 'Combos, add-ons and policies',
       path: 'src/content/policies',

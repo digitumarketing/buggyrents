@@ -10,11 +10,12 @@ import { locations } from '@/data/locations';
 import { transfers } from '@/data/extras';
 import { buggies, fromPrice } from '@/data/vehicles';
 import { pageTitle } from '@/data/seo';
+import { pickupZones, pickupAreaCount } from '@/data/pickupAreas';
 
 const buggyFrom = Math.min(...buggies.map(fromPrice));
 
 const title = pageTitle('Dune Buggy Pickup Locations in Dubai and the UAE');
-const description = `We collect from ${locations.length} areas across Dubai and the northern emirates. Safari pickup free, buggy and quad AED 300; outer emirates are quoted before you book.`;
+const description = `Hotel pickup from ${pickupAreaCount}+ areas across Dubai and Sharjah. Safari pickup free, buggy and quad AED ${transfers.vehiclePrice}; outer emirates quoted before you book.`;
 
 const h = hero('dune-buggy-dubai-hero-red-dunes');
 /* A different photo from the hero. Reusing the hero here would put the same image
@@ -55,7 +56,8 @@ const groups = [
         <p class="pl__hero-subhead">Free hotel pickup on desert safari bookings. Optional AED 300 pickup on buggy, quad and dirt bike. Outer emirates quoted before you book.</p>
         <p class="pl__hero-lede">
           Every ride starts at our Al Awir base on the Dubai to Hatta road, next to the Lahbab red dunes.
-          These {locations.length} pages cover the areas we collect from most often, with drive times and what to expect.
+          We collect from any hotel, tower or villa in Dubai and Sharjah. The {locations.length} pages below cover the
+          areas guests ask about most, and the full list of {pickupAreaCount}+ areas follows them.
         </p>
         <div class="pl__hero-actions">
           <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! Could you confirm pickup from my area?')}>Ask about your area</a>
@@ -83,7 +85,9 @@ const groups = [
               <p>{l.intro.split('.')[0]}.</p>
               <dl class="lh__meta">
                 <div><dt>Drive time</dt><dd>{l.drive}</dd></div>
-                <div><dt>Transfer</dt><dd>{l.emirate === 'Dubai' ? 'Free' : 'Quoted'}</dd></div>
+                {/* Was 'Free' for every Dubai card until 5 Nov 2026, on a page whose cards all
+                    lead to buggy and quad booking. Free applies to safari only (CLAUDE.md §4). */}
+                <div><dt>Transfer</dt><dd>{l.emirate === 'Dubai' ? `Safari free, vehicles AED ${transfers.vehiclePrice}` : 'Quoted'}</dd></div>
               </dl>
               <em>View page &rarr;</em>
             </a>
@@ -92,6 +96,35 @@ const groups = [
       </div>
     </section>
   ))}
+
+  <!-- every pickup area. Data in Keystatic > Content > Pickup areas. -->
+  <section class="pl__section pl__section--light" id="all-areas">
+    <div class="pl__shell">
+      <header class="pl__section-head">
+        <div>
+          <p class="pl__kicker">Hotel pickup</p>
+          <h2>Every area we pick up from in Dubai and Sharjah</h2>
+        </div>
+        <p>Give us the hotel name or the building and we collect from the door. Drive times are typical to the
+          Al Awir base and move with traffic. Inside Dubai, pickup is free on a desert safari and AED {transfers.vehiclePrice} on a
+          buggy, quad or dirt bike. Sharjah transfers are quoted before you book.</p>
+      </header>
+      <div class="lh__zones">
+        {pickupZones.map(z => (
+          <article class="lh__zone">
+            <span class="lh__tag">{z.emirate}</span>
+            <h3>{z.name}</h3>
+            <dl class="lh__meta">
+              <div><dt>Drive to the base</dt><dd>{z.drive}</dd></div>
+              <div><dt>Transfer</dt><dd>{z.emirate === 'Dubai' ? `Safari free, vehicles AED ${transfers.vehiclePrice}` : 'Quoted'}</dd></div>
+            </dl>
+            <ul class="lh__areas">{z.areas.map(a => <li>{a}</li>)}</ul>
+            {z.landmarks.length > 0 && <p class="lh__landmarks"><strong>Near:</strong> {z.landmarks.join(', ')}</p>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- final CTA. Plain navy would butt straight into the navy footer, so this
        carries the hero image with a heavier scrim to keep the two apart. -->
@@ -143,6 +176,16 @@ const groups = [
   .lh__meta > div { display: flex; justify-content: space-between; gap: 1rem; }
   .lh__meta dt { font-size: var(--fs-xs); color: var(--c-ink-soft); }
   .lh__meta dd { margin: 0; font-size: var(--fs-xs); font-weight: 700; color: var(--c-navy); }
+  .lh__zones { display: grid; gap: clamp(1rem,2vw,1.4rem); margin-top: clamp(1.6rem,3vw,2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px),1fr)); }
+  .lh__zone { background: #fff; border: 1px solid var(--c-line); border-radius: 16px;
+    padding: clamp(1.3rem,2vw,1.7rem); box-shadow: 0 10px 30px rgba(50,61,78,.05); }
+  .lh__zone h3 { margin: .45rem 0 0; color: var(--c-navy); font-size: clamp(1.05rem,1rem + .35vw,1.25rem); }
+  .lh__areas { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .lh__areas li { font-size: var(--fs-xs); color: var(--c-navy); background: var(--c-sand-soft);
+    border-radius: 8px; padding: .3rem .6rem; }
+  .lh__landmarks { margin: .9rem 0 0; font-size: var(--fs-xs); color: var(--c-ink-soft); line-height: 1.6; }
+  .lh__landmarks strong { color: var(--c-navy); }
   .lh__card em { margin-top: .9rem; font-style: normal; font-family: var(--font-display);
     font-weight: 700; font-size: var(--fs-sm); color: var(--c-orange-dark); }
 </style>

@@ -1,0 +1,142 @@
+{
+  "zones": [
+    {
+      "name": "East Dubai and Silicon Oasis",
+      "emirate": "Dubai",
+      "drive": "20–35 min",
+      "areas": [
+        "Mirdif",
+        "Al Rashidiya",
+        "Al Warqa",
+        "Al Mizhar",
+        "Al Khawaneej",
+        "Muhaisnah",
+        "Al Qusais",
+        "Al Nahda Dubai",
+        "International City",
+        "Dubai Silicon Oasis",
+        "Academic City",
+        "Nad Al Hamar",
+        "Ras Al Khor"
+      ],
+      "landmarks": "City Centre Mirdif, Dragon Mart, Dubai Silicon Oasis hotels"
+    },
+    {
+      "name": "Dubailand and the inland communities",
+      "emirate": "Dubai",
+      "drive": "25–45 min",
+      "areas": [
+        "Arabian Ranches",
+        "Damac Hills",
+        "Town Square",
+        "Motor City",
+        "Dubai Sports City",
+        "Al Barari",
+        "Meydan",
+        "Nad Al Sheba",
+        "Dubai Hills Estate",
+        "Jumeirah Golf Estates"
+      ],
+      "landmarks": "Global Village, IMG Worlds of Adventure, Meydan Racecourse"
+    },
+    {
+      "name": "Deira, Bur Dubai and the airport",
+      "emirate": "Dubai",
+      "drive": "30–45 min",
+      "areas": [
+        "Deira",
+        "Bur Dubai",
+        "Al Karama",
+        "Oud Metha",
+        "Al Fahidi",
+        "Al Seef",
+        "Al Jaddaf",
+        "Dubai Healthcare City",
+        "Dubai Creek Harbour",
+        "Dubai Festival City",
+        "Al Garhoud",
+        "Dubai International Airport (DXB)",
+        "Port Rashid"
+      ],
+      "landmarks": "Gold Souk, Dubai Frame, Dubai Creek, Festival City Mall"
+    },
+    {
+      "name": "Downtown, Business Bay and Jumeirah",
+      "emirate": "Dubai",
+      "drive": "35–55 min",
+      "areas": [
+        "Downtown Dubai",
+        "Business Bay",
+        "DIFC",
+        "Sheikh Zayed Road",
+        "Za'abeel",
+        "City Walk",
+        "Al Wasl",
+        "Jumeirah",
+        "La Mer",
+        "Umm Suqeim",
+        "Madinat Jumeirah",
+        "Al Safa",
+        "Dubai Design District",
+        "Al Quoz"
+      ],
+      "landmarks": "Burj Khalifa, The Dubai Mall, Museum of the Future, Burj Al Arab"
+    },
+    {
+      "name": "Dubai Marina, JBR and Palm Jumeirah",
+      "emirate": "Dubai",
+      "drive": "45–65 min",
+      "areas": [
+        "Dubai Marina",
+        "JBR",
+        "Bluewaters Island",
+        "Dubai Harbour",
+        "Palm Jumeirah",
+        "JLT",
+        "Al Sufouh",
+        "Dubai Media City",
+        "Dubai Internet City",
+        "Al Barsha",
+        "Barsha Heights",
+        "Jumeirah Village Circle",
+        "Jumeirah Village Triangle"
+      ],
+      "landmarks": "Atlantis The Palm, Ain Dubai, The Walk at JBR, Mall of the Emirates"
+    },
+    {
+      "name": "Jebel Ali and Dubai South",
+      "emirate": "Dubai",
+      "drive": "50–75 min",
+      "areas": [
+        "Jebel Ali",
+        "Jebel Ali Free Zone",
+        "Discovery Gardens",
+        "The Gardens",
+        "Dubai Investments Park",
+        "Expo City Dubai",
+        "Dubai South"
+      ],
+      "landmarks": "Ibn Battuta Mall, Jebel Ali beach hotels, Expo City Dubai"
+    },
+    {
+      "name": "Sharjah city",
+      "emirate": "Sharjah",
+      "drive": "35–55 min",
+      "areas": [
+        "Al Majaz",
+        "Al Khan",
+        "Al Taawun",
+        "Al Nahda Sharjah",
+        "Al Qasimia",
+        "Rolla",
+        "Al Heera",
+        "Muwaileh",
+        "University City",
+        "Al Zahia",
+        "Aljada",
+        "Sharjah Airport (SHJ)"
+      ],
+      "landmarks": "Al Qasba, Al Majaz Waterfront, Al Noor Island"
+    }
+  ]
+}

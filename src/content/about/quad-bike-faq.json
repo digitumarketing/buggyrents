@@ -59,8 +59,8 @@
     },
     {
       "tag": "Pickup",
-      "value": "Free",
-      "note": "Anywhere inside Dubai."
+      "value": "AED 300",
+      "note": "Anywhere in Dubai and Sharjah. Self-drive is free."
     },
     {
       "tag": "Rating",
@@ -226,7 +226,7 @@
     },
     {
       "q": "Do you pick up from hotels?",
-      "a": "Yes, as an option. {pickupVehicle} Free pickup applies to desert safari bookings only. Outside Dubai we quote the transfer before you commit."
+      "a": "Yes, as an option. {pickupVehicle} Free pickup applies to desert safari bookings only. Outside Dubai and Sharjah we quote the transfer before you commit."
     },
     {
       "q": "What should I wear for quad biking?",

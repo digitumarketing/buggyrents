@@ -46,7 +46,7 @@ const templates = [
 const faqs = [
   { q: 'How fast do you reply?', a: 'WhatsApp is usually within minutes during the day. We are open 7am to 11pm, so evening messages still get picked up, though a reply may take a little longer.' },
   { q: 'Do I have to pay to reserve a slot?', a: `No deposit on standard bookings. ${payment.summary} Nothing is due when you message us.` },
-  { q: 'Can you collect from my hotel?', a: `${transfers.summary} Outside Dubai we quote the transfer before you commit, so there is no surprise on the day.` },
+  { q: 'Can you collect from my hotel?', a: `${transfers.summary} Outside Dubai and Sharjah we quote the transfer before you commit, so there is no surprise on the day.` },
   { q: 'What should I include in my first message?', a: 'Date, how many people are riding, and their ages. Ages decide which machines are even an option, so it saves a round of questions.' },
   { q: 'Can I change or cancel after booking?', a: 'Free cancellation up to 24 hours before your slot. Inside 24 hours, message us anyway. Our first move is to find you another date rather than charge you.' },
   { q: 'Do you handle large or corporate groups?', a: 'Yes. Group bookings are quoted separately so vehicles and guides can be planned properly. Send the headcount and date and we will come back with options.' }
@@ -92,7 +92,7 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
           <h1 id="ct-hero-h">Talk to the people who <em>actually run the base</em></h1>
           <p class="ct__hero-lede">Not a call centre and not a booking agency. WhatsApp reaches the team at Al Awir who will be handing you a helmet.</p>
           <div class="ct__status">
-            <p class="ct__status-item">Open 7am to 11pm. Safari pickup inside Dubai is free, buggy and quad pickup is AED 300</p>
+            <p class="ct__status-item">Open 7am to 11pm. Safari pickup inside Dubai and Sharjah is free, buggy and quad pickup is AED 300</p>
             <p class="ct__status-item">No deposit. You pay at the base before you ride</p>
             <p class="ct__status-item">Free cancellation up to 24 hours before your slot</p>
           </div>
@@ -198,7 +198,7 @@ const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}&hl
             </a>
           </dd>
           <dt>Hours</dt><dd>7am to 11pm, seven days a week</dd>
-          <dt>Pickup</dt><dd>{transfers.summary} Outer emirates are quoted before you commit.</dd>
+          <dt>Pickup</dt><dd>{transfers.summary} Other emirates are quoted before you commit.</dd>
         </dl>
         <div class="ct__map-frame">
           <iframe src={mapSrc} title="Buggy Rents base location on the Dubai to Hatta road"

@@ -274,12 +274,14 @@ camel ride 100, group bookings custom.
 
 **PICKUP IS TWO RULES, NOT ONE. Changed 19 Sep 2026 on client instruction.**
 
-| Service | Pickup inside Dubai |
+| Service | Pickup inside Dubai **and Sharjah** |
 |---|---|
 | Desert safari | **Free**, as it always was. The 4x4 is collecting you anyway. |
 | Dune buggy, quad bike, KTM dirt bike | **Optional, AED 300.** Self-drive to the base is free. |
 
-Outer emirates are quoted on both. Before this date there was one rule and one string, so
+**Sharjah joined Dubai on 5 Nov 2026** (client: "pickup rate same hi ha"); until then it was quoted.
+`standardPickup()` in `src/data/locationPages.ts` is the one place that decides which emirates get
+this rule. Ajman, Abu Dhabi and Ras Al Khaimah are quoted on both. Before this date there was one rule and one string, so
 every vehicle page inherited the safari promise. `transfers.summary` is now the safari line
 and `transfers.vehicle` the vehicle line; in CMS copy the tokens are `{pickup}` and
 `{pickupVehicle}`. **Never write "free pickup" on a buggy, quad or dirt bike surface again.**

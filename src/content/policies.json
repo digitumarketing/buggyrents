@@ -79,8 +79,8 @@
       "note": "Message on WhatsApp with group size and date"
     }
   ],
-  "transfersSummary": "Hotel pickup and drop-off within Dubai is free on every desert safari booking.",
-  "transfersOutsideDubai": "Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.",
+  "transfersSummary": "Hotel pickup and drop-off within Dubai and Sharjah is free on every desert safari booking.",
+  "transfersOutsideDubai": "Transfers from Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.",
   "paymentMethods": [
     "Cash",
     "Card",

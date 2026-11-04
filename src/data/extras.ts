@@ -12,7 +12,7 @@
  * Two rules the client cannot see in the CMS but the build enforces:
  * - No insurance claim, and no mention of its absence either. See CLAUDE.md.
  * - PICKUP IS NOT ONE RULE ANY MORE. Changed 19 Sep 2026 on client instruction.
- *   Desert safari: hotel pickup and drop-off inside Dubai is FREE, as before.
+ *   Desert safari: hotel pickup and drop-off inside Dubai and Sharjah is FREE, as before.
  *   Buggy, quad and dirt bike: pickup is OPTIONAL and costs AED 300. Self-drive
  *   to the base is free. Never write "free pickup" on a vehicle page again.
  *   Outer emirates stay quoted on both. `transfers.summary` is the SAFARI line

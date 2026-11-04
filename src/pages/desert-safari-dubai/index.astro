@@ -30,7 +30,7 @@ const h = hero('desert-safari-dubai-hero-dune-bashing');
 const fin = img('private-desert-safari-4x4-dubai-red-dunes', 'safari');
 
 const included = [
-  { h: 'Hotel pickup and drop-off', p: `${transfers.summary} Outer emirates are quoted before you book.` },
+  { h: 'Hotel pickup and drop-off', p: `${transfers.summary} Other emirates are quoted before you book.` },
   { h: 'Dune bashing in a 4x4', p: 'A trained driver takes the red dunes. You are a passenger, which is the whole point of a safari.' },
   { h: 'Camel ride and sandboarding', p: 'Both included on the shared packages. No extra charge and no upsell at the camp.' },
   { h: 'Halal BBQ dinner', p: 'Vegetarian options are always available. Tell us about allergies when you book.' },
@@ -39,7 +39,7 @@ const included = [
 ];
 
 const steps = [
-  { label: 'Pickup', h: 'We collect you', p: 'Free anywhere inside Dubai. Afternoon for the evening safari, before dawn for the morning one.' },
+  { label: 'Pickup', h: 'We collect you', p: 'Free anywhere in Dubai and Sharjah. Afternoon for the evening safari, before dawn for the morning one.' },
   { label: 'Dunes', h: 'Dune bashing', p: 'Forty minutes or so across the red dunes at Lahbab, with a stop at the top for photos.' },
   { label: 'Camp', h: 'Bedouin camp', p: 'Camel ride, sandboarding, henna and Arabic coffee before the light goes.' },
   { label: 'Dinner', h: 'BBQ and shows', p: 'Halal buffet, then belly dance, tanoura and fire show under the lights.' },
@@ -53,7 +53,7 @@ const faqs = [
   { q: 'Is dune bashing safe for children?', a: 'Yes, and children usually enjoy it most. Tell us their ages when you book. If anyone in the group gets motion sick, ask for a gentler drive and the driver will adjust.' },
   { q: 'Can I do a safari without dune bashing?', a: 'Yes. Tell us when you book and the driver takes a calmer route to the camp. Guests who are pregnant, have back problems or simply do not enjoy it take this option regularly.' },
   { q: 'Is the food halal?', a: 'Yes, the BBQ dinner is halal. Vegetarian options are always available. Tell us about allergies or dietary needs when you book so the camp knows in advance.' },
-  { q: 'Do you pick up from the hotel?', a: `${transfers.summary} Outside Dubai we quote the transfer before you commit.` },
+  { q: 'Do you pick up from the hotel?', a: `${transfers.summary} Outside Dubai and Sharjah we quote the transfer before you commit.` },
   { q: 'Can I add a buggy or quad to a safari?', a: `Yes, and it is the most popular combination we run. A quad and safari combo starts at AED 199. A buggy with BBQ dinner starts at AED 450. Ask on WhatsApp and we will price your group.` }
 ];
 
@@ -118,7 +118,7 @@ const children = [
         <p class="pl__hero-subhead">Someone else drives. Dune bashing, a Bedouin camp, halal BBQ dinner and live shows.</p>
         <p class="pl__hero-lede">
           {sharedSafaris.length + privateSafaris.length} packages across evening, morning, overnight and private safaris.
-          Free hotel pickup inside Dubai, no deposit, and you pay at the base or on the day.
+          Free hotel pickup inside Dubai and Sharjah, no deposit, and you pay at the base or on the day.
         </p>
         <div class="pl__hero-actions">
           <a class="btn btn--primary btn--lg" href={waLink('Hi Buggy Rents! I would like to book a desert safari. Could you send options?')}>Ask for safari options</a>

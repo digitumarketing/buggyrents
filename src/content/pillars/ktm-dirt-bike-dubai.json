@@ -39,7 +39,7 @@
     {
       "label": "Pickup",
       "h": "Optional pickup, AED 300",
-      "p": "Hotel pickup within Dubai is included, or self-drive directions to the Al Awir base."
+      "p": "Drive yourself to the Al Awir base for free, or add hotel pickup within Dubai and Sharjah for {pickupPrice}."
     },
     {
       "label": "Briefing",
@@ -92,7 +92,7 @@
     },
     {
       "q": "How much is hotel pickup?",
-      "a": "Pickup and drop-off within Dubai is optional and costs AED 300, and driving yourself to the Al Awir base costs nothing. Free pickup applies to desert safari bookings only. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking."
+      "a": "Pickup and drop-off within Dubai and Sharjah is optional and costs AED 300, and driving yourself to the Al Awir base costs nothing. Free pickup applies to desert safari bookings only. Transfers from Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking."
     },
     {
       "q": "How and when do I pay?",
@@ -121,7 +121,7 @@
     },
     {
       "h": "Safety, gear and conditions",
-      "html": "<p class=\"lf-lead\">Helmet included and mandatory. Long trousers and ankle-covering shoes strongly recommended.</p><p>Guides carry recovery gear and stay with you throughout. If wind, heat or visibility make the route unsafe we contact you before you travel and reschedule at no cost. If no alternative date works, you get a full refund.</p><p>Driving yourself to the base is free, and pickup and drop-off within Dubai is optional at AED 300. Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.</p>"
+      "html": "<p class=\"lf-lead\">Helmet included and mandatory. Long trousers and ankle-covering shoes strongly recommended.</p><p>Guides carry recovery gear and stay with you throughout. If wind, heat or visibility make the route unsafe we contact you before you travel and reschedule at no cost. If no alternative date works, you get a full refund.</p><p>Driving yourself to the base is free, and pickup and drop-off within Dubai and Sharjah is optional at AED 300. Transfers from Ajman, Abu Dhabi and Ras Al Khaimah are quoted with the booking.</p>"
     },
     {
       "h": "Booking and payment",

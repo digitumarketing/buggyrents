@@ -89,7 +89,7 @@ export type SafariPageDef = {
 /* Shared sentences. These sit here rather than in each page for the same reason the
    ten location pages share theirs: a correction should be one edit, not six, and six
    copies drift into reading like six different companies inside a year. */
-const pickupLine = `${transfers.summary} Outer emirates are quoted before you book.`;
+const pickupLine = `${transfers.summary} Other emirates are quoted before you book.`;
 const payLine = `${payment.summary} Nothing is due when you book.`;
 const cancelLine = policy.cancellation;
 
@@ -129,7 +129,7 @@ export const safariPages: SafariPageDef[] = [
       'The dune drive and the route are the same on all three. What changes is where you sit at the camp, ' +
       'what is on the buffet, and whether a quad ride is bundled in.',
     included: [
-      'Hotel pickup and drop-off, free anywhere inside Dubai',
+      'Hotel pickup and drop-off, free anywhere in Dubai and Sharjah',
       'Dune bashing in a 4x4 with a trained desert driver',
       'Sunset photo stop on the Lahbab red dunes',
       'Camel ride and sandboarding at the camp',
@@ -216,7 +216,7 @@ export const safariPages: SafariPageDef[] = [
       'A shared morning safari needs a full vehicle of guests willing to be collected before dawn, which ' +
       'rarely fills. We run the morning as a private Land Cruiser instead, priced per vehicle rather than per head.',
     included: [
-      'Private hotel pickup and drop-off, free anywhere inside Dubai',
+      'Private hotel pickup and drop-off, free anywhere in Dubai and Sharjah',
       'Private Land Cruiser with a desert-trained driver',
       'Morning dune bashing on the Lahbab red dunes',
       'Sunrise photo stop on the dunes',
@@ -307,7 +307,7 @@ export const safariPages: SafariPageDef[] = [
       'The evening programme, a night in the camp and the morning after. Priced per person, and it is the ' +
       'only safari we run where the sunrise is included rather than being a separate booking.',
     included: [
-      'Hotel pickup and drop-off, free anywhere inside Dubai',
+      'Hotel pickup and drop-off, free anywhere in Dubai and Sharjah',
       'Dune bashing in a 4x4 on the way out',
       'Halal BBQ dinner and the full evening show programme',
       'Overnight stay in the Bedouin camp',
@@ -323,7 +323,7 @@ export const safariPages: SafariPageDef[] = [
     flowH2: 'Afternoon pickup to breakfast the next day.',
     flowLede: 'Sixteen hours door to door. The evening half matches the standard evening safari.',
     flow: [
-      { h: 'Pickup around 3pm', p: 'Same collection as the evening safari, from your hotel or address anywhere inside Dubai.' },
+      { h: 'Pickup around 3pm', p: 'Same collection as the evening safari, from your hotel or address anywhere in Dubai and Sharjah.' },
       { h: 'Dune bashing and sunset', p: 'The drive across the Lahbab red dunes with the sunset photo stop on the way to the camp.' },
       { h: 'Dinner and the shows', p: 'Halal BBQ buffet, then belly dance, tanoura and the fire show under the lights.' },
       { h: 'The camp goes quiet', p: 'Once the day visitors leave, the camp empties and the noise stops. This is the part you actually booked, and it is not on any other package.' },
@@ -398,7 +398,7 @@ export const safariPages: SafariPageDef[] = [
       'ATV and quad bike mean the same machine, and both packages below bundle a ride into the safari. ' +
       'The more expensive one upgrades the seating and the buffet, not the quad.',
     included: [
-      'Hotel pickup and drop-off, free anywhere inside Dubai',
+      'Hotel pickup and drop-off, free anywhere in Dubai and Sharjah',
       'Dune bashing in a 4x4 with a trained driver',
       'Quad bike ride at the camp with a helmet and a briefing',
       'Camel ride and sandboarding',
@@ -414,7 +414,7 @@ export const safariPages: SafariPageDef[] = [
     flowH2: 'Pickup, dune drive, then your turn.',
     flowLede: 'The safari runs as normal and the quad session sits inside it, at the camp.',
     flow: [
-      { h: 'Pickup around 3pm', p: 'Collection from your hotel or address, free anywhere inside Dubai.' },
+      { h: 'Pickup around 3pm', p: 'Collection from your hotel or address, free anywhere in Dubai and Sharjah.' },
       { h: 'Dune bashing at Lahbab', p: 'Forty minutes across the red dunes with the driver working. You are a passenger for this part.' },
       { h: 'Briefing at the camp', p: 'Helmet on, controls explained, and a short flat run before anyone opens the throttle. Nobody rides untrained.' },
       { h: 'Your quad session', p: 'Your ride on the marked area beside the camp. A guide rides with the group rather than watching from the side.' },
@@ -496,7 +496,7 @@ export const safariPages: SafariPageDef[] = [
       'Read these totals against your whole group rather than against a per person price. One vehicle costs ' +
       'once no matter how many of you are in it, which is the entire reason to book private.',
     included: [
-      'Private hotel pickup and drop-off, free anywhere inside Dubai',
+      'Private hotel pickup and drop-off, free anywhere in Dubai and Sharjah',
       'Your own vehicle and driver for the whole trip',
       'A dune route the driver adjusts to your group',
       'Camel ride and sandboarding',
@@ -587,7 +587,7 @@ export const safariPages: SafariPageDef[] = [
       'Both packages are priced for the vehicle rather than per head, which is unusual on the shared side and ' +
       'is worth noticing when you compare them with a per person safari.',
     included: [
-      'Hotel pickup and drop-off, free anywhere inside Dubai',
+      'Hotel pickup and drop-off, free anywhere in Dubai and Sharjah',
       'Self-drive dune buggy session with helmet and briefing',
       'Dune bashing in a 4x4 with a trained driver',
       'Camel ride and sandboarding',
@@ -603,7 +603,7 @@ export const safariPages: SafariPageDef[] = [
     flowH2: 'Drive first, then dinner.',
     flowLede: 'The buggy session sits at the front of the evening while the light is still good.',
     flow: [
-      { h: 'Pickup around 3pm', p: 'Collection from your hotel or address, free anywhere inside Dubai.' },
+      { h: 'Pickup around 3pm', p: 'Collection from your hotel or address, free anywhere in Dubai and Sharjah.' },
       { h: 'Briefing and helmets', p: 'Controls, harnesses and the route explained at the base. A flat run first, then the dunes open up.' },
       { h: 'Your buggy session', p: 'You drive, with a lead guide ahead and the group behind. This is the part you are paying the premium for.' },
       { h: 'Hand it back', p: 'The buggy goes back and you get into the 4x4 for the dune bashing, which is a different sensation entirely because now somebody else is working.' },

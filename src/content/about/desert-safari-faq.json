@@ -33,7 +33,7 @@
     { "tag": "From", "value": "AED {safariFrom}", "note": "Shared evening safari, per person." },
     { "tag": "Rating", "value": "{rating}", "note": "From {reviewCount} Google reviews." },
     { "tag": "Guests", "value": "{guests}", "note": "Taken to the desert since {founded}." },
-    { "tag": "Pickup", "value": "Free", "note": "Anywhere inside Dubai." },
+    { "tag": "Pickup", "value": "Free", "note": "Anywhere inside Dubai and Sharjah." },
     { "tag": "Open", "value": "7am to 11pm", "note": "Message any time and we answer." }
   ],
   "introKicker": "01 / Start here",
@@ -77,7 +77,7 @@
     {
       "h": "Included in the price",
       "items": [
-        "Hotel pickup and drop-off, free anywhere inside Dubai",
+        "Hotel pickup and drop-off, free anywhere in Dubai and Sharjah",
         "Dune bashing in a 4x4 with a desert-trained driver",
         "Sunset photo stop on the Lahbab red dunes",
         "Camel ride and sandboarding at the camp",

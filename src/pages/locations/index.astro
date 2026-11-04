@@ -1,6 +1,6 @@
 ---
 /* Locations hub. A simple index over the 10 location pages, grouped by emirate,
-   which is the distinction that actually matters: inside Dubai safari pickup is free and vehicle pickup is AED 300, and
+   which is the distinction that actually matters: inside Dubai and Sharjah safari pickup is free and vehicle pickup is AED 300, and
    everything outside Dubai is quoted. */
 import '@/styles/pillar.css';
 import Base from '@/layouts/Base.astro';
@@ -11,19 +11,20 @@ import { transfers } from '@/data/extras';
 import { buggies, fromPrice } from '@/data/vehicles';
 import { pageTitle } from '@/data/seo';
 import { pickupZones, pickupAreaCount } from '@/data/pickupAreas';
+import { standardPickup } from '@/data/locationPages';
 
 const buggyFrom = Math.min(...buggies.map(fromPrice));
 
 const title = pageTitle('Dune Buggy Pickup Locations in Dubai and the UAE');
-const description = `Hotel pickup from ${pickupAreaCount}+ areas across Dubai and Sharjah. Safari pickup free, buggy and quad AED ${transfers.vehiclePrice}; outer emirates quoted before you book.`;
+const description = `Hotel pickup from ${pickupAreaCount}+ areas across Dubai and Sharjah. Safari pickup free, buggy and quad AED ${transfers.vehiclePrice}; other emirates quoted before you book.`;
 
 const h = hero('dune-buggy-dubai-hero-red-dunes');
 /* A different photo from the hero. Reusing the hero here would put the same image
    twice on one page, which the client has asked us not to do. */
 const fin = img('dune-buggy-convoy-crossing-dubai-red-dunes', 'buggy');
 
-const inDubai = locations.filter(l => l.emirate === 'Dubai');
-const outside = locations.filter(l => l.emirate !== 'Dubai');
+const inDubai = locations.filter(l => standardPickup(l.emirate));
+const outside = locations.filter(l => !standardPickup(l.emirate));
 
 const crumbSchema = { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement: [
   { '@type':'ListItem', position:1, name:'Home', item: site.domain },
@@ -33,8 +34,8 @@ const listSchema = { '@context':'https://schema.org', '@type':'ItemList',
     url: `${site.domain}/locations/${l.slug}/` })) };
 
 const groups = [
-  { key: 'dubai', h: 'Inside Dubai', lede: `${transfers.summary} ${transfers.vehicle} Give us the hotel, tower or villa and we handle the rest.`, list: inDubai },
-  { key: 'outside', h: 'Outside Dubai, transfers are quoted', lede: 'We still collect you. The transfer is priced before you book so there is no surprise on the day.', list: outside }
+  { key: 'dubai', h: 'Dubai and Sharjah', lede: `${transfers.summary} ${transfers.vehicle} Give us the hotel, tower or villa and we handle the rest.`, list: inDubai },
+  { key: 'outside', h: 'Other emirates, transfers are quoted', lede: 'We still collect you. The transfer is priced before you book so there is no surprise on the day.', list: outside }
 ];
 ---
 <Base title={title} description={description}>
@@ -53,7 +54,7 @@ const groups = [
       <div class="pl__hero-copy">
         <p class="pl__eyebrow">Pickup locations</p>
         <h1>Where we <em>collect you from</em></h1>
-        <p class="pl__hero-subhead">Free hotel pickup on desert safari bookings. Optional AED 300 pickup on buggy, quad and dirt bike. Outer emirates quoted before you book.</p>
+        <p class="pl__hero-subhead">Free hotel pickup on desert safari bookings. Optional AED 300 pickup on buggy, quad and dirt bike. Other emirates quoted before you book.</p>
         <p class="pl__hero-lede">
           Every ride starts at our Al Awir base on the Dubai to Hatta road, next to the Lahbab red dunes.
           We collect from any hotel, tower or villa in Dubai and Sharjah. The {locations.length} pages below cover the
@@ -72,7 +73,7 @@ const groups = [
       <div class="pl__shell">
         <header class="pl__section-head">
           <div>
-            <p class="pl__kicker">{gi === 0 ? 'Dubai' : 'Northern emirates'}</p>
+            <p class="pl__kicker">{gi === 0 ? 'Standard pickup' : 'Further afield'}</p>
             <h2>{g.h}</h2>
           </div>
           <p>{g.lede}</p>
@@ -87,7 +88,7 @@ const groups = [
                 <div><dt>Drive time</dt><dd>{l.drive}</dd></div>
                 {/* Was 'Free' for every Dubai card until 5 Nov 2026, on a page whose cards all
                     lead to buggy and quad booking. Free applies to safari only (CLAUDE.md §4). */}
-                <div><dt>Transfer</dt><dd>{l.emirate === 'Dubai' ? `Safari free, vehicles AED ${transfers.vehiclePrice}` : 'Quoted'}</dd></div>
+                <div><dt>Transfer</dt><dd>{standardPickup(l.emirate) ? `Safari free, vehicles AED ${transfers.vehiclePrice}` : 'Quoted'}</dd></div>
               </dl>
               <em>View page &rarr;</em>
             </a>
@@ -106,8 +107,8 @@ const groups = [
           <h2>Every area we pick up from in Dubai and Sharjah</h2>
         </div>
         <p>Give us the hotel name or the building and we collect from the door. Drive times are typical to the
-          Al Awir base and move with traffic. Inside Dubai, pickup is free on a desert safari and AED {transfers.vehiclePrice} on a
-          buggy, quad or dirt bike. Sharjah transfers are quoted before you book.</p>
+          Al Awir base and move with traffic. Anywhere in Dubai and Sharjah, pickup is free on a desert safari and
+          AED {transfers.vehiclePrice} on a buggy, quad or dirt bike.</p>
       </header>
       <div class="lh__zones">
         {pickupZones.map(z => (
@@ -116,7 +117,7 @@ const groups = [
             <h3>{z.name}</h3>
             <dl class="lh__meta">
               <div><dt>Drive to the base</dt><dd>{z.drive}</dd></div>
-              <div><dt>Transfer</dt><dd>{z.emirate === 'Dubai' ? `Safari free, vehicles AED ${transfers.vehiclePrice}` : 'Quoted'}</dd></div>
+              <div><dt>Transfer</dt><dd>`Safari free, vehicles AED ${transfers.vehiclePrice}`</dd></div>
             </dl>
             <ul class="lh__areas">{z.areas.map(a => <li>{a}</li>)}</ul>
             {z.landmarks.length > 0 && <p class="lh__landmarks"><strong>Near:</strong> {z.landmarks.join(', ')}</p>}

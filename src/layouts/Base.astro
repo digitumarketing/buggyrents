@@ -63,11 +63,12 @@ const localBusiness = {
     longitude: site.geo.lng
   },
 
-  /* Dubai is the served city and the outer emirates are quoted, so both are
-     listed and nothing broader is claimed. Pickup pricing differs by service
-     since 19 Sep 2026 and is not a schema concern. See src/data/extras.ts. */
+  /* Dubai and Sharjah are served at the standard pickup rate (client, 5 Nov 2026)
+     and the other emirates are quoted, so the two cities and the country are listed
+     and nothing broader is claimed. See src/data/extras.ts. */
   areaServed: [
     { '@type': 'City', name: 'Dubai' },
+    { '@type': 'City', name: 'Sharjah' },
     { '@type': 'Country', name: 'United Arab Emirates' }
   ],
 

@@ -54,8 +54,8 @@
     },
     {
       "tag": "Pickup",
-      "value": "Free",
-      "note": "Anywhere inside Dubai."
+      "value": "AED 300",
+      "note": "Anywhere in Dubai and Sharjah. Self-drive is free."
     },
     {
       "tag": "Deposit",
@@ -74,7 +74,7 @@
   "introBody": [
     "<strong>Prices are per buggy, not per person.</strong> This is the single biggest source of confusion, and it works in your favour. A two seater at AED {buggyFrom} for 30 minutes is AED {buggyFrom} for the buggy. Two people riding together pay AED 150 each. A four seater at AED 350 split four ways is under AED 90 a head, which is why groups almost always take the bigger machine.",
     "<strong>Duration matters more than the model.</strong> We run 30 minutes, 1 hour and 2 hours. Thirty minutes is a genuine taste of the dunes and it suits people fitting it around other plans. An hour is the sweet spot for most first timers. Two hours is for people who already know they like this.",
-    "<strong>Pickup is optional, not included.</strong> {pickupVehicle} Free pickup applies to desert safari bookings, where the 4x4 is collecting you anyway. It means the price you see is close to the price you pay. Outside Dubai we quote the transfer before you commit.",
+    "<strong>Pickup is optional, not included.</strong> {pickupVehicle} Free pickup applies to desert safari bookings, where the 4x4 is collecting you anyway. It means the price you see is close to the price you pay. Outside Dubai and Sharjah we quote the transfer before you commit.",
     "Everything else, model choice, seat count, time of day, is preference rather than cost. Ask us on WhatsApp and we will narrow it down in a couple of messages."
   ],
   "minis": [
@@ -91,7 +91,7 @@
     {
       "n": "03",
       "h": "Optional pickup AED 300",
-      "p": "Hotel, tower or villa anywhere inside Dubai, at no extra cost."
+      "p": "Hotel, tower or villa anywhere in Dubai and Sharjah. Driving yourself to the base costs nothing."
     }
   ],
   "confirmKicker": "02 / Before you book",
@@ -137,7 +137,7 @@
     {
       "tag": "Pickup",
       "h": "Do you collect from my hotel?",
-      "p": "Free anywhere inside Dubai. Outer emirates are quoted before you book so there is no surprise."
+      "p": "Yes, anywhere in Dubai and Sharjah for {pickupPrice}, or drive yourself to the base for free. Other emirates are quoted before you book so there is no surprise."
     },
     {
       "tag": "Booking",
@@ -222,7 +222,7 @@
     },
     {
       "q": "Do you pick up from hotels?",
-      "a": "Yes, as an option. {pickupVehicle} Free pickup applies to desert safari bookings only. Outside Dubai we quote the transfer before you commit."
+      "a": "Yes, as an option. {pickupVehicle} Free pickup applies to desert safari bookings only. Outside Dubai and Sharjah we quote the transfer before you commit."
     },
     {
       "q": "When is the best time to go?",

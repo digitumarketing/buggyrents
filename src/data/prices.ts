@@ -34,7 +34,7 @@ const includedBase = [
 ];
 const checkBase = [
   'Minimum age varies by vehicle. Bring photo ID for the booking record.',
-  'Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted separately.',
+  'Transfers from Ajman, Abu Dhabi and Ras Al Khaimah are quoted separately.',
   'Pregnant guests and anyone with back, neck, heart or recent-surgery concerns should not ride.',
   `Free cancellation up to ${policy.cancellationHours} hours before your slot.`
 ];
@@ -46,7 +46,7 @@ const flowFor = (safari: boolean) => [
   { h: 'Get the total', p: 'We reply with availability and the full price in AED. Nothing hidden, nothing added later.' },
   { h: 'Confirm the slot', p: 'No deposit on standard bookings. Your slot is held once you confirm.' },
   safari
-    ? { h: 'Get collected', p: 'Free hotel pickup within Dubai, arranged when you book.' }
+    ? { h: 'Get collected', p: 'Free hotel pickup within Dubai and Sharjah, arranged when you book.' }
     : { h: 'Get to the base', p: `Drive yourself to Al Awir with the directions we send, or add pickup and drop-off for AED ${transfers.vehiclePrice}.` },
   { h: 'Pay at the base', p: payment.summary }
 ];
@@ -227,7 +227,7 @@ export const safariPrices: PriceGuideData = {
       rows: addOns.filter(a => a.price !== null).map(a => ({ name: a.name, spec: a.note, cells: [a.price as number] })) }
   ],
   included: [
-    'Free hotel pickup and drop-off within Dubai in an air-conditioned 4x4.',
+    'Free hotel pickup and drop-off within Dubai and Sharjah in an air-conditioned 4x4.',
     'Dune bashing across the Lahbab red dunes with an experienced driver.',
     'Sunset photo stop at the best light of the day.',
     'Camel ride, sandboarding and Arabic coffee at the camp.',
@@ -235,7 +235,7 @@ export const safariPrices: PriceGuideData = {
   ],
   checkBefore: [
     'Shared packages are priced per person. Private packages are priced per vehicle.',
-    'Transfers from Sharjah, Ajman, Abu Dhabi and Ras Al Khaimah are quoted separately.',
+    'Transfers from Ajman, Abu Dhabi and Ras Al Khaimah are quoted separately.',
     'Dune bashing is not suitable for pregnant guests or anyone with back or neck concerns. Ask about the no-dune-bashing option.',
     `Free cancellation up to ${policy.cancellationHours} hours before your slot.`
   ],

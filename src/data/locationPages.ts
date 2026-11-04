@@ -6,13 +6,16 @@ import { transfers, policy, payment } from '@/data/extras';
 import { site } from '@/data/site';
 import { pageTitle, tidy } from '@/data/seo';
 
-const inDubai = (l: Location) => l.emirate === 'Dubai';
+/* Dubai and Sharjah share the standard pickup rule since 5 Nov 2026 (client: pickup
+   from anywhere in either, same rate). Every other emirate is quoted. */
+export const standardPickup = (emirate: string) => emirate === 'Dubai' || emirate === 'Sharjah';
+const inDubai = (l: Location) => standardPickup(l.emirate);
 
 export function locationData(l: Location): LocationData {
   const free = inDubai(l);
   /* Pickup stopped being one rule on 19 Sep 2026. Inside Dubai, desert safari
      pickup is free and buggy, quad and dirt bike pickup is an optional AED 300.
-     Outside Dubai everything is quoted. These pages sell all three services, so
+     Outside Dubai and Sharjah everything is quoted. These pages sell all three services, so
      they have to say both rather than pick one. See src/data/extras.ts. */
   const transferLine = free
     ? `Free hotel pickup on desert safari bookings. On buggy, quad and dirt bike, pickup and drop-off is optional at AED ${transfers.vehiclePrice}, and driving yourself costs nothing.`
@@ -24,7 +27,7 @@ export function locationData(l: Location): LocationData {
     description: tidy(`${l.drive} from ${l.short} to the Lahbab red dunes. Buggy, quad and desert safari, self-drive or ${free ? `AED ${transfers.vehiclePrice}` : 'quoted'} pickup. Per vehicle from AED ${fromPrice(quads[0])}.`),
     heroImage: 'desert-adventure-dubai-hero-canam-maverick',
     finalImage: 'dune-buggy-dubai-hero-red-dunes',
-    kicker: free ? 'Dubai pickup planning' : 'Outer emirate pickup planning',
+    kicker: free ? `${l.emirate} pickup planning` : 'Outer emirate pickup planning',
     h1Lead: 'Dune Buggy and Quad Pickup from', h1Em: l.short,
     lede: `${l.intro} Prices are per vehicle rather than per person, and ${free ? `you can drive to the base for nothing or add pickup for AED ${transfers.vehiclePrice}` : 'the transfer is quoted before you pay'}.`,
     chips: [l.drive, free ? `Pickup AED ${transfers.vehiclePrice}` : 'Transfer quoted', 'Lahbab red dunes', '7am to 11pm'],
@@ -32,7 +35,7 @@ export function locationData(l: Location): LocationData {
       kicker: 'Pickup route',
       title: `${l.short} to Lahbab`,
       sub: free
-        ? 'Pickup and return are included, and confirmed on WhatsApp before the day.'
+        ? `Safari pickup is free; buggy, quad and dirt bike pickup is AED ${transfers.vehiclePrice}. Confirmed on WhatsApp before the day.`
         : 'Transfer and return timing are quoted before payment.',
       points: [
         `Share the exact hotel, tower, villa or lobby in ${l.short} before the day.`,
@@ -42,9 +45,11 @@ export function locationData(l: Location): LocationData {
     },
     /* Matches the reference stats strip: area, desert, transfer, WhatsApp. */
     stats: [
-      { label: 'Area', value: l.short, sub: free ? 'Dubai' : `${l.emirate}, outer emirate` },
+      { label: 'Area', value: l.short, sub: free ? l.emirate : `${l.emirate}, outer emirate` },
       { label: 'Main desert', value: 'Lahbab', sub: 'Red-dune activity zone southeast of Dubai' },
-      { label: 'Transfer', value: free ? 'Free' : 'Quote', sub: free ? 'Included in every booking' : 'Quoted before payment' },
+      /* Was 'Free / Included in every booking' until 5 Nov 2026, on pages that sell
+         buggies and quads, where pickup costs AED 300. */
+      { label: 'Transfer', value: free ? `AED ${transfers.vehiclePrice}` : 'Quote', sub: free ? 'Buggy and quad. Free on safari' : 'Quoted before payment' },
       { label: 'WhatsApp', value: 'Current', sub: site.phone }
     ],
     fitH2: `${l.short} works best when the pickup point is confirmed first.`,
@@ -90,9 +95,9 @@ export function locationData(l: Location): LocationData {
     faqs: [
       { q: `Is pickup available from ${l.short}?`, a: free
           ? `Yes. On a desert safari it is free. On a buggy, quad or dirt bike booking it is optional and costs AED ${transfers.vehiclePrice}, because the vehicle stays at the base and the transfer is a separate run. Driving yourself to Al Awir costs nothing and there is parking. Send your ${l.short} address or a map pin either way.`
-          : `Yes. ${l.short} is outside Dubai, so the transfer is quoted with the booking rather than included. You will always see the total before paying anything.` },
+          : `Yes. ${l.short} is outside Dubai and Sharjah, so the transfer is quoted with the booking rather than included. You will always see the total before paying anything.` },
       { q: `How long is the drive from ${l.short}?`, a: `Around ${l.drive} each way to our Al Awir base on the Dubai-Hatta road. Allow longer on Friday afternoons and public holidays.` },
-      { q: `Which activity suits a trip from ${l.short}?`, a: l.drive.includes('9') || l.drive.includes('8') || l.emirate !== 'Dubai'
+      { q: `Which activity suits a trip from ${l.short}?`, a: l.drive.includes('9') || l.drive.includes('8') || !free
           ? `Given the drive, book at least an hour. A 30-minute session rarely justifies the travel time from ${l.short}. Many guests pair a buggy or quad session with an evening safari to make one trip out of it.`
           : `Anything works from ${l.short} given the short drive. First-timers do well on a Polaris RZR buggy or a boundary-area quad; experienced riders take the Can-Am or the Raptor 700.` },
       { q: 'Can I drive myself instead?', a: `Yes. There is parking at the Al Awir base and we send directions after confirmation. From ${l.short} that is roughly ${l.drive}.` },

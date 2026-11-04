@@ -87,7 +87,7 @@ Read this before quoting any figure from this file.
 - Hotel pickup: from any hotel, tower or villa in Dubai and Sharjah. The pickup areas list below names the districts.
 - Pickup, desert safari: ${transfers.summary}
 - Pickup, dune buggy, quad bike and dirt bike: ${transfers.vehicle}
-- Pickup, outside Dubai: ${transfers.outsideDubai}
+- Pickup, other emirates: ${transfers.outsideDubai}
 - Payment: ${payment.summary}
 - Cancellation: ${policy.cancellation}
 - Weather: ${policy.weather}
@@ -137,7 +137,7 @@ ${safariPages.map(p => `- [${[p.h1Lead, p.h1Em, p.h1Tail].filter(Boolean).join('
 
 ${locations.map(l => `- [${l.name}](${url(`/locations/${l.slug}/`)})`).join('\n')}
 
-Every area we collect from, by zone. Typical drive to the Al Awir base in brackets; Dubai pickup is free on safari and AED ${transfers.vehiclePrice} on buggy, quad and dirt bike; Sharjah is quoted.
+Every area we collect from, by zone. Typical drive to the Al Awir base in brackets; pickup anywhere in Dubai and Sharjah is free on safari and AED ${transfers.vehiclePrice} on buggy, quad and dirt bike.
 
 ${pickupZones.map(z => `- ${z.name}, ${z.emirate} (${z.drive}): ${z.areas.join(', ')}.`).join('\n')}
 

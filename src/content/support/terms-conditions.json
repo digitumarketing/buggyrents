@@ -113,8 +113,8 @@
     },
     {
       "tag": "Transfers",
-      "h": "Free inside Dubai",
-      "p": "{pickup} Outer emirates are quoted before you commit."
+      "h": "Pickup in Dubai and Sharjah",
+      "p": "{pickup} {pickupVehicle} Other emirates are quoted before you commit."
     },
     {
       "tag": "Timing",

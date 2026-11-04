@@ -1,12 +1,12 @@
 {
   "category": "buggy",
   "crumb": "Dune Buggy Dubai",
-  "title": "Dune Buggy Rental Dubai | Self-Drive from AED {buggyFrom}",
-  "description": "Dune buggy rental in Dubai, self-drive in the Lahbab red dunes. Eleven buggies from AED {buggyFrom} per buggy, not per person. Guide included, optional pickup.",
-  "eyebrow": "Buggy rental and dune buggy tours in Dubai",
-  "h1": "Dune Buggy Rental Dubai, Self-Drive in the Lahbab Red Dunes",
+  "title": "Dune Buggy Dubai | Self-Drive Tours from AED {buggyFrom}",
+  "description": "Dune buggy Dubai tours you drive yourself in the Lahbab red dunes. Eleven Polaris and Can-Am buggies from AED {buggyFrom} per buggy, with a lead guide on every ride.",
+  "eyebrow": "Dune buggy tours and rides in Dubai",
+  "h1": "Dune Buggy Dubai: Self-Drive Tours in the Lahbab Red Dunes",
   "subhead": "Self-drive dune buggy tours in the Lahbab red dunes, with Polaris and Can-Am machines for every level.",
-  "lede": "Choose a 30-minute, 1-hour, 2-hour or 4-hour guided dune buggy ride with helmet, briefing, fuel and a lead guide included. Buggy rental Dubai prices are per buggy rather than per person, so a 2-seater at AED {buggyFrom} covers both of you.",
+  "lede": "Choose a 30-minute, 1-hour or 2-hour guided dune buggy ride with helmet, briefing, fuel and a lead guide included. Dune buggy tour prices are per buggy rather than per person, so a 2-seater at AED {buggyFrom} covers both of you.",
   "stats": [],
   "fleetKicker": "01 / Buggy fleet",
   "fleetH2": "Choose your dune buggy.",
@@ -39,7 +39,7 @@
     {
       "label": "Pickup",
       "h": "Optional pickup, AED 300",
-      "p": "Hotel pickup within Dubai is included, or self-drive directions to the Al Awir base."
+      "p": "Drive yourself to the Al Awir base for free, or add hotel pickup within Dubai for {pickupPrice}."
     },
     {
       "label": "Briefing",
@@ -64,7 +64,7 @@
   ],
   "faqKicker": "04 / FAQ",
   "faqH2": "Answers before you book.",
-  "faqLede": "Clear answers on buggy rental Dubai prices, who can drive, what is included and how pickup works.",
+  "faqLede": "Clear answers on dune buggy tour prices, who can drive, what is included and how pickup works.",
   "faqs": [
     {
       "q": "How much is a dune buggy in Dubai?",
@@ -109,7 +109,7 @@
   ],
   "lfKicker": "05 / Guide",
   "lfHeading": "Dune Buggy Dubai: self-drive routes, prices and vehicle choice in the Lahbab red dunes",
-  "lfIntro": "Everything you need before booking <strong>dune buggy Dubai</strong>: the eleven-machine fleet, what separates a Polaris from a Can-Am, current <strong>buggy rental Dubai</strong> prices, and how the guided <strong>dune buggy tour</strong> through the red dunes actually runs.",
+  "lfIntro": "Everything you need before booking <strong>dune buggy Dubai</strong>: the eleven-machine fleet, what separates a Polaris from a Can-Am, current prices, and how the guided <strong>dune buggy tour</strong> through the red dunes actually runs. Planning to mix a buggy with a quad or a KTM on the same day? Start with <a href=\"/\">buggy rental in Dubai</a>, which puts every machine we run on one page.",
   "lfBlocks": [
     {
       "h": "What a dune buggy tour in Dubai actually involves",

@@ -33,10 +33,18 @@ import { homeLongForm } from '@/data/longform';
 
     The homepage is the page being fixed rather than the buggy pillar because Search
     Console says the homepage is what Google chose for these queries: the pillar draws
-    a single impression on them. Fighting that choice is slower than serving it. */}
+    a single impression on them. Fighting that choice is slower than serving it.
+
+    CANNIBALISATION CLOSED 4 Nov 2026. October's Search Console showed both pages
+    competing for "dune buggy rental dubai": homepage at 12.2, the buggy pillar at 26.7,
+    because the pillar's title and h1 also opened on "Dune Buggy Rental Dubai". The
+    pillar now targets the head term and the tour/ride intents (dune buggy dubai,
+    dune buggy tour dubai, dune buggy ride dubai) and links here with a "buggy rental
+    in Dubai" anchor. This page owns the rental and hire family alone. docs/KEYWORDS.md
+    §2 records the split; keep the pillar's title and h1 free of "rental". */}
 <Base
   title="Dune Buggy Rental Dubai | Quad Bike and Dirt Bike Hire"
-  description="Dune buggy rental in Dubai from AED 300 per buggy, with quad bike and KTM dirt bike hire in the Lahbab red dunes. Helmet, briefing and guide included."
+  description="Buggy rental and hire in Dubai from AED 300 per buggy, plus quad bike, ATV and KTM dirt bike rental in the Lahbab red dunes. Helmet and guide included."
 >
   <!-- 1 -->
   <Hero />
@@ -48,7 +56,7 @@ import { homeLongForm } from '@/data/longform';
   <section class="section" id="fleet-buggy">
     <div class="shell">
       <p class="eyebrow">Dune buggy rental</p>
-      <h2>Five buggies, two durations, one price per vehicle</h2>
+      <h2>Buggy rental Dubai: {buggies.length} buggies, one price per vehicle</h2>
       <p class="lede">Polaris if it is your first time behind the wheel. Can-Am if it is not. The Maverick R if you already know exactly what you are asking for.</p>
       <div class="grid grid--3" style="margin-top:2rem">
         {buggies.map(v => <VehicleCard vehicle={v} base="/dune-buggy-dubai/" />)}

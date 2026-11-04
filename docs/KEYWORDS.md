@@ -59,10 +59,10 @@ Volume is monthly, UAE. KD is the median across the group's variants.
 | Intent | Vol | KD | Variants | Owner today | State |
 |---|---:|---:|---:|---|---|
 | dune buggy dubai (head) | 5,400 | 22 | 16 | `/dune-buggy-dubai/` | owned |
-| **buggy rental dubai** | **1,300** | **17** | 15 | `/dune-buggy-dubai/` | **on-page gap** |
-| dune buggy tour dubai | 1,300 | 39 | 7 | `/dune-buggy-dubai/` | on-page gap |
+| **buggy rental dubai** | **1,300** | **17** | 15 | homepage `/` | owned since 4 Nov |
+| dune buggy tour dubai | 1,300 | 39 | 7 | `/dune-buggy-dubai/` | title and h1 since 4 Nov |
 | dune buggy ride dubai | 880 | 36 | 11 | `/dune-buggy-dubai/` | on-page gap |
-| dune buggy rental dubai | 590 | 35 | — | `/dune-buggy-dubai/` | owned since 8 Sep |
+| dune buggy rental dubai | 590 | 35 | — | homepage `/` | owned since 4 Nov |
 | dune buggy dubai price | 260 | 32 | 3 | `/dune-buggy-dubai/price/` + article | owned |
 | self-drive dune buggy dubai | 110 | — | 5 | homepage h1 | owned since 8 Sep |
 | best dune buggy dubai | 110 | — | 1 | — | thin, skip |
@@ -75,6 +75,15 @@ than twice the volume of `dune buggy rental dubai` (1,300 vs 590) at half the di
 (KD 17 vs 35), the domain is literally buggyrents.com, and Search Console already shows
 this cluster at positions 23–30 on one page. Nothing else on the site combines that
 volume, that difficulty and that much existing signal.
+
+**The rental family moved to the homepage on 4 Nov 2026, and the pillar gave it up.**
+October's Search Console had both pages ranking for `dune buggy rental dubai`, the
+homepage at 12.2 and the pillar at 26.7, because both titles and both h1s opened on
+"Dune Buggy Rental Dubai". Google had already chosen the homepage for every rental and
+hire query, so that choice was served rather than fought. The pillar now leads on the
+head term and the tour intent, and links to the homepage with a `buggy rental in Dubai`
+anchor. **Do not put "rental" back into the pillar's title or h1.** Body copy may still
+use the word; the pillar FAQ "Is this a dune buggy tour or a buggy rental?" is meant to.
 
 ### Quad bike and ATV
 

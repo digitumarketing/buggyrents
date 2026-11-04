@@ -1,0 +1,9 @@
+{
+  "from": "/dune-buggy-rides/",
+  "type": {
+    "discriminant": "301",
+    "value": "/dune-buggy-dubai/"
+  },
+  "active": true,
+  "note": "Old WordPress URL, 404 with organic landings in GA4 Oct 2026, 4 Nov 2026"
+}

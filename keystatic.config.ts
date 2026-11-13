@@ -519,13 +519,27 @@ export default config({
           slug: { label: 'URL slug', description: 'Changing this breaks every link to the page and its Google ranking. Leave it alone once published.' }
         }),
         short:   fields.text({ label: 'Short name', description: 'The place on its own, e.g. "Dubai Marina". It is dropped into roughly thirty sentences across the page, so keep it short and natural.' }),
-        emirate: fields.text({ label: 'Emirate', description: 'Exactly "Dubai" for free pickup. Anything else makes the page say the transfer is quoted, so a typo here changes what the page promises.' }),
+        emirate: fields.text({ label: 'Emirate', description: 'Exactly "Dubai" or "Sharjah" for the standard pickup rate. Anything else makes the page say the transfer is quoted, so a typo here changes what the page promises.' }),
         drive:   fields.text({ label: 'Drive time', description: 'e.g. "40-55 min". Printed in the stats strip, the FAQ and the guide.' }),
         intro:   fields.text({ label: 'Opening paragraph', multiline: true }),
         keywords: fields.array(fields.text({ label: 'Keyword' }), {
           label: 'Target keywords', description: 'Never shown on the page. They record what this page is meant to rank for.', itemLabel: p => p.value
         }),
-        order:   fields.integer({ label: 'Display order', defaultValue: 99 })
+        order:   fields.integer({ label: 'Display order', defaultValue: 99 }),
+        /* Optional, added 5 Nov 2026. Most location pages are pickup routes and the
+           shared wording fits them. A page about a PLACE people search for in its
+           own right (Big Red) needs its own heading, answers and guide copy, or it
+           is the same page as the other nine with one sentence changed. Left empty,
+           a page builds exactly as before. */
+        h1Lead:  fields.text({ label: 'Heading lead (optional)', description: 'Replaces "Dune Buggy and Quad Pickup from" in the page heading. The short name follows it.' }),
+        about:   fields.array(fields.object({
+                   h: fields.text({ label: 'Section heading' }),
+                   p: fields.text({ label: 'Text', multiline: true, description: 'One paragraph per line.' })
+                 }), { label: 'Extra guide sections (optional)', description: 'Shown first in the long-form guide.', itemLabel: p => p.fields.h.value }),
+        faqs:    fields.array(fields.object({
+                   q: fields.text({ label: 'Question' }),
+                   a: fields.text({ label: 'Answer', multiline: true })
+                 }), { label: 'Extra FAQs (optional)', description: 'Shown before the standard questions, and included in the FAQ schema.', itemLabel: p => p.fields.q.value })
       }
     }),
 

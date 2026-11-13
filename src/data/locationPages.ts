@@ -8,6 +8,9 @@ import { pageTitle, tidy } from '@/data/seo';
 
 /* Dubai and Sharjah share the standard pickup rule since 5 Nov 2026 (client: pickup
    from anywhere in either, same rate). Every other emirate is quoted. */
+/* CMS text is plain text; escape it before it goes into the guide's HTML. */
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
 export const standardPickup = (emirate: string) => emirate === 'Dubai' || emirate === 'Sharjah';
 const inDubai = (l: Location) => standardPickup(l.emirate);
 
@@ -28,7 +31,7 @@ export function locationData(l: Location): LocationData {
     heroImage: 'desert-adventure-dubai-hero-canam-maverick',
     finalImage: 'dune-buggy-dubai-hero-red-dunes',
     kicker: free ? `${l.emirate} pickup planning` : 'Outer emirate pickup planning',
-    h1Lead: 'Dune Buggy and Quad Pickup from', h1Em: l.short,
+    h1Lead: l.h1Lead ?? 'Dune Buggy and Quad Pickup from', h1Em: l.short,
     lede: `${l.intro} Prices are per vehicle rather than per person, and ${free ? `you can drive to the base for nothing or add pickup for AED ${transfers.vehiclePrice}` : 'the transfer is quoted before you pay'}.`,
     chips: [l.drive, free ? `Pickup AED ${transfers.vehiclePrice}` : 'Transfer quoted', 'Lahbab red dunes', '7am to 11pm'],
     panel: {
@@ -93,6 +96,7 @@ export function locationData(l: Location): LocationData {
     ],
     faqChips: [free ? 'Optional pickup' : 'Transfer quote', l.drive, 'Per vehicle pricing'],
     faqs: [
+      ...l.faqs,
       { q: `Is pickup available from ${l.short}?`, a: free
           ? `Yes. On a desert safari it is free. On a buggy, quad or dirt bike booking it is optional and costs AED ${transfers.vehiclePrice}, because the vehicle stays at the base and the transfer is a separate run. Driving yourself to Al Awir costs nothing and there is parking. Send your ${l.short} address or a map pin either way.`
           : `Yes. ${l.short} is outside Dubai and Sharjah, so the transfer is quoted with the booking rather than included. You will always see the total before paying anything.` },
@@ -111,6 +115,8 @@ export function locationData(l: Location): LocationData {
     guideH2: `Booking a desert ride from ${l.short}: drive times, transfers and what to confirm`,
     guideIntro: `Everything worth knowing before booking a <strong>dune buggy or quad bike from ${l.short}</strong>: how long the drive really takes, what pickup costs, which activity suits the journey, and what to agree before you travel.`,
     guideBlocks: [
+      ...l.about.map(s => ({ h: s.h, html: s.p.split(/\n+/).map(t => t.trim()).filter(Boolean)
+        .map((t, i) => `<p${i === 0 ? ' class="lf-lead"' : ''}>${esc(t)}</p>`).join('') })),
       { h: `Getting from ${l.short} to the red dunes`,
         html: `<p class="lf-lead">${l.intro}</p><p>Our base sits on the Dubai-Hatta road at Al Awir, at the edge of the <span class="pill">Lahbab red dunes</span>. From ${l.short} that is roughly <span class="pill">${l.drive}</span> each way in normal traffic.</p><p>${free ? `Most guests drive it themselves, and there is parking at the base. If you would rather be collected, pickup and drop-off is AED ${transfers.vehiclePrice} on a buggy, quad or dirt bike booking and free on a desert safari, where the 4x4 is coming for you anyway. Send a map pin rather than just the area name so the driver stops in the right place first time.` : `${l.short} is outside Dubai, so the transfer is quoted with your booking. You see the total before paying anything, and there are no surprises at the base.`}</p>` },
       { h: 'Which activity is worth the journey',

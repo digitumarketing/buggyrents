@@ -15,9 +15,18 @@ import LinkClusters from '@/components/home/LinkClusters.astro';
 import Faq from '@/components/home/Faq.astro';
 import Reviews from '@/components/home/Reviews.astro';
 import VehicleCard from '@/components/VehicleCard.astro';
-import { buggies, quads } from '@/data/vehicles';
+import { buggies, quads, fromPrice } from '@/data/vehicles';
+import { googleMeta } from '@/data/reviews';
 import { buggyIntro, quadIntro } from '@/data/home';
 import { homeLongForm } from '@/data/longform';
+/* Price and rating added to the title and description 13 Nov 2026. Search Console,
+   5 to 12 Nov: "dune buggy rental dubai" held position 9 to 11 on this page with 80
+   impressions and no clicks. The old title named the activity and nothing a searcher
+   compares on. Both figures are read from the data, never typed, so a price or rating
+   change cannot leave the snippet promising something the page does not. */
+const buggyFrom = Math.min(...buggies.map(fromPrice));
+const homeTitle = `Dune Buggy Rental Dubai from AED ${buggyFrom} | Quad and ATV Hire`;
+const homeDescription = `Buggy rental and hire in Dubai from AED ${buggyFrom} per buggy, rated ${googleMeta.averageRating.toFixed(1)} on Google. Quad bike, ATV and KTM dirt bike rental in the Lahbab red dunes, guide included.`;
 ---
 {/* TITLE AND DESCRIPTION REWRITTEN 7 Sep 2026 AGAINST SEARCH CONSOLE, not against
     the keyword research. The research in CLAUDE.md §5 is about volume; this is about
@@ -43,8 +52,8 @@ import { homeLongForm } from '@/data/longform';
     in Dubai" anchor. This page owns the rental and hire family alone. docs/KEYWORDS.md
     §2 records the split; keep the pillar's title and h1 free of "rental". */}
 <Base
-  title="Dune Buggy Rental Dubai | Quad Bike and Dirt Bike Hire"
-  description="Buggy rental and hire in Dubai from AED 300 per buggy, plus quad bike, ATV and KTM dirt bike rental in the Lahbab red dunes. Helmet and guide included."
+  title={homeTitle}
+  description={homeDescription}
 >
   <!-- 1 -->
   <Hero />

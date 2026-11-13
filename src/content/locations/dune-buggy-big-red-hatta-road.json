@@ -1,13 +1,44 @@
 {
-  "name": "Dune Buggy at Big Red, Hatta Road",
+  "name": "Big Red Dune, Al Badayer (Hatta Road)",
   "short": "Big Red",
-  "emirate": "Dubai",
+  "emirate": "Sharjah",
   "drive": "10–15 min",
   "intro": "Big Red sits further along the same Dubai-Hatta road as our base. If you know Big Red, the Lahbab red dunes are the quieter, redder alternative a few minutes back toward the city.",
   "keywords": [
+    "big red dune",
+    "big red dubai location",
     "dune buggy Big Red",
     "quad biking Big Red Dubai",
     "Al Badayer dune buggy"
   ],
-  "order": 9
+  "order": 9,
+  "h1Lead": "Dune Buggy and Quad Bike Near",
+  "about": [
+    {
+      "h": "Where Big Red is",
+      "p": "Big Red is the popular name for the tall red dune at Al Badayer, on the E44 Dubai to Hatta road just past the Dubai and Sharjah border. Search \"Al Badayer\" or \"Big Red\" in Google Maps and it comes up straight away.\nIt is usually called Big Red Dubai because almost everyone reaches it from Dubai, but the dune itself is in Sharjah. From Downtown Dubai the drive is around 45 to 60 minutes.\nOur base is on the same road at Al Awir, 10 to 15 minutes before Big Red if you are coming from the city. You pass it on the way."
+    },
+    {
+      "h": "Big Red or the Lahbab red dunes",
+      "p": "Our rides run in the Lahbab red dunes, not on Big Red itself. Big Red is one very tall dune that everyone can see from the road, so it draws the crowds and the traffic.\nLahbab is a whole system of red dunes and valleys, which is what lets a guide lead a buggy or quad route for an hour or two without going over the same ground. The sand is the same deep red.\nIf you want a photo at Big Red, stop on the way to us or on the way home. It is 10 to 15 minutes further along the road, and nothing about the ride needs to change."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Where is Big Red in Dubai?",
+      "a": "Big Red is at Al Badayer on the E44 Dubai to Hatta road, just over the border in Sharjah, around 45 to 60 minutes from Downtown Dubai. Search \"Al Badayer\" or \"Big Red\" in Google Maps. Our Al Awir base is 10 to 15 minutes before it on the same road."
+    },
+    {
+      "q": "Is Big Red in Dubai or Sharjah?",
+      "a": "Sharjah. The dune is at Al Badayer, just past the Dubai border on the Hatta road. It gets called Big Red Dubai because nearly every visitor drives out from Dubai to see it."
+    },
+    {
+      "q": "Do you ride on Big Red itself?",
+      "a": "No. Our buggy and quad routes run in the Lahbab red dunes beside our Al Awir base, 10 to 15 minutes before Big Red on the same road. Lahbab has more ground to ride and far less traffic, and the sand is the same red."
+    },
+    {
+      "q": "Can I see Big Red on the same trip?",
+      "a": "Yes. Drive on to Big Red after your ride, or stop there on the way in. It adds 10 to 15 minutes each way, so it is easiest in your own car."
+    }
+  ]
 }

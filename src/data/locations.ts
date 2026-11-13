@@ -14,9 +14,15 @@
 export type Location = {
   slug: string; name: string; short: string; emirate: string;
   drive: string; intro: string; keywords: string[];
+  /* Optional page-specific copy, 5 Nov 2026. Always present here, empty when unused. */
+  h1Lead?: string;
+  about: { h: string; p: string }[];
+  faqs: { q: string; a: string }[];
 };
 
-type Raw = Omit<Location, 'slug'> & { order?: number };
+type Raw = Omit<Location, 'slug' | 'about' | 'faqs'> & {
+  order?: number; about?: { h?: string; p?: string }[]; faqs?: { q?: string; a?: string }[];
+};
 
 /* JSON has no inherent order and the drive-time sort on the hub page and the
    "nearby pickups" list both depend on a stable one. */
@@ -30,7 +36,14 @@ export const locations: Location[] = Object.entries(files)
     slug: path.replace(/\/index\.json$/, '').replace(/\.json$/, '').split('/').pop()!
   }))
   .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
-  .map(({ order, ...l }) => l as Location);
+  /* Keystatic drops empty strings, so every optional piece is read defensively and a
+     half-filled row is skipped rather than printed blank. */
+  .map(({ order, about, faqs, h1Lead, ...l }) => ({
+    ...l,
+    h1Lead: h1Lead?.trim() || undefined,
+    about: (about ?? []).filter(s => s.h?.trim() && s.p?.trim()).map(s => ({ h: s.h!.trim(), p: s.p!.trim() })),
+    faqs: (faqs ?? []).filter(f => f.q?.trim() && f.a?.trim()).map(f => ({ q: f.q!.trim(), a: f.a!.trim() }))
+  }) as Location);
 
 if (locations.length === 0) {
   throw new Error('No location pages found in src/content/locations. Ten pages and every internal link to them would 404.');

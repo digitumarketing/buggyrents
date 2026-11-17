@@ -297,6 +297,22 @@ ninth would have meant competing with a page this site already ranks with, which
 The blog now holds **14 articles**. Four of the eight new ones point at the quad pillar, which
 was the point: quad sits at positions 52 to 70 while buggy sits at 22 to 30.
 
+### E. November 2026
+
+Two articles, written 17 Nov 2026 after Search Console showed brand-comparison and
+decision queries with no owner. Both pass the Step 0 check: neither is a synonym of an
+existing page.
+
+| Article | Target | Serves |
+|---|---|---|
+| `polaris-rzr-vs-can-am-dubai` | polaris rzr vs can am (GSC: `canam vs rzr`, `can am dubai` at 4.4) | buggy pillar, model pages |
+| `dune-buggy-or-desert-safari-dubai` | dune buggy or desert safari dubai | buggy pillar, safari combos |
+
+**Considered and rejected the same day**, so nobody re-proposes them: a 2-seater vs 4-seater
+article (the buggy price article already owns seat count), a sandboarding article (the only
+fact we hold is that it is included on safaris, so 800 words would be invented), and a cheap
+quad biking article (a synonym of the quad price article).
+
 ### D. Parked
 
 20. `desert safari deals dubai` (1,000, KD 10) needs a real offers page, and offers are the

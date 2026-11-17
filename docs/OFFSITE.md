@@ -251,3 +251,18 @@ completion instead, reported in the monthly client report:
 - Whether the buggy cluster average position crosses **20**. On-page work has taken it from
   39.5 to roughly 25 and it will stall somewhere in the low twenties without this work. If it
   stalls, that is the evidence, not an opinion.
+
+## 8. Links placed
+
+One row per live link, checked in a browser rather than trusted from the publisher's email.
+"Follow" means the anchor carries no `nofollow`, `sponsored` or `ugc`, and the page is not
+`noindex`. Re-check each row in the monthly report: guest-post links get edited or removed.
+
+| Date live | Site | URL | Anchor | Target | Follow | Checked |
+|---|---|---|---|---|---|---|
+| 17 Nov 2026 | uaeklicks.com | /buggy-rental-dubai-prices-guide/ | buggy rental Dubai | `/` | yes, `rel="noopener"` only; page `index, follow` | 17 Nov 2026 |
+
+The anchor matches the homepage's target term (`KEYWORDS.md` §2, `buggy rental dubai`, which
+the homepage has owned since 4 Nov). Keep later anchors varied: brand, bare URL and
+service-plus-place phrases. A second exact-match anchor to the same page in the same month is
+the pattern Google's link spam systems look for.

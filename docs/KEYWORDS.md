@@ -232,15 +232,15 @@ written as "build a page", then deleted after checking the live site. See §6.
    dropped out, which is the same vocabulary mistake in the opposite direction. Added as a
    long-form block heading and a new FAQ — *"Is this a dune buggy tour or a buggy rental?"* —
    which answers the split honestly instead of stuffing both words in the title.
-3. **Four outer-emirate location titles.** 670 searches at median KD 0, for four CMS fields.
+3. ~~**Four outer-emirate location titles.**~~ **Done, verified 18 Nov 2026**: all four `name` fields carry quad. 670 searches at median KD 0, for four CMS fields.
    `src/content/locations/dune-buggy-from-{abu-dhabi,sharjah,ajman,ras-al-khaimah}.json`, the
    `name` field, which is what builds the `<title>`. It says "Dune Buggy from Sharjah"; the
    page underneath is already about both services. **Check the crumb and nav rendering before
    changing it** — `name` may feed more than the title.
-4. **An H2 carrying the location wording on `red-dune-desert-safari`.** 720 at KD 0–1.
+4. ~~**An H2 carrying the location wording on `red-dune-desert-safari`.**~~ **Done, verified 18 Nov 2026**: two H2s carry it. 720 at KD 0–1.
    Already logged as pending; the body answers the question and the headings never use the
    words.
-5. **`ATV rental Dubai` and `ATV tours Dubai` as phrases on `/quad-bike-dubai/`.** 260. The
+5. ~~**`ATV rental Dubai` and `ATV tours Dubai` as phrases on `/quad-bike-dubai/`.**~~ **Done, verified 18 Nov 2026**: `atv rental dubai` sits at position 13 on the pillar. 260. The
    page mentions ATV eight times and never in those two forms.
 
 ### B. Quad rescue — the largest single opportunity on the site
@@ -256,7 +256,7 @@ pillar does not surface at all.
 Redirects were verified on 17 Sep and are genuine `301`s, all three of them, so this is not a
 technical fault. Google simply has no reason yet to prefer the new quad page. Give it one:
 
-6. **Quad depth on the homepage.** It leads with buggy and mentions quad. Buggy's position
+6. ~~**Quad depth on the homepage.**~~ **Done, verified 18 Nov 2026**: two quad sections, title carries Quad and ATV Hire. The quad pillar now ranks 7 to 13 for price and ATV queries; the old URL no longer holds them. It leads with buggy and mentions quad. Buggy's position
    came from that lead. Quad needs real homepage body copy, not a nav word.
 7. **Internal anchor text.** Links to the quad pillar mostly read "Quad Bike Dubai". Change
    the high-traffic ones to the phrases people search: *quad bike rental Dubai*,

@@ -136,7 +136,7 @@ export const quadPrices: PriceGuideData = {
   slug: '/quad-bike-dubai/price/',
   crumbParent: { label: 'Quad Bike Dubai', href: '/quad-bike-dubai/' },
   title: pageTitle(`Quad Biking Dubai Price | From AED ${fromPrice(quads[0])}`),
-  description: `Quad biking Dubai prices: six ATVs from AED ${fromPrice(quads[0])} for 30 minutes. Kids from age 6, boundary area, open desert and the Raptor 700cc. Per quad, optional pickup.`,
+  description: `Quad biking Dubai prices, and the cheapest quad biking in Dubai: six ATVs from AED ${fromPrice(quads[0])} for 30 minutes, per quad. Kids from 6 to the Raptor 700cc. No deposit.`,
   heroImage: 'quad-biking-dubai-hero-red-dunes',
   eyebrow: `${quads.length} quads · ${durCount(quads)} durations · price per quad`,
   h1Lead: 'Quad Biking Dubai', h1Em: 'Price', h1Tail: 'Guide',

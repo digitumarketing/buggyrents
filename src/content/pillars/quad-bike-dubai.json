@@ -85,7 +85,15 @@
   "faqs": [
     {
       "q": "How much is quad biking in Dubai?",
-      "a": "Quad biking Dubai starts at AED {quadFrom} for 30 minutes on the kids quad and AED 89 for adults in the boundary area. Open-desert single seats start at AED 200, and the Yamaha Raptor 700cc starts at AED {dirtbikeFrom}. Every price is per quad."
+      "a": "Quad biking Dubai starts at AED {quadFrom} for 30 minutes on the kids quad and AED 89 for adults in the boundary area. Open-desert single seats start at AED 200, and the Yamaha Raptor 700cc starts at AED 500. Every price is per quad."
+    },
+    {
+      "q": "How much is 1 hour of quad biking in Dubai?",
+      "a": "One hour costs AED 140 on the kids quad, AED 150 on a single seat in the boundary area and AED 250 on a double seat there. In the open desert it is AED 350 single seat and AED 450 double seat, and the Yamaha Raptor 700cc is AED 700. Every price is per quad, so a double seat shared by two halves the cost per rider. An hour is the length we suggest for most groups: 30 minutes is a taster, and the hour is what gets you past the briefing and properly into the dunes."
+    },
+    {
+      "q": "Can I go quad biking in the evening in Dubai?",
+      "a": "Yes. The base runs from 7am to 11pm every day, and late afternoon into the hour before sunset is the slot most guests ask for, because the sand has cooled and the Lahbab dunes turn red in that light. If you want dinner afterwards, the quad and desert safari combo runs the ride first and then the evening camp, from AED 199 per person for 30 minutes on the quad or AED 300 with a full hour."
     },
     {
       "q": "Is ATV rental Dubai the same as quad bike hire?",

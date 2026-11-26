@@ -258,7 +258,7 @@ technical fault. Google simply has no reason yet to prefer the new quad page. Gi
 
 6. ~~**Quad depth on the homepage.**~~ **Done, verified 18 Nov 2026**: two quad sections, title carries Quad and ATV Hire. The quad pillar now ranks 7 to 13 for price and ATV queries; the old URL no longer holds them. It leads with buggy and mentions quad. Buggy's position
    came from that lead. Quad needs real homepage body copy, not a nav word.
-7. **Internal anchor text.** Links to the quad pillar mostly read "Quad Bike Dubai". Change
+7. ~~**Internal anchor text.**~~ **Done 26 Nov 2026**: sitewide footer link and three blog links now read *quad biking*. Links to the quad pillar mostly read "Quad Bike Dubai". Change
    the high-traffic ones to the phrases people search: *quad bike rental Dubai*,
    *quad biking Dubai*.
 8. **An article cluster pointing at the quad pillar** — items 11, 13 and 15 below exist as
@@ -317,8 +317,8 @@ quad biking article (a synonym of the quad price article).
 
 20. `desert safari deals dubai` (1,000, KD 10) needs a real offers page, and offers are the
     client's to set. Do not build a page that will sit empty.
-21. `evening quad biking dubai` (70) and `1 hour quad biking dubai` (90) fold into the quad
-    pillar FAQ. Not worth a page each.
+21. ~~`evening quad biking dubai` (70) and `1 hour quad biking dubai` (90) fold into the quad
+    pillar FAQ.~~ **Done 26 Nov 2026**: two FAQs on `/quad-bike-dubai/`. Not worth a page each.
 
 ### What none of this fixes, and it needs saying
 
